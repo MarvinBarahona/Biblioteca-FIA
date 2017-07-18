@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
-
 import { MaterializeModule } from 'angular2-materialize';
+import { DataTablesModule } from 'angular-datatables';
+
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { MaterializeModule } from 'angular2-materialize';
   ],
   imports: [
     BrowserModule,
-	MaterializeModule
+	MaterializeModule,
+	DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
