@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { LibroNuevoComponent } from './componentes/libro-nuevo.component';
 import { LibroBuscarComponent } from './componentes/libro-buscar.component';
 import { LibroSeleccionComponent } from './libro-seleccion.component';
@@ -9,6 +10,6 @@ import { LibroSeleccionComponent } from './libro-seleccion.component';
     CommonModule
   ],
   declarations: [LibroNuevoComponent, LibroBuscarComponent, LibroSeleccionComponent],
-  exports: [LibroSeleccionComponent]
+  exports: [LibroNuevoComponent, LibroBuscarComponent, LibroSeleccionComponent]
 })
 export class LibroSeleccionModule { }

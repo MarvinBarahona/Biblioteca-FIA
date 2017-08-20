@@ -8,9 +8,9 @@ import { CookieModule } from 'ngx-cookie';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { LibrosRoutingModule } from './libros/libros-routing.module';
-import { EjemplaresRoutingModule } from './ejemplares/ejemplares-routing.module';
-import { AdquisicionesRoutingModule } from './adquisiciones/adquisiciones-routing.module';
+import { LibrosModule } from './libros/libros.module';
+import { EjemplaresModule } from './ejemplares/ejemplares.module';
+import { AdquisicionesModule } from './adquisiciones/adquisiciones.module';
 
 import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './login/not-found.component';
@@ -31,10 +31,10 @@ import { SkipLoginGuard } from './login/skip-login.guard';
     DataTablesModule,
     Angular2FontawesomeModule,
     CookieModule.forRoot(),
-    AppRoutingModule,
-    LibrosRoutingModule,
-    EjemplaresRoutingModule,
-    AdquisicionesRoutingModule
+    AdquisicionesModule,
+    LibrosModule,
+    EjemplaresModule,
+    AppRoutingModule
   ],
   providers: [AppAuthGuard, SkipLoginGuard],
   bootstrap: [AppComponent]
