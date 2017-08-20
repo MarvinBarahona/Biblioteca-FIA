@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LibrosRoutingModule } from './libros-routing.module';
 import { LibrosRootComponent } from './libros-root.component';
-import { LibrosComponent } from './componentes/libros.component';
-import { LibroComponent } from './componentes/libro.component';
+import { LibrosComponent, LibroComponent } from './componentes';
 
 @NgModule({
   imports: [

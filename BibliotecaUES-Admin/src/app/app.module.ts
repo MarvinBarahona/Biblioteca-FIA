@@ -12,11 +12,7 @@ import { LibrosModule } from './libros/libros.module';
 import { EjemplaresModule } from './ejemplares/ejemplares.module';
 import { AdquisicionesModule } from './adquisiciones/adquisiciones.module';
 
-import { LoginComponent } from './login/login.component';
-import { NotFoundComponent } from './login/not-found.component';
-import { NotAllowedComponent } from './login/not-allowed.component';
-import { AppAuthGuard } from './login/app-auth.guard';
-import { SkipLoginGuard } from './login/skip-login.guard';
+import { LoginComponent, NotFoundComponent, NotAllowedComponent, AppAuthGuard, SkipLoginGuard } from './login';
 
 @NgModule({
   declarations: [
