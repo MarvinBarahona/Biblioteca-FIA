@@ -13,11 +13,10 @@ import { EjemplaresRoutingModule } from './ejemplares/ejemplares-routing.module'
 import { AdquisicionesRoutingModule } from './adquisiciones/adquisiciones-routing.module';
 
 import { LoginComponent } from './login/login.component';
-import { NotFoundComponent } from './guards/not-found.component';
-import { NotAllowedComponent } from './guards/not-allowed.component';
-
-import { AppAuthGuard } from './guards/app-auth.guard';
-import { SkipLoginGuard } from './guards/skip-login.guard';
+import { NotFoundComponent } from './login/not-found.component';
+import { NotAllowedComponent } from './login/not-allowed.component';
+import { AppAuthGuard } from './login/app-auth.guard';
+import { SkipLoginGuard } from './login/skip-login.guard';
 
 @NgModule({
   declarations: [
