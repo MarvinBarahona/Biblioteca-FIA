@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-ejemplar-nuevo',
-  templateUrl: './ejemplar-nuevo.component.html',
-  styles: []
+  selector: 'ejemplar-nuevo',
+  templateUrl: './ejemplar-nuevo.component.html'
 })
 export class EjemplarNuevoComponent implements OnInit {
 

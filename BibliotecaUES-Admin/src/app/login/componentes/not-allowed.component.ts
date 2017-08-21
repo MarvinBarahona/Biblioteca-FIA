@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-not-allowed',
+  selector: 'not-allowed',
   templateUrl: './not-allowed.component.html'
 })
 export class NotAllowedComponent implements OnInit {

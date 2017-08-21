@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-libro-buscar',
-  templateUrl: './libro-buscar.component.html',
-  styles: []
+  selector: 'libro-buscar',
+  templateUrl: './libro-buscar.component.html'
 })
 export class LibroBuscarComponent implements OnInit {
 
