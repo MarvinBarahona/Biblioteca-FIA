@@ -8,31 +8,29 @@ import { CookieModule } from 'ngx-cookie';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { LibrosModule } from './libros/libros.module';
-import { EjemplaresModule } from './ejemplares/ejemplares.module';
-import { AdquisicionesModule } from './adquisiciones/adquisiciones.module';
 
-import { LoginComponent, NotFoundComponent, NotAllowedComponent, AppAuthGuard, SkipLoginGuard } from './login';
+import { LibrosModule } from './libros';
+import { EjemplaresModule } from './ejemplares';
+import { AdquisicionesModule } from './adquisiciones';
+import { LoginModule } from './login';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    NotFoundComponent,
-    NotAllowedComponent
-  ],
   imports: [
     BrowserModule,
     MaterializeModule,
     DataTablesModule,
     Angular2FontawesomeModule,
     CookieModule.forRoot(),
-    AdquisicionesModule,
+    LoginModule,
     LibrosModule,
     EjemplaresModule,
+    AdquisicionesModule,
     AppRoutingModule
   ],
-  providers: [AppAuthGuard, SkipLoginGuard],
+  declarations: [
+    AppComponent
+  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LibrosRootComponent } from './libros-root.component';
-import { LibroComponent, LibrosComponent } from './componentes';
+import { LibrosRootComponent, LibroComponent, LibrosComponent } from './componentes';
 import { AppAuthGuard } from './../login'
 
 const routes: Routes = [
@@ -28,6 +27,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AppAuthGuard]
 })
 export class LibrosRoutingModule { }

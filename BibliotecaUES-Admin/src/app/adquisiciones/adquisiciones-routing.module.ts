@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AdquisicionesRootComponent } from './adquisiciones-root.component';
-import { AdquisicionComponent, AdquisicionNuevaComponent, AdquisicionesComponent } from './componentes';
+import { AdquisicionesRootComponent, AdquisicionComponent, AdquisicionNuevaComponent, AdquisicionesComponent } from './componentes';
 import { AppAuthGuard } from './../login'
 
 const routes: Routes = [
@@ -34,6 +33,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AppAuthGuard]
 })
 export class AdquisicionesRoutingModule { }

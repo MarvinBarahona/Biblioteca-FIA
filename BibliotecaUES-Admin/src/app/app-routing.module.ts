@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent, SkipLoginGuard, NotAllowedComponent, NotFoundComponent } from './login'
-
 const appRoutes: Routes = [
   {
     path: '',
@@ -10,17 +8,9 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'login',
-    component: LoginComponent,
-    canActivate: [ SkipLoginGuard ]
-  },
-  {
-    path: 'error403',
-    component: NotAllowedComponent
-  },
-  {
     path: '**',
-    component: NotFoundComponent
+    redirectTo: '/error404',
+    pathMatch: 'full'
   }
 ];
 

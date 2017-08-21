@@ -2,12 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-not-found',
-  template: `
-    <p>
-      not-found Works!
-    </p>
-  `,
-  styles: []
+  templateUrl: './not-found.component.html'
 })
 export class NotFoundComponent implements OnInit {
 

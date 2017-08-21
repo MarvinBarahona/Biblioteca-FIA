@@ -1,5 +1,3 @@
-export { LoginComponent } from './login.component'
-export { AppAuthGuard } from './app-auth.guard';
-export { SkipLoginGuard } from './skip-login.guard';
-export { NotAllowedComponent } from './not-allowed.component'
-export { NotFoundComponent } from './not-found.component'
+export * from './guards';
+export * from './servicios';
+export { LoginModule } from './login.module';
