@@ -1,5 +1,21 @@
-<p>
-  ejemplares-root works!
-</p>
+<!-- Side nav -->
+<ul id="slide-out" class="side-nav fixed">
+  <li class="active">
+    <a routerLink="/ejemplares"><i class="fa fa-book"></i>Ejemplares</a>
+  </li>
+  <li>
+    <a routerLink="/libros"><i class="fa fa-book"></i>Libros</a>
+  </li>
+  <li>
+    <a routerLink="/adquisiciones"><i class="fa fa-book"></i>Adquisiciones</a>
+  </li>
+</ul>
+<!-- /Side nav -->
 
-<router-outlet></router-outlet>
+<!-- Espacio para los componentes (ver el css de este componente) -->
+<div class="component">
+  <div>
+    <h5 class="center-align">Sección de ejemplares</h5>
+  </div>
+  <router-outlet></router-outlet>
+</div>

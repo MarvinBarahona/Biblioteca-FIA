@@ -1,9 +1,21 @@
+<!-- Side nav -->
 <ul id="slide-out" class="side-nav fixed">
-  <li><a routerLink="/libros">Libros</a></li>
-  <li><a routerLink="/adquisiciones">Adquisiciones</a></li>
-  <li><a routerLink="/ejemplares">Ejemplares</a></li>
+  <li>
+    <a routerLink="/ejemplares"><i class="fa fa-book"></i>Ejemplares</a>
+  </li>
+  <li class="active">
+    <a routerLink="/libros"><i class="fa fa-book"></i>Libros</a>
+  </li>
+  <li>
+    <a routerLink="/adquisiciones"><i class="fa fa-book"></i>Adquisiciones</a>
+  </li>
 </ul>
+<!-- /Side nav -->
 
+<!-- Espacio para los componentes (ver el css de este componente) -->
 <div class="component">
+  <div>
+    <h5 class="center-align">Sección de libros</h5>
+  </div>
   <router-outlet></router-outlet>
 </div>
