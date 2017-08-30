@@ -1,4 +1,24 @@
-<p>
-app works
-</p>
+<!-- TOP NAV -->
+<div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper">
+      <ul class="title left">
+        <li><a href="">Title</a></li>
+      </ul>
+
+      <ul class="right">
+         <li><a materialize="dropdown" class='dropdown-button' href='javascript:void(0)' data-activates='dropdown1'>{{usuario}}<i class="material-icons right">arrow_drop_down</i></a></li>
+         <ul id='dropdown1' class='dropdown-content'>
+           <li><a href="">Cerrar sesión</a></li>
+         </ul>
+       </ul>
+
+      <!-- Toogle navside -->
+      <a materialize="sideNav" [materializeParams]="[buttonCollapse]" href="" data-activates="slide-out" class="hide-on-large-only"><i class="material-icons">menu</i></a>
+
+    </div>
+  </nav>
+</div>
+<!-- /TOP NAV -->
+
 <router-outlet></router-outlet>
