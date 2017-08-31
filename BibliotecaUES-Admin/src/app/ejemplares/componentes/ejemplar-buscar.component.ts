@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ejemplares',
-  templateUrl: './ejemplares.component.html'
+  templateUrl: './ejemplar-buscar.component.html'
 })
-export class EjemplaresComponent implements OnInit {
+export class EjemplarBuscarComponent implements OnInit {
 
   constructor() { }
 

@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CookieModule } from 'ngx-cookie';
 
 import { EjemplaresRoutingModule } from './ejemplares-routing.module';
-import { EjemplaresRootComponent, EjemplaresComponent, EjemplarComponent, EjemplarNuevoComponent } from './componentes';
+import { EjemplaresRootComponent, EjemplarBuscarComponent, EjemplarComponent, EjemplarNuevoComponent } from './componentes';
 import { EjemplaresService } from './servicios';
 
 import { LibroSeleccionModule } from './../libro-seleccion';
@@ -21,7 +21,7 @@ import { LibroSeleccionModule } from './../libro-seleccion';
   ],
   declarations: [
     EjemplaresRootComponent,
-    EjemplaresComponent,
+    EjemplarBuscarComponent,
     EjemplarComponent,
     EjemplarNuevoComponent
   ],
