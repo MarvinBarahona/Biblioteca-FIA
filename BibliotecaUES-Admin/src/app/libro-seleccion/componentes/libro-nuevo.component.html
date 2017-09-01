@@ -1,3 +1,43 @@
-<p>
-  libro-nuevo works!
-</p>
+<form>
+  <div class="row">
+    <div class="input-field col s12">
+      <input id="titulo" type="text" class="validate" >
+      <label for="titulo"> Título</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12">
+      <!-- <span>Autores</span>
+      <div class="chips" materialize="material_chip" [materializeParams]="[chipsAutocomplete]"></div> -->
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s6">
+      <input id="editorial" type="text" class="validate" >
+      <label for="editorial">Editorial</label>
+    </div>
+    <div class="input-field col s6">
+      <input id="pais" type="text" class="validate" >
+      <label for="pais">País</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s3">
+      <input id="anio" type="text" class="validate" >
+      <label for="anio">Año</label>
+    </div>
+    <div class="input-field col s3">
+      <input id="edicion" type="text" class="validate" >
+      <label for="edicion">Edición</label>
+    </div>
+    <div class="input-field col s6">
+      <input id="isbn" type="text" class="validate" >
+      <label for="isbn">ISBN</label>
+    </div>
+  </div>
+
+  <a class="btn waves-effect waves-green">Guardar</a>
+</form>

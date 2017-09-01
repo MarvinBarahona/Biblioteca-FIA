@@ -1,5 +1,12 @@
-/*Para la integración de DataTables y Materialize*/
+/*Elementos generales*/
+body{
+  background-color: #f7f7f7;
+}
+.card, .card-panel{
+  margin: 0 50px 0 50px;
+}
 
+/*Para la integración de DataTables y Materialize*/
 .dataTables_wrapper .dataTables_length select {
   display: inline;
   border: 1px solid #000;
@@ -10,7 +17,6 @@
 }
 
 /*Copiado de bootstrap*/
-
 .alert {
   padding: 5px;
   margin-bottom: 20px;
