@@ -1,12 +1,41 @@
 /*Elementos generales*/
-body{
+body {
   background-color: #f7f7f7;
 }
-.card, .card-panel{
+
+.btn {
+  background-color: #309abb;
+}
+
+ul{
+  margin-top: 0px;
+}
+
+/* Cards */
+.card, .card-panel {
   margin: 0 50px 0 50px;
 }
 
+.card .card-action a {
+  color: #0781bb !important;
+}
+
+/* Cambiar el color de los placeholder en chrome, opera y firefoz*/
+::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #000000 !important;
+  opacity: 1 !important;
+}
+
+::-moz-placeholder{
+  /* Firefox 19+ */
+  color: #000000 !important;
+  opacity: 1 !important;
+}
+
+
 /*Para la integración de DataTables y Materialize*/
+
 .dataTables_wrapper .dataTables_length select {
   display: inline;
   border: 1px solid #000;
@@ -16,7 +45,9 @@ body{
   height: inherit;
 }
 
+
 /*Copiado de bootstrap*/
+
 .alert {
   padding: 5px;
   margin-bottom: 20px;
