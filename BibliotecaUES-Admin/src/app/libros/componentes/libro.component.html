@@ -66,32 +66,10 @@
     <div class="card-panel">
       <h5>Datos de catalogación</h5>
 
-      <!-- Código de autor y categorías -->
-      <div class="row">
-        <div class="col s12 m6 ">
-          <b>Código de autor: </b>
-          <span>Código de autor</span>
-        </div>
-        <div class="col s12 m6 ">
-          <b>Categoría: </b>
-          <span>categoria Dewey</span>
-        </div>
-      </div>
-
-      <!-- Imagen y materías -->
-      <div class="row">
-        <div class="col s12 m6 ">
-          <b>Imagen: </b>
-          <img src="" alt="Imagen">
-        </div>
-        <div class="col s12 m6 ">
-          <b>Materias: </b>
-          <ul>
-            <li>Materia 1</li>
-            <li>Materia 2</li>
-          </ul>
-        </div>
-      </div>
+      <catalogado *ngIf="false; else catalogar"></catalogado>
+      <ng-template #catalogar>
+        <catalogar></catalogar>
+      </ng-template>
 
     </div>
     <!-- /card-panel -->

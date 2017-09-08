@@ -7,7 +7,7 @@ import { CookieModule } from 'ngx-cookie';
 import { MaterializeModule } from 'angular2-materialize';
 
 import { LibrosRoutingModule } from './libros-routing.module';
-import { LibrosRootComponent, LibrosComponent, LibroComponent } from './componentes';
+import { LibrosRootComponent, LibrosComponent, LibroComponent, CatalogarComponent, CatalogadoComponent } from './componentes';
 import { LibrosService } from './servicios';
 
 @NgModule({
@@ -22,7 +22,9 @@ import { LibrosService } from './servicios';
   declarations: [
     LibrosRootComponent,
     LibrosComponent,
-    LibroComponent
+    LibroComponent,
+    CatalogarComponent,
+    CatalogadoComponent
   ],
   providers: [
     LibrosService
