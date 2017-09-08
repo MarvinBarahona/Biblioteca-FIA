@@ -1,0 +1,12 @@
+/* Cambiar el color de los label en chrome, opera y firefoz*/
+label {
+  /* WebKit browsers */
+  color: #000000 !important;
+  opacity: 1 !important;
+}
+
+label{
+  /* Firefox 19+ */
+  color: #000000 !important;
+  opacity: 1 !important;
+}
