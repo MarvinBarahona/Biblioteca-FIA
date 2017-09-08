@@ -8,18 +8,20 @@
               <input id="libro" type="text" class="validate" disabled>
               <label for="libro"> Libro</label>
             </div>
-            <a class="waves-effect waves-light btn col m3 s4 offset-m1">Seleccionar</a>
+            <a class="waves-effect waves-light btn col m3 s4 offset-m1" (click)="openModal1()">Seleccionar</a>
           </div>
 
           <div class="row">
             <div class="input-field col s6">
-              <!-- <select>
-                <option value="" disabled selected>Choose your option</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-              </select> -->
-              <label>Materialize Select</label>
+              <div class="input-field col s6">
+                <select name="selectedOption" materialize="material_select" [materializeSelectOptions]="" [attr.disabled]="isDisabled?true:null">
+                  <option value="" disabled selected>Choose your option</option>
+                  <option value="">1</option>
+                  <option value="">2</option>
+                  <!-- <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option> -->
+                </select>
+                <label>Materialize Select</label>
+              </div>
             </div>
             <div class="input-field col s6">
               <input id="donante" type="text" class="validate">
@@ -45,4 +47,12 @@
     </div>
   </div>
 </div>
-<libro-seleccion></libro-seleccion>
+
+<div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions1">
+  <div class="modal-content">
+    <libro-seleccion></libro-seleccion>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-green btn-flat" (click)="closeModal1()">Close</a>
+  </div>
+</div>
