@@ -1,3 +1,8 @@
+/*
+*Nombre del módulo: Gestión de libros
+*Dirección física: src\app\libros\componentes\catalogar.component.ts
+*Objetivo: Catalogar un libro
+**/
 import { Component, OnInit } from '@angular/core';
 
 @Component({

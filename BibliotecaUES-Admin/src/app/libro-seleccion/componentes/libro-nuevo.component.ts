@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: Gestión de libros
+*Dirección física: src\app\libro-seleccion\componentes\libro-nuevo.component.ts
+*Objetivo: Crear un nuevo libro
+**/
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({

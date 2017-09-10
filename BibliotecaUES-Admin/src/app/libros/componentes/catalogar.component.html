@@ -1,6 +1,8 @@
 <form>
   <div class="row">
+    <!-- Detalles de catalogación -->
     <div class="col l6">
+      <!-- Código de Autor -->
       <div class="col inicial">
         A
       </div>
@@ -12,17 +14,21 @@
         A
       </div>
 
+      <!-- Código Dewey -->
       <div class="input-field col l7 m10 s12">
         <input id="dewey" type="text" class="validate" maxlength="60">
         <label for="dewey">Código Dewey</label>
       </div>
 
+      <!-- Materias o Tags -->
       <div class="input-field col s10">
         <strong>Materias: </strong>
         <div class="chips" materialize="material_chip" [materializeParams]="[chipsAutocomplete]"></div>
       </div>
+
     </div>
 
+    <!-- Seleccionar y cargar imagen -->
     <div class="col l6">
       <div class="col s12">
         <img src="http://2.bp.blogspot.com/-iHSmD9SRU9s/VDhMkzW2_oI/AAAAAAAAK0w/IVe_QCU07xo/s1600/HP3_1.jpeg" alt="Imagen del libro" class="previa">
@@ -39,11 +45,13 @@
         </div>
       </div>
     </div>
-
   </div>
+  <!-- /row -->
 
+  <!-- Acciones -->
   <div class="row">
     <a class="waves-effect waves-light btn col m2 s12 offset-m3">Guardar</a>
     <a class="waves-effect waves-light btn col m2 s12 offset-m1">Cancelar</a>
   </div>
+
 </form>

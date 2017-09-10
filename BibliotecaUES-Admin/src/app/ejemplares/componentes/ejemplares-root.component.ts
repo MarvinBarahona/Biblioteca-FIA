@@ -1,7 +1,7 @@
 /*
 *Nombre del módulo: Gestión de ejemplares
 *Dirección física: src\app\ejemplares\componentes\ejemplares-root.component.ts
-*Objetivo: Mostrar estructura del menú de ejemplares
+*Objetivo: Formar la estructura base para los componentes de Ejemplares
 **/
 
 import { Component, OnInit } from '@angular/core';
