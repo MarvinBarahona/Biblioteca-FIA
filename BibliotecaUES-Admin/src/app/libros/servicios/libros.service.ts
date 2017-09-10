@@ -148,12 +148,35 @@ export class LibrosService {
     );
   }
 
-  getAutoBook(): Observable<AutoData[][]> {
+  getAutoBook(): Observable<any> {
     let url = this.baseUrl + '/books/authorspublishers';
 
     return this.http.get(url, { headers: this.headers }).map(
       (r: Response) => {
-        return r.json();
+        let authors = new Array<AutoData>();
+        let publishers = new Array<AutoData>();
+        let ra = r['authors'];
+        let rp = r['publishers'];
+
+        ra.json().forEach(function(item){
+          let author = new AutoData;
+
+          author.id = item['id'];
+          author.name = item['name'];
+
+          authors.push(author);
+        });
+
+        rp.json().forEach(function(item){
+          let publisher = new AutoData;
+
+          publisher.id = item['id'];
+          publisher.name = item['name'];
+
+          publishers.push(publisher);
+        });
+
+        return {authors: authors, publishers: publishers};
       }
     );
   }
@@ -163,7 +186,19 @@ export class LibrosService {
 
     return this.http.get(url, { headers: this.headers }).map(
       (r: Response) => {
-        return r.json();
+        let subjects = new Array<AutoData>();
+        let rs = r['subjects'];
+
+        rs.json().forEach(function(item){
+          let subject = new AutoData;
+
+          subject.id = item['id'];
+          subject.name = item['name'];
+
+          subjects.push(subject);
+        });
+
+        return subjects;
       }
     );
   }
