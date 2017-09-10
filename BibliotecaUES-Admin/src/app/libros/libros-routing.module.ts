@@ -13,13 +13,13 @@ const routes: Routes = [
         path: '',
         component: LibrosComponent,
         canActivate: [AppAuthGuard],
-        data: {politica: "catalogar"}
+        data: {politica: 142}
       },
       {
         path: ':id',
         component: LibroComponent,
         canActivate: [AppAuthGuard],
-        data: {politica: "catalogar"}
+        data: {politica: 142}
       }
     ]
   }

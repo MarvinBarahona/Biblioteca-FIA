@@ -13,19 +13,19 @@ const routes: Routes = [
         path: '',
         component: EjemplarBuscarComponent,
         canActivate: [AppAuthGuard],
-        data: {politica: "catalogar"}
+        data: {politica: 143}
       },
       {
         path: 'nuevo',
         component: EjemplarNuevoComponent,
         canActivate: [AppAuthGuard],
-        data: {politica: "crearAdquisicion"}
+        data: {politica: 113}
       },
       {
         path: ':id',
         component: EjemplarComponent,
         canActivate: [AppAuthGuard],
-        data: {politica: "catalogar"}
+        data: {politica: 143}
       }
     ]
   }
