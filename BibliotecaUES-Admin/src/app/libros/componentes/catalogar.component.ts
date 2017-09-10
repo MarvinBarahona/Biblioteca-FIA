@@ -2,7 +2,24 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'catalogar',
-  templateUrl: './catalogar.component.html'
+  templateUrl: './catalogar.component.html',
+  styles:[`
+    .inicial {
+      margin-top: 40px;
+      text-align: right;
+    }
+
+    .final {
+      margin-top: 40px;
+      text-align: left;
+    }
+
+    .previa {
+      width: 150px;
+      height: 206px;
+      margin-top:5px;
+    }
+    `]
 })
 export class CatalogarComponent implements OnInit {
 
@@ -11,4 +28,18 @@ export class CatalogarComponent implements OnInit {
   ngOnInit() {
   }
 
+  chipsAutocomplete = {
+    placeholder: "+ Materia",
+    secondaryPlaceholder: 'Ingrese etiquetas',
+    autocompleteOptions: {
+      data: {
+        'Apple': null,
+        'Microsoft': null,
+        'Google': null,
+        'Asia': null,
+      },
+      limit: Infinity,
+      minLength: 1
+    }
+  };
 }
