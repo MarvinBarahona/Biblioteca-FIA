@@ -1,7 +1,7 @@
 /*
-*Nombre del módulo:
-*Dirección física:
-*Objetivo:
+*Nombre del módulo: Gestión de adquisiciones
+*Dirección física: src\app\adquisiciones\componentes\adquisicion-nueva.component.ts
+*Objetivo: Crear nuevas adquisiciones
 **/
 
 import { Component, OnInit, EventEmitter } from '@angular/core';
