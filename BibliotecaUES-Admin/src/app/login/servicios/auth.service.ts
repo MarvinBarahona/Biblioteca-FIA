@@ -16,8 +16,8 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<any> {
-    let q = JSON.stringify({ email: username, password: password });
     let url = this.baseUrl + '/authentication/login';
+    let q = JSON.stringify({ email: username, password: password });
 
     return this.http.post(url, q, { headers: this.headers }).map(
       (r: Response) => {
@@ -26,11 +26,11 @@ export class AuthService {
     );
   }
 
-  verify(token:string):Observable<User>{
+  verify(token:string): Observable<User>{
     let url = this.baseUrl + "/authentication/verify/" + token;
 
     return this.http.get(url).map(
-      (r: Response)=>{
+      (r: Response) => {
         return this.mapUser(r);
       }
     );
