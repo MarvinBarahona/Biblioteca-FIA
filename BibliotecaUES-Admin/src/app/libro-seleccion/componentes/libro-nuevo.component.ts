@@ -2,27 +2,24 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'libro-nuevo',
-  templateUrl: './libro-nuevo.component.html',
-  styleUrls: ['./libro-nuevo.component.css']
+  templateUrl: './libro-nuevo.component.html'
 })
-export class LibroNuevoComponent implements OnInit {
 
-  chipsAutocomplete = {
-    placeholder: "Otro Autor",
-    secondaryPlaceholder: 'Autores',
-    autocompleteOptions: {
-      data: {
-        'Apple': null,
-        'Microsoft': null,
-        'Google': null,
-        'Asia': null,
-      },
-      limit: Infinity,
-      minLength: 1
-    }
-  };
+export class LibroNuevoComponent implements OnInit {
+  datos : any;
+  chipsAutocomplete : any;
 
   ngOnInit() {
-  }
+    this.datos = {};
+    this.datos['Apple'] = null;
+    this.datos['Google'] = null;
 
+    this.chipsAutocomplete = {
+      autocompleteOptions: {
+        data: this.datos,
+        limit: Infinity,
+        minLength: 1
+      }
+    };
+  }
 }
