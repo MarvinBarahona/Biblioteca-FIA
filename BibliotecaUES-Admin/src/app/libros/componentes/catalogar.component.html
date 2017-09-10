@@ -1,3 +1,49 @@
-<p>
-  catalogar works!
-</p>
+<form>
+  <div class="row">
+    <div class="col l6">
+      <div class="col inicial">
+        A
+      </div>
+      <div class="input-field col l6 m8 s6">
+        <input id="codautor" type="text" class="validate" maxlength="3">
+        <label for="codautor">Código de autor</label>
+      </div>
+      <div class="col final">
+        A
+      </div>
+
+      <div class="input-field col l7 m10 s12">
+        <input id="dewey" type="text" class="validate" maxlength="60">
+        <label for="dewey">Código Dewey</label>
+      </div>
+
+      <div class="input-field col s10">
+        <strong>Materias: </strong>
+        <div class="chips" materialize="material_chip" [materializeParams]="[chipsAutocomplete]"></div>
+      </div>
+    </div>
+
+    <div class="col l6">
+      <div class="col s12">
+        <img src="http://2.bp.blogspot.com/-iHSmD9SRU9s/VDhMkzW2_oI/AAAAAAAAK0w/IVe_QCU07xo/s1600/HP3_1.jpeg" alt="Imagen del libro" class="previa">
+      </div>
+      <div class="col s10">
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>File</span>
+            <input type="file" (change)="onFileSelection($event)" accept="image/*">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <a class="waves-effect waves-light btn col m2 s12 offset-m3">Guardar</a>
+    <a class="waves-effect waves-light btn col m2 s12 offset-m1">Cancelar</a>
+  </div>
+</form>

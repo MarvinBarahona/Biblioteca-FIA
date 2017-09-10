@@ -3,11 +3,34 @@
     <div class="card">
       <div class="card-content">
         <h5>Listado de adquisiciones</h5>
-        <p>Aquí estará una tabla con adquisiciones</p>
+        <!-- <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover"> -->
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Tipo</th>
+              <th>Fecha de creación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="">Nombre de la adquisición</a></td>
+              <td>Donación</td>
+              <td>10/09/2017</td>
+            </tr>
+            <!--
+            <tr *ngFor="let post of posts">
+              <td>{{ post.id }}</td>
+              <td>{{ post.userId }}</td>
+              <td>{{ post.title }}</td>
+            </tr>
+            -->
+          </tbody>
+        </table>
         <a routerLink="/adquisiciones/1">Prueba link a adquisición</a>
       </div>
       <div class="card-action">
-        <a routerLink="/adquisiciones/nueva">Nuevo</a>
+        <a routerLink="/adquisiciones/nueva">Nueva</a>
       </div>
     </div>
   </div>
