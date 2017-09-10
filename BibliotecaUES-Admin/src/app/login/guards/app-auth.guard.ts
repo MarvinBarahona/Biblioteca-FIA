@@ -1,3 +1,6 @@
+// Guard de autenticación.
+// No permite acceder a la información sin loguearse.
+
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -11,19 +14,26 @@ export class AppAuthGuard implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     let res = false;
+    // Recuperar el token de los cookies.
     let token = this.cookieService.get('token');
 
+    // Si no hay token, redirigir al logueo.
     if (!token) {
       this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
     }
     else {
-      let user = this.cookieService.getObject('user');
+      // Recuperar el objeto Usuario de los cookies.
+      let user = this.cookieService.getObject('usuario');
+
+      // Si no hay usuario, verificar el token.
       if (!user) {
-        this.authService.verify(token).subscribe(
+        this.authService.verificar(token).subscribe(
+          // Recuperarción exitosa: poner el objeto en los cookies.
           u => {
             user = u;
-            this.cookieService.putObject('user', u);
+            this.cookieService.putObject('usuario', u);
           },
+          // Error al recuperar: redirigir al login.
           error => {
             this.cookieService.remove('token');
             this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
@@ -31,9 +41,12 @@ export class AppAuthGuard implements CanActivate {
         );
       }
 
+      // Si hay usuario o se recuperar con éxito
       if(user){
-        let i = user['policies'].indexOf(next.data['politica']);
+        // Determinar si en las políticas del usuario está la política necesaria para acceder.
+        let i = user['politicas'].indexOf(next.data['politica']);
 
+        // Si no está la política, redirigir al sitio del 'Permiso denegado'.
         if(i == -1) this.router.navigate(['error403']);
         else res = true;
       }

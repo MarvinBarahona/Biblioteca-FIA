@@ -1,6 +1,6 @@
 export { LibrosService } from './libros.service';
-export { Catalog } from './catalog';
-export { NewCatalog } from './newCatalog';
-export { Book } from './book';
-export { NewBook } from './newBook';
-export { AutoData } from './autoData';
+export { Catalogo } from './catalogo';
+export { Libro } from './libro';
+export { NuevoLibro } from './nuevo-libro';
+export { AutoData } from './auto-data';
+export { Ejemplar } from './ejemplar';

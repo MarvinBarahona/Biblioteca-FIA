@@ -1,4 +1,6 @@
+// Clase AutoData
+
 export class AutoData{
   id: number;
-  name: string;
+  nombre: string;
 }

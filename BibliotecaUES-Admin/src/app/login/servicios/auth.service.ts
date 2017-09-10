@@ -1,9 +1,11 @@
+// Servicios de autenticación
+
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 
-import { User } from './'
+import { Usuario } from './'
 
 @Injectable()
 export class AuthService {
@@ -15,36 +17,42 @@ export class AuthService {
     this.headers = new Headers({ 'Content-Type': 'application/json'});
   }
 
-  login(username: string, password: string): Observable<any> {
+  // Método: logueo
+  // Objetivo: permite a los usuarios loguearse.
+  logueo(correo: string, contra: string): Observable<any> {
     let url = this.baseUrl + '/authentication/login';
-    let q = JSON.stringify({ email: username, password: password });
+    let q = JSON.stringify({ email: correo, password: contra });
 
     return this.http.post(url, q, { headers: this.headers }).map(
       (r: Response) => {
-        return {user: this.mapUser(r['user']), token: r['token']};
+        return {user: this.mapearUsuario(r['user']), token: r['token']};
       }
     );
   }
 
-  verify(token:string): Observable<User>{
+  // Método: verificar
+  // Objetivo: autenticar a un usuario, dado un token.
+  verificar(token:string): Observable<Usuario>{
     let url = this.baseUrl + "/authentication/verify/" + token;
 
     return this.http.get(url).map(
       (r: Response) => {
-        return this.mapUser(r);
+        return this.mapearUsuario(r);
       }
     );
   }
 
-  private mapUser(r: any): User{
-    let user = new User();
-    user.id = 0;
-    user.email = r['email'];
-    user.fullname = r['fullname'];
-    user.group = r['group'];
-    user.policies = r['policies'];
+  // Método privado: mapearUsuario
+  // Objetivo: convertir un json de respuesta en un objeto ve Usuario.
+  private mapearUsuario(r: any): Usuario{
+    let usuario = new Usuario;
+    usuario.id = 0;
+    usuario.correo = r['email'];
+    usuario.nombre = r['fullname'];
+    usuario.grupo = r['group'];
+    usuario.politicas = r['policies'];
 
-    return user;
+    return usuario;
   }
 
 }

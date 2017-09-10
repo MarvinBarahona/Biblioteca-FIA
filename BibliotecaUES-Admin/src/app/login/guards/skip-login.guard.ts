@@ -14,9 +14,9 @@ export class SkipLoginGuard implements CanActivate {
     let token = this.cookieService.get('token');
 
     if (token){
-      this.authService.verify(token).subscribe(
+      this.authService.verificar(token).subscribe(
         u => {
-          this.cookieService.putObject('user', u);
+          this.cookieService.putObject('usuario', u);
           res = false;
           this.router.navigate(['/']);
         },
