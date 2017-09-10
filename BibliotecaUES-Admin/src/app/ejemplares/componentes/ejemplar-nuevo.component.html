@@ -8,18 +8,18 @@
               <input id="libro" type="text" class="validate" disabled>
               <label for="libro"> Libro</label>
             </div>
-            <a class="waves-effect waves-light btn col m3 s4 offset-m1" (click)="openModal1()">Seleccionar</a>
+            <a class="waves-effect waves-light btn col m3 s4 offset-m1" (click)="openSeleccion()">Seleccionar</a>
           </div>
 
           <div class="row">
             <div class="input-field col s6">
-                <select name="selectedOption" materialize="material_select" [materializeSelectOptions]="" [attr.disabled]="isDisabled?true:null">
+              <select name="selectedOption" materialize="material_select" [materializeSelectOptions]="" [attr.disabled]="isDisabled?true:null">
                   <option value="" disabled selected>Seleccionar...</option>
                   <option value="">1</option>
                   <option value="">2</option>
                   <!-- <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option> -->
                 </select>
-                <label>Materialize Select</label>
+              <label>Materialize Select</label>
             </div>
             <div class="input-field col s6">
               <input id="donante" type="text" class="validate">
@@ -36,7 +36,7 @@
 
           <div class="row">
             <a class="waves-effect waves-light btn col m2 s12 offset-m3">Guardar</a>
-            <a class="waves-effect waves-light btn col m2 s12 offset-m1">Cancelar</a>
+            <a class="waves-effect waves-light btn col m2 s12 offset-m1" (click)="openCancel()">Cancelar</a>
           </div>
 
         </form>
@@ -46,11 +46,24 @@
   </div>
 </div>
 
-<div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions1">
+<!-- Ventana modal para agregar libro -->
+<div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalSeleccion">
   <div class="modal-content">
     <libro-seleccion></libro-seleccion>
   </div>
   <div class="modal-footer">
-    <a class="waves-effect waves-green btn-flat" (click)="closeModal1()">Close</a>
+    <a class="waves-effect waves-light btn-flat" (click)="closeSeleccion()">Cerrar</a>
+  </div>
+</div>
+
+<!-- Ventana modal para asegurar la acción de cancelar -->
+<div id="modal2" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalCancel">
+  <div class="modal-content">
+    <h4>Cancelar acción</h4>
+    <p>¿Desea cancelar el ingreso del ejemplar?</p>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-green btn-flat" (click)="closeCancel()">Regresar</a>
+    <a class="modal-action modal-close waves-effect btn-flat">Confirmar</a>
   </div>
 </div>

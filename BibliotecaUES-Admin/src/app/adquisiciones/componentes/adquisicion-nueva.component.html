@@ -61,9 +61,9 @@
       <!-- Botones -->
       <br>
       <div class="row">
-        <a class="waves-effect waves-light btn col m2 offset-m2 s4 " (click)="openModal1()">Agregar</a>
+        <a class="waves-effect waves-light btn col m2 offset-m2 s4 " (click)="openSeleccion()">Agregar</a>
         <a class="waves-effect waves-light btn col m2 offset-m1 s4 ">Guardar</a>
-        <a class="waves-effect waves-light btn col m2 offset-m1 s4 ">Cancelar</a>
+        <a class="waves-effect waves-light btn col m2 offset-m1 s4 "(click)="openCancel()">Cancelar</a>
       </div>
 
     </div>
@@ -74,12 +74,24 @@
 <!-- /div -->
 
 
-<!-- Ventana modal -->
-<div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions1">
+<!-- Ventana modal para agregar libro -->
+<div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalSeleccion">
   <div class="modal-content">
     <libro-seleccion></libro-seleccion>
   </div>
   <div class="modal-footer">
-    <a class="waves-effect waves-green btn-flat" (click)="closeModal1()">Cerrar</a>
+    <a class="waves-effect waves-light btn-flat" (click)="closeSeleccion()">Cerrar</a>
+  </div>
+</div>
+
+<!-- Ventana modal para asegurar la acción de cancelar -->
+<div id="modal2" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalCancel">
+  <div class="modal-content">
+    <h4>Cancelar acción</h4>
+    <p>¿Desea cancelar el ingreso del ejemplares?</p>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-green btn-flat" (click)="closeCancel()">Regresar</a>
+    <a class="modal-action modal-close waves-effect btn-flat">Confirmar</a>
   </div>
 </div>
