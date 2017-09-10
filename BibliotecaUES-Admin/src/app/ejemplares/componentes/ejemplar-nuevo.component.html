@@ -3,6 +3,7 @@
     <div class="card-panel">
       <div class="card-content">
         <form>
+          <!-- Seleccionar libro -->
           <div class="row">
             <div class="input-field col m6 s7 offset-m1">
               <input id="libro" type="text" class="validate" disabled>
@@ -10,7 +11,7 @@
             </div>
             <a class="waves-effect waves-light btn col m3 s4 offset-m1" (click)="openSeleccion()">Seleccionar</a>
           </div>
-
+          <!-- Origen del ejemplar -->
           <div class="row">
             <div class="input-field col s6">
               <select name="selectedOption" materialize="material_select" [materializeSelectOptions]="" [attr.disabled]="isDisabled?true:null">
@@ -26,7 +27,7 @@
               <label for="donante"> Donante</label>
             </div>
           </div>
-
+          <!-- Código de barras -->
           <div class="row">
             <div class="input-field col s6">
               <input id="codigo" type="text" class="validate">
@@ -34,6 +35,7 @@
             </div>
           </div>
 
+          <!-- Acciones -->
           <div class="row">
             <a class="waves-effect waves-light btn col m2 s12 offset-m3">Guardar</a>
             <a class="waves-effect waves-light btn col m2 s12 offset-m1" (click)="openCancel()">Cancelar</a>
@@ -42,9 +44,13 @@
         </form>
 
       </div>
+      <!-- /card-content -->
     </div>
+    <!-- /card-panel -->
   </div>
+  <!-- /col -->
 </div>
+<!-- /row -->
 
 <!-- Ventana modal para agregar libro -->
 <div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalSeleccion">

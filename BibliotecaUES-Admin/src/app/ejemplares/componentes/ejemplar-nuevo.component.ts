@@ -1,7 +1,7 @@
 /*
-*Nombre del módulo:
-*Dirección física:
-*Objetivo:
+*Nombre del módulo: Gestión de ejemplares
+*Dirección física: src\app\ejemplares\componentes\ejemplar-nuevo.component.ts
+*Objetivo: Crear un nuevo ejemplar
 **/
 
 import { Component, OnInit, EventEmitter } from '@angular/core';
