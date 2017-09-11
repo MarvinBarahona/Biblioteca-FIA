@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 
 import { CookieService } from 'ngx-cookie';
-import { Libro, NuevoLibro, Catalogo, AutoData, Ejemplar } from './';
+import { Libro, Catalogo, AutoData, Ejemplar } from './';
 
 @Injectable()
 export class LibrosService {
@@ -16,54 +16,6 @@ export class LibrosService {
   constructor(private http: Http, private cookieService: CookieService) {
     this.baseUrl = "https://bibliotecafiaues.herokuapp.com";
     this.headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.cookieService.get('token') });
-  }
-
-  // Método: crear
-  // Objetivo: Crear un nuevo libro.
-  crear(nuevoLibro: NuevoLibro, autores: AutoData[], editoriales: AutoData[]): Observable<Libro> {
-    let url = this.baseUrl + '/books';
-
-    // Obtener los autores registrados y nuevos.
-    let division = this.dividirNuevos(nuevoLibro.autores, autores);
-    let autoresGuardados = division['viejos'];
-    let nuevosAutores = division['nuevos'];
-
-    // Obtener la editorial
-    let editorial = {id: this.obtenerIdData(nuevoLibro.editorial, editoriales), name: nuevoLibro.editorial};
-
-    // Mapeando la salida.
-    let q = JSON.stringify({
-      book: {
-        isbn: nuevoLibro.isbn,
-        title: nuevoLibro.titulo,
-        authorName: nuevoLibro.autor,
-        edition: nuevoLibro.edicion,
-        year: nuevoLibro.anio,
-        country: nuevoLibro.pais
-      },
-      authors: autoresGuardados,
-      newAuthors: nuevosAutores,
-      publisher: editorial
-    });
-
-    // Realizar el POST
-    return this.http.post(url, q, { headers: this.headers }).map(
-      (r: Response) => {
-
-        // Mapeando la entrada.
-        let libro = new Libro();
-
-        libro.id = r['id'];
-        libro.isbn = nuevoLibro.isbn;
-        libro.titulo = nuevoLibro.titulo;
-        libro.edicion = nuevoLibro.edicion;
-        libro.autor = nuevoLibro.autor;
-        libro.editorial = nuevoLibro.editorial;
-        libro.catalogado = false;
-
-        return libro;
-      }
-    );
   }
 
   // Método: catalogar
@@ -76,7 +28,7 @@ export class LibrosService {
     let materiasGuardadas = division['viejos'];
     let nuevasMaterias = division['nuevos'];
 
-    // Mapeando la salida.
+    // Mapeando la entrada.
     let q = JSON.stringify({
       subjects: materiasGuardadas,
       newSubjects: nuevasMaterias,
@@ -87,7 +39,8 @@ export class LibrosService {
 
     // Realizando el POST
     return this.http.post(url, q, { headers: this.headers }).map(
-      (r: Response) => {
+      (response: Response) => {
+        let r = response.json();
         return r['message'];
       }
     );
@@ -101,7 +54,8 @@ export class LibrosService {
 
     // Realizando el GET
     return this.http.post(url, q, { headers: this.headers }).map(
-      (r: Response) => {
+      (response: Response) => {
+        let r = response.json();
         return r['message'];
       }
     );
@@ -114,11 +68,12 @@ export class LibrosService {
 
     // Realizando el GET
     return this.http.get(url, { headers: this.headers }).map(
-      (r: Response) => {
+      (response: Response) => {
+        let r = response.json();
         // Mapeando la salida
         let libros = new Array<Libro>();
 
-        r.json().forEach(function(item){
+        r.forEach(function(item) {
           let libro = new Libro;
 
           libro.id = item['id'];
@@ -144,7 +99,8 @@ export class LibrosService {
 
     // Realizar el GET
     return this.http.get(url, { headers: this.headers }).map(
-      (r: Response) => {
+      (response: Response) => {
+        let r = response.json();
         // Mapeando la salida
         let libro = new Libro;
         let rb = r['book'];
@@ -159,14 +115,14 @@ export class LibrosService {
         libro.anio = rb['year'];
         libro.catalogado = rb['catalogued'];
         libro.autores = [];
-        rb['Authors'].json().forEach(function(author){
+        rb['Authors'].forEach(function(author) {
           libro.autores.push(author['name']);
         });
 
         // Mapeando el catalogo
         let catalogo = new Catalogo;
         catalogo.materias = [];
-        rb['Subjects'].json().forEach(function(subject){
+        rb['Subjects'].forEach(function(subject) {
           catalogo.materias.push(subject['name']);
         });
         catalogo.categoria = rb['category'];
@@ -176,7 +132,7 @@ export class LibrosService {
 
         // Mapeando los ejemplares
         let ejemplares = new Array<Ejemplar>();
-        rc.json().forEach(function(item){
+        rc.forEach(function(item) {
           let ejemplar = new Ejemplar;
           ejemplar.id = item['id'];
           ejemplar.codigo = item['barcode'];
@@ -197,14 +153,15 @@ export class LibrosService {
 
     // Realizando GET
     return this.http.get(url, { headers: this.headers }).map(
-      (r: Response) => {
+      (response: Response) => {
+        let r = response.json();
         // Mapeando la salida
         let autores = new Array<AutoData>();
         let editoriales = new Array<AutoData>();
         let ra = r['authors'];
         let rp = r['publishers'];
 
-        ra.json().forEach(function(item){
+        ra.forEach(function(item) {
           let autor = new AutoData;
 
           autor.id = item['id'];
@@ -213,7 +170,7 @@ export class LibrosService {
           autores.push(autor);
         });
 
-        rp.json().forEach(function(item){
+        rp.forEach(function(item) {
           let editorial = new AutoData;
 
           editorial.id = item['id'];
@@ -222,7 +179,7 @@ export class LibrosService {
           editoriales.push(editorial);
         });
 
-        return {autores: autores, editoriales: editoriales};
+        return { autores: autores, editoriales: editoriales };
       }
     );
   }
@@ -234,12 +191,13 @@ export class LibrosService {
 
     // Realizando GET
     return this.http.get(url, { headers: this.headers }).map(
-      (r: Response) => {
+      (response: Response) => {
+        let r = response.json();
         // Mapeando la salida
         let materias = new Array<AutoData>();
         let rs = r['subjects'];
 
-        rs.json().forEach(function(item){
+        rs.forEach(function(item) {
           let materia = new AutoData;
 
           materia.id = item['id'];
@@ -255,34 +213,20 @@ export class LibrosService {
 
   // Método privado: dividirNuevos
   // Objetivo: obtener los nuevos registros y los datos ya registrados.
-  private dividirNuevos(items:string[], data: AutoData[]): any{
+  private dividirNuevos(items: string[], data: AutoData[]): any {
     let viejos: number[] = [];
     let nuevos: any[] = [];
     let buscarEn: string[] = [];
 
-    data.forEach(function(d){
+    data.forEach(function(d) {
       buscarEn.push(d.nombre);
     });
 
-    items.forEach(function(item){
+    items.forEach(function(item) {
       let i = buscarEn.indexOf(item);
-      i > -1 ? viejos.push(data[i].id) : nuevos.push({name: item});
+      i > -1 ? viejos.push(data[i].id) : nuevos.push({ name: item });
     });
 
-    return {viejos: viejos, nuevos: nuevos};
-  }
-
-  // Método privado: obtenerIdData
-  // Objetivo: obtener el id de un item de autocompletado, o 0 si no existe.
-  private obtenerIdData(item: string, data: AutoData[]): number {
-    let buscarEn: string[] = [];
-    let i: number;
-
-    data.forEach(function(d){
-      buscarEn.push(d.nombre);
-    });
-
-    i = buscarEn.indexOf(item);
-    return i > -1 ? data[i].id : 0;
+    return { viejos: viejos, nuevos: nuevos };
   }
 }

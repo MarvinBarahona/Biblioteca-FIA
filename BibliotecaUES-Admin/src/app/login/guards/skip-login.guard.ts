@@ -1,3 +1,6 @@
+// Guard SkipLoginGuard
+// Objetivo: permite saltar el logueo si ya hay un usuario registrado.
+
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -11,15 +14,19 @@ export class SkipLoginGuard implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot){
     let res = true;
+    // Recupera el token.
     let token = this.cookieService.get('token');
 
+    // Si ya hay token, intenta saltarlo.
     if (token){
+      // Verifica al usuario.
       this.authService.verificar(token).subscribe(
         u => {
           this.cookieService.putObject('usuario', u);
           res = false;
           this.router.navigate(['/']);
         },
+        // Si hay error, quita el token. 
         error => {
           this.cookieService.remove('token');
         }

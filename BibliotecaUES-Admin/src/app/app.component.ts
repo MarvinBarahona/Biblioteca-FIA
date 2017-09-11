@@ -20,6 +20,6 @@ export class AppComponent {
 
   ngOnInit(){
     let u = this.cookieService.getObject('usuario');
-    if(u) this.usuario = u['correo'];
+    if(u) this.usuario = u['nombre'];
   }
 }
