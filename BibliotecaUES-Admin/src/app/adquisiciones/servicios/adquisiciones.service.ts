@@ -35,7 +35,8 @@ export class AdquisicionesService {
     // Realizando POST
     return this.http.post(url, q, { headers: this.headers }).map(
       // Mapeando salida
-      (r: Response) => {
+      (response: Response) => {
+        let r = response.json();
         return r['message'];
       }
     );
@@ -57,7 +58,8 @@ export class AdquisicionesService {
     // Realizando POST
     return this.http.post(url, q, { headers: this.headers }).map(
       // Mapeando salida
-      (r: Response) => {
+      (response: Response) => {
+        let r = response.json();
         return r['message'];
       }
     );
@@ -71,10 +73,11 @@ export class AdquisicionesService {
     // Realizando GET
     return this.http.get(url, { headers: this.headers }).map(
       // Mapeando la salida
-      (r: Response) => {
+      (response: Response) => {
+        let r = response.json();
         let adquisiciones = new Array<Adquisicion>();
 
-        r.json().forEach(function(item) {
+        r.forEach(function(item) {
           let adquisicion = new Adquisicion;
           adquisicion.id = item['id'];
           adquisicion.nombre = item['notes'];
@@ -97,7 +100,8 @@ export class AdquisicionesService {
     // Realizando GET
     return this.http.get(url, { headers: this.headers }).map(
       // Mapeando la salida
-      (r: Response) => {
+      (response: Response) => {
+        let r = response.json();
         let adquisicion = new Adquisicion;
         let rt = r[0];
         let rd = rt['details'];
@@ -113,7 +117,7 @@ export class AdquisicionesService {
 
         // Mapear las ejemplares.
         let ejemplares = new Array<Ejemplar>();
-        rc.json().forEach(function(item){
+        rc.forEach(function(item){
           let ejemplar = new Ejemplar;
           ejemplar.id = item['id'];
           ejemplar.codigo = item['barcode'];

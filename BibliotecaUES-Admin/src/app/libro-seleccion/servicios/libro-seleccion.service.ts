@@ -1,8 +1,128 @@
+// Servicios de selección de libros
+
 import { Injectable } from '@angular/core';
+import { Http, Headers, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map'
+
+import { CookieService } from 'ngx-cookie';
+import { Libro, NuevoLibro, AutoData } from './';
 
 @Injectable()
 export class LibroSeleccionService {
+  baseUrl: string;
+  headers: Headers;
 
-  constructor() { }
+  constructor(private http: Http, private cookieService: CookieService) {
+    this.baseUrl = "https://bibliotecafiaues.herokuapp.com";
+    this.headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.cookieService.get('token') });
+  }
 
+  // Método: crear
+  // Objetivo: Crear un nuevo libro.
+  crear(nuevoLibro: NuevoLibro, autores: AutoData[], editoriales: AutoData[]): Observable<Libro> {
+    let url = this.baseUrl + '/books';
+
+    // Obtener los autores registrados y nuevos.
+    let division = this.dividirNuevos(nuevoLibro.autores, autores);
+    let autoresGuardados = division['viejos'];
+    let nuevosAutores = division['nuevos'];
+
+    // Obtener la editorial
+    let editorial = {id: this.obtenerIdData(nuevoLibro.editorial, editoriales), name: nuevoLibro.editorial};
+
+    // Mapeando la entrada.
+    let q = JSON.stringify({
+      book: {
+        isbn: nuevoLibro.isbn,
+        title: nuevoLibro.titulo,
+        authorName: nuevoLibro.autor,
+        edition: nuevoLibro.edicion,
+        year: nuevoLibro.anio,
+        country: nuevoLibro.pais
+      },
+      authors: autoresGuardados,
+      newAuthors: nuevosAutores,
+      publisher: editorial
+    });
+
+    // Realizar el POST
+    return this.http.post(url, q, { headers: this.headers }).map(
+      (response: Response) => {
+        let r = response.json();
+        // Mapeando la salida
+        let libro = new Libro();
+
+        libro.id = r['id'];
+        libro.isbn = nuevoLibro.isbn;
+        libro.titulo = nuevoLibro.titulo;
+        libro.edicion = nuevoLibro.edicion;
+        libro.autor = nuevoLibro.autor;
+
+        return libro;
+      }
+    );
+  }
+
+  // Método: obtenerTodos
+  // Objetivo: obtener todos los libros registrados.
+  obtenerTodos(): Observable<Libro[]> {
+    let url = this.baseUrl + '/books';
+
+    // Realizando el GET
+    return this.http.get(url, { headers: this.headers }).map(
+      (response: Response) => {
+        let r = response.json();
+        // Mapeando la salida
+        let libros = new Array<Libro>();
+
+        r.forEach(function(item){
+          let libro = new Libro;
+
+          libro.id = item['id'];
+          libro.isbn = item['isbn'];
+          libro.titulo = item['title'];
+          libro.edicion = item['edition'];
+          libro.autor = item['authorName'];
+
+          libros.push(libro);
+        });
+
+        return libros;
+      }
+    );
+  }
+
+  // Método privado: dividirNuevos
+  // Objetivo: obtener los nuevos registros y los datos ya registrados.
+  private dividirNuevos(items:string[], data: AutoData[]): any{
+    let viejos: number[] = [];
+    let nuevos: any[] = [];
+    let buscarEn: string[] = [];
+
+    data.forEach(function(d){
+      buscarEn.push(d.nombre);
+    });
+
+    items.forEach(function(item){
+      let i = buscarEn.indexOf(item);
+      i > -1 ? viejos.push(data[i].id) : nuevos.push({name: item});
+    });
+
+    return {viejos: viejos, nuevos: nuevos};
+  }
+
+  // Método privado: obtenerIdData
+  // Objetivo: obtener el id de un item de autocompletado, o 0 si no existe.
+  private obtenerIdData(item: string, data: AutoData[]): number {
+    let buscarEn: string[] = [];
+    let i: number;
+
+    data.forEach(function(d){
+      buscarEn.push(d.nombre);
+    });
+
+    i = buscarEn.indexOf(item);
+    return i > -1 ? data[i].id : 0;
+  }
 }

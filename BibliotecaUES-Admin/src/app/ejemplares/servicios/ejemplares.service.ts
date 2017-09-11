@@ -32,7 +32,8 @@ export class EjemplaresService {
     // Realizando POST
     return this.http.post(url, q, { headers: this.headers }).map(
       // Mapeando salida
-      (r: Response) => {
+      (response: Response) => {
+        let r = response.json();
         return r['message'];
       }
     );
@@ -54,7 +55,8 @@ export class EjemplaresService {
     // Realizando POST
     return this.http.post(url, q, { headers: this.headers }).map(
       // Mapeando salida
-      (r: Response) => {
+      (response: Response) => {
+        let r = response.json();
         return r['message'];
       }
     );
@@ -68,10 +70,11 @@ export class EjemplaresService {
     // Realizando GET
     return this.http.get(url, { headers: this.headers }).map(
       // Mapeando la salida
-      (r: Response) => {
+      (response: Response) => {
+        let r = response.json();
         let ejemplares = new Array<Ejemplar>();
 
-        r.json().forEach(function(item) {
+        r.forEach(function(item) {
           let ejemplar = new Ejemplar;
           ejemplar.id = item['id'];
           ejemplar.codigo = item['barcode'];
@@ -92,7 +95,8 @@ export class EjemplaresService {
     // Realizando GET
     return this.http.get(url, { headers: this.headers }).map(
       // Mapeando la salida
-      (r: Response) => {
+      (response: Response) => {
+        let r = response.json();
         let ejemplar = new Ejemplar;
         let rc = r['copy'];
         let rt = rc['transactions'];
@@ -105,7 +109,7 @@ export class EjemplaresService {
 
         // Mapear las transacciones.
         let transacciones = new Array<Transaccion>();
-        rt.json().forEach(function(item){
+        rt.forEach(function(item){
           let transaccion = new Transaccion;
           transaccion.id = item['id'];
           transaccion.nombre = item['notes'];
@@ -136,7 +140,8 @@ export class EjemplaresService {
     // Realizando GET
     return this.http.get(url, { headers: this.headers }).map(
       // Mapeando la salida
-      (r: Response) => {
+      (response: Response) => {
+        let r = response.json();
         let ejemplar = new Ejemplar;
         let rc = r['copy'];
         let rb = r['book'];
