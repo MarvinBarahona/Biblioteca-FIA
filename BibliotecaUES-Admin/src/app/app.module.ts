@@ -9,9 +9,9 @@ import { CookieModule } from 'ngx-cookie';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { LibrosModule } from './libros';
-import { EjemplaresModule } from './ejemplares';
-import { AdquisicionesModule } from './adquisiciones';
+import { LibrosModule } from './libros/libros.module';
+import { EjemplaresModule } from './ejemplares/ejemplares.module';
+import { AdquisicionesModule } from './adquisiciones/adquisiciones.module';
 import { LoginModule } from './login';
 
 @NgModule({

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { CookieModule } from 'ngx-cookie';
 import { MaterializeModule } from 'angular2-materialize';
+import { DataTablesModule } from 'angular-datatables';
 
 import { LibrosRoutingModule } from './libros-routing.module';
 import { LibrosRootComponent, LibrosComponent, LibroComponent, CatalogarComponent, CatalogadoComponent } from './componentes';
@@ -15,6 +16,7 @@ import { LibrosService } from './servicios';
     CommonModule,
     HttpModule,
     FormsModule,
+    DataTablesModule,
     MaterializeModule,
     CookieModule.forChild(),
     LibrosRoutingModule

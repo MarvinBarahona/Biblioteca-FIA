@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { CookieModule } from 'ngx-cookie';
 import { MaterializeModule } from 'angular2-materialize';
+import { DataTablesModule } from 'angular-datatables';
 
 import { AdquisicionesRoutingModule } from './adquisiciones-routing.module';
 import { AdquisicionesRootComponent, AdquisicionesComponent, AdquisicionComponent, AdquisicionNuevaComponent } from './componentes/';
@@ -18,6 +19,7 @@ import { LibroSeleccionModule } from './../libro-seleccion';
     HttpModule,
     FormsModule,
     MaterializeModule,
+    DataTablesModule,
     CookieModule.forChild(),
     AdquisicionesRoutingModule,
     LibroSeleccionModule

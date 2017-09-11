@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { CookieModule } from 'ngx-cookie';
 
+import { CookieModule } from 'ngx-cookie';
+import { DataTablesModule } from 'angular-datatables';
 import { MaterializeModule } from 'angular2-materialize';
 
 import { LibroSeleccionComponent, LibroNuevoComponent, LibroBuscarComponent } from './componentes';
@@ -14,6 +15,7 @@ import { LibroSeleccionService } from './servicios';
     CommonModule,
     HttpModule,
     FormsModule,
+    DataTablesModule,
     MaterializeModule,
     CookieModule.forChild()
   ],

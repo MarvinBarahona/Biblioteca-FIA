@@ -1,7 +1,6 @@
 <div class="row">
   <div class="col m12">
-    <!-- <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover"> -->
-    <table>
+    <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
       <thead>
         <tr>
           <th>ISBN</th>
@@ -10,18 +9,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>12345678</td>
-          <td>Libro muy interesante</td>
-          <td>Juan Perez</td>
+        <div>
+          <p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Cargando datos...</p>
+        </div>
+        <tr *ngFor="let libro of libros">
+          <td>{{ libro.isbn }}</td>
+          <td>{{ libro.titulo }}</td>
+          <td>{{ libro.autor }}</td>
         </tr>
-        <!--
-        <tr *ngFor="let post of posts">
-          <td>{{ post.id }}</td>
-          <td>{{ post.userId }}</td>
-          <td>{{ post.title }}</td>
-        </tr>
-        -->
       </tbody>
     </table>
   </div>

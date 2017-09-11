@@ -3,8 +3,7 @@
     <div class="card">
       <div class="card-content">
         <h5>Listado de adquisiciones</h5>
-        <!-- <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover"> -->
-        <table>
+        <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
           <thead>
             <tr>
               <th>Nombre</th>
@@ -13,21 +12,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><a href="">Nombre de la adquisición</a></td>
-              <td>Donación</td>
-              <td>10/09/2017</td>
+            <div>
+              <p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Cargando datos...</p>
+            </div>
+            <tr *ngFor="let adquisicion of adquisiciones">
+              <td><a href="javascript:void(0)" (click)="linkAdquisicion(adquisicion)">{{adquisicion.nombre}}</a></td>
+              <td>{{adquisicion.tipo}}</td>
+              <td>{{adquisicion.fecha | date:"shortDate"}}</td>
             </tr>
-            <!--
-            <tr *ngFor="let post of posts">
-              <td>{{ post.id }}</td>
-              <td>{{ post.userId }}</td>
-              <td>{{ post.title }}</td>
-            </tr>
-            -->
           </tbody>
         </table>
-        <a routerLink="/adquisiciones/1">Prueba link a adquisición</a>
       </div>
       <!-- Acciones -->
       <div class="card-action">
