@@ -51,6 +51,7 @@ ul{
 .alert {
   padding: 5px;
   margin-bottom: 20px;
+  margin-up: 20px;
   border: 1px solid transparent;
   border-radius: 4px
 }

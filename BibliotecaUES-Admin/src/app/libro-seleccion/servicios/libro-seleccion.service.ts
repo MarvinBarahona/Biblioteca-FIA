@@ -31,6 +31,9 @@ export class LibroSeleccionService {
     // Obtener la editorial
     let editorial = {id: this.obtenerIdData(nuevoLibro.editorial, editoriales), name: nuevoLibro.editorial};
 
+    // Asignando el autor principal
+    nuevoLibro.autor = nuevoLibro.autores[0];
+
     // Mapeando la entrada.
     let q = JSON.stringify({
       book: {
@@ -89,6 +92,44 @@ export class LibroSeleccionService {
         });
 
         return libros;
+      }
+    );
+  }
+
+  // Método: obtenerAutoLibro
+  // Objetivo: obtener los datos de autocompletado para la creación del libro.
+  obtenerAutoLibro(): Observable<any> {
+    let url = this.baseUrl + '/books/authorspublishers';
+
+    // Realizando GET
+    return this.http.get(url, { headers: this.headers }).map(
+      (response: Response) => {
+        let r = response.json();
+        // Mapeando la salida
+        let autores = new Array<AutoData>();
+        let editoriales = new Array<AutoData>();
+        let ra = r['authors'];
+        let rp = r['publishers'];
+
+        ra.forEach(function(item) {
+          let autor = new AutoData;
+
+          autor.id = item['id'];
+          autor.nombre = item['name'];
+
+          autores.push(autor);
+        });
+
+        rp.forEach(function(item) {
+          let editorial = new AutoData;
+
+          editorial.id = item['id'];
+          editorial.nombre = item['name'];
+
+          editoriales.push(editorial);
+        });
+
+        return { autores: autores, editoriales: editoriales };
       }
     );
   }

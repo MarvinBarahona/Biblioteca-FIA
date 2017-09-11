@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
 
     this.authService.logueo(this.model.correo, this.model.contra).subscribe(
       r => {
-        console.log(r);
         this.cookieService.put('token', r['token']);
         this.cookieService.putObject('usuario', r['usuario']);
         window.location.href = this.returnUrl;
@@ -44,6 +43,7 @@ export class LoginComponent implements OnInit {
         if (error.status === 401) {
           this.errorMessage = "Contraseña incorrecta"
         }
-      });
+      }
+    );
   }
 }

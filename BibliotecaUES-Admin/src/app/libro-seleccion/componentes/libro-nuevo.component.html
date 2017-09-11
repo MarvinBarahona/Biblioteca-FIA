@@ -1,43 +1,50 @@
-<form>
+<form #libroNuevoForm="ngForm" (ngSubmit)="crear(libroNuevoForm)">
   <div class="row">
     <div class="input-field col s12">
-      <input id="titulo" type="text" class="validate">
-      <label for="titulo"> Título</label>
+      <input id="titulo" name="titulo" type="text" class="validate" [(ngModel)]="libro.titulo" required>
+      <label for="titulo">Título</label>
     </div>
   </div>
 
   <div class="row">
     <div class="input-field col s12">
-      <div id="autores" class="chips" materialize="material_chip" [materializeParams]="[chipsAutocomplete]"></div>
-      <label for="autores"> Autores</label>
+      <div id="autores" class="chips" (chip.add)="agregarAutor($event.detail)" (chip.delete)="eliminarAuttor($event.detail)"></div>
+      <label for="autores">Autores</label>
     </div>
   </div>
 
   <div class="row">
     <div class="input-field col s6">
-      <input id="editorial" type="text" class="validate">
+      <input id="editorial" name="editorial" type="text" class="validate" [(ngModel)]="libro.editorial" required>
       <label for="editorial">Editorial</label>
     </div>
     <div class="input-field col s6">
-      <input id="pais" type="text" class="validate">
+      <input id="pais" name="pais" type="text" class="validate" [(ngModel)]="libro.pais" required>
       <label for="pais">País</label>
     </div>
   </div>
 
   <div class="row">
     <div class="input-field col s3">
-      <input id="anio" type="text" class="validate">
-      <label for="anio">Año</label>
+      <input id="anio" name="anio" type="number" class="validate" min="1950" max="2050" [(ngModel)]="libro.anio" required>
+      <label for="anio" data-error="Valor entre 1950 y 2050">Año</label>
     </div>
     <div class="input-field col s3">
-      <input id="edicion" type="text" class="validate">
-      <label for="edicion">Edición</label>
+      <input id="edicion" name="edicion" type="number" class="validate" min="1" max="30" [(ngModel)]="libro.edicion" required>
+      <label for="edicion" data-error="Valor entre 1 y 30">Edición</label>
     </div>
     <div class="input-field col s6">
-      <input id="isbn" type="text" class="validate">
-      <label for="isbn">ISBN</label>
+      <input id="isbn" name="isbn" type="text" class="validate" pattern="^[\d-]{13}$|^[\d-]{17}$" [(ngModel)]="libro.isbn" required>
+      <label for="isbn" data-error="Ingrese 10 ó 13 dígitos, con guiones">ISBN</label>
     </div>
   </div>
 
-  <a class="btn waves-effect waves-green">Guardar</a>
+  <div class="row">
+    <div class="center">
+      <button type="submit" class="btn waves-effect waves-green" [disabled]="!libroNuevoForm.form.valid || libro.autores.length == 0">Guardar</button>
+    </div>
+    <div class="row alert alert-info col s6 offset-s3" *ngIf="message">
+      <p>{{message}}</p>
+    </div>
+  </div>
 </form>
