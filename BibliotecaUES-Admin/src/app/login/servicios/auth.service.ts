@@ -24,8 +24,9 @@ export class AuthService {
     let q = JSON.stringify({ email: correo, password: contra });
 
     return this.http.post(url, q, { headers: this.headers }).map(
-      (r: Response) => {
-        return {user: this.mapearUsuario(r['user']), token: r['token']};
+      (response: Response) => {
+        let r = response.json();
+        return {usuario: this.mapearUsuario(r['user']), token: r['token']};
       }
     );
   }
@@ -36,7 +37,8 @@ export class AuthService {
     let url = this.baseUrl + "/authentication/verify/" + token;
 
     return this.http.get(url).map(
-      (r: Response) => {
+      (response: Response) => {
+        let r = response.json();
         return this.mapearUsuario(r);
       }
     );
@@ -49,8 +51,8 @@ export class AuthService {
     usuario.id = 0;
     usuario.correo = r['email'];
     usuario.nombre = r['fullname'];
-    usuario.grupo = r['group'];
-    usuario.politicas = r['policies'];
+    usuario.grupo = r['Group'];
+    usuario.politicas = r['Policies'];
 
     return usuario;
   }
