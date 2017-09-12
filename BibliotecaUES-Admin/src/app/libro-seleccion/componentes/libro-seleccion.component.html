@@ -1,10 +1,16 @@
 <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
   <li>
     <div class="collapsible-header active">Buscar libro</div>
-    <div class="collapsible-body"><libro-buscar></libro-buscar></div>
+    <div class="collapsible-body">
+      <!-- Libro-buscar. Escucha el evento emitido por el componente hijo. -->
+      <libro-buscar (eventEmitter)='onNotify($event)'></libro-buscar>
+    </div>
   </li>
   <li>
     <div class="collapsible-header">Nuevo libro</div>
-    <div class="collapsible-body"><libro-nuevo></libro-nuevo></div>
+    <div class="collapsible-body">
+      <!-- Libro-nuevo. Escucha el evento emitido por el componente hijo. -->
+      <libro-nuevo (eventEmitter)='onNotify($event)'></libro-nuevo>
+    </div>
   </li>
 </ul>

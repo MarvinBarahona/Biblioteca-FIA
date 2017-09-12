@@ -4,7 +4,7 @@
 *Objetivo: Crear un nuevo libro
 */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { LibroSeleccionService, NuevoLibro, Libro, AutoData } from './../servicios';
 
@@ -20,6 +20,9 @@ export class LibroNuevoComponent implements OnInit {
   libro: NuevoLibro;
   autores: AutoData[];
   editoriales: AutoData[];
+
+  // Para emitir evento con el libro creado
+  @Output() eventEmitter: EventEmitter<Libro> = new EventEmitter<Libro>();
 
   autorAutocomplete: any;
   editorialAutocomplete: any;
@@ -43,6 +46,8 @@ export class LibroNuevoComponent implements OnInit {
     // Llamando al servicio
     this.libroService.crear(this.libro, this.autores, this.editoriales).subscribe(
       libro => {
+        // Emite el libro para comunicarse con otro componente.
+        this.eventEmitter.emit(libro);
         // Muestra un toast con el mensaje de creación
         Materialize.toast('Libro creado', 3000);
         this.limpiar(form);

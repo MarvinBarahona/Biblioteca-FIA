@@ -16,7 +16,7 @@
           <p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Cargando datos...</p>
         </div>
         <tr *ngFor="let libro of libros">
-          <td>{{ libro.isbn }}</td>
+          <td><a href="javascript:void(0)" (click)="emitir(libro);">{{ libro.isbn }}</a></td>
           <td>{{ libro.titulo }}</td>
           <td>{{ libro.autor }}</td>
         </tr>

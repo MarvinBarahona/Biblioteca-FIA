@@ -4,7 +4,7 @@
 *Objetivo: Buscar un libro por medio de una tabla
 **/
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Rx';
 
@@ -18,6 +18,9 @@ export class LibroBuscarComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   libros: Libro[];
   dtTrigger: Subject<any> = new Subject();
+
+  // Para emitir un evento con el libro seleccionado
+  @Output() eventEmitter: EventEmitter<Libro> = new EventEmitter<Libro>();
 
   constructor(private libroSeleccionService: LibroSeleccionService, private router: Router) {
     // Opciones del datatable
@@ -41,7 +44,7 @@ export class LibroBuscarComponent implements OnInit {
   }
 
   // Emite evento con el libro seleccionado.
-  linkLibro(libro: Libro){
-    this.router.navigate(["/libros/"+libro.id])
+  emitir(libro: Libro) {
+    this.eventEmitter.emit(libro);
   }
 }
