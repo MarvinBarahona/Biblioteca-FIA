@@ -36,7 +36,7 @@ export class LibrosService {
       authorCode: nuevoCatalogo.codigoAutor,
       image: nuevoCatalogo.img
     });
-
+    
     // Realizando el POST
     return this.http.post(url, q, { headers: this.headers }).map(
       (response: Response) => {
@@ -155,11 +155,10 @@ export class LibrosService {
     return this.http.get(url, { headers: this.headers }).map(
       (response: Response) => {
         let r = response.json();
+
         // Mapeando la salida
         let materias = new Array<AutoData>();
-        let rs = r['subjects'];
-
-        rs.forEach(function(item) {
+        r.forEach(function(item) {
           let materia = new AutoData;
 
           materia.id = item['id'];

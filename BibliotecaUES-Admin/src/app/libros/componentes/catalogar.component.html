@@ -1,29 +1,24 @@
-<form>
+<form #catalogarForm="ngForm">
   <div class="row">
     <!-- Detalles de catalogación -->
     <div class="col l6">
+
       <!-- Código de Autor -->
-      <div class="col inicial">
-        A
-      </div>
       <div class="input-field col l6 m8 s6">
-        <input id="codautor" type="text" class="validate" maxlength="3">
-        <label for="codautor">Código de autor</label>
-      </div>
-      <div class="col final">
-        A
+        <input id="codautor" name="codautor" type="text" class="validate" maxlength="5" pattern="^[A-Z]{1}[\d]{3}[A-Z]{1}$" [(ngModel)]="catalogo.codigoAutor">
+        <label for="codautor" data-error="Debe tener el formato A999A">Código de autor</label>
       </div>
 
       <!-- Código Dewey -->
       <div class="input-field col l7 m10 s12">
-        <input id="dewey" type="text" class="validate" maxlength="60">
-        <label for="dewey">Código Dewey</label>
+        <input id="dewey" name="dewey" type="text" class="validate" maxlength="60" pattern="^[\d.]+$" [(ngModel)]="catalogo.categoria" required>
+        <label for="dewey" data-error="Debe contener solo números y puntos">Código Dewey</label>
       </div>
 
       <!-- Materias o Tags -->
       <div class="input-field col s10">
         <strong>Materias: </strong>
-        <div class="chips" materialize="material_chip" [materializeParams]="[chipsAutocomplete]"></div>
+        <div class="chips" materialize="material_chip" [materializeParams]="[chipsAutocomplete]" (chip.add)="agregarMateria($event.detail)" (chip.delete)="eliminarMateria($event.detail)"></div>
       </div>
 
     </div>
@@ -31,7 +26,7 @@
     <!-- Seleccionar y cargar imagen -->
     <div class="col l6">
       <div class="col s12">
-        <img id="image" src="http://2.bp.blogspot.com/-iHSmD9SRU9s/VDhMkzW2_oI/AAAAAAAAK0w/IVe_QCU07xo/s1600/HP3_1.jpeg" alt="Imagen del libro" class="previa">
+        <img id="image" src="{{catalogo.img || 'assets/noImage.jpg'}}" alt="Imagen del libro" class="previa">
       </div>
       <div class="col s10">
         <div class="file-field input-field">
@@ -40,7 +35,7 @@
             <input type="file" (change)="mostrarImagen($event)" accept="image/*">
           </div>
           <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
+            <input class="file-path validate" type="text" disabled required>
           </div>
         </div>
       </div>
@@ -50,8 +45,18 @@
 
   <!-- Acciones -->
   <div class="row">
-    <a class="waves-effect waves-light btn col m2 s12 offset-m3">Guardar</a>
-    <a class="waves-effect waves-light btn col m2 s12 offset-m1">Cancelar</a>
+    <a class="waves-effect waves-light btn col m2 s12 offset-m3" (click)="guardar()">Guardar</a>
+    <button class="waves-effect waves-light btn col m2 s12 offset-m1" [disabled]="!catalogarForm.form.valid || catalogo.materias.length == 0">Catalogar</button>
   </div>
 
 </form>
+
+<!-- Mensajes -->
+<div class="row">
+  <div class="alert alert-info col s6 offset-s3" *ngIf="showMessage">
+    <p>Guardando...</p>
+  </div>
+  <div class="alert alert-danger col s6 offset-s3" *ngIf="errorMessage">
+    <p>{{errorMessage}}</p>
+  </div>
+</div>

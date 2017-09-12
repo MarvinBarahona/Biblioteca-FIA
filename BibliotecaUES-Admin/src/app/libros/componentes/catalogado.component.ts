@@ -4,7 +4,7 @@
 *Objetivo: Muestra la información catalogada de un libro
 **/
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Catalogo } from './../servicios';
 
@@ -19,11 +19,7 @@ import { Catalogo } from './../servicios';
       }
       `]
 })
-export class CatalogadoComponent implements OnInit {
+export class CatalogadoComponent {
   @Input() catalogo: Catalogo;
-  constructor() { }
-
-  ngOnInit() {
-  }
 
 }

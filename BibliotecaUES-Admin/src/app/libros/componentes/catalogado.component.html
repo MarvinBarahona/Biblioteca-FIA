@@ -1,25 +1,26 @@
 <div class="row">
   <div class="col l6">
+
     <!-- Código de autor -->
     <strong>Código de autor: </strong>
-    <span>A###A</span>
+    <span>{{catalogo.codigoAutor}}</span>
     <br>
+
     <!-- Código Dewey -->
     <strong>Código Dewey: </strong>
-    <span>###.##</span>
+    <span>{{catalogo.categoria}}</span>
     <br>
+
     <!-- Materias -->
     <strong>Materias: </strong>
     <ul>
-      <li>Materia 1</li>
-      <li>Materia 2</li>
-      <li>Materia 3</li>
+      <li *ngFor="let materia of catalogo.materias">{{materia}}</li>
     </ul>
-  </div>  
+  </div>
 
   <!-- Imagen -->
   <div class="col l6">
-    <img src="http://2.bp.blogspot.com/-iHSmD9SRU9s/VDhMkzW2_oI/AAAAAAAAK0w/IVe_QCU07xo/s1600/HP3_1.jpeg" alt="Imagen del libro" class="previa">
+    <img src="{{catalogo.img || 'assets/noImage.jpg'}}" alt="Imagen del libro" class="previa">
   </div>
 
 </div>
