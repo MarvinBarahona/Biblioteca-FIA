@@ -1,4 +1,6 @@
+<!-- Formulario para el ingreso del nuevo libro -->
 <form #libroNuevoForm="ngForm" (ngSubmit)="crear(libroNuevoForm)">
+  <!-- Título -->
   <div class="row">
     <div class="input-field col s12">
       <input id="titulo" name="titulo" type="text" class="validate" [(ngModel)]="libro.titulo" required>
@@ -6,13 +8,15 @@
     </div>
   </div>
 
+  <!-- Autores -->
   <div class="row">
     <div class="input-field col s12">
-      <div id="autores" class="chips" (chip.add)="agregarAutor($event.detail)" (chip.delete)="eliminarAuttor($event.detail)"></div>
+      <div id="autores" class="chips"></div>
       <label for="autores">Autores</label>
     </div>
   </div>
 
+  <!-- Editorial y pais -->
   <div class="row">
     <div class="input-field col s6">
       <input id="editorial" name="editorial" type="text" class="validate" [(ngModel)]="libro.editorial" required>
@@ -24,6 +28,7 @@
     </div>
   </div>
 
+  <!-- Año, edición e ISBN -->
   <div class="row">
     <div class="input-field col s3">
       <input id="anio" name="anio" type="number" class="validate" min="1950" max="2050" [(ngModel)]="libro.anio" required>
@@ -39,12 +44,21 @@
     </div>
   </div>
 
+  <!-- Botones del formulario -->
   <div class="row">
     <div class="center">
       <button type="submit" class="btn waves-effect waves-green" [disabled]="!libroNuevoForm.form.valid || libro.autores.length == 0">Guardar</button>
-    </div>
-    <div class="row alert alert-info col s6 offset-s3" *ngIf="message">
-      <p>{{message}}</p>
+      <button type="button" class="btn waves-effect waves-green" (click)="limpiar(libroNuevoForm)">Limpiar</button>
     </div>
   </div>
 </form>
+
+<!-- Mensajes -->
+<div class="row">
+  <div class="alert alert-info col s6 offset-s3" *ngIf="message">
+    <p>{{message}}</p>
+  </div>
+  <div class="alert alert-danger col s6 offset-s3" *ngIf="errorMessage">
+    <p>{{errorMessage}}</p>
+  </div>
+</div>

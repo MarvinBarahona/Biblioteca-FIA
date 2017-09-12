@@ -20,6 +20,7 @@ export class AdquisicionesComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
 
   constructor(private adquisicionesService: AdquisicionesService, private router: Router) {
+    // Opciones de datatable
     this.dtOptions = {
       pageLength: 5,
       // dom: 'lrtpif',
@@ -29,14 +30,17 @@ export class AdquisicionesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Llama al servicio
     this.adquisicionesService.obtenerTodos().subscribe(
       adquisiciones => {
+        // Asigna las adquisiciones y refresca la tabla
         this.adquisiciones = adquisiciones;
         this.dtTrigger.next();
       }
     );
   }
 
+  // Rediriga a la vista de nueva adquisición
   linkAdquisicion(adquisicion: Adquisicion){
     this.router.navigate(["/adquisiciones/"+adquisicion.id])
   }

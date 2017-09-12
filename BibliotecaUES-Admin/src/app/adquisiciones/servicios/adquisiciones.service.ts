@@ -74,7 +74,8 @@ export class AdquisicionesService {
     return this.http.get(url, { headers: this.headers }).map(
       // Mapeando la salida
       (response: Response) => {
-        let r = response.json();
+        let a = response.json();
+        let r = a[0];
         let adquisiciones = new Array<Adquisicion>();
 
         r.forEach(function(item) {

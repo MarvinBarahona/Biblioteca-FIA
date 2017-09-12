@@ -19,6 +19,7 @@ export class LibrosComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
 
   constructor(private librosService: LibrosService, private router: Router) {
+    // Opciones del datatable
     this.dtOptions = {
       pageLength: 5,
       // dom: 'lrtpif',
@@ -28,14 +29,17 @@ export class LibrosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Llama al servicio
     this.librosService.obtenerTodos().subscribe(
       libros => {
+        // Asigna los libros y refresca la tabla
         this.libros = libros;
         this.dtTrigger.next();
       }
     );
   }
 
+  // Redirige a la vista individual del libro
   linkLibro(libro: Libro){
     this.router.navigate(["/libros/"+libro.id])
   }
