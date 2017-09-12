@@ -4,7 +4,9 @@
 *Objetivo: Muestra la información catalogada de un libro
 **/
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Catalogo } from './../servicios';
 
 @Component({
   selector: 'catalogado',
@@ -18,7 +20,7 @@ import { Component, OnInit } from '@angular/core';
       `]
 })
 export class CatalogadoComponent implements OnInit {
-
+  @Input() catalogo: Catalogo;
   constructor() { }
 
   ngOnInit() {

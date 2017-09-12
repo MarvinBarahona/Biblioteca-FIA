@@ -104,7 +104,7 @@ export class LibrosService {
         // Mapeando la salida
         let libro = new Libro;
         let rb = r['book'];
-        let rc = r['Copies'];
+        let rc = r['copies'];
 
         libro.id = rb['id'];
         libro.isbn = rb['isbn'];

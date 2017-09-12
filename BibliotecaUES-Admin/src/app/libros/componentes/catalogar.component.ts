@@ -3,7 +3,9 @@
 *Dirección física: src\app\libros\componentes\catalogar.component.ts
 *Objetivo: Catalogar un libro
 **/
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Catalogo } from './../servicios';
 
 @Component({
   selector: 'catalogar',
@@ -27,7 +29,7 @@ import { Component, OnInit } from '@angular/core';
     `]
 })
 export class CatalogarComponent implements OnInit {
-
+  @Input() catalogo: Catalogo;
   constructor() { }
 
   ngOnInit() {

@@ -1,102 +1,117 @@
-<!-- Información del libro -->
-<div class="row">
-  <div class="col s12 m12">
-    <div class="card-panel">
-      <h5>Datos del libro</h5>
+<div *ngIf="libro; else elseLibro">
+  <!-- Información del libro -->
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card-panel">
+        <h5>Datos del libro</h5>
 
-      <!-- Título -->
-      <div class="row">
-        <div class="col s11 offset-m1">
-          <b>Título: </b>
-          <span>Título</span>
+        <!-- Título -->
+        <div class="row">
+          <div class="col s11 offset-m1">
+            <strong>Título: </strong>
+            <span>{{libro.titulo}}</span>
+          </div>
         </div>
+
+        <!-- Autores -->
+        <div class="row">
+          <div class="col s12 m1 offset-m1">
+            <strong>Autores: </strong>
+          </div>
+          <div class="col s12 m3">
+            <ul>
+              <li *ngFor="let autor of libro.autores">{{autor}}</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Editorial y país -->
+        <div class="row">
+          <div class="col s12 m3 offset-m1">
+            <strong>Editorial: </strong>
+            <span>{{libro.editorial}}</span>
+          </div>
+          <div class="col s12 m2 offset-m1">
+            <strong>País: </strong>
+            <span>{{libro.pais}}</span>
+          </div>
+        </div>
+
+        <!-- Año, edición e ISBN -->
+        <div class="row">
+          <div class="col s12 m2 offset-m1">
+            <strong>Año: </strong>
+            <span>{{libro.anio}}</span>
+          </div>
+          <div class="col s12 m2 offset-m1">
+            <strong>Edición: </strong>
+            <span>{{libro.edicion}}</span>
+          </div>
+          <div class="col s12 m4 offset-m1">
+            <strong>ISBN: </strong>
+            <span>{{libro.isbn}}</span>
+          </div>
+        </div>
+
       </div>
-
-      <!-- Autores -->
-      <div class="row">
-        <div class="col s12 m1 offset-m1">
-          <b>Autores: </b>
-        </div>
-        <div class="col s12 m3">
-          <ul>
-            <li>Autor 1</li>
-            <li>Autor 2</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Editorial y país -->
-      <div class="row">
-        <div class="col s12 m3 offset-m1">
-          <b>Editorial: </b>
-          <span>Editorial</span>
-        </div>
-        <div class="col s12 m2 offset-m1">
-          <b>País: </b>
-          <span>País</span>
-        </div>
-      </div>
-
-      <!-- Año, edición e ISBN -->
-      <div class="row">
-        <div class="col s12 m2 offset-m1">
-          <b>Año: </b>
-          <span>2017</span>
-        </div>
-        <div class="col s12 m2 offset-m1">
-          <b>Edición: </b>
-          <span>edición</span>
-        </div>
-        <div class="col s12 m2 offset-m1">
-          <b>ISBN: </b>
-          <span>ISBN</span>
-        </div>
-      </div>
-
+      <!-- /card-panel -->
     </div>
-    <!-- /card-panel -->
+    <!-- /col -->
   </div>
-  <!-- /col -->
-</div>
-<!-- row -->
+  <!-- row -->
 
-<!-- Catalogación -->
-<div class="row">
-  <div class="col s12 m12">
-    <div class="card-panel">
-      <h5>Datos de catalogación</h5>
+  <!-- Catalogación -->
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card-panel">
+        <h5>Datos de catalogación</h5>
 
-      <catalogado *ngIf="false; else catalogar"></catalogado>
-      <ng-template #catalogar>
-        <catalogar></catalogar>
-      </ng-template>
+        <div *ngIf="libro.catalogado; else catalogar">
+          <catalogado [catalogo]="libro.catalogo"></catalogado>
+        </div>
+        <ng-template #catalogar>
+          <catalogar [catalogo]="libro.catalogo"></catalogar>
+        </ng-template>
 
+      </div>
+      <!-- /card-panel -->
     </div>
-    <!-- /card-panel -->
+    <!-- /col -->
   </div>
-  <!-- /col -->
-</div>
-<!-- row -->
+  <!-- row -->
 
-<!-- Ejemplares -->
-<div class="row">
-  <div class="col s12 m12">
-    <div class="card-panel">
+  <!-- Ejemplares -->
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card-panel">
 
-      <!-- Ejemplares -->
-      <ul class="collection with-header">
-        <li class="collection-header">
-          <h5>Ejemplares</h5>
-        </li>
-        <li class="collection-item">Código de barras (estado)</li>
-        <li class="collection-item">Código de barras (estado)</li>
-        <li class="collection-item">Código de barras (estado)</li>
-        <li class="collection-item">Código de barras (estado)</li>
-      </ul>
+        <!-- Ejemplares -->
+        <ul class="collection with-header">
+          <li class="collection-header">
+            <h5>Ejemplares</h5>
+          </li>
+          <li class="collection-item" *ngFor="let ejemplar of libro.ejemplares">
+            <a href="javascript:void(0)" (click)="linkEjemplar(ejemplar.id)">{{ejemplar.codigo || "No asignado"}} </a> ({{ejemplar.estado}})
+          </li>
+        </ul>
 
+      </div>
+      <!-- /card-panel -->
     </div>
-    <!-- /card-panel -->
+    <!-- /col -->
   </div>
-  <!-- /col -->
+  <!-- row -->
 </div>
-<!-- row -->
+<!-- libro -->
+
+<!-- Mensaje de espera -->
+<ng-template #elseLibro>
+  <div class="row">
+    <div class="col s8 m8 offset-s2 offset-m2">
+      <p>Cargando...</p>
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>
