@@ -2,46 +2,52 @@
   <div class="col s12 m12">
     <div class="card-panel">
       <div class="card-content">
-        <form>
+
+        <!-- Form -->
+        <form #nuevoEjemplarForm="ngForm" (ngSubmit)="crear()">
+
           <!-- Seleccionar libro -->
           <div class="row">
             <div class="input-field col m6 s7 offset-m1">
-              <input id="libro" type="text" class="validate" disabled>
-              <label for="libro"> Libro</label>
+              <strong>Libro: </strong>
+              <input id="libro" type="text" name="libro" [(ngModel)]="ejemplar.libro.titulo" readonly required>
             </div>
             <a class="waves-effect waves-light btn col m3 s4 offset-m1" (click)="openSeleccion()">Seleccionar</a>
           </div>
+
           <!-- Origen del ejemplar -->
           <div class="row">
+
             <div class="input-field col s6">
-              <select name="selectedOption" materialize="material_select" [materializeSelectOptions]="" [attr.disabled]="isDisabled?true:null">
+              <select name="tipo" materialize="material_select" [(ngModel)]="ejemplar.tipo" required>
                   <option value="" disabled selected>Seleccionar...</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <!-- <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option> -->
+                  <option>Compra</option>
+                  <option>Donación</option>
                 </select>
-              <label>Materialize Select</label>
+              <label>Motivo</label>
             </div>
-            <div class="input-field col s6">
-              <input id="donante" type="text" class="validate">
-              <label for="donante"> Donante</label>
+
+            <div class="input-field col s6" *ngIf="ejemplar.tipo == 'Donación'">
+              <input id="donante" type="text" class="validate" name="donante" [(ngModel)]="ejemplar.donante">
+              <label for="donante">Donante</label>
             </div>
           </div>
           <!-- Código de barras -->
           <div class="row">
             <div class="input-field col s6">
-              <input id="codigo" type="text" class="validate">
-              <label for="codigo"> Código de barras</label>
+              <input id="codigo" name="codigo" type="text" class="validate" pattern="^[\d]{8}$" [(ngModel)]="ejemplar.codigo" required>
+              <label for="codigo" data-error="Ingrese 8 dígitos">Código de barras</label>
             </div>
           </div>
 
           <!-- Acciones -->
           <div class="row">
-            <a class="waves-effect waves-light btn col m2 s12 offset-m3">Guardar</a>
+            <button class="waves-effect waves-light btn col m2 s12 offset-m3" [disabled]="!nuevoEjemplarForm.form.valid || ejemplar.tipo == 'Donación' && !ejemplar.donante">Guardar</button>
             <a class="waves-effect waves-light btn col m2 s12 offset-m1" (click)="openCancel()">Cancelar</a>
           </div>
 
         </form>
+        <!-- /Form -->
 
       </div>
       <!-- /card-content -->
@@ -55,7 +61,7 @@
 <!-- Ventana modal para agregar libro -->
 <div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalSeleccion">
   <div class="modal-content">
-    <libro-seleccion></libro-seleccion>
+    <libro-seleccion (eventEmitter)='onNotify($event)'></libro-seleccion>
   </div>
   <div class="modal-footer">
     <a class="waves-effect waves-light btn-flat" (click)="closeSeleccion()">Cerrar</a>
@@ -70,6 +76,6 @@
   </div>
   <div class="modal-footer">
     <a class="waves-effect waves-green btn-flat" (click)="closeCancel()">Regresar</a>
-    <a class="modal-action modal-close waves-effect btn-flat">Confirmar</a>
+    <a class="modal-action modal-close waves-effect btn-flat" (click)="closeCancel(); router.navigate(['/ejemplares'])">Confirmar</a>
   </div>
 </div>

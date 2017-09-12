@@ -6,4 +6,5 @@ export class NuevoEjemplar {
   libro: Libro;
   codigo: string;
   donante: string;
+  tipo: string;
 }
