@@ -3,68 +3,71 @@
     <div class="card-panel">
       <h5>Crear Adquisición</h5>
 
-      <!-- Nombre de la adquisición y motivo -->
-      <div class="row">
-        <div class="input-field col m6 offset-m1 s8 offset-s2">
-          <input id="nombre" type="text" class="validate" maxlength="60">
-          <label for="nombre">Nombre</label>
-        </div>
-      </div>
+      <!-- Form -->
+      <form #nuevaAdquisicionForm="ngForm" (ngSubmit)="crear()">
 
-      <div class="row">
-        <div class="input-field col m3 offset-m1 s8 offset-s2">
-          <select name="selectedOption" materialize="material_select">
-            <option value="" disabled selected>Seleccionar...</option>
-            <option value="compra">Compra</option>
-            <option value="donacion">Donación</option>
-          </select>
-          <label>Motivo:</label>
+        <!-- Nombre  -->
+        <div class="row">
+          <div class="input-field col m6 offset-m1 s8 offset-s2">
+            <input id="nombre" name="nombre" type="text" class="validate" maxlength="60" [(ngModel)]="adquisicion.nombre" required>
+            <label for="nombre">Nombre</label>
+          </div>
         </div>
 
-        <div class="input-field col m5 offset-m1 s8 offset-s2">
-          <input id="donante" type="text" class="validate">
-          <label for="donante"> Donante </label>
-        </div>
-      </div>
+        <!-- Tipo y donante -->
+        <div class="row">
+          <div class="input-field col m3 offset-m1 s8 offset-s2">
+            <select id="tipo" name="tipo" materialize="material_select" [(ngModel)]="adquisicion.tipo" required>
+              <option value="" disabled selected>Seleccionar...</option>
+              <option>Compra</option>
+              <option>Donación</option>
+            </select>
+            <label for="tipo">Motivo:</label>
+          </div>
 
-      <!-- Tabla de nuevos ejemplares -->
-      <br>
-      <div class="row">
-        <div class="col m12">
-          <!-- <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover"> -->
-          <table class="bordered">
-            <thead>
-              <tr>
-                <th>Libro</th>
-                <th>Cantidad</th>
-                <th>Eliminar</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Libro muy interesante asdasda sd asd </td>
-                <td><input class="col m3 offset-m1" type="number" value="1" min="1" max="50"></td>
-                <td><a href="javascript:void(0);"><i class="material-icons borrar">delete</i></a></td>
-              </tr>
-              <!--
-              <tr *ngFor="let post of posts">
-                <td>{{ post.id }}</td>
-                <td>{{ post.userId }}</td>
-                <td>{{ post.title }}</td>
-              </tr>
-              -->
-            </tbody>
-          </table>
+          <div class="input-field col m5 offset-m1 s8 offset-s2" *ngIf="adquisicion.tipo == 'Donación'">
+            <input id="donante" name="donante" type="text" class="validate" [(ngModel)]="adquisicion.donante">
+            <label for="donante"> Donante </label>
+          </div>
         </div>
-      </div>
 
-      <!-- Acciones -->
-      <br>
-      <div class="row">
-        <a class="waves-effect waves-light btn col m2 offset-m2 s4 " (click)="openSeleccion()">Agregar</a>
-        <a class="waves-effect waves-light btn col m2 offset-m1 s4 ">Guardar</a>
-        <a class="waves-effect waves-light btn col m2 offset-m1 s4 "(click)="openCancel()">Cancelar</a>
-      </div>
+        <!-- Tabla de nuevos ejemplares -->
+        <br>
+        <div class="row">
+          <div class="col m12">
+
+            <!-- Table -->
+            <table class="bordered">
+              <thead>
+                <tr>
+                  <th>Libro</th>
+                  <th>Cantidad</th>
+                  <th>Eliminar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ejemplar of adquisicion.ejemplares">
+                  <td>{{ejemplar.libro.titulo}}</td>
+                  <td><input class="col m3 offset-m1" type="number" name="cantidad" min="1" max="20" [(ngModel)]="ejemplar.cantidad" required></td>
+                  <td><a href="javascript:void(0);" (click)="eliminarEjemplar(ejemplar)"><i class="material-icons borrar">delete</i></a></td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /Table -->
+
+          </div>
+        </div>
+        <!-- /Tabla de nuevos ejemplares -->
+
+        <!-- Acciones -->
+        <br>
+        <div class="row">
+          <a class="waves-effect waves-light btn col m2 offset-m2 s4 " (click)="openSeleccion()">Agregar</a>
+          <button type="submit" class="waves-effect waves-light btn col m2 offset-m1 s4" [disabled]="!nuevaAdquisicionForm.form.valid || (adquisicion.tipo=='Donación' && !adquisicion.donante) || adquisicion.ejemplares.length==0">Guardar</button>
+          <a class="waves-effect waves-light btn col m2 offset-m1 s4 " (click)="openCancel()">Cancelar</a>
+        </div>
+
+      </form>
 
     </div>
     <!-- /card-panel -->
@@ -77,7 +80,7 @@
 <!-- Ventana modal para agregar libro -->
 <div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalSeleccion">
   <div class="modal-content">
-    <libro-seleccion></libro-seleccion>
+    <libro-seleccion (eventEmitter)='onNotify($event)'></libro-seleccion>
   </div>
   <div class="modal-footer">
     <a class="waves-effect waves-light btn-flat" (click)="closeSeleccion()">Cerrar</a>
@@ -92,6 +95,6 @@
   </div>
   <div class="modal-footer">
     <a class="waves-effect waves-green btn-flat" (click)="closeCancel()">Regresar</a>
-    <a class="modal-action modal-close waves-effect btn-flat">Confirmar</a>
+    <a class="modal-action modal-close waves-effect btn-flat" (click)="closeCancel(); router.navigate(['/adquisiciones'])">Confirmar</a>
   </div>
 </div>

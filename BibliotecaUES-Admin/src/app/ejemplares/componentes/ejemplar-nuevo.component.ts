@@ -31,7 +31,7 @@ export class EjemplarNuevoComponent implements OnInit {
 
   onNotify(libro: Libro): void {
     this.ejemplar.libro = libro;
-    Materialize.toast(libro.titulo + " asignado al nuevo ejemplar", 3000);
+    Materialize.toast("'" + libro.titulo + "' asignado al nuevo ejemplar", 3000);
   }
 
   openSeleccion() {
