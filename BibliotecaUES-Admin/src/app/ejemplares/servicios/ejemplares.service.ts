@@ -25,9 +25,9 @@ export class EjemplaresService {
 
     // Mapeando la entrada
     let ejemplares = [];
-    ejemplares.push({ id: nuevoEjemplar.libro.id, quantity: 1, barcode: nuevoEjemplar.codigo });
+    ejemplares.push({ bookId: nuevoEjemplar.libro.id, quantity: 1, barcode: nuevoEjemplar.codigo });
 
-    let q = JSON.stringify({ notes: "Compra de ejemplar", copies: ejemplares });
+    let q = JSON.stringify({ notes: "Compra de ejemplar", copies: ejemplares, details: {} });
 
     // Realizando POST
     return this.http.post(url, q, { headers: this.headers }).map(
@@ -46,7 +46,7 @@ export class EjemplaresService {
 
     // Mapeando la entrada
     let ejemplares = [];
-    ejemplares.push({ id: nuevoEjemplar.libro.id, quantity: 1, barcode: nuevoEjemplar.codigo });
+    ejemplares.push({ bookId: nuevoEjemplar.libro.id, quantity: 1, barcode: nuevoEjemplar.codigo });
 
     let detalles = {donante: nuevoEjemplar.donante};
 

@@ -55,8 +55,8 @@
 
 <!-- Mensajes -->
 <div class="row">
-  <div class="alert alert-info col s6 offset-s3" *ngIf="message">
-    <p>{{message}}</p>
+  <div class="alert alert-info col s6 offset-s3" *ngIf="showMessage">
+    <p>Creando libro...</p>
   </div>
   <div class="alert alert-danger col s6 offset-s3" *ngIf="errorMessage">
     <p>{{errorMessage}}</p>

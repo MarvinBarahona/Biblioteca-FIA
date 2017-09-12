@@ -27,7 +27,7 @@ export class LibroNuevoComponent implements OnInit {
   autorAutocomplete: any;
   editorialAutocomplete: any;
 
-  message: string;
+  showMessage: boolean = false;
   errorMessage: string
 
   constructor(private libroService: LibroSeleccionService) { }
@@ -41,7 +41,7 @@ export class LibroNuevoComponent implements OnInit {
   // Método: crear
   // Objetivo: Crear un nuevo libro con los datos del formulario.
   crear(form: any) {
-    this.message = "Creando libro...";
+    this.showMessage = true;
     this.errorMessage = null;
     // Llamando al servicio
     this.libroService.crear(this.libro, this.autores, this.editoriales).subscribe(
@@ -54,7 +54,7 @@ export class LibroNuevoComponent implements OnInit {
       },
       error => {
         // Muestra un mensaje de error.
-        this.message = null;
+        this.showMessage = false;
         this.errorMessage = "El ISBN ingresado ya está registrado";
       }
     );
@@ -63,7 +63,7 @@ export class LibroNuevoComponent implements OnInit {
   // Método: limpiar
   // Objetivo: limpiar el formulario
   limpiar(form: any){
-    this.message = null;
+    this.showMessage = false;
     form.reset();
     this.inicializarAutocompletado();
   }
