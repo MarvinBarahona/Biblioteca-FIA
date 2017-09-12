@@ -25,13 +25,12 @@ export class AdquisicionesService {
     // Mapeando la entrada
     let ejemplares = [];
     nuevaAdquisicion.ejemplares.forEach(function(ejemplar){
-      ejemplares.push({id: ejemplar.libro.id, quantity: ejemplar.cantidad});
+      ejemplares.push({bookId: ejemplar.libro.id, quantity: ejemplar.cantidad});
     });
 
-    let detalles = nuevaAdquisicion.donante ? {donante: nuevaAdquisicion.donante} : null;
+    let detalles = nuevaAdquisicion.tipo == "Compra" ? {} : {donante: nuevaAdquisicion.donante};
 
     let q = JSON.stringify({ notes: nuevaAdquisicion.nombre, copies: ejemplares, details: detalles });
-
     // Realizando POST
     return this.http.post(url, q, { headers: this.headers }).map(
       // Mapeando salida

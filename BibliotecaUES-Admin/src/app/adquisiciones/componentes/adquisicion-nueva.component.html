@@ -68,6 +68,17 @@
         </div>
 
       </form>
+      <!-- /form -->
+
+      <!-- Mensajes -->
+      <div class="row">
+        <div class="alert alert-danger col s6 offset-s3" *ngIf="errorMessage">
+          <p>{{errorMessage}}</p>
+        </div>
+        <div class="alert alert-info col s6 offset-s3" *ngIf="showMessage">
+          <p>Creando adquisición...</p>
+        </div>
+      </div>
 
     </div>
     <!-- /card-panel -->
