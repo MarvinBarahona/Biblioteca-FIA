@@ -81,7 +81,6 @@ export class EjemplaresService {
           ejemplar.estado = item['state'];
           ejemplares.push(ejemplar);
         });
-
         return ejemplares;
       }
     );
@@ -117,9 +116,12 @@ export class EjemplaresService {
           transaccion.usuario = item['fullname'];
           transaccion.tipo = item['type'];
           transaccion.individual = item['single'];
+          transacciones.push(transaccion);
         });
+
         ejemplar.transacciones = transacciones;
 
+        console.log(r)
         // Mapear el libros
         let libro = new Libro;
         libro.id = rb['id'];

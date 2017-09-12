@@ -1,65 +1,73 @@
-<!-- Información del ejemplar -->
-<div class="row">
-  <div class="col s12 m12">
+<div *ngIf="ejemplar; else elseEjemplar">
+  <!-- Información del ejemplar -->
+  <div class="row">
+    <div class="col s12 m12">
 
-    <div class="card-panel">
-      <h5>Información del ejemplar</h5>
+      <div class="card-panel">
+        <h5>Información del ejemplar</h5>
 
-      <div class="row">
-        <div class="col s12">
-          <strong>Libro: </strong>
-          <span><a href="">Título del libro</a></span>
+        <div class="row">
+          <div class="col s12">
+            <strong>Libro: </strong>
+            <span><a href="javascript:void(0)" (click)="linkLibro(ejemplar.libro.id)">{{ejemplar.libro.titulo}}</a></span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col m5 s12">
+            <strong>Código de barra: </strong>
+            <span>{{ejemplar.codigo || "No asignado"}}</span>
+          </div>
+          <div class="col m5 s12">
+            <strong>Estado: </strong>
+            <span>{{ejemplar.estado}}</span>
+          </div>
         </div>
       </div>
-
-      <div class="row">
-        <div class="col m5 s12">
-          <strong>Código de barra: </strong>
-          <span>########</span>
-        </div>
-        <div class="col m5 s12">
-          <strong>Estado: </strong>
-          <span>Disponible</span>
-        </div>
-      </div>
+      <!-- /card-panel -->
     </div>
-    <!-- /card-panel -->
+  </div>
+
+
+  <!-- Tabla de transacciones -->
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card-panel">
+        <h5>Transacciones</h5>
+        <table class="row-border hover">
+          <thead>
+            <tr>
+              <th>Transacción</th>
+              <th>Fecha</th>
+              <th>Autoriza</th>
+              <th>Proceso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Mensaje de carga -->
+            <tr *ngFor="let transaccion of ejemplar.transacciones">
+              <td>{{transaccion.nombre}}</td>
+              <td>{{transaccion.fecha | date:"shortDate"}}</td>
+              <td>{{transaccion.usuario}}</td>
+              <td><a href="javascript:void(0)" (click)="linkAdquisicion(transaccion.id)">{{transaccion.tipo}}</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- /table -->
+      </div>
+      <!-- card-panel -->
+    </div>
   </div>
 </div>
 
-<!-- Tabla de transacciones -->
-<div class="row">
-  <div class="col s12 m12">
-    <div class="card-panel">
-      <h5>Transacciones</h5>
-      <!-- <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover"> -->
-      <table>
-        <thead>
-          <tr>
-            <th>Transacción</th>
-            <th>Fecha</th>
-            <th>Autoriza</th>
-            <th>Proceso</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Nombre de la transacción</td>
-            <td>día/mes/año</td>
-            <td>auoriza</td>
-            <td><a href="">Nombre del lote</a></td>
-          </tr>
-          <!--
-          <tr *ngFor="let post of posts">
-            <td>{{ post.id }}</td>
-            <td>{{ post.userId }}</td>
-            <td>{{ post.title }}</td>
-          </tr>
-          -->
-        </tbody>
-      </table>
-      <!-- /table -->
+<!-- Mensaje de espera -->
+<ng-template #elseEjemplar>
+  <div class="row">
+    <div class="col s8 m8 offset-s2 offset-m2">
+      <p>Cargando...</p>
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
     </div>
-    <!-- card-panel -->
   </div>
-</div>
+</ng-template>
