@@ -31,13 +31,13 @@
     <!-- Seleccionar y cargar imagen -->
     <div class="col l6">
       <div class="col s12">
-        <img src="http://2.bp.blogspot.com/-iHSmD9SRU9s/VDhMkzW2_oI/AAAAAAAAK0w/IVe_QCU07xo/s1600/HP3_1.jpeg" alt="Imagen del libro" class="previa">
+        <img id="image" src="http://2.bp.blogspot.com/-iHSmD9SRU9s/VDhMkzW2_oI/AAAAAAAAK0w/IVe_QCU07xo/s1600/HP3_1.jpeg" alt="Imagen del libro" class="previa">
       </div>
       <div class="col s10">
         <div class="file-field input-field">
           <div class="btn">
             <span>File</span>
-            <input type="file" (change)="onFileSelection($event)" accept="image/*">
+            <input type="file" (change)="mostrarImagen($event)" accept="image/*">
           </div>
           <div class="file-path-wrapper">
             <input class="file-path validate" type="text">

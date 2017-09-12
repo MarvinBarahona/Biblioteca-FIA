@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'catalogar',
   templateUrl: './catalogar.component.html',
-  styles:[`
+  styles: [`
     .inicial {
       margin-top: 40px;
       text-align: right;
@@ -31,6 +31,18 @@ export class CatalogarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  mostrarImagen(event: any) {
+    let reader = new FileReader();
+    let image: any = document.getElementById("image");
+
+    reader.onload = function(e: any) {
+      var src = e.target.result;
+      image.src = src;
+    };
+
+    reader.readAsDataURL(event.target.files[0]);
   }
 
   chipsAutocomplete = {
