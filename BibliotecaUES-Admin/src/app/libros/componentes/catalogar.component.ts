@@ -3,7 +3,7 @@
 *Dirección física: src\app\libros\componentes\catalogar.component.ts
 *Objetivo: Catalogar un libro
 **/
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { LibrosService, Catalogo, AutoData } from './../servicios';
@@ -26,8 +26,13 @@ export class CatalogarComponent implements OnInit {
   id: number;
   materias: AutoData[];
 
+  materiasAutocomplete: any;
+
   errorMessage: string;
   showMessage: boolean = false;
+
+  // Para emitir un evento al catalogar
+  @Output() eventEmitter: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private libroService: LibrosService, private route: ActivatedRoute) { }
 
@@ -45,14 +50,21 @@ export class CatalogarComponent implements OnInit {
           materiasData[materia.nombre] = null;
         });
 
+        // Materias ya agregadas
+        let initialData = [];
+        this.catalogo.materias.forEach(function(materia){
+          initialData.push({tag: materia});
+        });
+
         // Construye el autocompletado.
-        let chipsAutocomplete = {
+        this.materiasAutocomplete = {
           placeholder: "+ Materia",
           secondaryPlaceholder: 'Ingrese materias',
+          data: initialData,
           autocompleteOptions: {
             data: materiasData,
             limit: 5,
-            minLength: 3
+            minLength: 1
           }
         };
       }
@@ -67,7 +79,35 @@ export class CatalogarComponent implements OnInit {
 
     this.libroService.catalogar(this.id, this.catalogo, this.materias).subscribe(
       message => {
+        this.showMessage = false;
         Materialize.toast("Información guardada", 3000);
+      },
+      error => {
+        this.showMessage = false;
+        this.errorMessage = "Error al guardar";
+      }
+    );
+  }
+
+  // Método: catalogar
+  // Objetivo: Marcar un libro como catalogado
+  catalogar(){
+    this.showMessage = true;
+    this.errorMessage = null;
+
+    this.libroService.catalogar(this.id, this.catalogo, this.materias).subscribe(
+      message => {
+        this.showMessage = false;
+        Materialize.toast("Información guardada", 3000);
+        this.libroService.finalizarCatalogacion(this.id).subscribe(
+          message => {
+            Materialize.toast("Libro catalogado exitosamente", 3000);
+            this.eventEmitter.emit("Catalogado");
+          },
+          error => {
+            this.errorMessage = "Error al catalogar";
+          }
+        );
       },
       error => {
         this.showMessage = false;

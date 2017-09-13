@@ -5,7 +5,7 @@
 
       <!-- Código de Autor -->
       <div class="input-field col l6 m8 s6">
-        <input id="codautor" name="codautor" type="text" class="validate" maxlength="5" pattern="^[A-Z]{1}[\d]{3}[A-Z]{1}$" [(ngModel)]="catalogo.codigoAutor">
+        <input id="codautor" name="codautor" type="text" class="validate" maxlength="5" pattern="^[A-Z]{1}[\d]{3}[A-Z]{1}$" [(ngModel)]="catalogo.codigoAutor" required>
         <label for="codautor" data-error="Debe tener el formato A999A">Código de autor</label>
       </div>
 
@@ -18,7 +18,7 @@
       <!-- Materias o Tags -->
       <div class="input-field col s10">
         <strong>Materias: </strong>
-        <div class="chips" materialize="material_chip" [materializeParams]="[chipsAutocomplete]" (chip.add)="agregarMateria($event.detail)" (chip.delete)="eliminarMateria($event.detail)"></div>
+        <div class="chips" materialize="material_chip" [materializeParams]="[materiasAutocomplete]" (chip.add)="agregarMateria($event.detail)" (chip.delete)="eliminarMateria($event.detail)"></div>
       </div>
 
     </div>
@@ -35,7 +35,7 @@
             <input type="file" (change)="mostrarImagen($event)" accept="image/*">
           </div>
           <div class="file-path-wrapper">
-            <input class="file-path validate" type="text" disabled required>
+            <input class="file-path" type="text">
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@
   <!-- Acciones -->
   <div class="row">
     <a class="waves-effect waves-light btn col m2 s12 offset-m3" (click)="guardar()">Guardar</a>
-    <button class="waves-effect waves-light btn col m2 s12 offset-m1" [disabled]="!catalogarForm.form.valid || catalogo.materias.length == 0">Catalogar</button>
+    <button class="waves-effect waves-light btn col m2 s12 offset-m1" [disabled]="!catalogarForm.form.valid || catalogo.materias.length == 0 || !catalogo.img" (click)="catalogar()">Catalogar</button>
   </div>
 
 </form>

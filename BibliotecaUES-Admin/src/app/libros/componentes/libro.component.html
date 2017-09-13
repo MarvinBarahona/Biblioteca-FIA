@@ -70,7 +70,7 @@
           <catalogado [catalogo]="libro.catalogo"></catalogado>
         </div>
         <ng-template #catalogar>
-          <catalogar [catalogo]="libro.catalogo"></catalogar>
+          <catalogar [catalogo]="libro.catalogo" (eventEmitter)='onNotify($event)'></catalogar>
         </ng-template>
 
       </div>
