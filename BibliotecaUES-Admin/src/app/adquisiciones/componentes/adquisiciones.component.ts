@@ -22,10 +22,9 @@ export class AdquisicionesComponent implements OnInit {
   constructor(private adquisicionesService: AdquisicionesService, private router: Router) {
     // Opciones de datatable
     this.dtOptions = {
-      pageLength: 5,
-      // dom: 'lrtpif',
+      pageLength: 10,
       pagingType: 'simple_numbers',
-      lengthMenu: [2,3,5]
+      lengthMenu: [10,15,20]
     };
   }
 

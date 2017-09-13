@@ -25,10 +25,9 @@ export class LibroBuscarComponent implements OnInit {
   constructor(private libroSeleccionService: LibroSeleccionService, private router: Router) {
     // Opciones del datatable
     this.dtOptions = {
-      pageLength: 5,
-      // dom: 'lrtpif',
+      pageLength: 10,
       pagingType: 'simple_numbers',
-      lengthMenu: [2,3,5]
+      lengthMenu: [10]
     };
   }
 
