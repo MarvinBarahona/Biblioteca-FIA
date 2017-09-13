@@ -1,76 +1,108 @@
-<!-- Información de la adquisición -->
-<div class="row">
-  <div class="col s12 m12">
+<div *ngIf="adquisicion; else elseAdquisicion">
 
-    <div class="card-panel">
-      <h5>Información de la adquisición</h5>
-      <div class="row">
-        <div class="col m5 s12">
-          <strong>Nombre: </strong>
-          <span>Nombre de la adquisición</span>
+  <!-- Información de la adquisición -->
+  <div class="row">
+    <div class="col s12 m12">
+
+      <div class="card-panel">
+        <h5>Información de la adquisición</h5>
+
+        <!-- Nombre y fecha -->
+        <div class="row">
+          <div class="col m5 s12">
+            <strong>Nombre: </strong>
+            <span>{{adquisicion.nombre}}</span>
+          </div>
+          <div class="col m5 s12">
+            <strong>Fecha: </strong>
+            <span>{{adquisicion.fecha | date:"shortDate"}}</span>
+          </div>
         </div>
-        <div class="col m5 s12">
-          <strong>Fecha: </strong>
-          <span>Día/Mes/Año</span>
+
+        <!-- Motivo y donante -->
+        <div class="row">
+          <div class="col m5 s12">
+            <strong>Motivo: </strong>
+            <span>{{adquisicion.tipo}}</span>
+          </div>
+          <div class="col m5 s12" *ngIf="adquisicion.donante">
+            <strong>Donante: </strong>
+            <span>{{adquisicion.donante}}</span>
+          </div>
         </div>
+
       </div>
+      <!-- /card-panel -->
+    </div>
+    <!-- /col -->
+  </div>
+  <!-- /row -->
 
-      <div class="row">
-        <div class="col m5 s12">
-          <strong>Motivo: </strong>
-          <span>Motivo de la adquisición</span>
+  <!-- Tabla de ejemplares -->
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card-panel">
+        <h5>Ejemplares</h5>
+
+        <form #adquisicionForm="ngForm">
+          <!-- tabla -->
+          <table>
+            <thead>
+              <tr>
+                <th>Código de barra</th>
+                <th>Título</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ejemplar of adquisicion.ejemplares">
+                <td>
+                  <a *ngIf="ejemplar.ingresado" href="javascript:void(0)" (click)="linkEjemplar(ejemplar.id);">{{ejemplar.codigo}}</a>
+                  <div *ngIf="!ejemplar.ingresado" class="input-field col m6 offset-m1 s8 offset-s2">
+                    <input type="text" class="validate" name="codigo" pattern="^[\d]{8}$" [(ngModel)]="ejemplar.codigo">
+                    <label for="codigo" data-error="Debe ingresar 8 dígitos">Código de barra</label>
+                  </div>
+                </td>
+                <td><a href="javascript:void(0)" (click)="linkLibro(ejemplar.libro.id);">{{ejemplar.libro.titulo}}, {{ejemplar.libro.edicion}}ed</a></td>
+                <td>{{ejemplar.estado}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /tabla -->
+
+          <!-- Acciones -->
+          <div class="row">
+            <button type="submit" class="waves-effect waves-light btn col m2 s12 offset-m5" [disabled]="!adquisicionForm.form.valid" (click)="guardar()">Guardar</button>
+          </div>
+        </form>
+
+        <!-- Mensajes -->
+        <div class="row">
+          <div class="alert alert-danger col s6 offset-s3" *ngIf="errorMessage">
+            <p>{{errorMessage}}</p>
+          </div>
+          <div class="alert alert-info col s6 offset-s3" *ngIf="showMessage">
+            <p>Guardando datos...</p>
+          </div>
         </div>
-        <div class="col m5 s12">
-          <strong>Donante: </strong>
-          <span>Nombre del donante</span>
-        </div>
+
+      </div>
+      <!-- /card-panel -->
+    </div>
+    <!-- /col -->
+  </div>
+  <!-- /row -->
+</div>
+<!-- /adquisicion -->
+
+<!-- Mensaje de espera -->
+<ng-template #elseAdquisicion>
+  <div class="row">
+    <div class="col s8 m8 offset-s2 offset-m2">
+      <p>Cargando...</p>
+      <div class="progress">
+        <div class="indeterminate"></div>
       </div>
     </div>
-    <!-- /card-panel -->
-
   </div>
-</div>
-
-<!-- Tabla de ejemplares -->
-<div class="row">
-  <div class="col s12 m12">
-    <div class="card-panel">
-      <h5>Ejemplares</h5>
-      <!-- <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover"> -->
-      <table>
-        <thead>
-          <tr>
-            <th>Código de barra</th>
-            <th>Título</th>
-            <th>Estado</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><a href="">12345678</a></td>
-            <td><a href="">Libro muy interesante,1° edición</a></td>
-            <td>Disponible</td>
-          </tr>
-          <tr>
-            <td><input type="text"></td>
-            <td><a href="">Libro muy interesante,1° edición</a></td>
-            <td>Inactivo</td>
-          </tr>
-          <!--
-          <tr *ngFor="let post of posts">
-            <td>{{ post.id }}</td>
-            <td>{{ post.userId }}</td>
-            <td>{{ post.title }}</td>
-          </tr>
-          -->
-        </tbody>
-      </table>
-      
-      <!-- Acciones -->
-      <div class="row">
-        <a class="waves-effect waves-light btn col m2 s12 offset-m5">Guardar</a>
-      </div>
-    </div>
-    <!-- /card-panel -->
-  </div>
-</div>
+</ng-template>

@@ -6,5 +6,6 @@ export class Ejemplar{
   id: number;
   codigo: string;
   estado: string;
+  ingresado: boolean;
   libro: Libro;
 }

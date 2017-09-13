@@ -67,6 +67,7 @@ export class AdquisicionNuevaComponent implements OnInit {
     // Llamar al servicio
     this.adquisicionesService.crear(this.adquisicion).subscribe(
       message => {
+        this.showMessage= false;
         Materialize.toast("Adquisición creada", 3000);
         this.router.navigate(['/adquisiciones']);
       },

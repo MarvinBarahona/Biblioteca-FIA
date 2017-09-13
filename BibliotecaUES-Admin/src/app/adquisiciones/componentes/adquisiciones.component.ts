@@ -24,7 +24,8 @@ export class AdquisicionesComponent implements OnInit {
     this.dtOptions = {
       pageLength: 10,
       pagingType: 'simple_numbers',
-      lengthMenu: [10,15,20]
+      lengthMenu: [10,15,20],
+      order: [[2, "desc"], [0, "asc"]]
     };
   }
 

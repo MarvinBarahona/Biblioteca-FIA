@@ -49,7 +49,7 @@ export class AdquisicionesService {
     // Mapeando la entrada.
     let copies = [];
     ejemplares.forEach(function(ejemplar){
-      copies.push({id: ejemplar.id, barcode: ejemplar.codigo});
+      if(!ejemplar.ingresado && ejemplar.codigo) copies.push({id: ejemplar.id, barcode: ejemplar.codigo});
     });
 
     let q = JSON.stringify({copies: copies});
@@ -58,8 +58,11 @@ export class AdquisicionesService {
     return this.http.post(url, q, { headers: this.headers }).map(
       // Mapeando salida
       (response: Response) => {
-        let r = response.json();
-        return r['message'];
+        ejemplares.forEach(function(ejemplar){
+          ejemplar.ingresado = ejemplar.codigo? true: false;
+        });
+
+        return "Datos almacenados";
       }
     );
   }
@@ -74,10 +77,21 @@ export class AdquisicionesService {
       // Mapeando la salida
       (response: Response) => {
         let a = response.json();
-        let r = a[0];
+        let r1 = a[0];
+        let r2 = a[1];
         let adquisiciones = new Array<Adquisicion>();
 
-        r.forEach(function(item) {
+        r1.forEach(function(item) {
+          let adquisicion = new Adquisicion;
+          adquisicion.id = item['id'];
+          adquisicion.nombre = item['notes'];
+          adquisicion.fecha = item['createdAt'];
+          adquisicion.tipo = item['type'];
+          adquisicion.usuario = item['fullname'];
+          adquisiciones.push(adquisicion);
+        });
+
+        r2.forEach(function(item) {
           let adquisicion = new Adquisicion;
           adquisicion.id = item['id'];
           adquisicion.nombre = item['notes'];
@@ -103,17 +117,16 @@ export class AdquisicionesService {
       (response: Response) => {
         let r = response.json();
         let adquisicion = new Adquisicion;
-        let rt = r[0];
-        let rd = rt['details'];
-        let rc = rt['copies'];
+        let rd = r['details'];
+        let rc = r['copies'];
 
         // Mapear el objeto de adquisicion
-        adquisicion.id = rt['id'];
-        adquisicion.nombre = rt['notes'];
-        adquisicion.tipo = rt['type'];
-        adquisicion.usuario = rt['fullname'];
-        adquisicion.fecha = rt['createdAt'];
-        adquisicion.donante = rd['donante'];
+        adquisicion.id = r['id'];
+        adquisicion.nombre = r['notes'];
+        adquisicion.tipo = r['type'];
+        adquisicion.usuario = r['userName'];
+        adquisicion.fecha = r['createdAt'];
+        adquisicion.donante = rd? rd['donante'] || null : null;
 
         // Mapear las ejemplares.
         let ejemplares = new Array<Ejemplar>();
@@ -122,6 +135,7 @@ export class AdquisicionesService {
           ejemplar.id = item['id'];
           ejemplar.codigo = item['barcode'];
           ejemplar.estado = item['state'];
+          ejemplar.ingresado = ejemplar.codigo? true: false;
 
           // Mapear el libro
           let rb = item['book'];
