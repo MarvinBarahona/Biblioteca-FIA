@@ -91,6 +91,11 @@ export class EjemplarNuevoComponent implements OnInit {
     }
   }
 
+  cancel(){
+    this.closeCancel();
+    this.router.navigate(['/ejemplares']);
+  }
+
   openSeleccion() {
     this.modalSeleccion.emit({ action: "modal", params: ['open'] });
   }

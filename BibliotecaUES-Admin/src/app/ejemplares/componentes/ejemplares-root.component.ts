@@ -6,6 +6,8 @@
 
 import { Component, OnInit } from '@angular/core';
 
+declare var $: any;
+
 @Component({
   templateUrl: './ejemplares-root.component.html',
   styleUrls: ['./ejemplares-root.component.css']
@@ -15,6 +17,7 @@ export class EjemplaresRootComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    $("#toogle_menu").sideNav({closeOnClick: true});
   }
 
 }

@@ -78,6 +78,11 @@ export class AdquisicionNuevaComponent implements OnInit {
     );
   }
 
+  cancel(){
+    this.closeCancel();
+    this.router.navigate(['/adquisiciones']);
+  }
+
 
   // Método para las ventanas modales.
   openSeleccion() {
