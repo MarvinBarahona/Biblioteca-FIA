@@ -13,7 +13,7 @@ import { EjemplaresService, Ejemplar }  from './../servicios'
   templateUrl: './ejemplar.component.html'
 })
 export class EjemplarComponent implements OnInit {
-  	ejemplar: Ejemplar;
+  ejemplar: Ejemplar;
 
   constructor(private ejemplarService: EjemplaresService, private route: ActivatedRoute, private router: Router) {}
 
@@ -25,10 +25,9 @@ export class EjemplarComponent implements OnInit {
     this.ejemplarService.obtener(id).subscribe(
       ejemplar =>{
         this.ejemplar = ejemplar;
-        console.log(ejemplar)
       },
       error =>{
-        //Si el ejemplar no existentes
+        //Si el ejemplar no existe
         if(error.status == 404){
           this.router.navigate(['/error404']);
         }

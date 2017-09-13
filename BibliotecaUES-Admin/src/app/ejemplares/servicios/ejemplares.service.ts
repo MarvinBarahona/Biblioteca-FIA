@@ -113,7 +113,7 @@ export class EjemplaresService {
           transaccion.id = item['id'];
           transaccion.nombre = item['notes'];
           transaccion.fecha = item['createdAt'];
-          transaccion.usuario = item['fullname'];
+          transaccion.usuario = item['userName'];
           transaccion.tipo = item['type'];
           transaccion.individual = item['single'];
           transacciones.push(transaccion);

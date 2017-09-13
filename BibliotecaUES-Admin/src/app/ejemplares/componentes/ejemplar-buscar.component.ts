@@ -25,7 +25,6 @@ export class EjemplarBuscarComponent implements OnInit {
   codigos = Array<string>();
   ejemplar: Ejemplar;
   codigo: string;
-  error: string = "No se encontraron resultados";
 
   constructor(private ejemplaresService: EjemplaresService, private router: Router) { }
 
@@ -56,18 +55,21 @@ export class EjemplarBuscarComponent implements OnInit {
         $('#codigo').autocomplete({
           data: codigosData,
           limit: 5,
-          minLength: 1
+          minLength: 3
         });
       }
     );
   }
 
   //Buscar un libro por medio del código de barra
-  buscar(form:any){
+  buscar(){
     let codigo = $("#codigo").val();
     this.ejemplaresService.obtenerPorCodigo(codigo).subscribe(
       ejemplar => {
         this.ejemplar = ejemplar;
+      },
+      error => {
+        this.ejemplar = null;
       }
     )
   }
