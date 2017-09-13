@@ -1,0 +1,9 @@
+/* Cambiar el color del navbar */
+nav {
+  background-color: #546e99;
+}
+
+/* Muestra el dropdown abajo del navbar */
+#dropdown1 {
+  margin-top: 65px;
+}
