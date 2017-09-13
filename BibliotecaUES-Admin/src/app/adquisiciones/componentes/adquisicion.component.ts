@@ -16,6 +16,7 @@ declare var Materialize: any;
 })
 export class AdquisicionComponent implements OnInit {
   adquisicion: Adquisicion;
+  showButton: boolean = false;
 
   errorMessage: string;
   showMessage: boolean = false;
@@ -30,11 +31,16 @@ export class AdquisicionComponent implements OnInit {
     this.adquisicionesService.obtener(id).subscribe(
       adquisicion =>{
         this.adquisicion = adquisicion;
+
+        this.adquisicion.ejemplares.forEach( (ejemplar) => {
+          console.log(ejemplar.ingresado);
+          this.showButton = this.showButton || !ejemplar.ingresado;
+        });
       },
       error =>{
         //Si la adquisición no existe
         if(error.status == 404){
-          this.router.navigate(['/error404']);
+          this.router.navigate(['/error404'], { skipLocationChange: true });
         }
       }
     );
@@ -49,10 +55,14 @@ export class AdquisicionComponent implements OnInit {
       message =>{
         this.showMessage= false;
         Materialize.toast("Datos guardados", 3000);
+        this.adquisicion.ejemplares.forEach((ejemplar) => {
+          this.showButton = false;
+          this.showButton = this.showButton || !ejemplar.ingresado;
+        });
       },
       error => {
         this.showMessage= false;
-        this.errorMessage = "Error al guardar los códigos";
+        this.errorMessage = "Códigos de barra duplicados";
       }
     );
   }

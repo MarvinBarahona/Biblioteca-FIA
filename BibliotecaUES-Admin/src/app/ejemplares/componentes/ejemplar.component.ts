@@ -29,7 +29,7 @@ export class EjemplarComponent implements OnInit {
       error =>{
         //Si el ejemplar no existe
         if(error.status == 404){
-          this.router.navigate(['/error404']);
+          this.router.navigate(['/error404'], { skipLocationChange: true });
         }
       }
     );

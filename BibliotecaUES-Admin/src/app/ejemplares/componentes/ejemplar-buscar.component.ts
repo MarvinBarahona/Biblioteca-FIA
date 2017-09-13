@@ -25,6 +25,7 @@ export class EjemplarBuscarComponent implements OnInit {
   codigos = Array<string>();
   ejemplar: Ejemplar;
   codigo: string;
+  message: string = "No se encontraron resultados"
 
   constructor(private ejemplaresService: EjemplaresService, private router: Router) { }
 
@@ -63,13 +64,17 @@ export class EjemplarBuscarComponent implements OnInit {
 
   //Buscar un libro por medio del código de barra
   buscar(){
+    this.ejemplar = null;
+    this.message = "Buscando...";
+
+
     let codigo = $("#codigo").val();
     this.ejemplaresService.obtenerPorCodigo(codigo).subscribe(
       ejemplar => {
         this.ejemplar = ejemplar;
       },
       error => {
-        this.ejemplar = null;
+        this.message = "No se encontraron resultado para " + this.codigo;
       }
     )
   }
