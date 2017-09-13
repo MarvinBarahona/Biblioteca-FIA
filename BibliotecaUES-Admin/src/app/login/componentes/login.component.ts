@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || './ejemplares';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/ejemplares';
   }
 
   logueo() {
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       r => {
         this.cookieService.put('token', r['token']);
         this.cookieService.putObject('usuario', r['usuario']);
-        window.location.href = this.returnUrl;
+        window.location.href = '.' + this.returnUrl;
       },
       error => {
         this.message = undefined;

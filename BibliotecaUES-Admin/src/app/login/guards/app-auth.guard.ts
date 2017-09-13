@@ -47,7 +47,7 @@ export class AppAuthGuard implements CanActivate {
         let i = user['politicas'].indexOf(next.data['politica']);
 
         // Si no está la política, redirigir al sitio del 'Permiso denegado'.
-        if(i == -1) this.router.navigate(['error403']);
+        if(i == -1) this.router.navigate(['/error403']);
         else res = true;
       }
     }
