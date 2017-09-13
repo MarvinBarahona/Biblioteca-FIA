@@ -21,10 +21,10 @@ export class LibrosComponent implements OnInit {
   constructor(private librosService: LibrosService, private router: Router) {
     // Opciones del datatable
     this.dtOptions = {
-      pageLength: 5,
-      // dom: 'lrtpif',
+      pageLength: 10,
       pagingType: 'simple_numbers',
-      lengthMenu: [2,3,5]
+      lengthMenu: [10,15,20],
+      order: [[3, 'asc']]
     };
   }
 

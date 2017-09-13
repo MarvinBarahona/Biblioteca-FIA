@@ -9,7 +9,7 @@
             <th>ISBN</th>
             <th>Título</th>
             <th>Autor</th>
-            <th>Edición</th>
+            <th>Catalogado?</th>
           </tr>
         </thead>
         <tbody>
@@ -19,9 +19,9 @@
           </div>
           <tr *ngFor="let libro of libros">
             <td><a href="javascript:void(0)" (click)="linkLibro(libro)">{{libro.isbn}}</a></td>
-            <td>{{libro.titulo}}</td>
+            <td>{{libro.titulo}}, {{libro.edicion}}ed</td>
             <td>{{libro.autor}}</td>
-            <td>{{libro.edicion}}</td>
+            <td>{{libro.catalogado? 'Sí' : 'No'}}</td>
           </tr>
         </tbody>
       </table>
