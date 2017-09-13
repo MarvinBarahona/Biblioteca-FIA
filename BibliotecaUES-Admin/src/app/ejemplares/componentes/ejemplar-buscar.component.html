@@ -3,18 +3,21 @@
     <div class="card-panel">
       <h5>Buscador de ejemplares</h5>
 
-      <!-- Input y botones -->
-      <div class="row">
-        <div class="input-field col m4 s8">
-          <input id="codigo" type="text" class="validate" placeholder="Código de barra">
+      <!-- Formulario para buscar  -->
+      <form #buscarEjemplarForm="ngForm" (ngSubmit)="buscar(buscarEjemplarForm)">
+        <div class="row">
+          <div class="input-field col m4 s8">
+            <input id="codigo" name="codigo" type="text" class="validate" placeholder="Código de barra" pattern="^[0-9]{8}$">
+            <label for="codigo" data-error="El código debe contener 8 dígitos"></label>
+          </div>
+          <div class="col m1 s1">
+            <button  class="btn waves-effect waves-green search" type="submit"><i class="medium material-icons">search</i></button>
+          </div>
+          <div class="col m2 offset-m3 s6 search">
+            <a routerLink="/ejemplares/nuevo" class="btn waves-effect waves-green">Nuevo</a>
+          </div>
         </div>
-        <div class="col m1 s1">
-          <a class="btn waves-effect waves-green search"><i class="medium material-icons">search</i></a>
-        </div>
-        <div class="col m2 offset-m3 s6 search">
-          <a routerLink="/ejemplares/nuevo" class="btn waves-effect waves-green">Nuevo</a>
-        </div>
-      </div>
+      </form>
 
       <!-- Resultados de la búsqueda -->
       <div class="row">
@@ -23,18 +26,24 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col s4">
-          <p><strong>Código de barra: </strong><a routerLink="/ejemplares/1">12345678</a></p>
-        </div>
-        <div class="col s4">
-          <p><strong>Titulo: </strong><a href="">Libro muy interesante</a></p>
-        </div>
-        <div class="col s4">
-          <p><strong>Estado: </strong>Prestado</p>
+      <div *ngIf="ejemplar; else elseEjemplar">
+        <div class="row">
+          <div class="col s4">
+            <p><strong>Código de barra: </strong><a href="javascript:void(0)" (click)="linkEjemplar(ejemplar.id)">{{ejemplar.codigo || " "}}</a></p>
+          </div>
+          <div class="col s4">
+            <p><strong>Titulo: </strong><a href="javascript:void(0)" (click)="linkLibro(ejemplar.libro.id)">{{ejemplar.libro.titulo || " "}}</a></p>
+          </div>
+          <div class="col s4">
+            <p><strong>Estado: </strong>{{ejemplar.estado || " "}}</p>
+          </div>
         </div>
       </div>
-
+      <ng-template #elseEjemplar>
+        <div class="row">
+          <p>{{error}}</p>
+        </div>
+      </ng-template>
     </div>
     <!-- /card-panel -->
   </div>
