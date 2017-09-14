@@ -9,7 +9,7 @@ const appRoutes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/error404',
+    redirectTo: '/libros',
     pathMatch: 'full'
   }
 ];

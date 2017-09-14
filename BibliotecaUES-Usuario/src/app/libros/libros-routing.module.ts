@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LibrosRootComponent, LibroComponent, LibrosComponent } from './componentes';
-import { AppAuthGuard } from './../login'
+import { LibrosRootComponent, LibroComponent, LibrosNuevosComponent } from './componentes';
 
 const routes: Routes = [
   {
@@ -11,7 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: LibrosComponent
+        component: LibrosNuevosComponent
       },
       {
         path: ':id',
@@ -24,6 +23,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [AppAuthGuard]
+  providers: []
 })
 export class LibrosRoutingModule { }

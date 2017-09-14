@@ -9,15 +9,14 @@ import { Component, OnInit } from '@angular/core';
 declare var $: any;
 
 @Component({
-  templateUrl: './libros-root.component.html',
-  styleUrls: ['./libros-root.component.css']
+  templateUrl: './libros-root.component.html'
 })
 export class LibrosRootComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit() {
-	  
+
   }
 
 }

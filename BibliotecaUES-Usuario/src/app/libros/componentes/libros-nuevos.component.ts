@@ -11,9 +11,9 @@ import { Subject } from 'rxjs/Rx';
 import { LibrosService, Libro } from './../servicios';
 
 @Component({
-  templateUrl: './libros.component.html'
+  templateUrl: './libros-nuevos.component.html'
 })
-export class LibrosComponent implements OnInit {
+export class LibrosNuevosComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   libros: Libro[];
   dtTrigger: Subject<any> = new Subject();

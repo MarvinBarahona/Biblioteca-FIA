@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 
 import { CookieService } from 'ngx-cookie';
-import { Libro, Catalogo, AutoData, Ejemplar } from './';
+import { Libro, Catalogo, Ejemplar } from './';
 
 @Injectable()
 export class LibrosService {
@@ -15,7 +15,7 @@ export class LibrosService {
 
   constructor(private http: Http, private cookieService: CookieService) {
     this.baseUrl = "https://bibliotecafiaues.herokuapp.com";
-    this.headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.cookieService.get('token') });
+    this.headers = new Headers({ 'Content-Type': 'application/json'});
   }
 
   // Método: obtenerTodos
@@ -50,7 +50,7 @@ export class LibrosService {
   }
 
   // Método: obtener
-  // Objetivo: obtener un ejemplar.
+  // Objetivo: obtener un libro
   obtener(id: number): Observable<Libro> {
     let url = this.baseUrl + '/books/' + id;
 
