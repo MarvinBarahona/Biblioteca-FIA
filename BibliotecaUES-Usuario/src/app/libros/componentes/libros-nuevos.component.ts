@@ -1,7 +1,7 @@
 /*
 *Nombre del módulo: Gestión de libros
-*Dirección física: src\app\libros\componentes\libros.component.ts
-*Objetivo: Mostrar el listado de libros disponibles en una tabla
+*Dirección física: src\app\libros\componentes\libros-nuevos.component.ts
+*Objetivo: Mostrar el listado de libros más recientes
 **/
 
 import { Component, OnInit } from '@angular/core';

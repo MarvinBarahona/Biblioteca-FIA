@@ -13,6 +13,10 @@ const routes: Routes = [
         component: LibrosNuevosComponent
       },
       {
+        path: 'buscar',
+        component: LibrosBuscarComponent
+      },
+      {
         path: ':id',
         component: LibroComponent
       }
