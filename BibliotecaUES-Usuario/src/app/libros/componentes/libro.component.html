@@ -7,92 +7,65 @@
 
         <!-- Título -->
         <div class="row">
-          <div class="col s11 offset-m1">
-            <strong>Título: </strong>
-            <span>{{libro.titulo}}</span>
+          <!-- Imagen -->
+          <div class="col l2">
+            <img src="{{libro.catalogo.img || 'assets/noImage.jpg'}}" alt="Imagen del libro" class="previa">
+          </div>
+          <div class="col l8">
+            <div class="row">
+              <div class="col l10 offset-l1">
+                <strong>Título: </strong>
+                <span>{{libro.titulo}}</span>
+              </div>
+            </div>
+            <!-- Autores -->
+            <div class="row">
+              <div class="col s12 m1 offset-m1">
+                <strong>Autores: </strong>
+              </div>
+              <div class="col s12 m3">
+                <ul>
+                  <li *ngFor="let autor of libro.autores">{{autor}}</li>
+                </ul>
+              </div>
+            </div>
+            <!-- Editorial y país -->
+            <div class="row">
+              <div class="col s12 m3 offset-m1">
+                <strong>Editorial: </strong>
+                <span>{{libro.editorial}}</span>
+              </div>
+              <div class="col s12 m2 offset-m1">
+                <strong>País: </strong>
+                <span>{{libro.pais}}</span>
+              </div>
+            </div>
+            <!-- Año, edición e ISBN -->
+            <div class="row">
+              <div class="col s12 m2 offset-m1">
+                <strong>Año: </strong>
+                <span>{{libro.anio}}</span>
+              </div>
+              <div class="col s12 m2 offset-m1">
+                <strong>Edición: </strong>
+                <span>{{libro.edicion}}</span>
+              </div>
+              <div class="col s12 m4 offset-m1">
+                <strong>ISBN: </strong>
+                <span>{{libro.isbn}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12 m2 offset-m1">
+                <!-- Materias -->
+                <strong>Materias: </strong>
+                <ul>
+                  <li *ngFor="let materia of libro.catalogo.materias">{{materia}}</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
-
-        <!-- Autores -->
-        <div class="row">
-          <div class="col s12 m1 offset-m1">
-            <strong>Autores: </strong>
-          </div>
-          <div class="col s12 m3">
-            <ul>
-              <li *ngFor="let autor of libro.autores">{{autor}}</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Editorial y país -->
-        <div class="row">
-          <div class="col s12 m3 offset-m1">
-            <strong>Editorial: </strong>
-            <span>{{libro.editorial}}</span>
-          </div>
-          <div class="col s12 m2 offset-m1">
-            <strong>País: </strong>
-            <span>{{libro.pais}}</span>
-          </div>
-        </div>
-
-        <!-- Año, edición e ISBN -->
-        <div class="row">
-          <div class="col s12 m2 offset-m1">
-            <strong>Año: </strong>
-            <span>{{libro.anio}}</span>
-          </div>
-          <div class="col s12 m2 offset-m1">
-            <strong>Edición: </strong>
-            <span>{{libro.edicion}}</span>
-          </div>
-          <div class="col s12 m4 offset-m1">
-            <strong>ISBN: </strong>
-            <span>{{libro.isbn}}</span>
-          </div>
-        </div>
-
-      </div>
-      <!-- /card-panel -->
-    </div>
-    <!-- /col -->
-  </div>
-  <!-- row -->
-
-  <!-- Catalogación -->
-  <div class="row">
-    <div class="col s12 m12">
-      <div class="card-panel">
-        <h5>Datos de catalogación</h5>
-
-        <div class="row">
-		  <div class="col l6">
-
-			<!-- Código de autor -->
-			<strong>Código de autor: </strong>
-			<span>{{libro.catalogo.codigoAutor}}</span>
-			<br>
-
-			<!-- Código Dewey -->
-			<strong>Código Dewey: </strong>
-			<span>{{libro.catalogo.categoria}}</span>
-			<br>
-
-			<!-- Materias -->
-			<strong>Materias: </strong>
-			<ul>
-			  <li *ngFor="let materia of libro.catalogo.materias">{{materia}}</li>
-			</ul>
-		  </div>
-
-		  <!-- Imagen -->
-		  <div class="col l6">
-			<img src="{{libro.catalogo.img || 'assets/noImage.jpg'}}" alt="Imagen del libro" class="previa">
-		  </div>
-
-		</div>
-		<!-- /row -->
 
       </div>
       <!-- /card-panel -->
@@ -103,18 +76,30 @@
 
   <!-- Ejemplares -->
   <div class="row">
-    <div class="col s12 m12">
+    <div class="col s12 m12 l12">
       <div class="card-panel">
 
-        <!-- Ejemplares -->
-        <ul class="collection with-header">
-          <li class="collection-header">
-            <h5>Ejemplares</h5>
-          </li>
-          <li class="collection-item" *ngFor="let ejemplar of libro.ejemplares">
-            <a href="javascript:void(0)" (click)="linkEjemplar(ejemplar.id)">{{ejemplar.codigo || "No asignado"}} </a> ({{ejemplar.estado}})
-          </li>
-        </ul>
+        <h5>Ejemplares</h5>
+        <!-- tabla -->
+        <div class="row">
+          <table class="striped col s12 m8 l6">
+            <thead>
+              <tr>
+                <th>Signatura</th>
+                <th>Estado</th>
+                <th>Código de barra</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ejemplar of libro.ejemplares">
+                <td>{{libro.catalogo.categoria}} - {{libro.catalogo.codigoAutor}}</td>
+                <td>{{ejemplar.estado}}</td>
+                <td>{{ejemplar.codigo || 'No asignado'}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /tabla -->
+        </div>
 
       </div>
       <!-- /card-panel -->

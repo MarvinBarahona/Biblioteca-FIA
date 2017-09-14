@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LibrosRootComponent, LibroComponent, LibrosNuevosComponent } from './componentes';
+import { LibrosRootComponent, LibroComponent, LibrosComponent } from './componentes';
 
 const routes: Routes = [
   {
@@ -10,11 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: LibrosNuevosComponent
-      },
-      {
-        path: 'buscar',
-        component: LibrosBuscarComponent
+        component: LibrosComponent
       },
       {
         path: ':id',

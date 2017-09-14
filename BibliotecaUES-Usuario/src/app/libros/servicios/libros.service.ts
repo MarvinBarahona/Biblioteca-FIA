@@ -27,6 +27,7 @@ export class LibrosService {
     return this.http.get(url, { headers: this.headers }).map(
       (response: Response) => {
         let r = response.json();
+        console.log(r);
         // Mapeando la salida
         let libros = new Array<Libro>();
 

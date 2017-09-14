@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col s12 m12">
+
+    <!-- Buscador -->
+    <div class="card-panel">
+      <div class="valign-wrapper row">
+        <div class="input-field col l7 m5 offset-m1 s10 offset-s2">
+          <input id="busqueda" name="busqueda" type="text" class="validate" maxlength="60">
+          <label for="busqueda">Buscar...</label>
+        </div>
+        <div class="input-field col l2 offset-l1 m5 s6 offset-s2">
+          <select id="tipo" name="tipo" materialize="material_select">
+            <option selected>Título</option>
+            <option>ISBN</option>
+            <option>Autor</option>
+            <option>Materia</option>
+          </select>
+          <label for="tipo">Criterio:</label>
+        </div>
+        <div class="col l2 m1 s2">
+          <a class="waves-effect waves-light btn">Buscar</a>
+        </div>
+      </div>
+    </div>
+    <!-- /card-panel -->
+
+    <br>
+    <br>
+
+    <!-- Resultados de la búsqueda -->
+    <div class="card-panel">
+      <h4>{{mensajeResultado}}</h4>
+
+      <ul class="collection" *ngIf="libros; else elseLibro">
+        <li *ngFor="let libro of libros" class="collection-item">
+          <h5><a href="javascript:void(0)" (click)="linkLibro(libro)">{{libro.titulo}}, {{libro.edicion}}ed</a></h5>
+          <p>{{libro.autor}}</p>
+          <p>{{libro.isbn}}</p>
+        </li>
+      </ul>
+
+      <!-- Mensaje de espera -->
+      <ng-template #elseLibro>
+        <div class="row">
+          <div class="col s8 m8 offset-s2 offset-m2">
+            <p>Cargando...</p>
+            <div class="progress">
+              <div class="indeterminate"></div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+    <!-- /card-panel -->
+
+  </div>
+  <!-- /col -->
+</div>
+<!-- /row -->
