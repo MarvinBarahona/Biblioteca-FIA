@@ -20,7 +20,7 @@ import { LoginModule } from './login';
     Angular2FontawesomeModule,
     CookieModule.forRoot(),
     LoginModule,
-    EjemplaresModule,
+    ConsultarModule,
     AppRoutingModule
   ],
   declarations: [

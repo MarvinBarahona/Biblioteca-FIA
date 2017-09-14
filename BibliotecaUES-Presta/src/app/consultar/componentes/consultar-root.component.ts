@@ -9,10 +9,10 @@ import { Component, OnInit } from '@angular/core';
 declare var $: any;
 
 @Component({
-  templateUrl: './ejemplares-root.component.html',
-  styleUrls: ['./ejemplares-root.component.css']
+  templateUrl: './consultar-root.component.html',
+  styleUrls: ['./consultar-root.component.css']
 })
-export class EjemplaresRootComponent implements OnInit {
+export class ConsultarRootComponent implements OnInit {
 
   constructor() { }
 

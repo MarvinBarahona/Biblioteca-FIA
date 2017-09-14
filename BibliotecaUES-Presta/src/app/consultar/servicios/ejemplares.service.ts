@@ -18,6 +18,29 @@ export class EjemplaresService {
     this.headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.cookieService.get('token') });
   }
 
+  // Método: obtenerTodos
+  // Objetivo: obtener todos los ejemplares existentes.
+  obtenerTodos(): Observable<Ejemplar[]> {
+    let url = this.baseUrl + '/copies';
+
+    // Realizando GET
+    return this.http.get(url, { headers: this.headers }).map(
+      // Mapeando la salida
+      (response: Response) => {
+        let r = response.json();
+        let ejemplares = new Array<Ejemplar>();
+
+        r.forEach(function(item) {
+          let ejemplar = new Ejemplar;
+          ejemplar.id = item['id'];
+          ejemplar.codigo = item['barcode'];
+          ejemplar.estado = item['state'];
+          ejemplares.push(ejemplar);
+        });
+        return ejemplares;
+      }
+    );
+  }
 
   // Método: obtener
   // Objetivo: obtener un ejemplar

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { EjemplaresRootComponent, EjemplarBuscarComponent, EjemplarComponent, LibroComponent } from './componentes';
+import { ConsultarRootComponent, EjemplarBuscarComponent, EjemplarComponent, LibroComponent } from './componentes';
 import { AppAuthGuard } from './../login'
 
 const routes: Routes = [
   {
     path: 'consultar',
-    component: EjemplaresRootComponent,
+    component: ConsultarRootComponent,
     children: [
       {
         path: '',
@@ -27,7 +27,7 @@ const routes: Routes = [
         canActivate: [AppAuthGuard],
         data: {politica: 142}
       },
-	  
+
     ]
   }
 ];
