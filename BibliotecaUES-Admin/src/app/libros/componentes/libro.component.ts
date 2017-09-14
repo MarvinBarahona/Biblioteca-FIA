@@ -6,6 +6,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { CookieService } from 'ngx-cookie';
 import { LibrosService, Libro } from './../servicios'
 
 @Component({
@@ -13,12 +14,24 @@ import { LibrosService, Libro } from './../servicios'
 })
 export class LibroComponent implements OnInit {
   libro: Libro;
+  catalogador: boolean;
 
-constructor(private libroService: LibrosService, private route: ActivatedRoute, private router: Router){}
+  constructor(
+    private libroService: LibrosService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private cookieService: CookieService
+  ){}
 
   ngOnInit() {
     // Obtiene el id del libro
     let id = this.route.snapshot.params['id'];
+
+    // Determina si el usuario tiene los permisos de catalogación
+    let user = this.cookieService.getObject('usuario');
+    let i = user['politicas'].indexOf(122);
+    this.catalogador = i > -1;
+
     // Llama al servicio
     this.libroService.obtener(id).subscribe(
       libro =>{

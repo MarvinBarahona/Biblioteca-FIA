@@ -7,6 +7,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { CookieService } from 'ngx-cookie';
 import { AdquisicionesService, Adquisicion }  from './../servicios'
 
 declare var Materialize: any;
@@ -17,25 +18,38 @@ declare var Materialize: any;
 export class AdquisicionComponent implements OnInit {
   adquisicion: Adquisicion;
   showButton: boolean = false;
+  catalogador: boolean
 
   errorMessage: string;
   showMessage: boolean = false;
 
-  constructor(private adquisicionesService: AdquisicionesService, private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private adquisicionesService: AdquisicionesService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private cookieService: CookieService
+  ) {}
 
   ngOnInit() {
     // Obtiene el id de la adquisición
     let id = this.route.snapshot.params['id'];
 
+    // Determina si el usuario tiene los permisos de catalogación
+    let user = this.cookieService.getObject('usuario');
+    let i = user['politicas'].indexOf(122);
+    this.catalogador = i > -1;
+
     // Llama al servicio
     this.adquisicionesService.obtener(id).subscribe(
       adquisicion =>{
         this.adquisicion = adquisicion;
+        let pendiente = false;
 
         this.adquisicion.ejemplares.forEach( (ejemplar) => {
-          console.log(ejemplar.ingresado);
-          this.showButton = this.showButton || !ejemplar.ingresado;
+          pendiente = pendiente || !ejemplar.ingresado;
         });
+
+        this.showButton = this.catalogador && pendiente;
       },
       error =>{
         //Si la adquisición no existe
@@ -55,10 +69,13 @@ export class AdquisicionComponent implements OnInit {
       message =>{
         this.showMessage= false;
         Materialize.toast("Datos guardados", 3000);
-        this.adquisicion.ejemplares.forEach((ejemplar) => {
-          this.showButton = false;
-          this.showButton = this.showButton || !ejemplar.ingresado;
+
+        let pendiente = false;
+        this.adquisicion.ejemplares.forEach( (ejemplar) => {
+          pendiente = pendiente || !ejemplar.ingresado;
         });
+
+        this.showButton = pendiente;
       },
       error => {
         this.showMessage= false;

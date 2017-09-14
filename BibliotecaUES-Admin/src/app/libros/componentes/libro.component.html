@@ -66,7 +66,7 @@
       <div class="card-panel">
         <h5>Datos de catalogación</h5>
 
-        <div *ngIf="libro.catalogado; else catalogar">
+        <div *ngIf="libro.catalogado || !catalogador; else catalogar">
           <catalogado [catalogo]="libro.catalogo"></catalogado>
         </div>
         <ng-template #catalogar>
