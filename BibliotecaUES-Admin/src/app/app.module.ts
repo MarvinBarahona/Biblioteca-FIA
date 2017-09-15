@@ -12,6 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { LibrosModule } from './libros/libros.module';
 import { EjemplaresModule } from './ejemplares/ejemplares.module';
 import { AdquisicionesModule } from './adquisiciones/adquisiciones.module';
+import { EmpleadosModule } from './empleados/empleados.module';
+import { IntercambiosModule } from './intercambios/intercambios.module';
 import { LoginModule } from './login';
 
 @NgModule({
@@ -25,6 +27,8 @@ import { LoginModule } from './login';
     LibrosModule,
     EjemplaresModule,
     AdquisicionesModule,
+    EmpleadosModule,
+    IntercambiosModule,
     AppRoutingModule
   ],
   declarations: [

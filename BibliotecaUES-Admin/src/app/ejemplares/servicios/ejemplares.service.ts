@@ -118,10 +118,8 @@ export class EjemplaresService {
           transaccion.individual = item['single'];
           transacciones.push(transaccion);
         });
-
         ejemplar.transacciones = transacciones;
 
-        console.log(r)
         // Mapear el libros
         let libro = new Libro;
         libro.id = rb['id'];
