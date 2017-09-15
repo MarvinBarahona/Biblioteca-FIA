@@ -56,7 +56,10 @@ export class EjemplarBuscarComponent implements OnInit {
         $('#codigo').autocomplete({
           data: codigosData,
           limit: 5,
-          minLength: 3
+          minLength: 3,
+          onAutocomplete: (val) => {
+            this.codigo = val;
+          }
         });
       }
     );
@@ -67,9 +70,7 @@ export class EjemplarBuscarComponent implements OnInit {
     this.ejemplar = null;
     this.message = "Buscando...";
 
-
-    let codigo = $("#codigo").val();
-    this.ejemplaresService.obtenerPorCodigo(codigo).subscribe(
+    this.ejemplaresService.obtenerPorCodigo(this.codigo).subscribe(
       ejemplar => {
         this.ejemplar = ejemplar;
       },

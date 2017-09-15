@@ -8,8 +8,8 @@
         <div class="row">
           <!-- Correo -->
           <div class="input-field col s8 offset-s2">
-            <input id="usuario" type="text" class="validate" name="correo" [(ngModel)]="model.correo" required>
-            <label for="usuario">Correo</label>
+            <input id="usuario" type="email" class="validate" name="correo" [(ngModel)]="model.correo" required>
+            <label for="usuario" data-error="Ingrese un correo válido">Correo</label>
           </div>
           <!-- Contraseña -->
           <div class="input-field col s8 offset-s2">
