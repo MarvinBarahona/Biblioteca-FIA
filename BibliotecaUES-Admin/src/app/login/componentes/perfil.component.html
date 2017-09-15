@@ -1,3 +1,37 @@
-<p>
-  perfil works!
-</p>
+<!-- Side nav -->
+<ul id="slide-out" class="side-nav fixed">
+  <li>
+    <a routerLink="/ejemplares"><i class="fa fa-files-o"></i>Ejemplares</a>
+  </li>
+  <li>
+    <a routerLink="/libros"><i class="fa fa-book"></i>Libros</a>
+  </li>
+  <li>
+    <a routerLink="/adquisiciones"><i class="fa fa-shopping-bag"></i>Adquisiciones</a>
+  </li>
+  <li>
+    <a routerLink="/intercambios"><i class="fa fa-exchange"></i>Intercambios</a>
+  </li>
+  <li>
+    <a routerLink="/empleados"><i class="fa fa-users"></i>Usuarios</a>
+  </li>
+</ul>
+<!-- /Side nav -->
+
+<!-- Espacio para los componentes (ver styles.css) -->
+<div class="component">
+  <div class="row">
+    <div class="col s12 m12">
+      <br><br>
+      <div class="card-panel">
+        <h5 class="center-align">Mi perfil</h5>
+        <p><strong>Nombre: </strong>{{usuario.nombre}}</p>
+        <p><strong>Correo: </strong>{{usuario.correo}}</p>
+        <p><strong>Cargo: </strong>{{usuario.grupo}}</p>
+        <div class="right-align">
+          <a  routerLink="/cambiar">¿Cambiar contraseña?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

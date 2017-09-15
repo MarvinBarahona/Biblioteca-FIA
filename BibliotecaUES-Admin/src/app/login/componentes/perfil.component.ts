@@ -1,15 +1,23 @@
+/*
+*Nombre del módulo: mi perfil
+*Dirección: /src/app/login/componentes/perfil.component.ts
+*Objetivo: permite al usuario revisar sus datos
+*/
 import { Component, OnInit } from '@angular/core';
 
+import { CookieService } from 'ngx-cookie';
+import { Usuario } from './../servicios';
+
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.component.html',
-  styles: []
+  templateUrl: './perfil.component.html'
 })
 export class PerfilComponent implements OnInit {
+  usuario: Usuario;
 
-  constructor() { }
+  constructor(private cookieService: CookieService){}
 
-  ngOnInit() {
+  ngOnInit(){
+    this.usuario = <Usuario> this.cookieService.getObject('usuario');
   }
 
 }
