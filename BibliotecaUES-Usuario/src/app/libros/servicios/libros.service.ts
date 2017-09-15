@@ -21,7 +21,7 @@ export class LibrosService {
   // Método: obtenerTodos
   // Objetivo: obtener todos los libros registrados.
   obtenerTodos(): Observable<Libro[]> {
-    let url = this.baseUrl + '/books';
+    let url = this.baseUrl + '/books/public';
 
     // Realizando el GET
     return this.http.get(url, { headers: this.headers }).map(
@@ -40,8 +40,11 @@ export class LibrosService {
           libro.edicion = item['edition'];
           libro.autor = item['authorName'];
           libro.editorial = item['publisherName'];
-          libro.catalogado = item['catalogued'];
-
+          // libro.catalogado = item['catalogued'];
+          // Mapeando el catalogo
+          let catalogo = new Catalogo;
+          catalogo.img = item['image'];
+          libro.catalogo = catalogo;
           libros.push(libro);
         });
 
@@ -53,7 +56,7 @@ export class LibrosService {
   // Método: obtener
   // Objetivo: obtener un libro
   obtener(id: number): Observable<Libro> {
-    let url = this.baseUrl + '/books/' + id;
+    let url = this.baseUrl + '/books/' + id+'/public';
 
     // Realizar el GET
     return this.http.get(url, { headers: this.headers }).map(
@@ -63,7 +66,7 @@ export class LibrosService {
         let libro = new Libro;
         let rb = r['book'];
         let rc = r['copies'];
-
+        
         libro.id = rb['id'];
         libro.isbn = rb['isbn'];
         libro.titulo = rb['title'];
