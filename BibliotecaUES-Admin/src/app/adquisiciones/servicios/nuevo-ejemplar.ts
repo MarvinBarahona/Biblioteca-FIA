@@ -1,4 +1,4 @@
-// Class NuevoEjemplar
+// Class NuevoEjemplar de Libros
 
 import { Libro } from './';
 

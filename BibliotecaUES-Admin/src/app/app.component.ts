@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: app
+*Dirección: /src/app/app.component.ts
+*Objetivo: Vista compartida por el resto de componentes
+*/
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 

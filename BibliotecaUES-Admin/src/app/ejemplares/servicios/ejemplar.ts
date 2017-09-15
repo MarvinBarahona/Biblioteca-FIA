@@ -1,4 +1,4 @@
-// Clase Ejemplar
+// Clase Ejemplar  de Ejemplares
 
 import { Transaccion, Libro } from './'
 

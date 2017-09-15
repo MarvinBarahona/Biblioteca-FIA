@@ -13,6 +13,7 @@ declare var $: any;
 })
 export class EjemplaresRootComponent implements OnInit {
   ngOnInit() {
+    // Cerrar el menú al darle click a una opción.
     $("#toogle_menu").sideNav({closeOnClick: true});
   }
 }

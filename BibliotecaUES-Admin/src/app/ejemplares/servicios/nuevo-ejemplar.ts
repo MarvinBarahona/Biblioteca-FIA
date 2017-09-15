@@ -1,4 +1,4 @@
-// Clase NuevoEjemplar
+// Clase NuevoEjemplar de Ejemplares
 
 import { Libro } from './';
 

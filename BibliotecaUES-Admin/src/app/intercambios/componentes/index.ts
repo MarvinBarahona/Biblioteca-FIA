@@ -3,4 +3,3 @@ export { IntercambiosComponent } from './intercambios.component';
 export { IntercambioComponent } from './intercambio.component';
 export { IntercambioNuevoComponent } from './intercambio-nuevo.component';
 export { EntradaPendienteComponent } from './entrada-pendiente.component';
-export { EntradaIngresadaComponent } from './entrada-ingresada.component';

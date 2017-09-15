@@ -1,4 +1,4 @@
-// Clase Libro del módulo de Ejemplares
+// Clase Libro de Ejemplares
 
 export class Libro{
   id: number;

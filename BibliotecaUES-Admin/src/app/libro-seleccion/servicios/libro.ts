@@ -1,4 +1,4 @@
-// Clase Libro
+// Clase Libro de LibroSelección
 
 export class Libro{
   id: number;

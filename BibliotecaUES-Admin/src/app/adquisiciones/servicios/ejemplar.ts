@@ -1,4 +1,4 @@
-// Clase ejemplar del módulo de Libros
+// Clase ejemplar de Libros
 
 import { Libro } from './';
 

@@ -3,6 +3,7 @@
 *Dirección física: src\app\libros\componentes\catalogar.component.ts
 *Objetivo: Catalogar un libro
 **/
+
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 

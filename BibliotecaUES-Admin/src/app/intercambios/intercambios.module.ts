@@ -8,7 +8,7 @@ import { MaterializeModule } from 'angular2-materialize';
 import { DataTablesModule } from 'angular-datatables';
 
 import { IntercambiosRoutingModule } from './intercambios-routing.module';
-import { IntercambiosRootComponent, IntercambiosComponent, IntercambioComponent, IntercambioNuevoComponent, EntradaPendienteComponent, EntradaIngresadaComponent } from './componentes/';
+import { IntercambiosRootComponent, IntercambiosComponent, IntercambioComponent, IntercambioNuevoComponent, EntradaPendienteComponent } from './componentes/';
 import { IntercambiosService } from './servicios/';
 
 import { LibroSeleccionModule } from './../libro-seleccion';
@@ -29,8 +29,7 @@ import { LibroSeleccionModule } from './../libro-seleccion';
     IntercambiosComponent,
     IntercambioComponent,
     IntercambioNuevoComponent,
-    EntradaPendienteComponent,
-    EntradaIngresadaComponent
+    EntradaPendienteComponent
   ],
   providers: [IntercambiosService]
 })
