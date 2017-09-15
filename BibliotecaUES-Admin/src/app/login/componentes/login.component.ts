@@ -1,8 +1,9 @@
 /*
-*Nombre del módulo: iniciar sesión. 
+*Nombre del módulo: iniciar sesión.
 *Dirección: /src/app/login/componentes/login.component.ts
 *Objetivo: permite al usuario iniciar sesión.
 */
+
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
