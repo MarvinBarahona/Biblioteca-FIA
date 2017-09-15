@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ConsultarModule } from './consultar/consultar.module';
+import { TrasladarModule } from './trasladar/trasladar.module';
 import { LoginModule } from './login';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { LoginModule } from './login';
     CookieModule.forRoot(),
     LoginModule,
     ConsultarModule,
+    TrasladarModule,
     AppRoutingModule
   ],
   declarations: [

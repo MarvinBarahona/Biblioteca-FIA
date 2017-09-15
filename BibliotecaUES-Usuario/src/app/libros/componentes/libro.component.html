@@ -1,63 +1,60 @@
 <div *ngIf="libro; else elseLibro">
   <!-- Información del libro -->
   <div class="row">
-    <div class="col s12 m12">
+    <div class="col s12 m12 l12">
       <div class="card-panel">
-        <h5>Datos del libro</h5>
-
-        <!-- Título -->
+        <!-- Título y edición -->
+        <div class="center">
+          <h5>{{libro.titulo}}</h5>
+          <h6>{{libro.edicion}}° edición</h6>
+        </div>
+        <br>
         <div class="row">
           <!-- Imagen -->
-          <div class="col l2">
-            <img src="{{libro.catalogo.img || 'assets/noImage.jpg'}}" alt="Imagen del libro" class="previa">
+          <div class="col l1 offset-l3 m2 offset-m1">
+            <img src="{{libro.catalogo.img || 'assets/noImage.jpg'}}" alt="Imagen del libro" class="previa center">
           </div>
-          <div class="col l8">
-            <div class="row">
-              <div class="col l10 offset-l1">
-                <strong>Título: </strong>
-                <span>{{libro.titulo}}</span>
-              </div>
-            </div>
+
+          <div class="col l6 offset-l1 m7 offset-m2">
             <!-- Autores -->
             <div class="row">
-              <div class="col s12 m1 offset-m1">
+              <div class="col s12 m2 offset-m1 l1">
                 <strong>Autores: </strong>
               </div>
-              <div class="col s12 m3">
+              <div class="col s12 m6 offset-m1">
                 <ul>
                   <li *ngFor="let autor of libro.autores">{{autor}}</li>
                 </ul>
               </div>
             </div>
+
             <!-- Editorial y país -->
             <div class="row">
-              <div class="col s12 m3 offset-m1">
+              <div class="col s12 m4 offset-m1 l2">
                 <strong>Editorial: </strong>
                 <span>{{libro.editorial}}</span>
               </div>
-              <div class="col s12 m2 offset-m1">
+              <div class="col s12 m4 offset-m1">
                 <strong>País: </strong>
                 <span>{{libro.pais}}</span>
               </div>
             </div>
+
             <!-- Año, edición e ISBN -->
             <div class="row">
-              <div class="col s12 m2 offset-m1">
+              <div class="col s12 m3 offset-m1 l2">
                 <strong>Año: </strong>
                 <span>{{libro.anio}}</span>
               </div>
-              <div class="col s12 m2 offset-m1">
-                <strong>Edición: </strong>
-                <span>{{libro.edicion}}</span>
-              </div>
-              <div class="col s12 m4 offset-m1">
+              <div class="col s12 m6">
                 <strong>ISBN: </strong>
                 <span>{{libro.isbn}}</span>
               </div>
             </div>
+
+            <!-- Materias -->
             <div class="row">
-              <div class="col s12 m2 offset-m1">
-                <!-- Materias -->
+              <div class="col s12 m6 offset-m1 l3">
                 <strong>Materias: </strong>
                 <ul>
                   <li *ngFor="let materia of libro.catalogo.materias">{{materia}}</li>
@@ -82,7 +79,7 @@
         <h5>Ejemplares</h5>
         <!-- tabla -->
         <div class="row">
-          <table class="striped col s12 m8 l6">
+          <table class="striped col s12 m8 offset-m2 l8 offset-l2">
             <thead>
               <tr>
                 <th>Signatura</th>

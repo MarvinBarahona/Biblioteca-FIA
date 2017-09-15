@@ -11,10 +11,10 @@
             <label for="codigo" data-error="El código debe contener 8 dígitos">Código de barra</label>
           </div>
           <div class="col m1 s1">
-            <button class="btn waves-effect waves-green search" type="submit"><i class="medium material-icons">search</i></button>
+            <button class="btn waves-effect waves-green search" type="submit" [disabled]="!buscarEjemplarForm.form.valid"><i class="medium material-icons">search</i></button>
           </div>
           <div class="col m2 offset-m3 s6 search">
-            <a routerLink="/ejemplares/nuevo" class="btn waves-effect waves-green">Nuevo</a>
+            <button routerLink="/ejemplares/nuevo" class="btn waves-effect waves-green" >Nuevo</button>
           </div>
         </div>
       </form>

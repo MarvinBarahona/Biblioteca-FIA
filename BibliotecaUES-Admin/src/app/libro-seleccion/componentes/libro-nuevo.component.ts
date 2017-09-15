@@ -102,7 +102,10 @@ export class LibroNuevoComponent implements OnInit {
         $('#editorial').autocomplete({
           data: editorialesData,
           limit: 5,
-          minLength: 1
+          minLength: 1,
+          onAutocomplete: (val) => {
+            this.libro.editorial = val;
+          }
         });
 
         // Agrega los métodos para vincular el autocompletado con los autores.
