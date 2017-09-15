@@ -9,15 +9,10 @@ import { Component, OnInit } from '@angular/core';
 declare var $: any;
 
 @Component({
-  templateUrl: './adquisiciones-root.component.html',
-  styleUrls: ['./adquisiciones-root.component.css']
+  templateUrl: './adquisiciones-root.component.html'
 })
 export class AdquisicionesRootComponent implements OnInit {
-
-  constructor() { }
-
   ngOnInit() {
     $("#toogle_menu").sideNav({closeOnClick: true});
   }
-
 }
