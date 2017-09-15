@@ -4,11 +4,11 @@
     <!-- Buscador -->
     <div class="card-panel">
       <div class="valign-wrapper row">
-        <div class="input-field col l7 m5 offset-m1 s10 offset-s2">
+        <div class="input-field col l7 m6 s12">
           <input id="busqueda" name="busqueda" type="text" class="validate" maxlength="60">
           <label for="busqueda">Buscar...</label>
         </div>
-        <div class="input-field col l2 offset-l1 m5 s6 offset-s2">
+        <div class="input-field col l2 m4 s12">
           <select id="tipo" name="tipo" materialize="material_select">
             <option selected>Título</option>
             <option>ISBN</option>
@@ -17,7 +17,7 @@
           </select>
           <label for="tipo">Criterio:</label>
         </div>
-        <div class="col l2 m1 s2">
+        <div class="col l2 m1 s12">
           <a class="waves-effect waves-light btn">Buscar</a>
         </div>
       </div>
@@ -32,8 +32,9 @@
       <h4>{{mensajeResultado}}</h4>
 
       <ul class="collection" *ngIf="libros; else elseLibro">
-        <li *ngFor="let libro of libros" class="collection-item">
-          <h5><a href="javascript:void(0)" (click)="linkLibro(libro)">{{libro.titulo}}, {{libro.edicion}}ed</a></h5>
+        <li *ngFor="let libro of libros" class="collection-item avatar">
+          <img src="" alt="mini imagen" class="circle">
+          <h6><a href="javascript:void(0)" (click)="linkLibro(libro)">{{libro.titulo}}, {{libro.edicion}}ed</a></h6>
           <p>{{libro.autor}}</p>
           <p>{{libro.isbn}}</p>
         </li>
