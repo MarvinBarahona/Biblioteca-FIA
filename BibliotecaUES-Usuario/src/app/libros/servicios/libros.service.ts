@@ -64,46 +64,47 @@ export class LibrosService {
         let r = response.json();
         // Mapeando la salida
         let libro = new Libro;
-        let rb = r['book'];
-        let rc = r['copies'];
-        
-        libro.id = rb['id'];
-        libro.isbn = rb['isbn'];
-        libro.titulo = rb['title'];
-        libro.edicion = rb['edition'];
-        libro.editorial = rb['publisherName'];
-        libro.pais = rb['country'];
-        libro.anio = rb['year'];
-        libro.catalogado = rb['catalogued'];
+
+        libro.id = r['id'];
+        libro.isbn = r['isbn'];
+        libro.titulo = r['title'];
+        libro.edicion = r['edition'];
+        libro.editorial = r['publisherName'];
+        libro.pais = r['country'];
+        libro.anio = r['year'];
+        libro.catalogado = r['catalogued'];
         libro.autores = [];
-        rb['Authors'].forEach(function(author) {
+        r['Authors'].forEach(function(author) {
           libro.autores.push(author['name']);
         });
 
         // Mapeando el catalogo
         let catalogo = new Catalogo;
         catalogo.materias = [];
-        rb['Subjects'].forEach(function(subject) {
+        r['Subjects'].forEach(function(subject) {
           catalogo.materias.push(subject['name']);
         });
-        catalogo.categoria = rb['category'];
-        catalogo.codigoAutor = rb['authorCode'];
-        catalogo.img = rb['image'];
+        catalogo.categoria = r['category'];
+        catalogo.codigoAutor = r['authorCode'];
+        catalogo.img = r['image'];
         libro.catalogo = catalogo;
 
         // Mapeando los ejemplares
-        let ejemplares = new Array<Ejemplar>();
-        rc.forEach(function(item) {
-          let ejemplar = new Ejemplar;
-          ejemplar.id = item['id'];
-          ejemplar.codigo = item['barcode'];
-          ejemplar.estado = item['state'];
-          ejemplares.push(ejemplar);
-        });
-        libro.ejemplares = ejemplares;
+        // let ejemplares = new Array<Ejemplar>();
+        // console.log(libro);
+        // r.forEach(function(item) {
+        //   let ejemplar = new Ejemplar;
+        //   ejemplar.id = item['id'];
+        //   ejemplar.codigo = item['barcode'];
+        //   ejemplar.estado = item['state'];
+        //   ejemplares.push(ejemplar);
+        // });
+        // libro.ejemplares = ejemplares;
 
         return libro;
       }
     );
   }
+
+  
 }
