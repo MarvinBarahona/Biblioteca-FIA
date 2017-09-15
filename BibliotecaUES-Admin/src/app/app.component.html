@@ -10,6 +10,7 @@
       <ul class="right" *ngIf='usuario'>
          <li><a materialize="dropdown" class='dropdown-button' href='javascript:void(0)' data-activates='dropdown1'>{{usuario}}<i class="material-icons right">arrow_drop_down</i></a></li>
          <ul id='dropdown1' class='dropdown-content'>
+           <li><a routerLink="/perfil">Mi perfil</a></li>
            <li><a href="javascript:void(0)" (click)='cerrarSesion()'>Cerrar sesión</a></li>
          </ul>
        </ul>

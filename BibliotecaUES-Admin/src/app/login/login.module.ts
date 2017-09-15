@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CookieModule } from 'ngx-cookie';
 
 import { LoginRoutingModule } from './login-routing.module';
-import { LoginComponent, NotAllowedComponent, NotFoundComponent } from './componentes';
+import { LoginComponent, NotAllowedComponent, NotFoundComponent, PerfilComponent, RestaurarContraComponent, CambiarContraComponent } from './componentes';
 import { AuthService } from './servicios';
 import { SkipLoginGuard } from './guards';
 
@@ -20,7 +20,10 @@ import { SkipLoginGuard } from './guards';
   declarations: [
     LoginComponent,
     NotFoundComponent,
-    NotAllowedComponent
+    NotAllowedComponent,
+    PerfilComponent,
+    RestaurarContraComponent,
+    CambiarContraComponent
   ],
   providers: [
     AuthService,

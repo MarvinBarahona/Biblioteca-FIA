@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent, NotAllowedComponent, NotFoundComponent } from './componentes';
+import { LoginComponent, NotAllowedComponent, NotFoundComponent, PerfilComponent, RestaurarContraComponent, CambiarContraComponent } from './componentes';
 import { SkipLoginGuard } from './guards';
 
 const appRoutes: Routes = [
@@ -17,7 +17,19 @@ const appRoutes: Routes = [
   {
     path: 'error404',
     component: NotFoundComponent
-  }
+  },
+  {
+    path: 'perfil',
+    component: PerfilComponent
+  },
+  {
+    path: 'cambiar',
+    component: CambiarContraComponent
+  },
+  {
+    path: 'restaurar',
+    component: RestaurarContraComponent
+  },
 ];
 
 @NgModule({
