@@ -5,4 +5,5 @@ export class Politica{
   codigo: number;
   nombre: string;
   asignada: boolean;
+  deshabilitada: boolean;
 }

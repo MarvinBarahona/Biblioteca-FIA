@@ -46,7 +46,6 @@ export class EmpleadosService {
       // Mapeando salida
       (response: Response) => {
         let r = response.json();
-        console.log(r);
         let empleados = new Array<Empleado>();
 
         r.forEach((item)=>{
@@ -70,6 +69,74 @@ export class EmpleadosService {
       }
     );
   }
+
+  // Método: obtener
+  // Objetivo: obtener un empleado dado su id, para asignarle permisos.
+  obtener(id: number): Observable<Empleado>{
+    let url = this.baseUrl + "/users/" + id;
+
+    // Realizando GET
+    return this.http.get(url, { headers: this.headers }).map(
+      // Mapeando salida
+      (response: Response) => {
+        let r = response.json();
+
+        // Mapeando objeto
+        let empleado = new Empleado;
+        empleado.id = r['id'];
+        empleado.nombre = r['fullname'];
+        empleado.correo = r['email'];
+
+        // Mapeando el grupo
+        let grupo = new Grupo;
+        grupo.nombre = r['Group'];
+        empleado.grupo = grupo;
+
+        // Mapeando politicas
+        let politicas = new Array<Politica>();
+        let rp = r['Policies'];
+
+        rp.forEach((item)=>{
+          let politica = new Politica;
+          politica.id = item['id'];
+          politica.codigo = item['code'];
+          politica.nombre = item['name'];
+          politica.asignada = item['hasIt'];
+          politica.deshabilitada = item['group'];
+
+          politicas.push(politica);
+        });
+        empleado.politicas = politicas;
+
+        return empleado;
+      }
+    );
+  }
+
+  // Método: asignarPoliticas
+  // Objetivo: asignar politicas a un empleado
+  asignarPoliticas(empleado: Empleado): Observable<string>{
+    let url = this.baseUrl + "/users/" + empleado.id + "/setPolities";
+
+    // Creando arreglo de politicas a asignarPoliticas
+    let politicas = [];
+    empleado.politicas.forEach((politica) => {
+      if(!politica.deshabilitada && politica.asignada) politicas.push(politica.id);
+    });
+
+    // Mapeando la entrada
+    let q = JSON.stringify({policies: politicas});
+
+    // Realizando POST
+    return this.http.put(url, q, { headers: this.headers }).map(
+      // Mapeando salida
+      (response: Response) => {
+        let r = response.json();
+        return r['message'];
+      }
+    );
+  }
+
 
   // Método: obtenerGrupos
   // Objetivo: obtener los grupos disponibles para asignarse al nuevo empleados

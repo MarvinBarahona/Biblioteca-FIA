@@ -7,7 +7,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Empleado, Grupo, Politica } from './../servicios/';
+import { EmpleadosService, Empleado, Grupo, Politica } from './../servicios/';
+
+declare var Materialize: any;
 
 @Component({
   templateUrl: './empleado.component.html'
@@ -18,15 +20,38 @@ export class EmpleadoComponent implements OnInit {
   errorMessage: string;
   showMessage: boolean;
 
-  constructor( private route: ActivatedRoute ) { }
+  constructor(private empleadosService: EmpleadosService, private route: ActivatedRoute ) { }
 
   ngOnInit() {
-    // Obtiene el id de la adquisición
+    this.showMessage = false;
+
+    // Obtiene el id del empleado
     let id = this.route.snapshot.params['id'];
 
-    this.empleado.grupo = new Grupo;
-    this.empleado.politicas = new Array<Politica>();
-    this.showMessage = false;
+    // Obtener al empleado
+    this.empleadosService.obtener(id).subscribe(
+      empleado => {
+        this.empleado = empleado;
+      }
+    );
+  }
+
+  guardar(){
+    // Mostrar mensajes.
+    this.showMessage = true;
+    this.errorMessage = null;
+
+    // Guardar las politicas asignadas
+    this.empleadosService.asignarPoliticas(this.empleado).subscribe(
+      message => {
+        this.showMessage= false;
+        Materialize.toast("Politicas guardadas", 3000);
+      },
+      error => {
+        this.showMessage= false;
+        this.errorMessage = "Error al crear la adquisición";
+      }
+    );
   }
 
 }

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 
 import { CookieService } from 'ngx-cookie';
-import { Intercambio, Ejemplar, Libro } from './';
+import { Intercambio, Ejemplar, Libro, NuevaEntrada } from './';
 
 @Injectable()
 export class IntercambiosService {
@@ -42,7 +42,72 @@ export class IntercambiosService {
     );
   }
 
+  // Método: crearEntrada
+  // Objetivo: crear la entrada de un intercambio
+  crearEntrada(entrada: NuevaEntrada): Observable<string> {
+    let url = this.baseUrl + '/transactions/tradein';
+
+    // Haciendo un arreglo de ids de ejemplares de salida
+    let ejemplares = [];
+    entrada.ejemplares.forEach((ejemplar)=>{
+      ejemplares.push({bookId: ejemplar.libro.id, quantity: ejemplar.cantidad});
+    });
+
+    // Mapeando la entrada
+    let q = JSON.stringify({transactionId: entrada.id, notes: entrada.facultad, copies: ejemplares});
+
+    // Realizando POST
+    return this.http.post(url, q, { headers: this.headers }).map(
+      // Mapeando salida
+      (response: Response) => {
+        let r = response.json();
+        return r['message'];
+      }
+    );
+  }
+
   // Método: obtenerTodos
+  // Objetivo: obtener todos los intercambios realizados
+  obtenerTodos(): Observable<any> {
+    let url = this.baseUrl + '/copies/lots?type=2';
+
+    // Realizando GET
+    return this.http.get(url, { headers: this.headers }).map(
+      // Mapeando la salida
+      (response: Response) => {
+        let a = response.json();
+        console.log(a);
+        // let r1 = a[0];
+        // let r2 = a[1];
+        // let adquisiciones = new Array<Adquisicion>();
+        //
+        // r1.forEach(function(item) {
+        //   let adquisicion = new Adquisicion;
+        //   adquisicion.id = item['id'];
+        //   adquisicion.nombre = item['notes'];
+        //   adquisicion.fecha = item['createdAt'];
+        //   adquisicion.tipo = item['type'];
+        //   adquisicion.usuario = item['fullname'];
+        //   adquisiciones.push(adquisicion);
+        // });
+        //
+        // r2.forEach(function(item) {
+        //   let adquisicion = new Adquisicion;
+        //   adquisicion.id = item['id'];
+        //   adquisicion.nombre = item['notes'];
+        //   adquisicion.fecha = item['createdAt'];
+        //   adquisicion.tipo = item['type'];
+        //   adquisicion.usuario = item['fullname'];
+        //   adquisiciones.push(adquisicion);
+        // });
+        //
+        // return adquisiciones;
+        return a;
+      }
+    );
+  }
+
+  // Método: obtenerEjemplares
   // Objetivo: obtener todos los ejemplares existentes.
   obtenerEjemplares(): Observable<Ejemplar[]> {
     let url = this.baseUrl + '/copies';

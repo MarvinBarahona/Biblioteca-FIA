@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Rx';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
-import { Intercambio } from './../servicios/';
+import { IntercambiosService, Intercambio } from './../servicios/';
 
 @Component({
   templateUrl: './intercambios.component.html'
@@ -20,7 +20,7 @@ export class IntercambiosComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
-  constructor(private router: Router) {
+  constructor(private intercambiosService: IntercambiosService, private router: Router) {
     // Opciones de datatable
     this.dtOptions = {
       pageLength: 10,
@@ -31,6 +31,7 @@ export class IntercambiosComponent implements OnInit {
 
   ngOnInit() {
     this.intercambios = new Array<Intercambio>();
+    this.intercambiosService.obtenerTodos().subscribe();
   }
 
   // Redirige a la vista de intercambio
