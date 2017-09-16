@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 
 import { CookieService } from 'ngx-cookie';
-import { Ejemplar, Libro } from './';
+import { Intercambio, Ejemplar, Libro } from './';
 
 @Injectable()
 export class IntercambiosService {
@@ -18,9 +18,33 @@ export class IntercambiosService {
     this.headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.cookieService.get('token') });
   }
 
+  // Método: crear
+  // Objetivo: crear un nuevo intercambio
+  crear(intercambio: Intercambio): Observable<string> {
+    let url = this.baseUrl + "/transactions/tradeout";
+
+    // Haciendo un arreglo de ids de ejemplares de salida
+    let ejemplares = [];
+    intercambio.salidas.forEach((ejemplar)=>{
+      ejemplares.push(ejemplar.id);
+    });
+
+    // Mapeando la entrada
+    let q = JSON.stringify({notes: intercambio.facultad, copies: ejemplares});
+
+    // Realizando POST
+    return this.http.post(url, q, { headers: this.headers }).map(
+      // Mapeando salida
+      (response: Response) => {
+        let r = response.json();
+        return r['message'];
+      }
+    );
+  }
+
   // Método: obtenerTodos
   // Objetivo: obtener todos los ejemplares existentes.
-  obtenerTodos(): Observable<Ejemplar[]> {
+  obtenerEjemplares(): Observable<Ejemplar[]> {
     let url = this.baseUrl + '/copies';
 
     // Realizando GET

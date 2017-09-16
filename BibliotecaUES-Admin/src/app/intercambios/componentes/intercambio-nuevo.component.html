@@ -22,7 +22,7 @@
             <label for="codigo" data-error="El código debe contener 8 dígitos">Código de barra</label>
           </div>
           <div class="col m8 s4">
-            <button class="btn waves-effect waves-green search" type="submit" [disabled]="!buscarEjemplarForm.form.valid"><i class="medium material-icons">search</i></button>
+            <button class="btn waves-effect waves-green search" type="submit" [disabled]="!buscarEjemplarForm.form.valid">Agregar</button>
           </div>
         </div>
       </form>
@@ -49,14 +49,14 @@
             <thead>
               <tr>
                 <th>Libro</th>
-                <th>Cantidad</th>
+                <th>Código de barra</th>
                 <th>Eliminar</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let ejemplar of intercambio.salidas.ejemplares">
+              <tr *ngFor="let ejemplar of intercambio.salidas">
                 <td>{{ejemplar.libro.titulo}}</td>
-                <td><input class="col m3 offset-m1" type="number" name="cantidad" min="1" max="20" [(ngModel)]="ejemplar.cantidad" required></td>
+                <td>{{ejemplar.codigo}}</td>
                 <td><a href="javascript:void(0);" (click)="eliminarEjemplar(ejemplar)"><i class="material-icons borrar">delete</i></a></td>
               </tr>
             </tbody>
@@ -68,9 +68,9 @@
       <!-- /Tabla de nuevos ejemplares -->
 
       <!-- Acciones -->
-      <br>
+      <br><br>
       <div class="row">
-        <button type="submit" class="waves-effect waves-light btn col m2 offset-m1 s4" [disabled]="intercambio.salidas.length==0 || !intercambio.facultad">Crear</button>
+        <button class="button" class="waves-effect waves-light btn col m2 offset-m4 s4" (click)="crear()" [disabled]="intercambio.salidas.length==0 || !intercambio.facultad">Crear</button>
         <a class="waves-effect waves-light btn col m2 offset-m1 s4 " (click)="openCancel()">Cancelar</a>
       </div>
 

@@ -40,7 +40,7 @@ export class IntercambiosComponent implements OnInit {
 
   // Redirige a la vista de registro de la entrada del intercambio
   linkEntrada(intercambio: Intercambio){
-    this.router.navigate(["/intercambio/pendiente", {id: intercambio.id, facultad: intercambio.facultad}]);
+    this.router.navigate(["/intercambios/pendiente", {id: intercambio.id, facultad: intercambio.facultad}]);
   }
 
 }

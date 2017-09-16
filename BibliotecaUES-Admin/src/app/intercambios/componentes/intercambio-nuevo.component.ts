@@ -60,7 +60,7 @@ export class IntercambioNuevoComponent implements OnInit {
   // Método: inicializarAutocompletado
   // Objetivo: hace el input de búsqueda con autocompletado
   inicializarAutocompletado(){
-    this.intercambiosService.obtenerTodos().subscribe(
+    this.intercambiosService.obtenerEjemplares().subscribe(
       ejemplares => {
         this.ejemplares = ejemplares;
 
@@ -95,17 +95,47 @@ export class IntercambioNuevoComponent implements OnInit {
   agregar(){
     this.message = null;
     this.showMessage = true;
+    let ingresado = false;
 
-    this.intercambiosService.obtenerPorCodigo(this.codigo).subscribe(
-      ejemplar => {
-        this.intercambio.salidas.push(ejemplar);
+    this.intercambio.salidas.forEach((ejemplar)=>{
+      if(ejemplar.codigo == this.codigo) ingresado = true;
+    });
+
+    if(!ingresado){
+      this.intercambiosService.obtenerPorCodigo(this.codigo).subscribe(
+        ejemplar => {
+          this.showMessage = false;
+          this.intercambio.salidas.push(ejemplar);
+        },
+        error => {
+          this.showMessage = false;
+          if(error.status == 404) this.message = "El ejemplar " + this.codigo + " no existe.";
+          else this.message = "El ejemplar " + this.codigo + " no está inactivo.";
+        }
+      )
+    }
+    else{
+      this.showMessage = false;
+    }
+  }
+
+  // Método: crear
+  // Objetivo: crear un nuevo intercambio
+  crear(){
+    // Mostrar mensaje de espera.
+    this.showMessage = true;
+    this.errorMessage = null;
+
+    this.intercambiosService.crear(this.intercambio).subscribe(
+      message => {
+        Materialize.toast("Intercambio creado", 3000);
+        this.router.navigate(['/intercambios']);
       },
       error => {
-        this.showMessage = false;
-        if(error.status == 404) this.message = "El ejemplar " + this.codigo + " no existe.";
-        else this.message = "El ejemplar " + this.codigo + " no está inactivo.";
+        this.showMessage= false;
+        this.errorMessage = "Error al crear intercambio";
       }
-    )
+    );
   }
 
   // Para la ventana modal de cancelación.

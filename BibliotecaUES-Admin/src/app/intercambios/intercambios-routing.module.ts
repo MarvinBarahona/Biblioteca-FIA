@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { IntercambiosRootComponent, IntercambiosComponent, IntercambioComponent, IntercambioNuevoComponent } from './componentes/';
+import { IntercambiosRootComponent, IntercambiosComponent, IntercambioComponent, IntercambioNuevoComponent, EntradaPendienteComponent } from './componentes/';
 import { AppAuthGuard } from './../login'
 
 const routes: Routes = [
@@ -12,7 +12,7 @@ const routes: Routes = [
       {
         path: '',
         component: IntercambiosComponent,
-        //canActivate: [AppAuthGuard],
+        canActivate: [AppAuthGuard],
         data: {politica: 143}
       },
       {
@@ -22,16 +22,16 @@ const routes: Routes = [
         data: {politica: 114}
       },
       {
-        path: ':id',
-        component: IntercambioComponent,
-        //canActivate: [AppAuthGuard],
-        data: {politica: 143}
-      },
-      {
         path: 'pendiente',
-        component: IntercambioNuevoComponent,
+        component: EntradaPendienteComponent,
         canActivate: [AppAuthGuard],
         data: {politica: 114}
+      },
+      {
+        path: ':id',
+        component: IntercambioComponent,
+        canActivate: [AppAuthGuard],
+        data: {politica: 143}
       }
     ]
   }

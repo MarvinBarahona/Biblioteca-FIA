@@ -28,6 +28,7 @@ export class EntradaPendienteComponent implements OnInit {
 
   ngOnInit() {
     this.entrada = new NuevaEntrada;
+    console.log(this.route.snapshot.params);
     this.entrada.id = this.route.snapshot.params['id'];
     this.entrada.facultad = this.route.snapshot.params['facultad'];
     this.entrada.ejemplares = new Array<NuevoEjemplar>();
