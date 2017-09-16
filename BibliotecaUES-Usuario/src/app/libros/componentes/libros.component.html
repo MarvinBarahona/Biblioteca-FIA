@@ -33,8 +33,8 @@
 
       <ul class="collection" *ngIf="libros; else elseLibro">
         <li *ngFor="let libro of libros" class="collection-item avatar">
-          <img src="" alt="mini imagen" class="circle">
-          <h6><a href="javascript:void(0)" (click)="linkLibro(libro)">{{libro.titulo}}, {{libro.edicion}}ed</a></h6>
+          <img src="{{libro.catalogo.img || 'assets/noImage.jpg'}}" alt="Imagen del libro" class="circle">
+          <h6><a href="javascript:void(0)" (click)="linkLibro(libro)">{{libro.titulo}}, {{libro.edicion}}° ed</a></h6>
           <p>{{libro.autor}}</p>
           <p>{{libro.isbn}}</p>
         </li>

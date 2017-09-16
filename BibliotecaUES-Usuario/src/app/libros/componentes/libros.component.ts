@@ -32,6 +32,7 @@ export class LibrosComponent implements OnInit {
 
   // Redirige a la vista individual del libro
   linkLibro(libro: Libro){
+    console.log(libro.id);
     this.router.navigate(["/libros/"+libro.id])
   }
 }
