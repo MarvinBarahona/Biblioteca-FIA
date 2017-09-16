@@ -11,7 +11,6 @@
               <th>Nombre</th>
               <th>Cargo</th>
               <th>Correo</th>
-              <th>Eliminar</th>
             </tr>
           </thead>
           <tbody>
@@ -26,7 +25,6 @@
               <td><a href="javascript:void(0)" (click)="linkEmpleado(empleado);">{{empleado.nombre}}</a></td>
               <td>{{empleado.grupo.nombre}}</td>
               <td>{{empleado.correo}}</td>
-              <td><a href="javascript:void(0);" (click)="eliminarEmpleado(empleado)"><i class="material-icons borrar">delete</i></a></td>
             </tr>
           </tbody>
         </table>
@@ -46,15 +44,3 @@
   <!-- /col -->
 </div>
 <!-- /row -->
-
-<!-- Ventana modal para asegurar la acción de eliminar -->
-<div id="modal2" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalEliminar">
-  <div class="modal-content">
-    <h4>Cancelar empleado</h4>
-    <p>¿Desea eliminar al empleado {{this.empleadoEliminar.nombre || 'No seleccionado'}}?</p>
-  </div>
-  <div class="modal-footer">
-    <a class="waves-effect waves-green btn-flat" (click)="closeEliminar()">Cancelar</a>
-    <a class="modal-action modal-close waves-effect btn-flat" (click)="elimnar()">Confirmar</a>
-  </div>
-</div>

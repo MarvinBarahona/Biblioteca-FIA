@@ -33,7 +33,42 @@ export class EmpleadosService {
         let r = response.json();
         return r['message'];
       }
-    );    
+    );
+  }
+
+  // Método: obtenerTodos
+  // Objetivo: obtener todos los empleados
+  obtenerTodos(): Observable<Empleado[]> {
+    let url = this.baseUrl + "/users"
+
+    // Realizando GET
+    return this.http.get(url, { headers: this.headers }).map(
+      // Mapeando salida
+      (response: Response) => {
+        let r = response.json();
+        console.log(r);
+        let empleados = new Array<Empleado>();
+
+        r.forEach((item)=>{
+          // Mapeando objeto Empleado
+          let empleado = new Empleado;
+          empleado.id = item['id'];
+          empleado.nombre = item['fullname'];
+          empleado.correo = item['email'];
+
+          // Mapeando objeto Grupo de Empleado
+          let rg = item['Group'];
+          let grupo = new Grupo;
+          grupo.nombre = rg['name'];
+          empleado.grupo = grupo;
+
+          // Agregando a la respuesta
+          empleados.push(empleado);
+        });
+
+        return empleados;
+      }
+    );
   }
 
   // Método: obtenerGrupos
