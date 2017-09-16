@@ -14,8 +14,9 @@ import { LibrosService, Libro } from './../servicios';
   templateUrl: './libros.component.html'
 })
 export class LibrosComponent implements OnInit {
-  dtOptions: DataTables.Settings = {};
   libros: Libro[];
+
+  dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
   constructor(private librosService: LibrosService, private router: Router) {

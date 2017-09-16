@@ -12,19 +12,19 @@ const routes: Routes = [
       {
         path: '',
         component: EmpleadosComponent,
-        canActivate: [AppAuthGuard],
+        //canActivate: [AppAuthGuard],
         data: {politica: 101}
       },
       {
-        path: 'nueva',
+        path: 'nuevo',
         component: EmpleadoNuevoComponent,
-        canActivate: [AppAuthGuard],
+        //canActivate: [AppAuthGuard],
         data: {politica: 101}
       },
       {
         path: ':id',
         component: EmpleadoComponent,
-        canActivate: [AppAuthGuard],
+        //canActivate: [AppAuthGuard],
         data: {politica: 101}
       }
     ]

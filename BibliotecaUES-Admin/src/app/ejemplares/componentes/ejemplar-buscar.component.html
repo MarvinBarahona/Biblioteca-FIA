@@ -5,7 +5,7 @@
 
       <!-- Formulario para buscar  -->
       <form #buscarEjemplarForm="ngForm" (ngSubmit)="buscar()" autocomplete="off">
-        <div class="row">
+        <div class="row valign-wrapper">
           <div class="input-field col m4 s8">
             <input id="codigo" name="codigo" type="text" class="validate" pattern="^[0-9]{8}$" [(ngModel)]="codigo" required>
             <label for="codigo" data-error="El código debe contener 8 dígitos">Código de barra</label>

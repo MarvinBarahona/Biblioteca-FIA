@@ -15,8 +15,9 @@ import { AdquisicionesService, Adquisicion } from './../servicios';
 })
 
 export class AdquisicionesComponent implements OnInit {
-  dtOptions: DataTables.Settings = {};
   adquisiciones: Adquisicion[];
+  
+  dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
   constructor(private adquisicionesService: AdquisicionesService, private router: Router) {

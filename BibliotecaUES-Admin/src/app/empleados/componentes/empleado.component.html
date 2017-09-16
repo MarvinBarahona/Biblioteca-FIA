@@ -1,3 +1,57 @@
-<p>
-  empleado works!
-</p>
+<div class="row">
+  <div class="col s12 m12">
+    <div class="card-panel">
+
+      <!-- Nombre y grupo -->
+      <div class="row">
+        <div class="col s12 l4 offset-l1">
+          <strong>Nombre: </strong>
+          <span>{{empleado.nombre}}</span>
+        </div>
+        <div class="col s12 l4 offset-l1">
+          <strong>Cargo: </strong>
+          <span>{{empleado.grupo.nombre}}</span>
+        </div>
+      </div>
+
+      <!-- Correo -->
+      <div class="row">
+        <div class="col s12 l4 offset-l1">
+          <strong>Cargo: </strong>
+          <span>{{empleado.correo}}</span>
+        </div>
+      </div>
+
+      <!-- Permisos -->
+      <div class="row">
+        <div class="input-field col s6 l2 offset-l1">
+          <strong>Políticas: </strong>
+        </div>
+        <div class="input-field col s6 l2 offset-l1">
+          <div *ngFor="let politica of empleado.politicas">
+            <input type="checkbox" name="politica" [(ngModel)]="politica.asignada">
+          </div>
+        </div>
+      </div>
+
+      <!-- Acciones -->
+      <div class="row">
+        <button class="waves-effect waves-light btn col m2 s12 offset-m3">Guardar</button>
+      </div>
+
+      <!-- Mensajes -->
+      <div class="row">
+        <div class="alert alert-danger col s6 offset-s3" *ngIf="errorMessage">
+          <p>{{errorMessage}}</p>
+        </div>
+        <div class="alert alert-info col s6 offset-s3" *ngIf="showMessage">
+          <p>Guardando...</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- /card-panel -->
+  </div>
+  <!-- /col -->
+</div>
+<!-- /row -->

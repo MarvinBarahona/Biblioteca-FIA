@@ -5,7 +5,7 @@
 **/
 
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 import {MaterializeDirective, MaterializeAction} from "angular2-materialize";
 
 import { EjemplaresService, NuevoEjemplar, Libro } from './../servicios';
@@ -91,11 +91,7 @@ export class EjemplarNuevoComponent implements OnInit {
     }
   }
 
-  cancel(){
-    this.closeCancel();
-    this.router.navigate(['/ejemplares']);
-  }
-
+  // Para las ventanas modales
   openSeleccion() {
     this.modalSeleccion.emit({ action: "modal", params: ['open'] });
   }
@@ -108,5 +104,10 @@ export class EjemplarNuevoComponent implements OnInit {
   }
   closeCancel() {
     this.modalCancel.emit({action:"modal",params:['close']});
+  }
+
+  cancel(){
+    this.closeCancel();
+    this.router.navigate(['/ejemplares']);
   }
 }

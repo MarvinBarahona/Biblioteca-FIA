@@ -14,15 +14,19 @@
             </tr>
           </thead>
           <tbody>
+
             <!-- Mensaje de carga -->
             <div>
               <p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Cargando datos...</p>
             </div>
+
+            <!-- Adquisiciones -->
             <tr *ngFor="let adquisicion of adquisiciones">
               <td><a href="javascript:void(0)" (click)="linkAdquisicion(adquisicion)">{{adquisicion.nombre}}</a></td>
               <td>{{adquisicion.tipo}}</td>
               <td>{{adquisicion.fecha | date:"shortDate"}}</td>
             </tr>
+
           </tbody>
         </table>
         <!-- /Table -->

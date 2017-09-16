@@ -1,3 +1,60 @@
-<p>
-  empleados works!
-</p>
+<div class="row">
+  <div class="col s12 m12">
+    <div class="card">
+      <div class="card-content">
+        <h5>Listado de empleados</h5>
+
+        <!-- Table -->
+        <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Cargo</th>
+              <th>Correo</th>
+              <th>Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- Mensaje de carga -->
+            <div>
+              <p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Cargando datos...</p>
+            </div>
+
+            <!-- Empleados -->
+            <tr *ngFor="let adquisicion of adquisiciones">
+              <td><a href="javascript:void(0)" (click)="linkEmpleado(empleado);">{{empleado.nombre}}</a></td>
+              <td>{{empleado.grupo.nombre}}</td>
+              <td>{{empleado.correo}}</td>
+              <td><a href="javascript:void(0);" (click)="eliminarEmpleado(empleado)"><i class="material-icons borrar">delete</i></a></td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- /Table -->
+
+      </div>
+      <!-- /card-content -->
+
+      <!-- Acciones -->
+      <div class="card-action">
+        <a routerLink="/empleados/nuevo">Nuevo</a>
+      </div>
+
+    </div>
+    <!-- /card -->
+  </div>
+  <!-- /col -->
+</div>
+<!-- /row -->
+
+<!-- Ventana modal para asegurar la acción de eliminar -->
+<div id="modal2" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalEliminar">
+  <div class="modal-content">
+    <h4>Cancelar empleado</h4>
+    <p>¿Desea eliminar al empleado {{this.empleadoEliminar.nombre || 'No seleccionados'}}?</p>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-green btn-flat" (click)="closeEliminar()">Cancelar</a>
+    <a class="modal-action modal-close waves-effect btn-flat" (click)="elimnar()">Confirmar</a>
+  </div>
+</div>

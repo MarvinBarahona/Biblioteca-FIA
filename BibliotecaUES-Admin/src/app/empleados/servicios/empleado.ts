@@ -1,11 +1,11 @@
 // Clase Empleado
 
-import { Politica } from './';
+import { Grupo, Politica } from './';
 
 export class Empleado{
   id: number;
   nombre: string;
   correo: string;
-  grupo: string;
+  grupo: Grupo;
   politicas: Politica[];
 }
