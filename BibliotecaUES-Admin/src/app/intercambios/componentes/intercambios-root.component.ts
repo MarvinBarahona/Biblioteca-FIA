@@ -1,6 +1,6 @@
 /*
 *Nombre del módulo: Gestión de intercambios
-*Dirección física: src\app\libros\componentes\intercambios-root.component.ts
+*Dirección física: src\app\intercambios\componentes\intercambios-root.component.ts
 *Objetivo: Formar la estructura base para los componentes de intercambios
 **/
 

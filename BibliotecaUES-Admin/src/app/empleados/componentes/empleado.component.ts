@@ -20,7 +20,9 @@ export class EmpleadoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.empleado = new Empleado;
+    // Obtiene el id de la adquisición
+    let id = this.route.snapshot.params['id'];
+    
     this.empleado.grupo = new Grupo;
     this.empleado.politicas = new Array<Politica>();
     this.showMessage = false;

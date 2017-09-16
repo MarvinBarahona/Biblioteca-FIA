@@ -1,3 +1,121 @@
-<p>
-  intercambio works!
-</p>
+<div *ngIf="intercambio; else elseIntercambio">
+
+  <!-- Información del intercambio -->
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card-panel">
+        <h5>Datos del intercambio</h5>
+
+        <!-- Facultad -->
+        <div class="row">
+          <div class="col s11 offset-m1">
+            <strong>Intercambio con: </strong>
+            <span>{{intercambio.facultad}}</span>
+          </div>
+        </div>
+
+        <!-- Fecha -->
+        <div class="row">
+          <div class="col s11 offset-m1">
+            <strong>Fecha: </strong>
+            <span>{{intercambio.fecha}}</span>
+          </div>
+        </div>
+
+      </div>
+      <!-- /card-panel -->
+    </div>
+    <!-- /col -->
+  </div>
+  <!-- row -->
+
+  <!-- Libros salida -->
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card-panel">
+
+        <!-- Libros de salida -->
+        <ul class="collection with-header">
+          <li class="collection-header">
+            <h5>Libros de salida</h5>
+          </li>
+          <li class="collection-item" *ngFor="let ejemplar of intercambio.salidas">
+            <a href="javascript:void(0)" (click)="linkEjemplar(ejemplar.id)">{{ejemplar.codigo}}</a>{{ejemplar.libro.titulo}}, {{ejemplar.libro.edicion}}ed
+          </li>
+        </ul>
+
+      </div>
+      <!-- /card-panel -->
+    </div>
+    <!-- /col -->
+  </div>
+  <!-- row -->
+
+  <!-- Ejemplares -->
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card-panel">
+        <h5>Libros de entrada</h5>
+
+        <form #intercambioForm="ngForm" autocomplete="off">
+          <!-- tabla -->
+          <table>
+            <thead>
+              <tr>
+                <th>Código de barra</th>
+                <th>Título</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ejemplar of intercambio.entradas">
+                <td>
+                  <a *ngIf="ejemplar.ingresado || !catalogador" href="javascript:void(0)" (click)="linkEjemplar(ejemplar.id);">{{ejemplar.codigo || 'No asignado'}}</a>
+                  <div *ngIf="!ejemplar.ingresado && catalogador" class="input-field col m6 offset-m1 s8 offset-s2">
+                    <input type="text" class="validate" name="codigo" pattern="^[\d]{8}$" [(ngModel)]="ejemplar.codigo">
+                    <label for="codigo" data-error="Debe ingresar 8 dígitos">Código de barra</label>
+                  </div>
+                </td>
+                <td><a href="javascript:void(0)" (click)="linkLibro(ejemplar.libro.id);">{{ejemplar.libro.titulo}}, {{ejemplar.libro.edicion}}ed</a></td>
+                <td>{{ejemplar.estado}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /tabla -->
+
+          <!-- Acciones -->
+          <div class="row">
+            <button *ngIf="showButton" type="button" class="waves-effect waves-light btn col m2 s12 offset-m5" [disabled]="!intercambioForm.form.valid" (click)="guardar()">Guardar</button>
+          </div>
+        </form>
+
+        <!-- Mensajes -->
+        <div class="row">
+          <div class="alert alert-danger col s6 offset-s3" *ngIf="errorMessage">
+            <p>{{errorMessage}}</p>
+          </div>
+          <div class="alert alert-info col s6 offset-s3" *ngIf="showMessage">
+            <p>Guardando datos...</p>
+          </div>
+        </div>
+
+      </div>
+      <!-- /card-panel -->
+    </div>
+    <!-- /col -->
+  </div>
+  <!-- row -->
+</div>
+<!-- libro -->
+
+<!-- Mensaje de espera -->
+<ng-template #elseIntercambio>
+  <div class="row">
+    <div class="col s8 m8 offset-s2 offset-m2">
+      <p>Cargando...</p>
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>

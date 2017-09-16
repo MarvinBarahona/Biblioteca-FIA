@@ -12,7 +12,7 @@ const routes: Routes = [
       {
         path: '',
         component: IntercambiosComponent,
-        canActivate: [AppAuthGuard],
+        //canActivate: [AppAuthGuard],
         data: {politica: 143}
       },
       {
@@ -24,8 +24,14 @@ const routes: Routes = [
       {
         path: ':id',
         component: IntercambioComponent,
-        canActivate: [AppAuthGuard],
+        //canActivate: [AppAuthGuard],
         data: {politica: 143}
+      },
+      {
+        path: 'pendiente',
+        component: IntercambioNuevoComponent,
+        canActivate: [AppAuthGuard],
+        data: {politica: 114}
       }
     ]
   }

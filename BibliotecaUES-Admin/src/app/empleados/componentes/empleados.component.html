@@ -22,7 +22,7 @@
             </div>
 
             <!-- Empleados -->
-            <tr *ngFor="let adquisicion of adquisiciones">
+            <tr *ngFor="let empleado of empleados">
               <td><a href="javascript:void(0)" (click)="linkEmpleado(empleado);">{{empleado.nombre}}</a></td>
               <td>{{empleado.grupo.nombre}}</td>
               <td>{{empleado.correo}}</td>
@@ -51,7 +51,7 @@
 <div id="modal2" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalEliminar">
   <div class="modal-content">
     <h4>Cancelar empleado</h4>
-    <p>¿Desea eliminar al empleado {{this.empleadoEliminar.nombre || 'No seleccionados'}}?</p>
+    <p>¿Desea eliminar al empleado {{this.empleadoEliminar.nombre || 'No seleccionado'}}?</p>
   </div>
   <div class="modal-footer">
     <a class="waves-effect waves-green btn-flat" (click)="closeEliminar()">Cancelar</a>

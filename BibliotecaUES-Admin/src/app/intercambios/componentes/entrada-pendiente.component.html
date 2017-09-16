@@ -1,3 +1,103 @@
-<p>
-  entrada-pendiente works!
-</p>
+<div class="row" *ngIf="entrada.id && entrada.facultad; else #error">
+  <div class="col s12 m12">
+    <div class="card-panel">
+      <h5>Ingresar entrada de intercambio</h5>
+
+      <!-- Form -->
+      <form #nuevaEntradaForm="ngForm" (ngSubmit)="crear()" autocomplete="off">
+
+        <!-- Facultad  -->
+        <div class="row">
+          <div class="input-field col m6 offset-m1 s8 offset-s2">
+            <strong>Facultad de origen: </strong>
+            <span>{{entrada.facultad}}</span>
+          </div>
+        </div>
+
+        <!-- Tabla de nuevos ejemplares -->
+        <br>
+        <div class="row">
+          <div class="col m12">
+
+            <!-- Table -->
+            <table class="bordered">
+              <thead>
+                <tr>
+                  <th>Libro</th>
+                  <th>Cantidad</th>
+                  <th>Eliminar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ejemplar of entrada.ejemplares">
+                  <td>{{ejemplar.libro.titulo}}</td>
+                  <td><input class="col m3 offset-m1" type="number" name="cantidad" min="1" max="20" [(ngModel)]="ejemplar.cantidad" required></td>
+                  <td><a href="javascript:void(0);" (click)="eliminarEjemplar(ejemplar)"><i class="material-icons borrar">delete</i></a></td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /Table -->
+
+          </div>
+        </div>
+        <!-- /Tabla de nuevos ejemplares -->
+
+        <!-- Acciones -->
+        <br>
+        <div class="row">
+          <a class="waves-effect waves-light btn col m2 offset-m2 s4 " (click)="openSeleccion()">Agregar</a>
+          <button type="submit" class="waves-effect waves-light btn col m2 offset-m1 s4" [disabled]="!nuevaEntradaForm.form.valid || entrada.ejemplares.length==0">Guardar</button>
+          <a class="waves-effect waves-light btn col m2 offset-m1 s4 " (click)="openCancel()">Cancelar</a>
+        </div>
+
+      </form>
+      <!-- /form -->
+
+      <!-- Mensajes -->
+      <div class="row">
+        <div class="alert alert-danger col s6 offset-s3" *ngIf="errorMessage">
+          <p>{{errorMessage}}</p>
+        </div>
+        <div class="alert alert-info col s6 offset-s3" *ngIf="showMessage">
+          <p>Creando ejemplares...</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- /card-panel -->
+  </div>
+  <!-- /col -->
+</div>
+<!-- /row -->
+
+<!-- Mensaje de espera -->
+<ng-template #error>
+  <div class="row">
+    <div class="alert alert-danger col s6 offset-s3">
+      <p>Id o facultad no especificadas</p>
+    </div>
+  </div>
+</ng-template>
+
+
+<!-- Ventana modal para agregar libro -->
+<div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalSeleccion">
+  <div class="modal-content">
+    <libro-seleccion (eventEmitter)='onNotify($event)'></libro-seleccion>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-light btn-flat" (click)="closeSeleccion()">Cerrar</a>
+  </div>
+</div>
+
+<!-- Ventana modal para asegurar la acción de cancelar -->
+<div id="modal2" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalCancel">
+  <div class="modal-content">
+    <h4>Cancelar acción</h4>
+    <p>¿Desea cancelar el ingreso del ejemplares?</p>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-green btn-flat" (click)="closeCancel()">Regresar</a>
+    <a class="modal-action modal-close waves-effect btn-flat" (click)="cancel()">Confirmar</a>
+  </div>
+</div>

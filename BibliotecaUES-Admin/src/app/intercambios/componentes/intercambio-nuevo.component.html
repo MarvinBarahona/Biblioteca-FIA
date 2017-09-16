@@ -1,3 +1,59 @@
-<p>
-  intercambio-nuevo works!
-</p>
+<div class="row" *ngIf="entrada.id && entrada.facultad; else #error">
+  <div class="col s12 m12">
+    <div class="card-panel">
+      <h5>Ingresar entrada de intercambio</h5>
+
+      <!-- Formulario para buscar  -->
+      <form #buscarEjemplarForm="ngForm" (ngSubmit)="buscar()" autocomplete="off">
+        <div class="row valign-wrapper">
+          <div class="input-field col m4 s8">
+            <input id="codigo" name="codigo" type="text" class="validate" pattern="^[0-9]{8}$" [(ngModel)]="codigo" required>
+            <label for="codigo" data-error="El código debe contener 8 dígitos">Código de barra</label>
+          </div>
+          <div class="col m1 s1">
+            <button class="btn waves-effect waves-green search" type="submit" [disabled]="!buscarEjemplarForm.form.valid"><i class="medium material-icons">search</i></button>
+          </div>
+          <div class="col m2 offset-m3 s6 search">
+            <button routerLink="/ejemplares/nuevo" class="btn waves-effect waves-green" >Nuevo</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="row">
+        <p>{{message}}</p>
+      </div>
+
+      <!-- Tabla de nuevos ejemplares -->
+      <br>
+      <div class="row">
+        <div class="col m12">
+
+          <!-- Table -->
+          <table class="bordered">
+            <thead>
+              <tr>
+                <th>Libro</th>
+                <th>Cantidad</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ejemplar of entrada.ejemplares">
+                <td>{{ejemplar.libro.titulo}}</td>
+                <td><input class="col m3 offset-m1" type="number" name="cantidad" min="1" max="20" [(ngModel)]="ejemplar.cantidad" required></td>
+                <td><a href="javascript:void(0);" (click)="eliminarEjemplar(ejemplar)"><i class="material-icons borrar">delete</i></a></td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /Table -->
+
+        </div>
+      </div>
+      <!-- /Tabla de nuevos ejemplares -->
+
+    </div>
+    <!-- /card-panel -->
+  </div>
+  <!-- /col -->
+</div>
+<!-- /row -->

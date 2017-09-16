@@ -16,7 +16,7 @@ import { AdquisicionesService, Adquisicion } from './../servicios';
 
 export class AdquisicionesComponent implements OnInit {
   adquisiciones: Adquisicion[];
-  
+
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
@@ -41,7 +41,7 @@ export class AdquisicionesComponent implements OnInit {
     );
   }
 
-  // Rediriga a la vista de nueva adquisición
+  // Rediriga a la vista de  adquisición
   linkAdquisicion(adquisicion: Adquisicion){
     this.router.navigate(["/adquisiciones/"+adquisicion.id])
   }

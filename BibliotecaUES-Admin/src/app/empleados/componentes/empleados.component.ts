@@ -34,10 +34,10 @@ export class EmpleadosComponent implements OnInit {
 
   ngOnInit() {
     this.empleados = new Array<Empleado>();
-    this.empleadoEliminar = new Empleado; 
+    this.empleadoEliminar = new Empleado;
   }
 
-  // Rediriga a la vista de nueva adquisición
+  // Redirige a la vista de empleado
   linkEmpleado(empleado: Empleado){
     this.router.navigate(["/empleados/" + empleado.id])
   }
