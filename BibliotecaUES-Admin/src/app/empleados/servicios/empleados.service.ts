@@ -116,7 +116,7 @@ export class EmpleadosService {
   // Método: asignarPoliticas
   // Objetivo: asignar politicas a un empleado
   asignarPoliticas(empleado: Empleado): Observable<string>{
-    let url = this.baseUrl + "/users/" + empleado.id + "/setPolities";
+    let url = this.baseUrl + "/users/" + empleado.id + "/setPolicies";
 
     // Creando arreglo de politicas a asignarPoliticas
     let politicas = [];
@@ -128,7 +128,7 @@ export class EmpleadosService {
     let q = JSON.stringify({policies: politicas});
 
     // Realizando POST
-    return this.http.put(url, q, { headers: this.headers }).map(
+    return this.http.post(url, q, { headers: this.headers }).map(
       // Mapeando salida
       (response: Response) => {
         let r = response.json();
