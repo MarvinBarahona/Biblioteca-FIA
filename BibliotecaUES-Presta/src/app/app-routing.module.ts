@@ -11,10 +11,10 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: '/trasladar',
-    component: TrasladarComponent,
-    canActivate: [AppAuthGuard],
-    data: {politica: 223}
+    path: 'trasladar',
+    component: TrasladarComponent
+    // canActivate: [AppAuthGuard],
+    // data: {politica: 223}
   },
   {
     path: '**',

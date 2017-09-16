@@ -12,8 +12,8 @@ const routes: Routes = [
       {
         path: '',
         component: EjemplarBuscarComponent,
-        canActivate: [AppAuthGuard],
-        data: {politica: 143}
+        // canActivate: [AppAuthGuard],
+        // data: {politica: 143}
       },
       {
         path: 'ejemplar/:id',

@@ -23,7 +23,7 @@ import { EjemplaresService, LibrosService } from './servicios';
     ConsultarRootComponent,
     EjemplarBuscarComponent,
     EjemplarComponent,
-	LibroComponent
+	  LibroComponent
   ],
   providers: [
     EjemplaresService,
