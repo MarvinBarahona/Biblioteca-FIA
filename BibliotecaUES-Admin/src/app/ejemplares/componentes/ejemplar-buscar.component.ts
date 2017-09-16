@@ -16,7 +16,7 @@ declare var $:any;
 })
 export class EjemplarBuscarComponent implements OnInit {
   ejemplares: Ejemplar[];
-  codigos = Array<string>();
+  codigos: string[];
   ejemplar: Ejemplar;
   codigo: string;
   message: string = "No se encontraron resultados"
@@ -24,6 +24,7 @@ export class EjemplarBuscarComponent implements OnInit {
   constructor(private ejemplaresService: EjemplaresService, private router: Router) { }
 
   ngOnInit() {
+    this.codigos = new Array<string>();
     this.inicializarAutocompletado();
   }
 
@@ -59,7 +60,7 @@ export class EjemplarBuscarComponent implements OnInit {
     );
   }
 
-  //Buscar un libro por medio del código de barra
+  //Buscar un lejemplar por medio del código de barra
   buscar(){
     this.ejemplar = null;
     this.message = "Buscando...";

@@ -8,7 +8,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
-import { NuevaEntrada, NuevoEjemplar } from './../servicios';
+import { NuevaEntrada, NuevoEjemplar, Libro } from './../servicios';
 
 declare var Materialize: any;
 
@@ -29,7 +29,7 @@ export class EntradaPendienteComponent implements OnInit {
   ngOnInit() {
     this.entrada = new NuevaEntrada;
     this.entrada.id = this.route.snapshot.params['id'];
-    this.entrada.facultar = this.route.snapshot.params['facultad'];
+    this.entrada.facultad = this.route.snapshot.params['facultad'];
     this.entrada.ejemplares = new Array<NuevoEjemplar>();
   }
 

@@ -1,4 +1,4 @@
-<div class="row" *ngIf="entrada.id && entrada.facultad; else #error">
+<div class="row" *ngIf="(entrada.id) && (entrada.facultad); else error">
   <div class="col s12 m12">
     <div class="card-panel">
       <h5>Ingresar entrada de intercambio</h5>

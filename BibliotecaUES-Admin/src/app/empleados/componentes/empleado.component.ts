@@ -5,6 +5,7 @@
 **/
 
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Empleado, Grupo, Politica } from './../servicios/';
 
@@ -17,12 +18,12 @@ export class EmpleadoComponent implements OnInit {
   errorMessage: string;
   showMessage: boolean;
 
-  constructor() { }
+  constructor( private route: ActivatedRoute ) { }
 
   ngOnInit() {
     // Obtiene el id de la adquisición
     let id = this.route.snapshot.params['id'];
-    
+
     this.empleado.grupo = new Grupo;
     this.empleado.politicas = new Array<Politica>();
     this.showMessage = false;

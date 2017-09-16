@@ -8,14 +8,18 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
-import { Empleado, Grupo } from './../servicios/';
+import { EmpleadosService, Empleado, Grupo } from './../servicios/';
+
+declare var $: any;
+declare var Materialize: any;
 
 @Component({
   templateUrl: './empleado-nuevo.component.html'
 })
+
 export class EmpleadoNuevoComponent implements OnInit {
+  // Variables del formulario
   empleado: Empleado;
-  genero: string;
   grupos: Grupo[];
 
   showMessage: boolean;
@@ -23,12 +27,50 @@ export class EmpleadoNuevoComponent implements OnInit {
 
   modalCancel = new EventEmitter<string | MaterializeAction>();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private empleadosService: EmpleadosService) { }
 
   ngOnInit() {
+    // Inicializando el objeto
     this.empleado = new Empleado;
-    this.genero = "F";
+    this.empleado.grupo = new Grupo;
     this.showMessage = false;
+
+    // Llama al servicio
+    this.empleadosService.obtenerGrupos().subscribe(
+      grupos => {
+        // Asigna los grupos
+        this.grupos = grupos;
+        // Para que no se seleccione ninguna por defecto
+        this.empleado.grupo.nombre = null;
+      }
+    );
+  }
+
+  crear(){
+    // Mostrar mensaje de espera.
+    this.showMessage = true;
+    this.errorMessage = null;
+
+    // Asigna el id del grupo seleccionado
+    this.grupos.forEach((grupo) => {
+      if(this.empleado.grupo.nombre === grupo.nombre) this.empleado.grupo.id = grupo.id;
+    });
+
+    this.empleadosService.crear(this.empleado).subscribe(
+      message => {
+        Materialize.toast("Empleado creado", 3000);
+        this.router.navigate(['/empleados']);
+      },
+      error => {
+        this.showMessage= false;
+        if(error.status == 422){
+          this.errorMessage = "El correo ingresado ya está en uso";
+        }
+        else{
+          this.errorMessage = "Error al crear el empleado";
+        }
+      }
+    );
   }
 
   // Para el modal de cancelar

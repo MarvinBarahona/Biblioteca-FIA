@@ -15,30 +15,18 @@
 
         <div class="row">
           <div class="input-field col s12 l6 offset-l1">
-            <input id="correo" name="nombre" type="text" class="validate" [(ngModel)]="empleado.correo" required>
+            <input id="correo" name="nombre" type="email" email class="validate" [(ngModel)]="empleado.correo" required>
             <label for="correo">Correo del empleado</label>
           </div>
         </div>
 
         <!-- Grupo -->
         <div class="row">
-          <!-- Género -->
-          <div class="col s2 l1 offset-l1">
-            <strong>Género: </strong>
-          </div>
-          <div class="col s10 l4">
-            <p>
-              <input id="generoF" name="genero" type="radio" value="F" [(ngModel)]="genero" required/>
-              <label for="generoF">F</label>
-              <input id="generoM" name="genero" type="radio" value="M" [(ngModel)]="genero" required/>
-              <label for="generoM">M</label>
-            </p>
-          </div>
           <!-- Selección de grupo -->
-          <div class="input-field col s12 l6">
-            <select name="grupo" materialize="material_select" [(ngModel)]="empleado.grupo" required>
-              <option [ngValue]="null" disabled selected>Seleccionar...</option>
-              <option *ngFor="let grupo of grupos" [ngValue]="grupo">{{grupo}}</option>
+          <div class="input-field col s12 l6 offset-l1">
+            <select materialize="material_select" name="grupo" [(ngModel)]="empleado.grupo.nombre" required>
+              <option selected disabled>Seleccionar...</option>
+              <option *ngFor="let grupo of grupos">{{grupo.nombre}}</option>
             </select>
             <label>Puesto</label>
           </div>
