@@ -82,16 +82,32 @@ export class TrasladarComponent implements OnInit {
     this.ejemplaresService.obtenerPorCodigo(this.codigo).subscribe(
       ejemplar => {
         this.ejemplar = ejemplar;
-        if(this.ejemplar.estado == "disponible"){
+        if(this.ejemplar.estado == "Disponible"){
           this.accion = "Enviar";
         }else{
           this.accion = "Recibir";
-          console.log(this.accion);
         }
       },
       error => {
         this.message = "No se encontraron resultado para " + this.codigo;
       }
     );
+  }
+
+  // Trasladar libro
+  trasladar(){
+
+    this.ejemplaresService.trasladar(this.ejemplar.id).subscribe(
+      ejemplar => {
+        if(this.ejemplar.estado == "Disponible"){
+          this.accion = "Enviar";
+        }else{
+          this.accion = "Recibir";
+        }
+      },
+      error => {
+        this.message = "Error trasladando ejemplar";
+      }
+    )
   }
 }

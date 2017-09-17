@@ -120,4 +120,16 @@ export class EjemplaresService {
       }
     );
   }
+
+  // Método: trasladar
+  // Objetivo: Cambia estado de inactivo a disponible o viceversa
+  trasladar(id: number): Observable<string>{
+    let url = this.baseUrl + '/copies/' + id;
+
+    console.log(this.http.put(url, {}, { headers: this.headers }).map(res => res.json()));
+    return this.http
+    .put(url, {}, { headers: this.headers })
+    .map(res => res.json());
+  }
+
 }
