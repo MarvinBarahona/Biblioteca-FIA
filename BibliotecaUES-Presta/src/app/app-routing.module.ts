@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TrasladarComponent } from './trasladar/trasladar.component';
 import { AppAuthGuard } from './login';
 
 const appRoutes: Routes = [
@@ -9,12 +8,6 @@ const appRoutes: Routes = [
     path: '',
     redirectTo: '/consultar',
     pathMatch: 'full'
-  },
-  {
-    path: 'trasladar',
-    component: TrasladarComponent
-    // canActivate: [AppAuthGuard],
-    // data: {politica: 223}
   },
   {
     path: '**',

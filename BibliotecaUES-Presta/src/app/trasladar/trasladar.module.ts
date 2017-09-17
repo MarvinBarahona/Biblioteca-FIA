@@ -6,9 +6,9 @@ import { FormsModule } from '@angular/forms';
 import { CookieModule } from 'ngx-cookie';
 import { MaterializeModule } from 'angular2-materialize';
 
+import { TrasladarRoutingModule } from './trasladar-routing.module';
 import { TrasladarComponent } from './trasladar.component';
-
-import { EjemplaresService } from './ejemplares.service';
+import { EjemplaresService } from './servicios';
 
 @NgModule({
   imports: [
@@ -16,6 +16,7 @@ import { EjemplaresService } from './ejemplares.service';
     HttpModule,
     FormsModule,
     MaterializeModule,
+    TrasladarRoutingModule,
     CookieModule.forChild()
   ],
   declarations: [
