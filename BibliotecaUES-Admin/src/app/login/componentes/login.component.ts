@@ -52,4 +52,9 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+  restaurar(){
+    if(this.model.correo) this.router.navigate(["/restaurar", {email: this.model.correo}]);
+    else this.router.navigate(["/restaurar"]);
+  }
 }

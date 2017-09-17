@@ -4,12 +4,12 @@
       <h4>Recuperar contraseña</h4>
 
       <!-- Formulario -->
-      <form #recuperarForm="ngForm" (ngSubmit)="recuperar()">
+      <form #recuperarForm="ngForm" (ngSubmit)="restaurar()" autocomplete="off">
         <div class="row">
           <!-- Correo -->
           <div class="input-field col s8 offset-s2">
             <input id="usuario" type="email" class="validate" name="correo" [(ngModel)]="correo" email required>
-            <label for="usuario" data-error="Ingrese un correo válido">Correo</label>
+            <label class="active" for="usuario" data-error="Ingrese un correo válido">Correo</label>
           </div>
         </div>
 
@@ -29,6 +29,9 @@
         </div>
         <div class="alert alert-info col s6 offset-s3" *ngIf="message">
           <p>{{message}}</p>
+        </div>
+        <div class="alert alert-success col s6 offset-s3" *ngIf="successMessage">
+          <p>{{successMessage}}</p>
         </div>
       </div>
 
