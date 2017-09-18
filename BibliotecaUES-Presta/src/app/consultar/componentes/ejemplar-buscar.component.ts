@@ -18,7 +18,7 @@ declare var $:any;
         margin-top:25px;
         left: -25px;
       }
-      `]
+  `]
 })
 export class EjemplarBuscarComponent implements OnInit {
   ejemplares: Ejemplar[];

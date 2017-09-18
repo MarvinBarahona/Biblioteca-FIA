@@ -7,23 +7,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { EjemplaresService, Ejemplar }  from './servicios'
+import { EjemplaresService, Ejemplar }  from './servicios';
+
 declare var $: any;
+declare var Materialize: any;
 
 @Component({
   templateUrl: './trasladar.component.html',
   styles: [`
-    #slide-out{
-      margin-top: 65px;
-    }
     .search{
       margin-top: 20px;
       left:-20px;
-    }
-    @media (min-width: 993px){
-      .component {
-        padding-left: 300px;
-      }
     }
   `]
 })
@@ -33,8 +27,7 @@ export class TrasladarComponent implements OnInit {
   codigos = Array<string>();
   ejemplar: Ejemplar;
   codigo: string;
-  message: string = "No se encontraron resultados"
-  accion: string;
+  message: string = "No se encontraron resultados";
 
   constructor(private ejemplaresService: EjemplaresService, private router: Router) { }
 
@@ -81,12 +74,8 @@ export class TrasladarComponent implements OnInit {
 
     this.ejemplaresService.obtenerPorCodigo(this.codigo).subscribe(
       ejemplar => {
+        this.message = null;
         this.ejemplar = ejemplar;
-        if(this.ejemplar.estado == "Disponible"){
-          this.accion = "Enviar";
-        }else{
-          this.accion = "Recibir";
-        }
       },
       error => {
         this.message = "No se encontraron resultado para " + this.codigo;
@@ -96,14 +85,12 @@ export class TrasladarComponent implements OnInit {
 
   // Trasladar libro
   trasladar(){
-
+    this.message = "Trasladando...";
     this.ejemplaresService.trasladar(this.ejemplar.id).subscribe(
-      ejemplar => {
-        if(this.ejemplar.estado == "Disponible"){
-          this.accion = "Enviar";
-        }else{
-          this.accion = "Recibir";
-        }
+      message => {
+        this.message = null;
+        this.ejemplar.estado = this.ejemplar.estado == 'Disponible'? 'Inactivo':'Disponible';
+        Materialize.toast("Ejemplar trasladado", 3000);
       },
       error => {
         this.message = "Error trasladando ejemplar";

@@ -10,7 +10,6 @@ declare var $: any;
 
 @Component({
   templateUrl: './consultar-root.component.html',
-  styleUrls: ['./consultar-root.component.css']
 })
 export class ConsultarRootComponent implements OnInit {
 

@@ -4,7 +4,7 @@
     <a routerLink="/consultar"><i class="fa fa-search"></i>Consultar</a>
   </li>
   <li class="active">
-    <a routerLink="/trasladar"><i class="fa fa-search"></i>Trasladar</a>
+    <a routerLink="/trasladar"><i class="fa fa-paper-plane-o"></i>Trasladar</a>
   </li>
 </ul>
 <!-- /Side nav -->
@@ -38,29 +38,27 @@
           </div>
         </div>
 
-        <div *ngIf="ejemplar; else elseEjemplar">
+        <div *ngIf="ejemplar">
           <div class="row">
             <div class="col s4">
-              <p><strong>Código de barra: </strong><a href="javascript:void(0)" (click)="linkEjemplar(ejemplar.id)">{{ejemplar.codigo || " "}}</a></p>
+              <p><strong>Código de barra: </strong><a href="javascript:void(0)" (click)="linkEjemplar(ejemplar.id)">{{ejemplar.codigo}}</a></p>
             </div>
             <div class="col s4">
-              <p><strong>Titulo: </strong><a href="javascript:void(0)" (click)="linkLibro(ejemplar.libro.id)">{{ejemplar.libro.titulo || " "}}</a></p>
+              <p><strong>Titulo: </strong><a href="javascript:void(0)" (click)="linkLibro(ejemplar.libro.id)">{{ejemplar.libro.titulo}}</a></p>
             </div>
             <div class="col s4">
-              <p><strong>Estado: </strong>{{ejemplar.estado || " "}}</p>
+              <p><strong>Estado: </strong>{{ejemplar.estado}}</p>
             </div>
           </div>
-          <div class="row">
+          <div class="row" *ngIf="ejemplar.estado == 'Disponible' || ejemplar.estado == 'Inactivo'">
             <div class="col m6 offset-m4 s8 offset-s2">
-              <a class="btn waves-effect waves-green search" href="javascript:void(0)" (click)="trasladar()">{{accion}}</a>
+              <a class="btn waves-effect waves-green search" href="javascript:void(0)" (click)="trasladar()">{{ejemplar.estado == 'Disponible'? 'Enviar':'Recibir'}}</a>
             </div>
           </div>
         </div>
-        <ng-template #elseEjemplar>
-          <div class="row">
-            <p>{{message}}</p>
-          </div>
-        </ng-template>
+        <div class="row" *ngIf="message">
+          <p>{{message}}</p>
+        </div>
       </div>
       <!-- /card-panel -->
     </div>
