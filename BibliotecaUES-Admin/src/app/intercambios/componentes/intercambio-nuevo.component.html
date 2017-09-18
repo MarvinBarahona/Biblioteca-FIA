@@ -54,7 +54,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let ejemplar of intercambio.salidas">
+              <tr *ngFor="let ejemplar of intercambio.ejemplares">
                 <td>{{ejemplar.libro.titulo}}</td>
                 <td>{{ejemplar.codigo}}</td>
                 <td><a href="javascript:void(0);" (click)="eliminarEjemplar(ejemplar)"><i class="material-icons borrar">delete</i></a></td>
@@ -70,7 +70,7 @@
       <!-- Acciones -->
       <br><br>
       <div class="row">
-        <button class="button" class="waves-effect waves-light btn col m2 offset-m4 s4" (click)="crear()" [disabled]="intercambio.salidas.length==0 || !intercambio.facultad">Crear</button>
+        <button class="button" class="waves-effect waves-light btn col m2 offset-m4 s4" (click)="crear()" [disabled]="intercambio.ejemplares.length==0 || !intercambio.facultad">Crear</button>
         <a class="waves-effect waves-light btn col m2 offset-m1 s4 " (click)="openCancel()">Cancelar</a>
       </div>
 

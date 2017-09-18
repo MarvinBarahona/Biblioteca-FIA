@@ -35,7 +35,7 @@ export class IntercambioNuevoComponent implements OnInit {
   ngOnInit() {
     // Inicializar el objeto.
     this.intercambio = new Intercambio;
-    this.intercambio.salidas = new Array<Ejemplar>();
+    this.intercambio.ejemplares = new Array<Ejemplar>();
 
     // Inicializar el input con autocompletado
     this.codigos = new Array<string>();
@@ -53,8 +53,8 @@ export class IntercambioNuevoComponent implements OnInit {
   // Método: eliminarEjemplar
   // Objetivo: eliminar un ejemplar de la tabla de ejemplares a intercambiar
   eliminarEjemplar(ejemplar: Ejemplar){
-    let i = this.intercambio.salidas.indexOf(ejemplar);
-    if(i > -1) this.intercambio.salidas.splice(i, 1);
+    let i = this.intercambio.ejemplares.indexOf(ejemplar);
+    if(i > -1) this.intercambio.ejemplares.splice(i, 1);
   }
 
   // Método: inicializarAutocompletado
@@ -97,7 +97,7 @@ export class IntercambioNuevoComponent implements OnInit {
     this.showMessage = true;
     let ingresado = false;
 
-    this.intercambio.salidas.forEach((ejemplar)=>{
+    this.intercambio.ejemplares.forEach((ejemplar)=>{
       if(ejemplar.codigo == this.codigo) ingresado = true;
     });
 
@@ -105,7 +105,8 @@ export class IntercambioNuevoComponent implements OnInit {
       this.intercambiosService.obtenerPorCodigo(this.codigo).subscribe(
         ejemplar => {
           this.showMessage = false;
-          this.intercambio.salidas.push(ejemplar);
+          this.intercambio.ejemplares.push(ejemplar);
+          this.codigo = "";
         },
         error => {
           this.showMessage = false;
@@ -123,7 +124,7 @@ export class IntercambioNuevoComponent implements OnInit {
   // Objetivo: crear un nuevo intercambio
   crear(){
     // Mostrar mensaje de espera.
-    this.showMessage = true;
+    this.showMessage2 = true;
     this.errorMessage = null;
 
     this.intercambiosService.crear(this.intercambio).subscribe(
@@ -132,7 +133,7 @@ export class IntercambioNuevoComponent implements OnInit {
         this.router.navigate(['/intercambios']);
       },
       error => {
-        this.showMessage= false;
+        this.showMessage2 = false;
         this.errorMessage = "Error al crear intercambio";
       }
     );

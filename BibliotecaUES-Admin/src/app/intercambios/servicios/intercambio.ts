@@ -5,8 +5,8 @@ import { Ejemplar } from './';
 export class Intercambio{
   id: number;
   facultad: string;
-  entradas: Ejemplar[];
-  salidas: Ejemplar[];
+  usuario: string;
+  ejemplares: Ejemplar[];
   fecha: Date;
-  completo: boolean;
+  relacionado: number;
 }
