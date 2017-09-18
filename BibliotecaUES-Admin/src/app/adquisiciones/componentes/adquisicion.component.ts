@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { CookieService } from 'ngx-cookie';
-import { AdquisicionesService, Adquisicion }  from './../servicios'
+import { EjemplaresService, AdquisicionesService, Adquisicion }  from './../servicios'
 
 declare var Materialize: any;
 
@@ -25,6 +25,7 @@ export class AdquisicionComponent implements OnInit {
 
   constructor(
     private adquisicionesService: AdquisicionesService,
+    private ejemplaresService: EjemplaresService,
     private route: ActivatedRoute,
     private router: Router,
     private cookieService: CookieService
@@ -67,7 +68,7 @@ export class AdquisicionComponent implements OnInit {
     this.showMessage = true;
     this.errorMessage = null;
 
-    this.adquisicionesService.catalogar(this.adquisicion.ejemplares).subscribe(
+    this.ejemplaresService.catalogar(this.adquisicion.ejemplares).subscribe(
       message =>{
         this.showMessage= false;
         Materialize.toast("Datos guardados", 3000);

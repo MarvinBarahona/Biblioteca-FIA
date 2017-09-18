@@ -8,7 +8,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
-import { IntercambiosService, Intercambio, Ejemplar } from './../servicios/'
+import { IntercambiosService, EjemplaresService, Intercambio, Ejemplar } from './../servicios/'
 
 declare var Materialize: any;
 declare var $:any;
@@ -30,7 +30,12 @@ export class IntercambioNuevoComponent implements OnInit {
   showMessage2: boolean = false;
   message: string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private intercambiosService: IntercambiosService) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private intercambiosService: IntercambiosService,
+    private ejemplaresService: EjemplaresService
+  ) { }
 
   ngOnInit() {
     // Inicializar el objeto.
@@ -43,10 +48,15 @@ export class IntercambioNuevoComponent implements OnInit {
 
     // Array de facultades
     this.facultades = [
-      "Medicina",
+      "Central",
+      "Agronomía",
+      "Ciencias naturales y matemáticas",
+      "Derecho",
       "Economía",
       "Humanidades",
-      "Jurisprudencia"
+      "Medicina",
+      "Odontologia",
+      "Química y farmacia"
     ];
   }
 
@@ -60,7 +70,7 @@ export class IntercambioNuevoComponent implements OnInit {
   // Método: inicializarAutocompletado
   // Objetivo: hace el input de búsqueda con autocompletado
   inicializarAutocompletado(){
-    this.intercambiosService.obtenerEjemplares().subscribe(
+    this.ejemplaresService.obtenerTodos().subscribe(
       ejemplares => {
         this.ejemplares = ejemplares;
 
@@ -102,7 +112,7 @@ export class IntercambioNuevoComponent implements OnInit {
     });
 
     if(!ingresado){
-      this.intercambiosService.obtenerPorCodigo(this.codigo).subscribe(
+      this.ejemplaresService.obtenerInactivosPorCodigo(this.codigo).subscribe(
         ejemplar => {
           this.showMessage = false;
           this.intercambio.ejemplares.push(ejemplar);

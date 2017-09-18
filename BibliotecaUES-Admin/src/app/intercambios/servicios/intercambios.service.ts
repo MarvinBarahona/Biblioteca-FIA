@@ -69,28 +69,6 @@ export class IntercambiosService {
     );
   }
 
-  // Método: catalogar
-  // Objetivo: asignar códigos de barra a los ejemplares de un intercambio
-  catalogar(ejemplares: Ejemplar[]): Observable<string>{
-    let url = this.baseUrl + '/copies/massCataloging';
-
-    // Mapeando la entrada.
-    let copies = [];
-    ejemplares.forEach(function(ejemplar){
-      if(!ejemplar.ingresado && ejemplar.codigo) copies.push({id: ejemplar.id, barcode: ejemplar.codigo});
-    });
-
-    let q = JSON.stringify({copies: copies});
-
-    // Realizando POST
-    return this.http.post(url, q, { headers: this.headers }).map(
-      // Mapeando salida
-      (response: Response) => {
-        return "guardados";
-      }
-    );
-  }
-
   // Método: obtenerTodos
   // Objetivo: obtener todos los intercambios realizados
   obtenerTodos(): Observable<any> {
@@ -162,61 +140,6 @@ export class IntercambiosService {
         intercambio.ejemplares = ejemplares;
 
         return intercambio;
-      }
-    );
-  }
-
-  // Método: obtenerEjemplares
-  // Objetivo: obtener todos los ejemplares existentes.
-  obtenerEjemplares(): Observable<Ejemplar[]> {
-    let url = this.baseUrl + '/copies';
-
-    // Realizando GET
-    return this.http.get(url, { headers: this.headers }).map(
-      // Mapeando la salida
-      (response: Response) => {
-        let r = response.json();
-        let ejemplares = new Array<Ejemplar>();
-
-        r.forEach(function(item) {
-          let ejemplar = new Ejemplar;
-          ejemplar.id = item['id'];
-          ejemplar.codigo = item['barcode'];
-          ejemplar.estado = item['state'];
-          ejemplares.push(ejemplar);
-        });
-        return ejemplares;
-      }
-    );
-  }
-
-  // Método: obtenerPorCodigo
-  // Objetivo: obtener un ejemplar por su código de barra, solo si está inactivo
-  obtenerPorCodigo(codigo: string): Observable<Ejemplar>{
-    let url = this.baseUrl + '/copies/barcode/' + codigo + "?inactive=1";
-
-    // Realizando GET
-    return this.http.get(url, { headers: this.headers }).map(
-      // Mapeando la salida
-      (response: Response) => {
-        let r = response.json();
-        let ejemplar = new Ejemplar;
-        let rc = r['copy'];
-        let rb = r['book'];
-
-        // Mapear el objeto de ejemplar
-        ejemplar.id = rc['id'];
-        ejemplar.codigo = rc['barcode'];
-        ejemplar.estado = rc['state'];
-
-        // Mapear el libros
-        let libro = new Libro;
-        libro.id = rb['id'];
-        libro.titulo = rb['title'];
-        libro.edicion = rb['edition'];
-        ejemplar.libro = libro;
-
-        return ejemplar;
       }
     );
   }

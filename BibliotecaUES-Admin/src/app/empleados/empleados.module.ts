@@ -9,7 +9,7 @@ import { DataTablesModule } from 'angular-datatables';
 
 import { EmpleadosRoutingModule } from './empleados-routing.module';
 import { EmpleadosRootComponent, EmpleadosComponent, EmpleadoComponent, EmpleadoNuevoComponent } from './componentes/';
-import { EmpleadosService } from './servicios/';
+import { EmpleadosService, GruposService } from './servicios/';
 
 @NgModule({
   imports: [
@@ -27,6 +27,6 @@ import { EmpleadosService } from './servicios/';
     EmpleadoComponent,
     EmpleadoNuevoComponent
   ],
-  providers: [EmpleadosService]
+  providers: [EmpleadosService, GruposService]
 })
 export class EmpleadosModule { }

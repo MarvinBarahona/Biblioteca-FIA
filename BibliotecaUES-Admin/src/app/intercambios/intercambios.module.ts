@@ -9,7 +9,7 @@ import { DataTablesModule } from 'angular-datatables';
 
 import { IntercambiosRoutingModule } from './intercambios-routing.module';
 import { IntercambiosRootComponent, IntercambiosComponent, SalidaComponent, EntradaComponent, IntercambioNuevoComponent, EntradaPendienteComponent } from './componentes/';
-import { IntercambiosService } from './servicios/';
+import { IntercambiosService, EjemplaresService } from './servicios/';
 
 import { LibroSeleccionModule } from './../libro-seleccion';
 
@@ -32,6 +32,6 @@ import { LibroSeleccionModule } from './../libro-seleccion';
     IntercambioNuevoComponent,
     EntradaPendienteComponent
   ],
-  providers: [IntercambiosService]
+  providers: [IntercambiosService, EjemplaresService]
 })
 export class IntercambiosModule { }
