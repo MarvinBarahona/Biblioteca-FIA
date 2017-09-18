@@ -24,9 +24,9 @@
         <div class="row">
           <!-- Selección de grupo -->
           <div class="input-field col s12 l6 offset-l1">
-            <select materialize="material_select" name="grupo" [(ngModel)]="empleado.grupo.nombre" required>
+            <select materialize="material_select" name="grupo" [(ngModel)]="empleado.grupo.id" required>
               <option selected disabled>Seleccionar...</option>
-              <option *ngFor="let grupo of grupos">{{grupo.nombre}}</option>
+              <option *ngFor="let grupo of grupos" [value]="grupo.id">{{grupo.nombre}}</option>
             </select>
             <label>Puesto</label>
           </div>

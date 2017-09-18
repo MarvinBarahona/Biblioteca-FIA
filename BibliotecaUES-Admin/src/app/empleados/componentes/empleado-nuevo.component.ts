@@ -41,7 +41,7 @@ export class EmpleadoNuevoComponent implements OnInit {
         // Asigna los grupos
         this.grupos = grupos;
         // Para que no se seleccione ninguna por defecto
-        this.empleado.grupo.nombre = null;
+        this.empleado.grupo.id = null;
       }
     );
   }
