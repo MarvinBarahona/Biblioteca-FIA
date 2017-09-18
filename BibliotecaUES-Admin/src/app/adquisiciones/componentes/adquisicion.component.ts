@@ -1,7 +1,7 @@
 /*
 *Nombre del módulo: Gestión de adquisiciones
 *Dirección física: src\app\adquisiciones\componentes\adquisicion.component.ts
-*Objetivo: Mostrar información de una adquisición especifica e ingresar códigos de barra. 
+*Objetivo: Mostrar información de una adquisición especifica e ingresar códigos de barra.
 **/
 
 import { Component, OnInit } from '@angular/core';
@@ -60,6 +60,8 @@ export class AdquisicionComponent implements OnInit {
     );
   }
 
+  // Método: guardar
+  // Objetivo: gurdar los código de barra ingresados.
   guardar(){
     // Mostrar mensajes.
     this.showMessage = true;
@@ -72,6 +74,7 @@ export class AdquisicionComponent implements OnInit {
 
         let pendiente = false;
         this.adquisicion.ejemplares.forEach( (ejemplar) => {
+          ejemplar.ingresado = ejemplar.codigo? true : false;
           pendiente = pendiente || !ejemplar.ingresado;
         });
 

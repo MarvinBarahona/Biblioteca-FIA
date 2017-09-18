@@ -58,11 +58,7 @@ export class AdquisicionesService {
     return this.http.post(url, q, { headers: this.headers }).map(
       // Mapeando salida
       (response: Response) => {
-        ejemplares.forEach(function(ejemplar){
-          ejemplar.ingresado = ejemplar.codigo? true: false;
-        });
-
-        return "Datos almacenados";
+        return "guardados";
       }
     );
   }
