@@ -1,0 +1,22 @@
+<!-- TOP NAV -->
+<div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper">
+      <ul class="title left">
+        <li><i class="large material-icons">insert_chart</i></li>
+        <li><a href="">Biblioteca FIA</a></li>
+      </ul>
+
+      <ul class="right" *ngIf='usuario'>
+         <li><a materialize="dropdown" class='dropdown-button' href='javascript:void(0)' data-activates='dropdown1'>{{usuario}}<i class="material-icons right">arrow_drop_down</i></a></li>
+         <ul id='dropdown1' class='dropdown-content'>
+           <li><a href="javascript:void(0)" (click)='cerrarSesion()'>Cerrar sesión</a></li>
+         </ul>
+       </ul>
+
+    </div>
+  </nav>
+</div>
+<!-- /TOP NAV -->
+
+<router-outlet></router-outlet>
