@@ -18,6 +18,7 @@ export class LoginComponent implements AfterViewInit {
       this.auth2 = gapi.auth2.init({
         client_id: "119678183271-slva4uq0ampcmauaa4926fp64hucln2a.apps.googleusercontent.com",
         cookiepolicy: 'single_host_origin',
+        prompt: 'select_account',
         scope: 'profile email'
       });
       this.attachSignin(document.getElementById('googleBtn'));
@@ -43,5 +44,12 @@ export class LoginComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.googleInit();
+  }
+
+  signOut() {
+    let auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then( () => {
+      console.log('User signed out.');
+    });
   }
 }
