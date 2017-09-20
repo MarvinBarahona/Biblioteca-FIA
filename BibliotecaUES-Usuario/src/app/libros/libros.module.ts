@@ -8,7 +8,7 @@ import { MaterializeModule } from 'angular2-materialize';
 import { DataTablesModule } from 'angular-datatables';
 
 import { LibrosRoutingModule } from './libros-routing.module';
-import { LibrosRootComponent, LibrosComponent, LibroComponent } from './componentes';
+import { LibrosRootComponent, LibrosComponent, LibroComponent, LoginComponent } from './componentes';
 import { LibrosService } from './servicios';
 
 @NgModule({
@@ -24,7 +24,8 @@ import { LibrosService } from './servicios';
   declarations: [
     LibrosRootComponent,
     LibrosComponent,
-    LibroComponent
+    LibroComponent,
+    LoginComponent
   ],
   providers: [
     LibrosService
