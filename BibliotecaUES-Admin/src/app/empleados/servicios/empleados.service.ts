@@ -136,29 +136,4 @@ export class EmpleadosService {
       }
     );
   }
-
-
-  // Método: obtenerGrupos
-  // Objetivo: obtener los grupos disponibles para asignarse al nuevo empleados
-  obtenerGrupos(): Observable<Grupo[]> {
-    let url = this.baseUrl + '/users/groups';
-
-    // Realizando GET
-    return this.http.get(url, { headers: this.headers }).map(
-      // Mapeando la salida
-      (response: Response) => {
-        let r = response.json();
-        let grupos = new Array<Grupo>();
-
-        r.forEach(function(item) {
-          let grupo = new Grupo;
-          grupo.id = item['id'];
-          grupo.nombre = item['name'];
-          grupos.push(grupo);
-        });
-        return grupos;
-      }
-    );
-  }
-
 }

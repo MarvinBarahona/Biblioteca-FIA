@@ -23,7 +23,7 @@ const appRoutes: Routes = [
     component: PerfilComponent
   },
   {
-    path: 'cambiar',
+    path: 'cambiar/:id/:token',
     component: CambiarContraComponent
   },
   {

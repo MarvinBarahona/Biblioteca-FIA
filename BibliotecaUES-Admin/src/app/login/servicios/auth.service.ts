@@ -44,6 +44,34 @@ export class AuthService {
     );
   }
 
+  // Método: restaurarContra
+  // Objetivo: permite a los usuarios solicitar el cambio de contraseña.
+  restaurarContra(correo: string): Observable<string> {
+    let url = this.baseUrl + '/users/recovery';
+    let q = JSON.stringify({email: correo});
+
+    return this.http.post(url, q, { headers: this.headers }).map(
+      (response: Response) => {
+        let r = response.json();
+        return r["message"];
+      }
+    );
+  }
+
+  // Método: cambiarContra
+  // Objetivo: permite a los usuarios cambiar de contraseña
+  cambiarContra(contra: string, id: number, token: string): Observable<string> {
+    let url = this.baseUrl + '/users/changePassword';
+    let q = JSON.stringify({password: contra, userId: id, token: token});
+
+    return this.http.post(url, q, { headers: this.headers }).map(
+      (response: Response) => {
+        let r = response.json();
+        return r["message"];
+      }
+    );
+  }
+
   // Método privado: mapearUsuario
   // Objetivo: convertir un json de respuesta en un objeto ve Usuario.
   private mapearUsuario(r: any): Usuario{

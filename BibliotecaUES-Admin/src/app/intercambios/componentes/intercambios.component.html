@@ -10,7 +10,6 @@
             <tr>
               <th>Facultad</th>
               <th>Fecha</th>
-              <th>Detalle</th>
             </tr>
           </thead>
           <tbody>
@@ -22,12 +21,8 @@
 
             <!-- Empleados -->
             <tr *ngFor="let intercambio of intercambios">
-              <td>{{intercambio.facultad}}</td>
-              <td>{{intercambio.fecha}}</td>
-              <td>
-                <a href="javascript:void(0)" *ngIf="intercambio.completo" (click)="linkIntercambio(intercambio);">Ver más</a>
-                <a href="javascript:void(0)" *ngIf="!intercambio.completo" (click)="linkEntrada(intercambio);">Completar</a>
-              </td>
+              <td><a href="javascript:void(0)" (click)="linkSalida(intercambio);">{{intercambio.facultad}}</a></td>
+              <td>{{intercambio.fecha | date:"shortDate"}}</td>
             </tr>
           </tbody>
         </table>

@@ -41,32 +41,6 @@ export class AdquisicionesService {
     );
   }
 
-  // Método: catalogar
-  // Objetivo: asignar códigos de barra a los ejemplares de una adquisición.
-  catalogar(ejemplares: Ejemplar[]): Observable<string>{
-    let url = this.baseUrl + '/copies/massCataloging';
-
-    // Mapeando la entrada.
-    let copies = [];
-    ejemplares.forEach(function(ejemplar){
-      if(!ejemplar.ingresado && ejemplar.codigo) copies.push({id: ejemplar.id, barcode: ejemplar.codigo});
-    });
-
-    let q = JSON.stringify({copies: copies});
-
-    // Realizando POST
-    return this.http.post(url, q, { headers: this.headers }).map(
-      // Mapeando salida
-      (response: Response) => {
-        ejemplares.forEach(function(ejemplar){
-          ejemplar.ingresado = ejemplar.codigo? true: false;
-        });
-
-        return "Datos almacenados";
-      }
-    );
-  }
-
   // Método: obtenerTodos
   // Objetivo: obtener todas las adquisiciones existentes.
   obtenerTodos(): Observable<Adquisicion[]> {

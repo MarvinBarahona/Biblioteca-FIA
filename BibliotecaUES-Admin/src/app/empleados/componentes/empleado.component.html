@@ -31,7 +31,7 @@
           <div class="input-field col s6 l4 offset-l1">
             <div *ngFor="let politica of empleado.politicas">
               <input [id]="politica.id" type="checkbox" name="politica" class="filled-in" [(ngModel)]=politica.asignada [disabled]="politica.deshabilitada?true:null"/>
-              <label [for]="politica.id">{{politica.nombre}}</label>
+              <label [for]="politica.id">{{politica.codigo}} - {{politica.nombre}}</label>
             </div>
           </div>
         </div>

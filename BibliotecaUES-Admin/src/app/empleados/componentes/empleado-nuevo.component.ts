@@ -8,7 +8,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
-import { EmpleadosService, Empleado, Grupo } from './../servicios/';
+import { EmpleadosService, GruposService, Empleado, Grupo } from './../servicios/';
 
 declare var $: any;
 declare var Materialize: any;
@@ -27,7 +27,7 @@ export class EmpleadoNuevoComponent implements OnInit {
 
   modalCancel = new EventEmitter<string | MaterializeAction>();
 
-  constructor(private router: Router, private empleadosService: EmpleadosService) { }
+  constructor(private router: Router, private empleadosService: EmpleadosService, private gruposService: GruposService) { }
 
   ngOnInit() {
     // Inicializando el objeto
@@ -36,12 +36,12 @@ export class EmpleadoNuevoComponent implements OnInit {
     this.showMessage = false;
 
     // Llama al servicio
-    this.empleadosService.obtenerGrupos().subscribe(
+    this.gruposService.obtenerGrupos().subscribe(
       grupos => {
         // Asigna los grupos
         this.grupos = grupos;
         // Para que no se seleccione ninguna por defecto
-        this.empleado.grupo.nombre = null;
+        this.empleado.grupo.id = null;
       }
     );
   }

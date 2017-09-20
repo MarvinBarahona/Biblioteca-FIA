@@ -16,7 +16,7 @@ import { LibrosService, Libro } from './../servicios'
         height: 206px;
         margin-top:5px;
       }
-      `]
+  `]
 })
 export class LibroComponent implements OnInit {
   libro: Libro;

@@ -27,7 +27,6 @@ export class LibrosService {
     return this.http.get(url, { headers: this.headers }).map(
       (response: Response) => {
         let r = response.json();
-        console.log(r);
         // Mapeando la salida
         let libros = new Array<Libro>();
 
@@ -40,7 +39,7 @@ export class LibrosService {
           libro.edicion = item['edition'];
           libro.autor = item['authorName'];
           libro.editorial = item['publisherName'];
-          // libro.catalogado = item['catalogued'];
+
           // Mapeando el catalogo
           let catalogo = new Catalogo;
           catalogo.img = item['image'];
@@ -56,7 +55,7 @@ export class LibrosService {
   // Método: obtener
   // Objetivo: obtener un libro
   obtener(id: number): Observable<Libro> {
-    let url = this.baseUrl + '/books/' + id+'/public';
+    let url = this.baseUrl + '/books/' + id + '/public';
 
     // Realizar el GET
     return this.http.get(url, { headers: this.headers }).map(
@@ -89,22 +88,42 @@ export class LibrosService {
         catalogo.img = r['image'];
         libro.catalogo = catalogo;
 
-        // Mapeando los ejemplares
-        // let ejemplares = new Array<Ejemplar>();
-        // console.log(libro);
-        // r.forEach(function(item) {
-        //   let ejemplar = new Ejemplar;
-        //   ejemplar.id = item['id'];
-        //   ejemplar.codigo = item['barcode'];
-        //   ejemplar.estado = item['state'];
-        //   ejemplares.push(ejemplar);
-        // });
-        // libro.ejemplares = ejemplares;
-
         return libro;
       }
     );
   }
 
-  
+  // Método: buscar
+  // Objetivo: permite filtrar libros por los campos
+  buscar(key: string, value: string): Observable<Libro[]> {
+    let url = this.baseUrl + '/books/public?' + key + "=" + value;
+
+    // Realizando el GET
+    return this.http.get(url, { headers: this.headers }).map(
+      (response: Response) => {
+        let r = response.json();
+        // Mapeando la salida
+        let libros = new Array<Libro>();
+
+        r.forEach(function(item) {
+          let libro = new Libro;
+
+          libro.id = item['id'];
+          libro.isbn = item['isbn'];
+          libro.titulo = item['title'];
+          libro.edicion = item['edition'];
+          libro.autor = item['authorName'];
+          libro.editorial = item['publisherName'];
+
+          // Mapeando el catalogo
+          let catalogo = new Catalogo;
+          catalogo.img = item['image'];
+          libro.catalogo = catalogo;
+          libros.push(libro);
+        });
+
+        return libros;
+      }
+    );
+  }
 }

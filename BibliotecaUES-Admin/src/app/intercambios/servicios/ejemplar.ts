@@ -7,4 +7,5 @@ export class Ejemplar{
   codigo: string;
   estado: string;
   libro: Libro;
+  ingresado: boolean;
 }

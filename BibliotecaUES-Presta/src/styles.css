@@ -11,6 +11,20 @@ ul{
   margin-top: 0px;
 }
 
+/* Para el navbar */
+
+/* Pone el side-nav abajo del navbar */
+#slide-out{
+  margin-top: 65px;
+}
+
+/* 993px es lo que Materialize considera tamaño "large", el tamaño donde oculta el side-nav y mostrará el toogle */
+@media (min-width: 993px){
+  .component {
+    padding-left: 300px;
+  }
+}
+
 /* Cards */
 .card, .card-panel {
   margin: 0 50px 0 50px;

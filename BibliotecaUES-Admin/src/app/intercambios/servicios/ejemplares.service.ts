@@ -1,4 +1,4 @@
-// Servicios de ejemplares
+// Servicios de intercambios
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -43,9 +43,9 @@ export class EjemplaresService {
   }
 
   // Método: obtenerPorCodigo
-  // Objetivo: obtener un ejemplar por su código de barra.
-  obtenerPorCodigo(codigo: string): Observable<Ejemplar>{
-    let url = this.baseUrl + '/copies/barcode/' + codigo;
+  // Objetivo: obtener un ejemplar por su código de barra, solo si está inactivo
+  obtenerInactivosPorCodigo(codigo: string): Observable<Ejemplar>{
+    let url = this.baseUrl + '/copies/barcode/' + codigo + "?inactive=1";
 
     // Realizando GET
     return this.http.get(url, { headers: this.headers }).map(
@@ -73,13 +73,25 @@ export class EjemplaresService {
     );
   }
 
-  // Método: trasladar
-  // Objetivo: Cambia estado de inactivo a disponible o viceversa
-  trasladar(id: number): Observable<string>{
-    let url = this.baseUrl + '/copies/' + id;
+  // Método: catalogar
+  // Objetivo: asignar códigos de barra a los ejemplares de un intercambio
+  catalogar(ejemplares: Ejemplar[]): Observable<string>{
+    let url = this.baseUrl + '/copies/massCataloging';
 
-    return this.http.put(url, {}, { headers: this.headers }).map(
-      res => res.json()
+    // Mapeando la entrada.
+    let copies = [];
+    ejemplares.forEach(function(ejemplar){
+      if(!ejemplar.ingresado && ejemplar.codigo) copies.push({id: ejemplar.id, barcode: ejemplar.codigo});
+    });
+
+    let q = JSON.stringify({copies: copies});
+
+    // Realizando POST
+    return this.http.post(url, q, { headers: this.headers }).map(
+      // Mapeando salida
+      (response: Response) => {
+        return "guardados";
+      }
     );
   }
 }

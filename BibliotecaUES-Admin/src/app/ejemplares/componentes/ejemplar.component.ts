@@ -7,7 +7,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { EjemplaresService, Ejemplar }  from './../servicios'
+import { EjemplaresService, Ejemplar, Transaccion }  from './../servicios'
 
 @Component({
   templateUrl: './ejemplar.component.html'
@@ -41,7 +41,28 @@ export class EjemplarComponent implements OnInit {
   }
 
   // Redirigir a la vista de adquisición
-  linkAdquisicion(id: number){
-    this.router.navigate(['/adquisiciones/'+id]);
+  linkProceso(transaccion: Transaccion){
+    switch(transaccion.tipo){
+      case "Donación":{
+        this.router.navigate(['/adquisiciones/' + transaccion.id]);
+        break;
+      }
+      case "Compra":{
+        this.router.navigate(['/adquisiciones/' + transaccion.id]);
+        break;
+      }
+      case "Entrada":{
+        this.router.navigate(['/intercambios/entrada/' + transaccion.id]);
+        break;
+      }
+      case "Salida":{
+        this.router.navigate(['/intercambios/salida/' + transaccion.id]);
+        break;
+      }
+      default:{
+        break;
+      }
+    }
+
   }
 }

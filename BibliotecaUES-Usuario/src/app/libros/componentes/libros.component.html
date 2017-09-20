@@ -3,24 +3,26 @@
 
     <!-- Buscador -->
     <div class="card-panel">
-      <div class="valign-wrapper row">
-        <div class="input-field col l7 m6 s12">
-          <input id="busqueda" name="busqueda" type="text" class="validate" maxlength="60">
-          <label for="busqueda">Buscar...</label>
+      <form #buscarForm="ngForm" (submit)="buscar()">
+        <div class="valign-wrapper row">
+          <div class="input-field col l7 m6 s12">
+            <input id="busqueda" name="busqueda" type="text" class="validate" maxlength="60" [(ngModel)]="model.valor" required>
+            <label for="busqueda">Buscar...</label>
+          </div>
+          <div class="input-field col l2 m4 s12">
+            <select id="tipo" name="tipo" materialize="material_select" [(ngModel)]="model.tipo" required>
+              <option value='0' selected>Título</option>
+              <option value='1'>ISBN</option>
+              <option value='2'>Autor</option>
+              <option value='3'>Editorial</option>
+            </select>
+            <label for="tipo">Criterio:</label>
+          </div>
+          <div class="col l2 m1 s12">
+            <button type="submit" class="waves-effect waves-light btn" [disabled]="!buscarForm.form.valid">Buscar</button>
+          </div>
         </div>
-        <div class="input-field col l2 m4 s12">
-          <select id="tipo" name="tipo" materialize="material_select">
-            <option selected>Título</option>
-            <option>ISBN</option>
-            <option>Autor</option>
-            <option>Materia</option>
-          </select>
-          <label for="tipo">Criterio:</label>
-        </div>
-        <div class="col l2 m1 s12">
-          <a class="waves-effect waves-light btn">Buscar</a>
-        </div>
-      </div>
+      </form>
     </div>
     <!-- /card-panel -->
 
@@ -32,6 +34,7 @@
       <h4>{{mensajeResultado}}</h4>
 
       <ul class="collection" *ngIf="libros; else elseLibro">
+        <li *ngIf="libros.length == 0">Sin resultados</li>
         <li *ngFor="let libro of libros" class="collection-item avatar">
           <img src="{{libro.catalogo.img || 'assets/noImage.jpg'}}" alt="Imagen del libro" class="circle">
           <h6><a href="javascript:void(0)" (click)="linkLibro(libro)">{{libro.titulo}}, {{libro.edicion}}° ed</a></h6>

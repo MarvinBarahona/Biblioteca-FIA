@@ -9,7 +9,7 @@ import { DataTablesModule } from 'angular-datatables';
 
 import { AdquisicionesRoutingModule } from './adquisiciones-routing.module';
 import { AdquisicionesRootComponent, AdquisicionesComponent, AdquisicionComponent, AdquisicionNuevaComponent } from './componentes/';
-import { AdquisicionesService } from './servicios';
+import { AdquisicionesService, EjemplaresService } from './servicios';
 
 import { LibroSeleccionModule } from './../libro-seleccion';
 
@@ -31,7 +31,7 @@ import { LibroSeleccionModule } from './../libro-seleccion';
     AdquisicionNuevaComponent
   ],
   providers: [
-    AdquisicionesService
+    AdquisicionesService, EjemplaresService
   ]
 })
 export class AdquisicionesModule { }

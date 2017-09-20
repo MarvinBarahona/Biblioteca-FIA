@@ -30,18 +30,18 @@ export class IntercambiosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.intercambios = new Array<Intercambio>();
-    this.intercambiosService.obtenerTodos().subscribe();
+    // Llamar al servicio
+    this.intercambiosService.obtenerTodos().subscribe(
+      intercambios => {
+        // Asignar los intercambios y refrescar la tabla;
+        this.intercambios = intercambios;
+        this.dtTrigger.next();
+      }
+    );
   }
 
   // Redirige a la vista de intercambio
-  linkIntercambio(intercambio: Intercambio){
-    this.router.navigate(["/intercambio/" + intercambio.id]);
+  linkSalida(salida: Intercambio){
+    this.router.navigate(["/intercambios/salida/" + salida.id]);
   }
-
-  // Redirige a la vista de registro de la entrada del intercambio
-  linkEntrada(intercambio: Intercambio){
-    this.router.navigate(["/intercambios/pendiente", {id: intercambio.id, facultad: intercambio.facultad}]);
-  }
-
 }

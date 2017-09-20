@@ -1,14 +1,14 @@
 /*
 *Nombre del módulo: Gestión de adquisiciones
 *Dirección física: src\app\adquisiciones\componentes\adquisicion.component.ts
-*Objetivo: Mostrar información de una adquisición especifica e ingresar códigos de barra. 
+*Objetivo: Mostrar información de una adquisición especifica e ingresar códigos de barra.
 **/
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { CookieService } from 'ngx-cookie';
-import { AdquisicionesService, Adquisicion }  from './../servicios'
+import { EjemplaresService, AdquisicionesService, Adquisicion }  from './../servicios'
 
 declare var Materialize: any;
 
@@ -25,6 +25,7 @@ export class AdquisicionComponent implements OnInit {
 
   constructor(
     private adquisicionesService: AdquisicionesService,
+    private ejemplaresService: EjemplaresService,
     private route: ActivatedRoute,
     private router: Router,
     private cookieService: CookieService
@@ -60,18 +61,21 @@ export class AdquisicionComponent implements OnInit {
     );
   }
 
+  // Método: guardar
+  // Objetivo: gurdar los código de barra ingresados.
   guardar(){
     // Mostrar mensajes.
     this.showMessage = true;
     this.errorMessage = null;
 
-    this.adquisicionesService.catalogar(this.adquisicion.ejemplares).subscribe(
+    this.ejemplaresService.catalogar(this.adquisicion.ejemplares).subscribe(
       message =>{
         this.showMessage= false;
         Materialize.toast("Datos guardados", 3000);
 
         let pendiente = false;
         this.adquisicion.ejemplares.forEach( (ejemplar) => {
+          ejemplar.ingresado = ejemplar.codigo? true : false;
           pendiente = pendiente || !ejemplar.ingresado;
         });
 

@@ -8,7 +8,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
-import { NuevaEntrada, NuevoEjemplar, Libro } from './../servicios';
+import { IntercambiosService, NuevaEntrada, NuevoEjemplar, Libro } from './../servicios';
 
 declare var Materialize: any;
 
@@ -24,11 +24,10 @@ export class EntradaPendienteComponent implements OnInit {
   errorMessage: string;
   showMessage: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute, private intercambiosService: IntercambiosService) { }
 
   ngOnInit() {
     this.entrada = new NuevaEntrada;
-    console.log(this.route.snapshot.params);
     this.entrada.id = this.route.snapshot.params['id'];
     this.entrada.facultad = this.route.snapshot.params['facultad'];
     this.entrada.ejemplares = new Array<NuevoEjemplar>();
@@ -67,17 +66,17 @@ export class EntradaPendienteComponent implements OnInit {
     this.errorMessage = null;
 
     // Llamar al servicio
-    //this.adquisicionesService.crear(this.adquisicion).subscribe(
-      //message => {
-        //this.showMessage= false;
-        //Materialize.toast("Adquisición creada", 3000);
-        //this.router.navigate(['/adquisiciones']);
-      //},
-      //error => {
-        //this.showMessage= false;
-        //this.errorMessage = "Error al crear la adquisición";
-      //}
-    //);
+    this.intercambiosService.crearEntrada(this.entrada).subscribe(
+      message => {
+        this.showMessage= false;
+        Materialize.toast("Entrada agregada", 3000);
+        this.router.navigate(['/intercambios/salida/' + this.entrada.id]);
+      },
+      error => {
+        this.showMessage= false;
+        this.errorMessage = "Error al crear la entrada";
+      }
+    );
   }
 
   // Método para las ventanas modales.

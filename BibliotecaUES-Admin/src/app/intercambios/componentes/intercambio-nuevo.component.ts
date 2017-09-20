@@ -8,7 +8,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
-import { IntercambiosService, Intercambio, Ejemplar } from './../servicios/'
+import { IntercambiosService, EjemplaresService, Intercambio, Ejemplar } from './../servicios/'
 
 declare var Materialize: any;
 declare var $:any;
@@ -30,12 +30,17 @@ export class IntercambioNuevoComponent implements OnInit {
   showMessage2: boolean = false;
   message: string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private intercambiosService: IntercambiosService) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private intercambiosService: IntercambiosService,
+    private ejemplaresService: EjemplaresService
+  ) { }
 
   ngOnInit() {
     // Inicializar el objeto.
     this.intercambio = new Intercambio;
-    this.intercambio.salidas = new Array<Ejemplar>();
+    this.intercambio.ejemplares = new Array<Ejemplar>();
 
     // Inicializar el input con autocompletado
     this.codigos = new Array<string>();
@@ -43,24 +48,29 @@ export class IntercambioNuevoComponent implements OnInit {
 
     // Array de facultades
     this.facultades = [
-      "Medicina",
+      "Central",
+      "Agronomía",
+      "Ciencias naturales y matemáticas",
+      "Derecho",
       "Economía",
       "Humanidades",
-      "Jurisprudencia"
+      "Medicina",
+      "Odontologia",
+      "Química y farmacia"
     ];
   }
 
   // Método: eliminarEjemplar
   // Objetivo: eliminar un ejemplar de la tabla de ejemplares a intercambiar
   eliminarEjemplar(ejemplar: Ejemplar){
-    let i = this.intercambio.salidas.indexOf(ejemplar);
-    if(i > -1) this.intercambio.salidas.splice(i, 1);
+    let i = this.intercambio.ejemplares.indexOf(ejemplar);
+    if(i > -1) this.intercambio.ejemplares.splice(i, 1);
   }
 
   // Método: inicializarAutocompletado
   // Objetivo: hace el input de búsqueda con autocompletado
   inicializarAutocompletado(){
-    this.intercambiosService.obtenerEjemplares().subscribe(
+    this.ejemplaresService.obtenerTodos().subscribe(
       ejemplares => {
         this.ejemplares = ejemplares;
 
@@ -97,15 +107,16 @@ export class IntercambioNuevoComponent implements OnInit {
     this.showMessage = true;
     let ingresado = false;
 
-    this.intercambio.salidas.forEach((ejemplar)=>{
+    this.intercambio.ejemplares.forEach((ejemplar)=>{
       if(ejemplar.codigo == this.codigo) ingresado = true;
     });
 
     if(!ingresado){
-      this.intercambiosService.obtenerPorCodigo(this.codigo).subscribe(
+      this.ejemplaresService.obtenerInactivosPorCodigo(this.codigo).subscribe(
         ejemplar => {
           this.showMessage = false;
-          this.intercambio.salidas.push(ejemplar);
+          this.intercambio.ejemplares.push(ejemplar);
+          this.codigo = "";
         },
         error => {
           this.showMessage = false;
@@ -123,7 +134,7 @@ export class IntercambioNuevoComponent implements OnInit {
   // Objetivo: crear un nuevo intercambio
   crear(){
     // Mostrar mensaje de espera.
-    this.showMessage = true;
+    this.showMessage2 = true;
     this.errorMessage = null;
 
     this.intercambiosService.crear(this.intercambio).subscribe(
@@ -132,7 +143,7 @@ export class IntercambioNuevoComponent implements OnInit {
         this.router.navigate(['/intercambios']);
       },
       error => {
-        this.showMessage= false;
+        this.showMessage2 = false;
         this.errorMessage = "Error al crear intercambio";
       }
     );

@@ -1,11 +1,10 @@
 // Clase Ejemplar
 
-import { Transaccion, Libro } from './'
+import {  Libro } from './'
 
 export class Ejemplar{
   id: number;
   codigo: string;
   estado: string;
-  transacciones: Transaccion[];
   libro: Libro;
 }

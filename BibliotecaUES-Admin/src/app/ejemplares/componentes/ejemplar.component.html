@@ -49,7 +49,7 @@
               <td>{{transaccion.tipo}}</td>
               <td>{{transaccion.fecha | date:"shortDate"}}</td>
               <td>{{transaccion.usuario}}</td>
-              <td><a href="javascript:void(0)" (click)="linkAdquisicion(transaccion.id)">{{transaccion.nombre}}</a></td>
+              <td><a href="javascript:void(0)" (click)="linkProceso(transaccion)">{{transaccion.nombre}}</a></td>
             </tr>
           </tbody>
         </table>

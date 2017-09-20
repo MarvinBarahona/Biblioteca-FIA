@@ -1,24 +1,36 @@
-<div *ngIf="intercambio; else elseIntercambio">
+<div *ngIf="entrada; else elseEntrada">
 
-  <!-- Información del intercambio -->
+  <!-- Información de la entrada intercambio -->
   <div class="row">
     <div class="col s12 m12">
       <div class="card-panel">
-        <h5>Datos del intercambio</h5>
+        <h5>Datos de la entrada intercambio</h5>
 
-        <!-- Facultad -->
+        <!-- Facultad y fecha -->
         <div class="row">
-          <div class="col s11 offset-m1">
-            <strong>Intercambio con: </strong>
-            <span>{{intercambio.facultad}}</span>
+          <div class="col s12 m5 offset-m1">
+            <strong>{{entrada.facultad}}</strong>
           </div>
-        </div>
 
-        <!-- Fecha -->
-        <div class="row">
-          <div class="col s11 offset-m1">
+          <div class="col s12 m5 offset-m1">
             <strong>Fecha: </strong>
-            <span>{{intercambio.fecha}}</span>
+            <span>{{entrada.fecha | date: "shortDate"}}</span>
+          </div>
+        </div>
+
+        <!-- Usuario -->
+        <div class="row">
+          <div class="col s12 m5 offset-m1">
+            <strong>Aprobada por: </strong>
+            <span>{{entrada.usuario }}</span>
+          </div>
+        </div>
+
+        <!-- Entrada -->
+        <div class="row">
+          <div class="col s12 m5 offset-m1">
+            <strong>Salida: </strong>
+            <a href="javascript:void(0)" (click)="salida()">Ver la salida del intercambio </a>
           </div>
         </div>
 
@@ -29,35 +41,13 @@
   </div>
   <!-- row -->
 
-  <!-- Libros salida -->
+  <!-- Tabla de ejemplares -->
   <div class="row">
     <div class="col s12 m12">
       <div class="card-panel">
+        <h5>Ejemplares</h5>
 
-        <!-- Libros de salida -->
-        <ul class="collection with-header">
-          <li class="collection-header">
-            <h5>Libros de salida</h5>
-          </li>
-          <li class="collection-item" *ngFor="let ejemplar of intercambio.salidas">
-            <a href="javascript:void(0)" (click)="linkEjemplar(ejemplar.id)">{{ejemplar.codigo}}</a>{{ejemplar.libro.titulo}}, {{ejemplar.libro.edicion}}ed
-          </li>
-        </ul>
-
-      </div>
-      <!-- /card-panel -->
-    </div>
-    <!-- /col -->
-  </div>
-  <!-- row -->
-
-  <!-- Ejemplares -->
-  <div class="row">
-    <div class="col s12 m12">
-      <div class="card-panel">
-        <h5>Libros de entrada</h5>
-
-        <form #intercambioForm="ngForm" autocomplete="off">
+        <form #entradaForm="ngForm" autocomplete="off">
           <!-- tabla -->
           <table>
             <thead>
@@ -68,11 +58,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let ejemplar of intercambio.entradas">
+              <tr *ngFor="let ejemplar of entrada.ejemplares">
                 <td>
                   <a *ngIf="ejemplar.ingresado || !catalogador" href="javascript:void(0)" (click)="linkEjemplar(ejemplar.id);">{{ejemplar.codigo || 'No asignado'}}</a>
                   <div *ngIf="!ejemplar.ingresado && catalogador" class="input-field col m6 offset-m1 s8 offset-s2">
-                    <input type="text" class="validate" name="codigo" pattern="^[\d]{8}$" [(ngModel)]="ejemplar.codigo">
+                    <input type="text" class="validate" [name]="ejemplar.id" pattern="^[\d]{8}$" [(ngModel)]="ejemplar.codigo">
                     <label for="codigo" data-error="Debe ingresar 8 dígitos">Código de barra</label>
                   </div>
                 </td>
@@ -85,7 +75,7 @@
 
           <!-- Acciones -->
           <div class="row">
-            <button *ngIf="showButton" type="button" class="waves-effect waves-light btn col m2 s12 offset-m5" [disabled]="!intercambioForm.form.valid" (click)="guardar()">Guardar</button>
+            <button *ngIf="showButton" type="button" class="waves-effect waves-light btn col m2 s12 offset-m5" [disabled]="!entradaForm.form.valid" (click)="guardar()">Guardar</button>
           </div>
         </form>
 
@@ -104,12 +94,12 @@
     </div>
     <!-- /col -->
   </div>
-  <!-- row -->
+  <!-- /row -->
 </div>
-<!-- libro -->
+<!-- /Entrada -->
 
 <!-- Mensaje de espera -->
-<ng-template #elseIntercambio>
+<ng-template #elseEntrada>
   <div class="row">
     <div class="col s8 m8 offset-s2 offset-m2">
       <p>Cargando...</p>
