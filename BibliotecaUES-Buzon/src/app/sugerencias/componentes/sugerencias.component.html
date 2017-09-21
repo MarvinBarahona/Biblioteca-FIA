@@ -3,16 +3,59 @@
 
     <!-- Buscador -->
     <div class="card-panel">
-      Buscador de sugerencias
-    </div>
-    <!-- /card-panel -->
+      <form #buscarForm="ngForm" (submit)="buscar()">
+        <div class="valign-wrapper row">
+          <div class="input-field col l7 m6 s12">
+            <input id="busqueda" name="busqueda" type="text" class="validate" maxlength="60" required>
+            <label for="busqueda">Buscar...</label>
+          </div>
+          <div class="input-field col l2 m4 s12">
+            <select id="tipo" name="tipo" materialize="material_select" required>
+              <option value='0' selected>Título</option>
+              <option value='1'>Código de Materia</option>
+              <option value='2'>Carrera</option>
+            </select>
+            <label for="tipo">Criterio:</label>
+          </div>
+          <div class="col l2 m1 s12">
+            <button type="submit" class="waves-effect waves-light btn" [disabled]="!buscarForm.form.valid"><i class="material-icons">search</i></button>
+          </div>
+        </div>
+      </form>
 
-    <br>
-    <br>
+      <br>
+      <br>
 
-    <!-- Resultados de la búsqueda -->
-    <div class="card-panel">
-      Resultados
+      <!-- Resultados -->
+      <ul class="collection">
+        <li class="collection-item">
+          <h6><a routerLink="/sugerencias/1">Título, #° ed</a></h6>
+          Autor
+          <br>
+          Puntuación
+        </li>
+      </ul>
+      <!-- <ul class="collection" *ngIf="; else else">
+        <li *ngIf=".length == 0">Sin resultados</li>
+        <li *ngFor="" class="collection-item">
+          <h6><a href="javascript:void(0)" (click)="">titulo, edicion° ed</a></h6>
+          <p>Autor</p>
+          <p>puntuacio</p>
+        </li>
+      </ul> -->
+
+      <!-- Mensaje de espera -->
+      <!-- <ng-template #else>
+        <div class="row">
+          <div class="col s8 m8 offset-s2 offset-m2">
+            <p>Cargando...</p>
+            <div class="progress">
+              <div class="indeterminate"></div>
+            </div>
+          </div>
+        </div>
+      </ng-template> -->
+      <a class="btn btn-floating btn cyan pulse" routerLink="/sugerencias/nueva"><i class="material-icons">plus_one</i></a>
     </div>
     <!-- /card-panel -->
 
