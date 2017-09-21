@@ -3,7 +3,7 @@
     <div class="card-panel">
 
       <!-- Formulario para el ingreso de una nueva sugerencia -->
-      <form #libroNuevoForm="ngForm" (ngSubmit)="crear(sugerenciaNuevaForm)" autocomplete="off">
+      <form #sugerenciaNuevaForm="ngForm" (ngSubmit)="crear()" autocomplete="off">
         <!-- Carrera y Materias -->
         <div class="row">
           <div class="input-field col m5 s12">
@@ -66,14 +66,14 @@
       </form>
 
       <!-- Mensajes -->
-      <div class="row">
+      <!-- <div class="row">
         <div class="alert alert-info col s6 offset-s3" *ngIf="showMessage">
           <p>Creando libro...</p>
         </div>
         <div class="alert alert-danger col s6 offset-s3" *ngIf="errorMessage">
-          <!-- <p>{{errorMessage}}</p> -->
+          < <p>{{errorMessage}}</p>
         </div>
-      </div>
+      </div> -->
 
     </div>
     <!-- /card-panel -->

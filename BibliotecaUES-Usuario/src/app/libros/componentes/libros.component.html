@@ -4,7 +4,7 @@
     <!-- Buscador -->
     <div class="card-panel">
       <form #buscarForm="ngForm" (submit)="buscar()">
-        <div class="valign-wrapper row">
+        <div class="row">
           <div class="input-field col l7 m6 s12">
             <input id="busqueda" name="busqueda" type="text" class="validate" maxlength="60" [(ngModel)]="model.valor" required>
             <label for="busqueda">Buscar...</label>

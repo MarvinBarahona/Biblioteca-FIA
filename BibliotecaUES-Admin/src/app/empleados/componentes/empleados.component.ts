@@ -23,9 +23,13 @@ export class EmpleadosComponent implements OnInit {
   constructor(private empleadosService: EmpleadosService, private router: Router){
     // Opciones de datatable
     this.dtOptions = {
-      pageLength: 10,
-      pagingType: 'simple_numbers',
-      lengthMenu: [10,15,20]
+      paging: false,
+      searching: false,
+      language: {
+        "emptyTable": "Sin registros disponibles en la tabla",
+        "info": " ",
+        "infoEmpty": ""
+      }
     };
   }
 

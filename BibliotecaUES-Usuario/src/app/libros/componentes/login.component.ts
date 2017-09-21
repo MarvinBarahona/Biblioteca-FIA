@@ -12,6 +12,7 @@ declare const gapi: any;
 })
 export class LoginComponent implements AfterViewInit {
   auth2: any;
+  token: string;
 
   googleInit() {
     gapi.load('auth2', () => {
@@ -30,6 +31,8 @@ export class LoginComponent implements AfterViewInit {
 
       let profile = googleUser.getBasicProfile();
       console.log('Token || ' + googleUser.getAuthResponse().id_token);
+      console.log(profile);
+      this.token = googleUser.getAuthResponse().id_token;
       console.log('ID: ' + profile.getId());
       console.log('Name: ' + profile.getName());
       console.log('Image URL: ' + profile.getImageUrl());

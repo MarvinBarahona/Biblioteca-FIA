@@ -25,8 +25,23 @@ export class AdquisicionesComponent implements OnInit {
     this.dtOptions = {
       pageLength: 10,
       pagingType: 'simple_numbers',
-      lengthMenu: [10,15,20],
-      order: [[2, "desc"], [0, "asc"]]
+      lengthMenu: [10, 15, 20],
+      order: [[2, "desc"], [0, "asc"]],
+      language: {
+        "emptyTable": "Sin registros disponibles en la tabla",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+        "infoEmpty": "",
+        "infoFiltered": "(filtrados de _MAX_ totales )",
+        "lengthMenu": "Mostrando _MENU_ registros",
+        "search": "Buscar:",
+        "zeroRecords": "Búsqueda sin resultados",
+        "paginate": {
+          "first": "Primero",
+          "last": "Último",
+          "next": "Siguiente",
+          "previous": "Anterior"
+        }
+      }
     };
   }
 
@@ -42,7 +57,7 @@ export class AdquisicionesComponent implements OnInit {
   }
 
   // Rediriga a la vista de  adquisición
-  linkAdquisicion(adquisicion: Adquisicion){
-    this.router.navigate(["/adquisiciones/"+adquisicion.id])
+  linkAdquisicion(adquisicion: Adquisicion) {
+    this.router.navigate(["/adquisiciones/" + adquisicion.id])
   }
 }

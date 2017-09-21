@@ -12,7 +12,13 @@ import { EjemplaresService, Ejemplar } from './../servicios';
 declare var $:any;
 
 @Component({
-  templateUrl: './ejemplar-buscar.component.html'
+  templateUrl: './ejemplar-buscar.component.html',
+  styles: [`
+    .search{
+      margin-top: 20px;
+      left:-20px;
+    }
+  `]
 })
 export class EjemplarBuscarComponent implements OnInit {
   ejemplares: Ejemplar[];

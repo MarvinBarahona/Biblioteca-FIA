@@ -10,7 +10,13 @@ import { Router } from '@angular/router';
 import { LibrosService, Libro } from './../servicios';
 
 @Component({
-  templateUrl: './libros.component.html'
+  templateUrl: './libros.component.html',
+  styles: [`
+    .search{
+      margin-top: 20px;
+      left:-20px;
+    }
+  `]
 })
 export class LibrosComponent implements OnInit {
   libros: Libro[];

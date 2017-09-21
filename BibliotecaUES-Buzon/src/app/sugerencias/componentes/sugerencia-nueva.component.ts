@@ -31,6 +31,8 @@ constructor(private sugerenciasService: SugerenciasService, private route: Activ
     this.inicializarAutocompletado();
   }
 
+  crear(){}
+
   // Inicializar el campo con autocompletado.
   inicializarAutocompletado(){
     $('#materias').material_chip({

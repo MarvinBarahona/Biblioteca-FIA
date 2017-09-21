@@ -20,4 +20,6 @@ export class SugerenciasComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  buscar(){}
+
 }
