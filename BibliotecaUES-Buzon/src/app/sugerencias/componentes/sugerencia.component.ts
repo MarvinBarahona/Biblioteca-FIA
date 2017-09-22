@@ -6,17 +6,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { SugerenciasService, Libro } from './../servicios'
+import { SugerenciasService } from './../servicios'
 
 @Component({
-  templateUrl: './sugerencia.component.html',
-  styles: [`
-      .previa {
-        width: 150px;
-        height: 206px;
-        margin-top:5px;
-      }
-      `]
+  templateUrl: './sugerencia.component.html'
 })
 export class SugerenciaComponent implements OnInit {
 

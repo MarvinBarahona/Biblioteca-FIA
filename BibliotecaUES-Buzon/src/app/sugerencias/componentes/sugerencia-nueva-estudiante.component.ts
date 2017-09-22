@@ -7,20 +7,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
-import { SugerenciasService, Libro } from './../servicios'
+import { SugerenciasService } from './../servicios'
 
 declare var Materialize: any;
 declare var $: any;
 
 @Component({
-  templateUrl: './sugerencia-nueva-estudiante.component.html',
-  styles: [`
-      .previa {
-        width: 150px;
-        height: 206px;
-        margin-top:5px;
-      }
-      `]
+  templateUrl: './sugerencia-nueva-estudiante.component.html'
 })
 export class SugerenciaNuevaEstudianteComponent implements OnInit {
 

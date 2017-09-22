@@ -4,7 +4,7 @@
     <!-- Buscador -->
     <div class="card-panel">
       <form #buscarForm="ngForm" (submit)="buscar()">
-        <div class="valign-wrapper row">
+        <div class="row">
           <div class="input-field col l7 m6 s12">
             <input id="busqueda" name="busqueda" type="text" class="validate" maxlength="60" required>
             <label for="busqueda">Buscar...</label>
@@ -27,18 +27,20 @@
       <br>
 
       <!-- Resultados -->
-      <ul class="collection">
-        <li class="collection-item">
-          <h6><a routerLink="/sugerencias/1">Título, #° ed</a></h6>
-          Autor
-          <br>
-          Puntuación
-        </li>
-      </ul>
+      <div class="row">
+        <div class="col l8 offset-l2 m10 offset-m1 s12">
+          <ul class="collection">
+            <li class="collection-item">
+              <strong><a routerLink="/sugerencias/1">Título, #° ed</a></strong><span class="right">Puntuación</span>
+              <br>Autor
+            </li>
+          </ul>
+        </div>
+      </div>
       <!-- <ul class="collection" *ngIf="; else else">
         <li *ngIf=".length == 0">Sin resultados</li>
         <li *ngFor="" class="collection-item">
-          <h6><a href="javascript:void(0)" (click)="">titulo, edicion° ed</a></h6>
+          <strong><a href="javascript:void(0)" (click)="">titulo, edicion° ed</a></strong>
           <p>Autor</p>
           <p>puntuacio</p>
         </li>
@@ -55,7 +57,7 @@
           </div>
         </div>
       </ng-template> -->
-      <a class="btn btn-floating btn cyan pulse" routerLink="/sugerencias/nueva"><i class="material-icons">plus_one</i></a>
+      <a class="btn btn-floating btn cyan pulse right" routerLink="/sugerencias/nueva"><i class="material-icons">plus_one</i></a>
     </div>
     <!-- /card-panel -->
 
