@@ -2,10 +2,10 @@
 
 export class Sugerencia{
   id: number;
-  titulo: string,
-  autor:string,
-  editorial: string,
-  edicion: number,
-  isbn:string,
+  titulo: string;
+  autor:string;
+  editorial: string;
+  edicion: number;
+  isbn:string;
   precio: number
 }
