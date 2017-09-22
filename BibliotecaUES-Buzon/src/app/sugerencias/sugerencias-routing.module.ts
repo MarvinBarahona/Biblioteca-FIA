@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { SugerenciasRootComponent, SugerenciaComponent, SugerenciaNuevaComponent, SugerenciasComponent } from './componentes';
+import { SugerenciasRootComponent, SugerenciaComponent, SugerenciaNuevaEstudianteComponent, SugerenciaNuevaDocenteComponent, SugerenciasComponent } from './componentes';
 
 const routes: Routes = [
   {
@@ -13,8 +13,12 @@ const routes: Routes = [
         component: SugerenciasComponent
       },
       {
-        path: 'nueva',
-        component: SugerenciaNuevaComponent
+        path: 'nueva/estudiante',
+        component: SugerenciaNuevaEstudianteComponent
+      },
+      {
+        path: 'nueva/docente',
+        component: SugerenciaNuevaDocenteComponent
       },
       {
         path: ':id',

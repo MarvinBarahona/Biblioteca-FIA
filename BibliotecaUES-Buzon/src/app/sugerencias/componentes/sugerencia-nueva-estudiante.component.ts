@@ -13,7 +13,7 @@ declare var Materialize: any;
 declare var $: any;
 
 @Component({
-  templateUrl: './sugerencia-nueva.component.html',
+  templateUrl: './sugerencia-nueva-estudiante.component.html',
   styles: [`
       .previa {
         width: 150px;
@@ -22,7 +22,7 @@ declare var $: any;
       }
       `]
 })
-export class SugerenciaNuevaComponent implements OnInit {
+export class SugerenciaNuevaEstudianteComponent implements OnInit {
 
 
 constructor(private sugerenciasService: SugerenciasService, private route: ActivatedRoute, private router: Router){}

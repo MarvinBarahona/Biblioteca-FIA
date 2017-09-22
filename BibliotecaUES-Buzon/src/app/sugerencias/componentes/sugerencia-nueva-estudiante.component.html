@@ -6,15 +6,15 @@
       <form #sugerenciaNuevaForm="ngForm" (ngSubmit)="crear()" autocomplete="off">
         <!-- Carrera y Materias -->
         <div class="row">
-          <div class="input-field col m5 s12">
+          <div class="input-field col l3 offset-l2 m5 s12">
             <select id="carrera" name="carrera" materialize="material_select" required>
-              <option value='0' selected>Ingeniería Informática</option>
+              <option value='0' selected>Ingeniería de Sistemas Informática</option>
               <option value='1' selected>Ingeniería Eléctrica</option>
               <option value='2' selected>Unidad de Ciencias Básicas</option>
             </select>
             <label for="tipo">Carrera:</label>
           </div>
-          <div class="input-field col m7 s12">
+          <div class="input-field col l5  m7 s12">
             <div id="materias" class="chips"></div>
             <label for="materias">Materias</label>
           </div>
@@ -22,7 +22,7 @@
 
         <!-- Título -->
         <div class="row">
-          <div class="input-field col s12">
+          <div class="input-field col l8 offset-l2 s12">
             <input id="titulo" name="titulo" type="text" class="validate" required>
             <label for="titulo">Título</label>
           </div>
@@ -30,7 +30,7 @@
 
         <!-- Autor -->
         <div class="row">
-          <div class="input-field col s12">
+          <div class="input-field col l8 offset-l2 s12">
             <input id="autor" name="autor" type="text" class="validate" required>
             <label for="autor">Autor</label>
           </div>
@@ -38,19 +38,19 @@
 
         <!-- Edición, Editorial e ISBN -->
         <div class="row">
-          <div class="input-field col m2 s12">
+          <div class="input-field col l1 offset-l2 m2 s12">
             <input id="edicion" name="edicion" type="number" class="validate" min="1" max="30" required>
             <label for="edicion" data-error="Valor entre 1 y 30">Edición</label>
           </div>
-          <div class="input-field col m4 s12">
+          <div class="input-field col l3 m4 s12">
             <input id="editorial" name="editorial" type="text" class="validate" required>
             <label for="editorial">Editorial</label>
           </div>
-          <div class="input-field col m4 s12">
+          <div class="input-field col l3 m4 s12">
             <input id="isbn" name="isbn" type="text" class="validate" required>
             <label for="isbn">ISBN</label>
           </div>
-          <div class="input-field col m2 s12">
+          <div class="input-field col l1 m2 s12">
             <input id="precio" name="precio" type="text" class="validate" required>
             <label for="precio">Precio</label>
           </div>
