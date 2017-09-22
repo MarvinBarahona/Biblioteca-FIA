@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 
 import { CookieService } from 'ngx-cookie';
-import { Libro, Sugerencia } from './';
+import { Sugerencia } from './';
 
 @Injectable()
 export class SugerenciasService {
