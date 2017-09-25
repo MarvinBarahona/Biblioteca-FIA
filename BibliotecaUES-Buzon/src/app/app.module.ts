@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { SugerenciasModule } from './sugerencias/sugerencias.module';
+import { LoginModule } from './login/';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { SugerenciasModule } from './sugerencias/sugerencias.module';
     DataTablesModule,
     Angular2FontawesomeModule,
     CookieModule.forRoot(),
+    LoginModule,
     SugerenciasModule,
     AppRoutingModule
   ],

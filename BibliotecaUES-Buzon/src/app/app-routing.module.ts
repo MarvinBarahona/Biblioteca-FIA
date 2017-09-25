@@ -9,7 +9,7 @@ const appRoutes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/sugerencias',
+    redirectTo: '/error404',
     pathMatch: 'full'
   }
 ];

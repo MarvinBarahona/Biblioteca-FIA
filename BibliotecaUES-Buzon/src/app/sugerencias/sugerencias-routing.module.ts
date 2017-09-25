@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { AppAuthGuard } from './../login/';
 import { SugerenciasRootComponent, SugerenciaComponent, SugerenciaNuevaEstudianteComponent, SugerenciaNuevaDocenteComponent, SugerenciasComponent } from './componentes';
 
 const routes: Routes = [
@@ -10,19 +11,27 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: SugerenciasComponent
+        component: SugerenciasComponent,
+        canActivate: [AppAuthGuard],
+        data: {politica: 400}
       },
       {
         path: 'nueva/estudiante',
-        component: SugerenciaNuevaEstudianteComponent
+        component: SugerenciaNuevaEstudianteComponent,
+        canActivate: [AppAuthGuard],
+        data: {politica: 410}
       },
       {
         path: 'nueva/docente',
-        component: SugerenciaNuevaDocenteComponent
+        component: SugerenciaNuevaDocenteComponent,
+        canActivate: [AppAuthGuard],
+        data: {politica: 420}
       },
       {
-        path: ':id',
-        component: SugerenciaComponent
+        path: 'votar/:id',
+        component: SugerenciaComponent,
+        canActivate: [AppAuthGuard],
+        data: {politica: 420}
       }
     ]
   }
@@ -31,6 +40,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [AppAuthGuard]
 })
 export class SugerenciasRoutingModule { }
