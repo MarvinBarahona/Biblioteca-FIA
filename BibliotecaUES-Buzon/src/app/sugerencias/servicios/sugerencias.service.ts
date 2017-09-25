@@ -16,12 +16,48 @@ export class SugerenciasService {
 
   constructor(private http: Http, private cookieService: CookieService) {
     this.baseUrl = "https://bibliotecafiaues.herokuapp.com";
-    this.headers = new Headers({ 'Content-Type': 'application/json'});
+    this.headers = new Headers({ 'Content-Type': 'application/json' });
+  }
+
+  // Método: crearSugerenciaEstudiante
+  // Objetivo: guardar la sugerencia de un estudiante
+  crearSugerenciaEstudiante(sugerencia: Sugerencia, idMateria: number): Observable<string> {
+    let url = this.baseUrl + '/suggestions/student';
+
+    // Mapeando la entrada
+    let q = JSON.stringify({ subjectId: idMateria, title: sugerencia.titulo, author: sugerencia.autor, publisher: sugerencia.editorial, edition: sugerencia.edicion, isbn: sugerencia.isbn, price: sugerencia.precio });
+
+    // Realizando POST
+    return this.http.post(url, q, { headers: this.headers }).map(
+      // Mapeando salida
+      (response: Response) => {
+        let r = response.json();
+        return r['message'];
+      }
+    );
+  }
+
+  // Método: crearSugerenciaDocente
+  // Objetivo: guardar la sugerencia de un docente
+  crearSugerenciaDocente(sugerencia: Sugerencia, idMateria: number): Observable<string> {
+    let url = this.baseUrl + '/suggestions/teacher';
+
+    // Mapeando la entrada
+    let q = JSON.stringify({ subjectId: idMateria, title: sugerencia.titulo, author: sugerencia.autor, publisher: sugerencia.editorial, edition: sugerencia.edicion, isbn: sugerencia.isbn, price: sugerencia.precio, quantity: sugerencia.cantidad });
+
+    // Realizando POST
+    return this.http.post(url, q, { headers: this.headers }).map(
+      // Mapeando salida
+      (response: Response) => {
+        let r = response.json();
+        return r['message'];
+      }
+    );
   }
 
   // Método: obtenerCarreras
   // Objetivo: obtener carreras con sus respectivas materias
-  obtenerCarreras(): Observable<Carrera[]>{
+  obtenerCarreras(): Observable<Carrera[]> {
     let url = this.baseUrl + '/suggestions/careers';
 
     // Realizando GET
@@ -40,7 +76,7 @@ export class SugerenciasService {
 
           // Mapear el objeto materia
           let materias = new Array<Materia>();
-          item['subjects'].forEach(function(subject){
+          item['subjects'].forEach(function(subject) {
             let materia = new Materia;
             materia.id = subject['id'];
             materia.codigo = subject['code'];
@@ -122,7 +158,7 @@ export class SugerenciasService {
 
   // Método: obtener
   // Objetivo: recuperar una sugerencia
-  obtener(id: number): Observable<Sugerencia>{
+  obtener(id: number): Observable<Sugerencia> {
     let url = this.baseUrl + '/suggestions/' + id;
 
     // Realizando GET
@@ -144,7 +180,7 @@ export class SugerenciasService {
 
         // Mapear los votos
         let votos = new Array<Voto>();
-        r['upVotes'].forEach(function(item){
+        r['upVotes'].forEach(function(item) {
           let voto = new Voto;
           voto.idMateria = item['subjectId'];
           voto.materia = item['subjectName'];
@@ -154,9 +190,9 @@ export class SugerenciasService {
         });
         sugerencia._votos = votos;
 
-        // Mapear los votos
+        // Mapear los pedidos
         let pedidos = new Array<Pedido>();
-        r['orders'].forEach(function(item){
+        r['orders'].forEach(function(item) {
           let pedido = new Pedido;
           pedido.idMateria = item['subjectId'];
           pedido.materia = item['subjectName'];
@@ -173,7 +209,7 @@ export class SugerenciasService {
 
   // Método: votar
   // Objetivo: agregar un voto
-  votar(id: number): Observable<string>{
+  votar(id: number): Observable<string> {
     let url = this.baseUrl + '/suggestions/' + id + '/votes';
 
     let q = JSON.stringify({ subjectId: id });

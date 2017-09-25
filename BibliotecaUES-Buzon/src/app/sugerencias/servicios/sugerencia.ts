@@ -10,6 +10,7 @@ export class Sugerencia{
   edicion: number;
   isbn:string;
   precio: number;
+  cantidad: number;
   votos: number;
   _votos: Voto[];
   pedidos: number;
