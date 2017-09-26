@@ -1,7 +1,7 @@
 /*
-*Nombre del módulo: 
-*Dirección física:
-*Objetivo:
+*Nombre del módulo: Gestión de sugerencias
+*Dirección física: src\app\sugerencias\componentes\sugerencias-root.component.ts
+*Objetivo: Formar la estructura básica para los componentes de Sugerencias
 **/
 
 import { Component, OnInit } from '@angular/core';

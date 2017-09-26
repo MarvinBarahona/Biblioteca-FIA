@@ -1,7 +1,7 @@
 /*
-*Nombre del módulo:
-*Dirección física:
-*Objetivo:
+*Nombre del módulo: Gestión de sugerencias
+*Dirección física: src\app\sugerencias\componentes\sugerencia-nueva-estudiante.component.ts
+*Objetivo: Crear sugerencia de un estudiante
 **/
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';

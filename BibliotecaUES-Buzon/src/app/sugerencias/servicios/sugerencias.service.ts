@@ -1,4 +1,4 @@
-// Servicios de sugerencias.
+// Servicio de sugerencias.
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 
 import { CookieService } from 'ngx-cookie';
-// import { Sugerencia, Carrera, Materia } from './';
+
 import { Sugerencia, Materia, Carrera, Voto, Pedido } from './';
 
 @Injectable()
@@ -19,31 +19,20 @@ export class SugerenciasService {
     this.headers = new Headers({ 'Content-Type': 'application/json' });
   }
 
-  // Método: crearSugerenciaEstudiante
-  // Objetivo: guardar la sugerencia de un estudiante
-  crearSugerenciaEstudiante(sugerencia: Sugerencia, idMateria: number): Observable<string> {
-    let url = this.baseUrl + '/suggestions/student';
+  // Método: crear
+  // Objetivo: guardar una sugerencia, ya sea de un estudiante o de un docente
+  crear(sugerencia: Sugerencia, idMateria: number, docente: boolean): Observable<string> {
+    let url = this.baseUrl + '/suggestions/' + (docente ? 'student' : 'teacher');
 
     // Mapeando la entrada
-    let q = JSON.stringify({ subjectId: idMateria, title: sugerencia.titulo, author: sugerencia.autor, publisher: sugerencia.editorial, edition: sugerencia.edicion, isbn: sugerencia.isbn, price: sugerencia.precio });
+    let _sugerencia = { subjectId: idMateria, title: sugerencia.titulo, author: sugerencia.autor, publisher: sugerencia.editorial, edition: sugerencia.edicion, isbn: sugerencia.isbn, price: sugerencia.precio };
 
-    // Realizando POST
-    return this.http.post(url, q, { headers: this.headers }).map(
-      // Mapeando salida
-      (response: Response) => {
-        let r = response.json();
-        return r['message'];
-      }
-    );
-  }
 
-  // Método: crearSugerenciaDocente
-  // Objetivo: guardar la sugerencia de un docente
-  crearSugerenciaDocente(sugerencia: Sugerencia, idMateria: number): Observable<string> {
-    let url = this.baseUrl + '/suggestions/teacher';
+    if(docente){
+      _sugerencia['quantity']=sugerencia.cantidad;
+    }
 
-    // Mapeando la entrada
-    let q = JSON.stringify({ subjectId: idMateria, title: sugerencia.titulo, author: sugerencia.autor, publisher: sugerencia.editorial, edition: sugerencia.edicion, isbn: sugerencia.isbn, price: sugerencia.precio, quantity: sugerencia.cantidad });
+    let q = JSON.stringify(_sugerencia);
 
     // Realizando POST
     return this.http.post(url, q, { headers: this.headers }).map(
