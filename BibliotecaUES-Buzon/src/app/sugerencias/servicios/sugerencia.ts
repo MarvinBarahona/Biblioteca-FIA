@@ -1,6 +1,6 @@
 // Clase sugerencia del módulo de sugerencias
 
-import { Voto, Pedido } from './';
+import { Materia } from './';
 
 export class Sugerencia{
   id: number;
@@ -11,8 +11,5 @@ export class Sugerencia{
   isbn:string;
   precio: number;
   cantidad: number;
-  votos: number;
-  _votos: Voto[];
-  pedidos: number;
-  _pedidos: Pedido[];
+  materias: Materia[];
 }
