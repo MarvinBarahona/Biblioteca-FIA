@@ -22,6 +22,12 @@ constructor(private sugerenciasService: SugerenciasService, private route: Activ
 
   ngOnInit() {
     this.inicializarAutocompletado();
+
+    this.sugerenciasService.obtenerCarreras().subscribe(
+      carreras => {
+        console.log(carreras);
+      }
+    );
   }
 
   crear(){}

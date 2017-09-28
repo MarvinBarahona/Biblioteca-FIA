@@ -31,7 +31,7 @@ const routes: Routes = [
         path: 'votar/:id',
         component: SugerenciaComponent,
         canActivate: [AppAuthGuard],
-        data: {politica: 420}
+        data: {politica: 410}
       }
     ]
   }

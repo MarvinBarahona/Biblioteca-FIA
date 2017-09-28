@@ -18,6 +18,12 @@ export class SugerenciasComponent implements OnInit {
   constructor(private sugerenciasService: SugerenciasService, private router: Router) {}
 
   ngOnInit(): void {
+    this.sugerenciasService.top10().subscribe(
+      sugerencias => {
+        this.sugerencias = sugerencias;
+      }
+    );
+
   }
 
   buscar(){}

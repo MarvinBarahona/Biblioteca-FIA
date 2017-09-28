@@ -8,7 +8,9 @@ export class Sugerencia{
   autor:string;
   editorial: string;
   edicion: number;
-  isbn:string;
+  isbn: string;
+  votos: number;
+  pedidos: number;
   precio: number;
   cantidad: number;
   materias: Materia[];

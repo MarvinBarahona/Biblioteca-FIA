@@ -4,7 +4,7 @@
 *Objetivo: permite al usuario iniciar sesión.
 */
 
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { CookieService } from 'ngx-cookie';
@@ -28,11 +28,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/ejemplares';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/sugerencias';
   }
 
   ngAfterViewInit() {
@@ -40,7 +41,20 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   logueo() {
+    this.errorMessage = undefined;
+    this.message = "Confirmando cuenta...";
+    this.cd.detectChanges();
 
+    this.authService.logueo(this.token).subscribe(
+      r => {
+        this.cookieService.put('token', r['token']);
+        this.cookieService.putObject('usuario', r['usuario']);
+        window.location.href = '.' + this.returnUrl;
+      },
+      error => {
+        this.errorMessage = "El correo ingresado no es del dominio de la UES";
+      }
+    );
   }
 
   googleInit() {
@@ -60,13 +74,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       let profile = googleUser.getBasicProfile();
       this.token = googleUser.getAuthResponse().id_token + "";
 
-      //YOUR CODE HERE
-      this.errorMessage = undefined;
-      this.message = "Iniciando sesión...";
-      console.log(this.token);
-
-    }, (error) => {
-      // alert(JSON.stringify(error, undefined, 2));
+      this.logueo();
     });
   }
 }
