@@ -7,7 +7,6 @@
 import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { CookieService } from 'ngx-cookie';
 import { AuthService } from './../servicios';
 
 declare const gapi: any;
@@ -28,7 +27,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private cookieService: CookieService,
     private cd: ChangeDetectorRef
   ) { }
 
@@ -47,8 +45,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     this.authService.logueo(this.token).subscribe(
       r => {
-        this.cookieService.put('token', r['token']);
-        this.cookieService.putObject('usuario', r['usuario']);
+        sessionStorage.setItem('token', r['token']);
+        sessionStorage.setItem('usuario', JSON.stringify(r['usuario']));
         window.location.href = '.' + this.returnUrl;
       },
       error => {

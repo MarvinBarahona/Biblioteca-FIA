@@ -25,7 +25,7 @@ constructor(private sugerenciasService: SugerenciasService, private route: Activ
 
     this.sugerenciasService.obtenerCarreras().subscribe(
       carreras => {
-        console.log(carreras);
+        
       }
     );
   }

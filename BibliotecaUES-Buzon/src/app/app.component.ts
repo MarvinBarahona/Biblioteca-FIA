@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { CookieService } from 'ngx-cookie';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,15 +9,15 @@ import { CookieService } from 'ngx-cookie';
 export class AppComponent {
   usuario: string;
 
-  constructor(private router: Router, private cookieService: CookieService) { }
+  constructor(private router: Router) { }
 
   cerrarSesion() {
-    this.cookieService.removeAll();
+    sessionStorage.clear();
     window.location.href = "./login";
   }
 
   ngOnInit(){
-    let u = this.cookieService.getObject('usuario');
+    let u = JSON.parse(sessionStorage.getItem('usuario'));
     if(u) this.usuario = u['nombre'];
   }
 }

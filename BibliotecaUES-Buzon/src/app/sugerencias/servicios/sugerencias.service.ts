@@ -5,8 +5,6 @@ import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 
-import { CookieService } from 'ngx-cookie';
-
 import { Sugerencia, Materia, Carrera } from './';
 
 @Injectable()
@@ -14,9 +12,9 @@ export class SugerenciasService {
   baseUrl: string;
   headers: Headers;
 
-  constructor(private http: Http, private cookieService: CookieService) {
+  constructor(private http: Http) {
     this.baseUrl = "https://bibliotecafiaues.herokuapp.com";
-    this.headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.cookieService.get('token') });
+    this.headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': sessionStorage.getItem('token') });
   }
 
   // Método: crear
@@ -54,7 +52,6 @@ export class SugerenciasService {
       //Mapeando la salida
       (response: Response) => {
         let r = response.json();
-        console.log(r);
 
         let carreras = new Array<Carrera>();
         let rc = r['majors'];

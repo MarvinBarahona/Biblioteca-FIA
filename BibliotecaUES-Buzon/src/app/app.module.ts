@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { MaterializeModule } from 'angular2-materialize';
 import { DataTablesModule } from 'angular-datatables';
-import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
-import { CookieModule } from 'ngx-cookie';
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,7 +17,6 @@ import { LoginModule } from './login/';
     MaterializeModule,
     DataTablesModule,
     Angular2FontawesomeModule,
-    CookieModule.forRoot(),
     LoginModule,
     SugerenciasModule,
     AppRoutingModule
