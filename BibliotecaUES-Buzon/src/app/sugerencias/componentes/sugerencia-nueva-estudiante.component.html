@@ -7,23 +7,21 @@
         <!-- Carrera y Materias -->
         <div class="row">
           <div class="input-field col l3 offset-l2 m5 s12">
-            <select id="carrera" name="carrera" materialize="material_select" required>
-              <option value='0' selected>Ingeniería de Sistemas Informática</option>
-              <option value='1' selected>Ingeniería Eléctrica</option>
-              <option value='2' selected>Unidad de Ciencias Básicas</option>
+            <select materialize="material_select" name="carrera" (change)="selectCarrera($event.target.value)" required>
+              <option *ngFor="let carrera of carreras">{{carrera.nombre}}</option>
             </select>
             <label for="tipo">Carrera:</label>
           </div>
           <div class="input-field col l5  m7 s12">
-            <div id="materias" class="chips"></div>
-            <label for="materias">Materias</label>
+            <input id="materia" name="materia" type="text" class="validate" required>
+            <label for="materia">Materia</label>
           </div>
         </div>
 
         <!-- Título -->
         <div class="row">
           <div class="input-field col l8 offset-l2 s12">
-            <input id="titulo" name="titulo" type="text" class="validate" required>
+            <input id="titulo" name="titulo" type="text" class="validate" [(ngModel)]="sugerencia.titulo" required>
             <label for="titulo">Título</label>
           </div>
         </div>
@@ -31,7 +29,7 @@
         <!-- Autor -->
         <div class="row">
           <div class="input-field col l8 offset-l2 s12">
-            <input id="autor" name="autor" type="text" class="validate" required>
+            <input id="autor" name="autor" type="text" class="validate" [(ngModel)]="sugerencia.autor" required>
             <label for="autor">Autor</label>
           </div>
         </div>
@@ -39,19 +37,19 @@
         <!-- Edición, Editorial e ISBN -->
         <div class="row">
           <div class="input-field col l1 offset-l2 m2 s12">
-            <input id="edicion" name="edicion" type="number" class="validate" min="1" max="30" required>
+            <input id="edicion" name="edicion" type="number" class="validate" [(ngModel)]="sugerencia.edicion" min="1" max="30" required>
             <label for="edicion" data-error="Valor entre 1 y 30">Edición</label>
           </div>
           <div class="input-field col l3 m4 s12">
-            <input id="editorial" name="editorial" type="text" class="validate" required>
+            <input id="editorial" name="editorial" type="text" class="validate" [(ngModel)]="sugerencia.editorial" required>
             <label for="editorial">Editorial</label>
           </div>
           <div class="input-field col l3 m4 s12">
-            <input id="isbn" name="isbn" type="text" class="validate" required>
-            <label for="isbn">ISBN</label>
+            <input id="isbn" name="isbn" type="text" class="validate" pattern="^[\d-]{13}$|^[\d-]{17}$" [(ngModel)]="sugerencia.isbn" required>
+            <label for="isbn" data-error="Ingrese 10 ó 13 dígitos, con guiones">ISBN</label>
           </div>
           <div class="input-field col l1 m2 s12">
-            <input id="precio" name="precio" type="text" class="validate" required>
+            <input id="precio" name="precio" type="number" class="validate" [(ngModel)]="sugerencia.precio" min="1" max="200" step="0.01" required>
             <label for="precio">Precio</label>
           </div>
         </div>
@@ -59,7 +57,7 @@
         <!-- Botones del formulario -->
         <div class="row">
           <div class="center">
-            <button type="submit" class="btn waves-effect waves-green">Guardar</button>
+            <button type="submit" class="btn waves-effect waves-green" [disabled]="!sugerenciaNuevaForm.form.valid || !idMateria">Guardar</button>
             <button type="button" class="btn waves-effect waves-green">Cancelar</button>
           </div>
         </div>
