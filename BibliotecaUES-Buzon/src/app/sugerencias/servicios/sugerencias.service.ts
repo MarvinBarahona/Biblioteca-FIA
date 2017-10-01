@@ -19,7 +19,7 @@ export class SugerenciasService {
 
   // Método: crear
   // Objetivo: guardar una sugerencia, ya sea de un estudiante o de un docente
-  crear(sugerencia: Sugerencia, idMateria: number, docente: boolean): Observable<string> {
+  crear(sugerencia: Sugerencia, idMateria: number, docente: boolean): Observable<any> {
     let url = this.baseUrl + '/suggestions/' + (docente ? 'teacher' : 'student');
 
     // Mapeando la entrada
@@ -37,7 +37,7 @@ export class SugerenciasService {
       // Mapeando salida
       (response: Response) => {
         let r = response.json();
-        return r['message'];
+        return r;
       }
     );
   }

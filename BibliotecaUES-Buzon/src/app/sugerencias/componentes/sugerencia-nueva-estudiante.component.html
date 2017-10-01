@@ -66,10 +66,13 @@
       <!-- Mensajes -->
       <div class="row">
         <div class="alert alert-info col s6 offset-s3" *ngIf="showMessage">
-          <p>Creando libro...</p>
+          <p>Creando suegerencia...</p>
         </div>
         <div class="alert alert-danger col s6 offset-s3" *ngIf="errorMessage">
-          < <p>{{errorMessage}}</p>
+          <p>{{errorMessage}}</p>
+        </div>
+        <div class="alert alert-warning col s6 offset-s3" *ngIf="showFailMessage">
+          <p>El ISBN ingresado ya está registrado. <a href="javascript:void(0)" (click)="linkSugerencia()">Ver sugerencia</a></p>
         </div>
       </div>
 

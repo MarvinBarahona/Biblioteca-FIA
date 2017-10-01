@@ -21,8 +21,10 @@ export class SugerenciaNuevaEstudianteComponent implements OnInit {
   sugerencia: Sugerencia;
   idMateria: number;
 
-  message: string;
+  showMessage: boolean;
   errorMessage: string;
+  showFailMessage: boolean;
+  linkId: string;
 
   constructor(
     private sugerenciasService: SugerenciasService,
@@ -33,6 +35,8 @@ export class SugerenciaNuevaEstudianteComponent implements OnInit {
 
   ngOnInit() {
     this.sugerencia = new Sugerencia;
+    this.showFailMessage = false;
+    this.showMessage = false;
 
     this.sugerenciasService.obtenerCarreras().subscribe(
       carreras => {
@@ -46,14 +50,32 @@ export class SugerenciaNuevaEstudianteComponent implements OnInit {
   }
 
   crear() {
-    this.message = "Guardando la sugerencia...";
+    this.showMessage = true;
     this.errorMessage = null;
+    this.showFailMessage = false;
 
     this.sugerenciasService.crear(this.sugerencia, this.idMateria, false).subscribe(
-      (message) => {
-        console.log(message);
+      (r) => {
+        if(r['saved']) this.router.navigate(['/sugerencias']);
+        else{
+          this.showFailMessage = true;
+          this.showMessage = false;
+          this.linkId = r['suggestionId'];
+        }
+      },
+      (error) => {
+        let r = error.json();
+        let errors = r['errors'];
+        this.showFailMessage = true;
+        this.showMessage = false;
+        this.linkId = errors['suggestionId'];
       }
     );
+  }
+
+  // Link a sugerencia
+  linkSugerencia(){
+    this.router.navigate(['/sugerencias/votar/'+this.linkId]);
   }
 
   // Al seleccionar una carreras
