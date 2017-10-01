@@ -3,17 +3,17 @@
 
     <!-- Buscador -->
     <div class="card-panel">
-      <form #buscarForm="ngForm" (submit)="buscar()">
+      <form #buscarForm="ngForm" (submit)="buscar()" autocomplete="off">
         <div class="row">
-          <div class="input-field col l7 m6 s12">
-            <input id="busqueda" name="busqueda" type="text" class="validate" maxlength="60" required>
+          <div class="input-field col l7 offset-l1 m6 s12">
+            <input id="busqueda" name="busqueda" type="text" class="validate" maxlength="60" [(ngModel)]="textoBusqueda" required>
             <label for="busqueda">Buscar...</label>
           </div>
           <div class="input-field col l2 m4 s12">
-            <select id="tipo" name="tipo" materialize="material_select" required>
-              <option value='0' selected>Título</option>
-              <option value='1'>Código de Materia</option>
-              <option value='2'>Carrera</option>
+            <select id="tipo" name="tipo" materialize="material_select" [(ngModel)]="criterioBusqueda" required>
+              <option value='0'>Título</option>
+              <option value='1'>ISBN</option>
+              <option value='2'>Código de materia</option>
             </select>
             <label for="tipo">Criterio:</label>
           </div>
@@ -32,8 +32,12 @@
           <ul class="collection">
             <li *ngIf="sugerencias.length == 0">Sin resultados</li>
             <li *ngFor="let sugerencia of sugerencias" class="collection-item">
-              <strong><a routerLink="/sugerencias/votar/1">{{sugerencia.titulo}}</a></strong><span class="right">{{sugerencia.votos}}</span>
-              <br>Autor
+              <strong><a routerLink="/sugerencias/votar/1">{{sugerencia.titulo}}</a></strong>
+              <br>
+              <span>{{sugerencia.autor}}</span>
+              <span class="right">
+                <strong>Pedidos: </strong>{{sugerencia.pedidos}} <strong>Votos: </strong>{{sugerencia.votos}}
+              </span>
             </li>
           </ul>
         </div>
