@@ -42,7 +42,7 @@ export class SugerenciasComponent implements OnInit {
         break;
       }
       case '2': {
-        key = 'subjectCode';
+        key = 'code';
         break;
       }
       default:{}
@@ -53,6 +53,10 @@ export class SugerenciasComponent implements OnInit {
         this.sugerencias = sugerencias;
       }
     );
+  }
+
+  linkAdquisicion(id: string){
+    this.router.navigate(['/sugerencias/votar/' + id]);
   }
 
 }

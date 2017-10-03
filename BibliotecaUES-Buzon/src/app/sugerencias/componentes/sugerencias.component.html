@@ -32,7 +32,7 @@
           <ul class="collection">
             <li *ngIf="sugerencias.length == 0">Sin resultados</li>
             <li *ngFor="let sugerencia of sugerencias" class="collection-item">
-              <strong><a routerLink="/sugerencias/votar/1">{{sugerencia.titulo}}</a></strong>
+              <strong><a href="javascript:void(0)" (click)="linkAdquisicion(sugerencia.id)">{{sugerencia.titulo}} ({{sugerencia.isbn}})</a></strong>
               <br>
               <span>{{sugerencia.autor}}</span>
               <span class="right">
@@ -55,7 +55,7 @@
         </div>
       </ng-template>
       <div class="row">
-        <a class="btn btn-floating btn cyan pulse right" routerLink="/sugerencias/nueva/estudiante"><i class="material-icons">plus_one</i></a>
+        <a class="btn btn-floating btn cyan pulse right" routerLink="/sugerencias/nueva/estudiante">+</a>
       </div>
     </div>
     <!-- /card-panel -->

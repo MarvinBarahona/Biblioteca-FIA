@@ -106,7 +106,7 @@ export class SugerenciasService {
           sugerencia.autor = item['author'];
           sugerencia.edicion = item['edition'];
           sugerencia.isbn = item['isbn'];
-          sugerencia.votos = item['upVotes'];
+          sugerencia.votos = item['upvotes'];
           sugerencia.pedidos = item['orders'];
 
           sugerencias.push(sugerencia);
@@ -138,7 +138,7 @@ export class SugerenciasService {
           sugerencia.autor = item['author'];
           sugerencia.edicion = item['edition'];
           sugerencia.isbn = item['isbn'];
-          sugerencia.votos = item['upVotes'];
+          sugerencia.votos = item['upvotes'];
           sugerencia.pedidos = item['orders'];
 
           sugerencias.push(sugerencia);

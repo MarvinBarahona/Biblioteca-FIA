@@ -54,7 +54,7 @@ export class SugerenciaNuevaDocenteComponent implements OnInit {
     this.errorMessage = null;
     this.showFailMessage = false;
 
-    this.sugerenciasService.crear(this.sugerencia, this.idMateria, false).subscribe(
+    this.sugerenciasService.crear(this.sugerencia, this.idMateria, true).subscribe(
       (r) => {
         if(r['saved']) this.router.navigate(['/sugerencias']);
         else{

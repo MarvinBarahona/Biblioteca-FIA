@@ -1,31 +1,24 @@
 <div class="row">
   <div class="col s12 m12 l12">
     <div class="card-panel">
-      <h5 class="center">Título, #° ed</h5>
-      <h6 class="center">Editorial</h6>
+      <h5 class="center">{{sugerencia.titulo}}, {{sugerencia.edicion}}ed</h5>
+      <h6 class="center">{{sugerencia.editorial}}</h6>
 
       <div class="row">
         <div class="col s12 m3 offset-m4">
-          <strong>Autor: </strong> Nombre de autor
+          <strong>Autor: </strong> {{sugerencia.autor}}
         </div>
         <div class="col s12 m3">
-          <strong>ISBN: </strong>ISBN
+          <strong>ISBN: </strong> {{sugerencia.isbn}}
         </div>
       </div>
 
       <div class="row">
-        <div class="col s12 m3 offset-m3">
+        <div class="col s12 m3 offset-m2" *ngFor="let materia of sugerencia.materias">
           <dl>
-            <dt><strong>Ingeniería Informática</strong></dt>
-            <dd>IGF115 <a href=""><i class="material-icons">thumb_up</i></a></dd>
-            <dd>DSI215 <a href=""><i class="material-icons">thumb_up</i></a></dd>
-          </dl>
-        </div>
-        <div class="col s12 m6">
-          <dl>
-            <dt><strong>Ingeniería Civl</strong></dt>
-            <dd>MSO115 <a href=""><i class="material-icons">thumb_up</i></a></dd>
-            <dd>FIR215 <a href=""><i class="material-icons">thumb_up</i></a></dd>
+            <dt><strong>{{materia.codigo}} - {{materia.nombre}}</strong></dt>
+            <dd>Votos: {{materia.votos}}<a href=""><i class="material-icons">thumb_up</i></a></dd>
+            <dd>Pedidos: {{materia.pedidos}}<a href=""><i class="material-icons">thumb_up</i></a></dd>
           </dl>
         </div>
       </div>

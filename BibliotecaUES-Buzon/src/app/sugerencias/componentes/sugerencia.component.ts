@@ -6,17 +6,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { SugerenciasService } from './../servicios'
+import { SugerenciasService, Sugerencia } from './../servicios'
 
 @Component({
   templateUrl: './sugerencia.component.html'
 })
 export class SugerenciaComponent implements OnInit {
+  sugerencia: Sugerencia;
 
-
-constructor(private sugerenciasService: SugerenciasService, private route: ActivatedRoute, private router: Router){}
+  constructor(private sugerenciasService: SugerenciasService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    let id = this.route.params['id'];
+
+    this.sugerenciasService.obtener(id).subscribe(
+      sugerencia => {
+        this.sugerencia = sugerencia;
+      }
+    );
   }
 
 }
