@@ -10,7 +10,12 @@ import { Router } from '@angular/router';
 import { SugerenciasService, Sugerencia } from './../servicios';
 
 @Component({
-  templateUrl: './sugerencias.component.html'
+  templateUrl: './sugerencias.component.html',
+  styles: [`
+    .sugerencia{
+      border-style: solid;
+    }
+  `]
 })
 export class SugerenciasComponent implements OnInit {
   sugerencias: Sugerencia[];
@@ -55,8 +60,16 @@ export class SugerenciasComponent implements OnInit {
     );
   }
 
-  linkAdquisicion(id: string){
-    this.router.navigate(['/sugerencias/votar/' + id]);
+  linkSugerencia(id: string){
+    let docente = JSON.parse(sessionStorage.getItem('usuario'))['grupo'] == "Docente";
+    if(docente) this.router.navigate(['/sugerencias/pedir/' + id]);
+    else this.router.navigate(['/sugerencias/votar/' + id]);
+  }
+
+  linkCrear(){
+    let docente = JSON.parse(sessionStorage.getItem('usuario'))['grupo'] == "Docente";
+    if(docente) this.router.navigate(['/sugerencias/nueva/docente']);
+    else this.router.navigate(['/sugerencias/nueva/estudiante']);
   }
 
 }

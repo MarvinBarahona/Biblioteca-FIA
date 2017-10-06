@@ -17,11 +17,17 @@ export class SugerenciaComponent implements OnInit {
   constructor(private sugerenciasService: SugerenciasService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    let id = this.route.params['id'];
+    let id = this.route.snapshot.params['id'];
 
     this.sugerenciasService.obtener(id).subscribe(
       sugerencia => {
         this.sugerencia = sugerencia;
+      },
+      error =>{
+        //Si la sugerencia no existe
+        if(error.status == 404){
+          this.router.navigate(['/error404'], { skipLocationChange: true });
+        }
       }
     );
   }
