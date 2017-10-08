@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       r => {
         sessionStorage.setItem('token', r['token']);
         sessionStorage.setItem('usuario', JSON.stringify(r['usuario']));
+        sessionStorage.setItem('gToken', this.token);
         window.location.href = '.' + this.returnUrl;
       },
       error => {
