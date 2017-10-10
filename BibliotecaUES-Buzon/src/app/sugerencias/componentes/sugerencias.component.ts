@@ -13,7 +13,8 @@ import { SugerenciasService, Sugerencia } from './../servicios';
   templateUrl: './sugerencias.component.html',
   styles: [`
     .sugerencia{
-      border-style: solid;
+      border: 1px solid;
+      margin-top: 10px;
     }
   `]
 })

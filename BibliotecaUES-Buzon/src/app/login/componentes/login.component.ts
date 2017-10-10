@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         window.location.href = '.' + this.returnUrl;
       },
       error => {
-        this.errorMessage = "El correo ingresado no es del dominio de la UES";
+        this.errorMessage = "El correo ingresado no es del dominio de la Universidad de El Salvador";
         this.message = null;
         this.cd.detectChanges();
       }

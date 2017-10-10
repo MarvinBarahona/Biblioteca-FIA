@@ -27,31 +27,17 @@
       <br>
 
       <!-- Resultados -->
-      <!-- <div class="row" *ngIf="sugerencias; else elseSugerencias">
-        <div class="col l8 offset-l2 m10 offset-m1 s12">
-          <ul class="collection">
-            <li *ngIf="sugerencias.length == 0">Sin resultados</li>
-            <li *ngFor="let sugerencia of sugerencias" class="collection-item">
-              <strong><a href="javascript:void(0)" (click)="linkSugerencia(sugerencia.id)">{{sugerencia.titulo}} ({{sugerencia.isbn}})</a></strong>
-              <br>
-              <span>{{sugerencia.autor}}</span>
-              <span class="right">
-                <strong>Pedidos: </strong>{{sugerencia.pedidos}} <strong>Votos: </strong>{{sugerencia.votos}}
-              </span>
-            </li>
-          </ul>
-        </div>
-      </div> -->
-
-      <!-- Resultados -->
       <div class="row" *ngIf="sugerencias; else elseSugerencias">
         <div class="sugerencia" *ngIf="sugerencias.length == 0" >Sin resultados</div>
-        <div class="col l4 offset-l1 m10 offset-m1 s12" *ngFor="let sugerencia of sugerencias">
+        <div class="col l4 offset-l1 m10 offset-m1 s12 sugerencia" *ngFor="let sugerencia of sugerencias">
 
-          <strong><a href="javascript:void(0)" (click)="linkSugerencia(sugerencia.id)">{{sugerencia.titulo}} ({{sugerencia.isbn}})</a></strong>
+          <strong><a href="javascript:void(0)" (click)="linkSugerencia(sugerencia.id)">{{sugerencia.titulo}} ({{sugerencia.autor}})</a></strong>
           <br>
-          <span>{{sugerencia.autor}}</span>
-          <span class="right">
+          <span>
+            <strong>ISBN: </strong>{{sugerencia.isbn}}
+          </span>
+          <br>
+          <span>
               <strong>Pedidos: </strong>{{sugerencia.pedidos}} <strong>Votos: </strong>{{sugerencia.votos}}
           </span>
         </div>
