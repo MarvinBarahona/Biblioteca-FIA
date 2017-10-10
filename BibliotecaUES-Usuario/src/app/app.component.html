@@ -8,11 +8,15 @@
       </ul>
 
       <ul class="right" *ngIf='usuario'>
-         <li><a materialize="dropdown" class='dropdown-button' href='javascript:void(0)' data-activates='dropdown1'>{{usuario}}<i class="material-icons right">arrow_drop_down</i></a></li>
-         <ul id='dropdown1' class='dropdown-content'>
-           <li><a href="javascript:void(0)" (click)='cerrarSesion()'>Cerrar sesión</a></li>
-         </ul>
-       </ul>
+        <li><a materialize="dropdown" class='dropdown-button' href='javascript:void(0)' data-activates='dropdown1'>{{usuario.nombre}}<i class="material-icons right">arrow_drop_down</i></a></li>
+        <ul id='dropdown1' class='dropdown-content'>
+          <li><a href="javascript:void(0)" (click)='cerrarSesion()'>Cerrar sesión</a></li>
+        </ul>
+      </ul>
+
+      <ul class="right" [hidden]="usuario">
+        <button type="button" class="btn waves-effect waves-green" id="googleBtn">Iniciar sesión</button>
+      </ul>
 
     </div>
   </nav>

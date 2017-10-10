@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LibrosRootComponent, LibroComponent, LibrosComponent, LoginComponent } from './componentes';
+import { LibrosRootComponent, LibroComponent, LibrosComponent } from './componentes';
 
 const routes: Routes = [
   {
@@ -17,10 +17,6 @@ const routes: Routes = [
         component: LibroComponent
       }
     ]
-  },
-  {
-    path: 'login',
-    component: LoginComponent
   }
 ];
 

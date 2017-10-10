@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { LibrosModule } from './libros/libros.module';
 
+import { AuthService } from './login/servicios/';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -24,7 +26,7 @@ import { LibrosModule } from './libros/libros.module';
   declarations: [
     AppComponent
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
