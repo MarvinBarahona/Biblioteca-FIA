@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   logueo() {
-    this.errorMessage = undefined;
+    this.errorMessage = null;
     this.message = "Confirmando cuenta...";
     this.cd.detectChanges();
 
@@ -47,11 +47,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
       r => {
         sessionStorage.setItem('token', r['token']);
         sessionStorage.setItem('usuario', JSON.stringify(r['usuario']));
-        sessionStorage.setItem('gToken', this.token);
         window.location.href = '.' + this.returnUrl;
       },
       error => {
         this.errorMessage = "El correo ingresado no es del dominio de la UES";
+        this.message = null;
+        this.cd.detectChanges();
       }
     );
   }
@@ -73,6 +74,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       let profile = googleUser.getBasicProfile();
       this.token = googleUser.getAuthResponse().id_token + "";
 
+      sessionStorage.setItem('gToken', this.token);
       this.logueo();
     });
   }
