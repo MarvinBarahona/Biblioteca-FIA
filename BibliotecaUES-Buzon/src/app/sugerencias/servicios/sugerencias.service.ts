@@ -192,10 +192,10 @@ export class SugerenciasService {
 
   // Método: votar
   // Objetivo: agregar un voto
-  votar(id: number): Observable<string> {
-    let url = this.baseUrl + '/suggestions/' + id + '/votes';
+  votar(sugerenciaId: number, materiaId): Observable<string> {
+    let url = this.baseUrl + '/suggestions/' + sugerenciaId + '/votes';
 
-    let q = JSON.stringify({ subjectId: id });
+    let q = JSON.stringify({ subjectId: materiaId });
 
     // Realizando POST
     return this.http.post(url, q, { headers: this.headers }).map(

@@ -20,6 +20,7 @@ export class SugerenciaNuevaEstudianteComponent implements OnInit {
   carreraSelect: Carrera;
   sugerencia: Sugerencia;
   idMateria: number;
+  materia: string;
 
   showMessage: boolean;
   errorMessage: string;

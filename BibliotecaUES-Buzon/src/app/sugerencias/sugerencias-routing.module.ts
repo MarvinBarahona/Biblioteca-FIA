@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppAuthGuard } from './../login/';
-import { SugerenciasRootComponent, SugerenciaComponent, SugerenciaNuevaEstudianteComponent, SugerenciaNuevaDocenteComponent, SugerenciasComponent } from './componentes';
+import { SugerenciasRootComponent, VotarComponent, SugerenciaNuevaEstudianteComponent, SugerenciaNuevaDocenteComponent, SugerenciasComponent } from './componentes';
 
 const routes: Routes = [
   {
@@ -29,7 +29,7 @@ const routes: Routes = [
       },
       {
         path: 'votar/:id',
-        component: SugerenciaComponent,
+        component: VotarComponent,
         canActivate: [AppAuthGuard],
         data: {politica: 410}
       }
