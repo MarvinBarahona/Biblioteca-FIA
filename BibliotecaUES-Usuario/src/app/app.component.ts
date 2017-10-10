@@ -1,5 +1,6 @@
-import { Component, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, AfterViewInit, ChangeDetectorRef, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { MaterializeAction } from "angular2-materialize";
 
 import { AuthService, Usuario } from './login/servicios/';
 
@@ -14,8 +15,17 @@ export class AppComponent implements AfterViewInit {
   usuario: Usuario;
   auth2: any;
   token: string;
+  messageBtn: string;
+
+  modalErrorActions = new EventEmitter<string | MaterializeAction>();
 
   constructor(private router: Router, private authService: AuthService, private cd: ChangeDetectorRef) { }
+
+  ngOnInit() {
+    this.messageBtn = "Iniciar sesión";
+    let u = JSON.parse(sessionStorage.getItem('usuario'));
+    if (u) this.usuario = u;
+  }
 
   ngAfterViewInit() {
     this.googleInit();
@@ -24,11 +34,6 @@ export class AppComponent implements AfterViewInit {
   cerrarSesion() {
     sessionStorage.clear();
     location.reload();
-  }
-
-  ngOnInit() {
-    let u = JSON.parse(sessionStorage.getItem('usuario'));
-    if (u) this.usuario = u;
   }
 
   googleInit() {
@@ -54,6 +59,9 @@ export class AppComponent implements AfterViewInit {
   }
 
   logueo() {
+    this.messageBtn = "Iniciando sesión...";
+    this.cd.detectChanges();
+
     this.authService.logueo(this.token).subscribe(
       r => {
         let usuario = r['usuario'];
@@ -62,10 +70,17 @@ export class AppComponent implements AfterViewInit {
         location.reload();
       },
       error => {
-        // this.errorMessage = "El correo ingresado no es del dominio de la Universidad de El Salvador";
-        // this.message = null;
-        // this.cd.detectChanges();
+        this.openModalError();
+        this.messageBtn = "Iniciar sesión";
+        this.cd.detectChanges();
       }
     );
+  }
+
+  openModalError() {
+    this.modalErrorActions.emit({ action: "modal", params: ['open'] });
+  }
+  closeModalError() {
+    this.modalErrorActions.emit({ action: "modal", params: ['close'] });
   }
 }

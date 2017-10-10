@@ -15,12 +15,25 @@
       </ul>
 
       <ul class="right" [hidden]="usuario">
-        <button type="button" class="btn waves-effect waves-green" id="googleBtn">Iniciar sesión</button>
+        <button type="button" class="btn waves-effect waves-green" id="googleBtn">{{messageBtn}}</button>
       </ul>
 
     </div>
   </nav>
 </div>
 <!-- /TOP NAV -->
+
+<!-- Ventana modal con error -->
+
+<div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalErrorActions">
+    <div class="modal-content">
+      <h4>Error</h4>
+      <p>Debe iniciar sesión con un correo institucional (Ejemplo: AA10001@ues.edu.sv)</p>
+      <p>La contraseña es la misma que el Expediente</p>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+    </div>
+</div>
 
 <router-outlet></router-outlet>
