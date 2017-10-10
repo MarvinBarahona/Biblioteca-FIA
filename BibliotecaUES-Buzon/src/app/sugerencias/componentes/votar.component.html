@@ -17,7 +17,7 @@
         <div class="col s12 m3 offset-m1" *ngFor="let materia of sugerencia.materias">
           <dl>
             <dt><strong>{{materia.nombre}}</strong></dt>
-            <dd>Votos: {{materia.votos}} <a href="javascript:void(0)" (click)="votar(materia.id)"><i class="material-icons">thumb_up</i></a></dd>
+            <dd>Votos: {{materia.votos}} <a href="javascript:void(0)" (click)="votar(materia.id)"><i class="fa fa-thumbs-up"></i></a></dd>
             <dd>Pedidos: {{materia.pedidos}}</dd>
           </dl>
         </div>

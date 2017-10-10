@@ -170,6 +170,13 @@ export class SugerenciasService {
         sugerencia.editorial = r['publisher'];
         sugerencia.materias = [];
 
+        // Obtener el id de la materia por la que voto / hizo pedido el usuario.
+        let accion = r['approval'];
+        let idMateria = accion ? accion['idSubject'] : null;
+
+        // Determinar si el usuario ya voto / hizo pedido en la sugerencia.
+        sugerencia.usuario = idMateria != null;
+
         // Mapear materias con sus respectivos votos y pedidos
         let materias = new Array<Materia>();
 
@@ -179,6 +186,7 @@ export class SugerenciasService {
           materia.nombre = item['name'];
           materia.votos = item['upvotes'];
           materia.pedidos = item['orders'];
+          materia.usuario = materia.id === idMateria;
 
           materias.push(materia);
         });
