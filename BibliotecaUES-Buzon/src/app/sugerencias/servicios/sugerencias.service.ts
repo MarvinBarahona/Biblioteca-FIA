@@ -154,6 +154,8 @@ export class SugerenciasService {
   obtener(id: number): Observable<Sugerencia> {
     let url = this.baseUrl + '/suggestions/' + id;
 
+    let usuario = JSON.parse(sessionStorage.getItem('usuario'));
+
     // Realizando GET
     return this.http.get(url, { headers: this.headers }).map(
       (response: Response) => {
@@ -170,23 +172,26 @@ export class SugerenciasService {
         sugerencia.editorial = r['publisher'];
         sugerencia.materias = [];
 
-        // Obtener el id de la materia por la que voto / hizo pedido el usuario.
-        let accion = r['approval'];
-        let idMateria = accion ? accion['idSubject'] : null;
-
-        // Determinar si el usuario ya voto / hizo pedido en la sugerencia.
-        sugerencia.usuario = idMateria != null;
+        // Pone el valor inicial a FALSO
+        sugerencia.usuario = false;
 
         // Mapear materias con sus respectivos votos y pedidos
         let materias = new Array<Materia>();
 
-        r['Courses'].forEach(function(item) {
+        r['Courses'].forEach((item) => {
           let materia = new Materia;
           materia.id= item['id'];
           materia.nombre = item['name'];
           materia.votos = item['upvotes'];
           materia.pedidos = item['orders'];
-          materia.usuario = materia.id === idMateria;
+
+          item['votes'].forEach((voto)=>{
+            if(voto.userId == usuario.id){
+              materia.usuario = true;
+              sugerencia.usuario = true;
+            }
+            else materia.usuario = false;
+          });
 
           materias.push(materia);
         });
@@ -200,7 +205,7 @@ export class SugerenciasService {
 
   // Método: votar
   // Objetivo: agregar un voto
-  votar(sugerenciaId: number, materiaId): Observable<string> {
+  votar(sugerenciaId: number, materiaId: number): Observable<string> {
     let url = this.baseUrl + '/suggestions/' + sugerenciaId + '/votes';
 
     let q = JSON.stringify({ subjectId: materiaId });

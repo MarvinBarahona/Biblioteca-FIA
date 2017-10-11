@@ -36,7 +36,7 @@ export class AuthService {
   // Objetivo: convertir un json de respuesta en un objeto ve Usuario.
   private mapearUsuario(r: any): Usuario{
     let usuario = new Usuario;
-    usuario.id = 0;
+    usuario.id = r['id'];
     usuario.correo = r['email'];
     usuario.nombre = r['fullname'];
     usuario.grupo = r['Group'];

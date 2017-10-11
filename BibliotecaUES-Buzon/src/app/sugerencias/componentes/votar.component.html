@@ -17,34 +17,35 @@
         <div class="col s12 m3 offset-m1" *ngFor="let materia of sugerencia.materias">
           <dl>
             <dt><strong>{{materia.nombre}}</strong></dt>
-            <dd>Votos: {{materia.votos}} <a href="javascript:void(0)" (click)="votar(materia.id)"><i class="fa fa-thumbs-up"></i></a></dd>
+            <dd>Votos: {{materia.votos}}
+              <a href="javascript:void(0)" (click)="votar(materia.id)" *ngIf="!sugerencia.usuario">
+                <i class="fa fa-thumbs-up"></i>
+              </a>
+              <span *ngIf="materia.usuario">(Tu elección)</span>
+            </dd>
             <dd>Pedidos: {{materia.pedidos}}</dd>
           </dl>
         </div>
       </div>
 
-      <form #agregarForm="ngForm" (ngSubmit)="crear()" autocomplete="off">
-        <!-- Carrera y Materias -->
-        <div class="row">
-
-          <div class="input-field col l3 offset-l2 m5 s12">
-            <select materialize="material_select" name="carrera" (change)="selectCarrera($event.target.value)" required>
+      <!-- Carrera y Materias -->
+      <div class="row" *ngIf="!sugerencia.usuario">
+        <div class="input-field col l3 offset-l2 m5 s12">
+          <select materialize="material_select" name="carrera" (change)="selectCarrera($event.target.value)" required>
               <option *ngFor="let carrera of carreras">{{carrera.nombre}}</option>
             </select>
-            <label for="tipo">Carrera:</label>
-          </div>
-
-          <div class="input-field col l5 m7 s12">
-            <input id="materia" name="materia" type="text" class="validate" required>
-            <label for="materia">Materia</label>
-          </div>
-
-          <div class="col l2 m1 s12">
-            <button type="submit" class="waves-effect waves-light btn" [disabled]="!agregarForm.form.valid || idMateria">Agregar</button>
-          </div>
-
+          <label for="tipo">Carrera:</label>
         </div>
-      </form>
+
+        <div class="input-field col l5 m7 s12">
+          <input id="materia" name="materia" type="text" class="validate" required>
+          <label for="materia">Materia</label>
+        </div>
+
+        <div class="col l2 m1 s12">
+          <button type="submit" class="waves-effect waves-light btn" [disabled]="!materia" (click)="agregar()">Agregar</button>
+        </div>
+      </div>
 
     </div>
     <!-- /card-panel -->
