@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
+import { environment } from './../../../environments/environment';
 
 import { CookieService } from 'ngx-cookie';
 import { Adquisicion, NuevaAdquisicion, Ejemplar, Libro } from './';
@@ -12,7 +13,7 @@ export class AdquisicionesService {
   headers: Headers;
 
   constructor(private http: Http, private cookieService: CookieService) {
-    this.baseUrl = "https://bibliotecafiaues.herokuapp.com";
+    this.baseUrl = environment.apiURL;
     this.headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.cookieService.get('token') });
   }
 
