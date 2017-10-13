@@ -3,7 +3,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
+import { environment } from './../../../environments/environment';
 
 import { CookieService } from 'ngx-cookie';
 import { Libro, Catalogo, AutoData, Ejemplar } from './';
@@ -14,7 +15,7 @@ export class LibrosService {
   headers: Headers;
 
   constructor(private http: Http, private cookieService: CookieService) {
-    this.baseUrl = "https://bibliotecafiaues.herokuapp.com";
+    this.baseUrl = environment.apiURL;
     this.headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.cookieService.get('token') });
   }
 
@@ -36,7 +37,7 @@ export class LibrosService {
       authorCode: nuevoCatalogo.codigoAutor,
       image: nuevoCatalogo.img
     });
-    
+
     // Realizando el POST
     return this.http.post(url, q, { headers: this.headers }).map(
       (response: Response) => {

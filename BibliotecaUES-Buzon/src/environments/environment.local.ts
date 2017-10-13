@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiURL: "https://bibliotecafiaues.herokuapp.com"
+  apiURL: "http://localhost:2000/"
 };
