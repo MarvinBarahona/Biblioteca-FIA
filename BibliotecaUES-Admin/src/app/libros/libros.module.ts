@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: libros
+*Dirección: /src/app/libros/libros.module.ts
+*Objetivo: Definición del módulo de libros
+*/
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';

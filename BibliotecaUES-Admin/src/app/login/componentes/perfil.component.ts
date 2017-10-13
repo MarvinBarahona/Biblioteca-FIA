@@ -15,12 +15,18 @@ import { Usuario } from './../servicios';
 export class PerfilComponent implements OnInit {
   usuario: Usuario;
 
-  constructor(private cookieService: CookieService, private router: Router){}
+  constructor(
+    private cookieService: CookieService,
+    private router: Router
+  ){}
 
   ngOnInit(){
+    // Recuperar al usuario de los cookies
     this.usuario = <Usuario> this.cookieService.getObject('usuario');
   }
 
+  // Método: restaurar
+  // Objetivo: Redirigir a la vista de restauración de contraseña
   restaurar(){
     this.router.navigate(["/restaurar", {email: this.usuario.correo}]);
   }

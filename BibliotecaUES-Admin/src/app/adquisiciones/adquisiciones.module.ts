@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: adquisiciones
+*Dirección: /src/app/adquisiciones/adquisiciones.module.ts
+*Objetivo: Definición del módulo de adquisiciones.
+*/
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { HttpModule } from '@angular/http';

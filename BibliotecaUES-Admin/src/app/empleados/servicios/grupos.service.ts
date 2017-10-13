@@ -1,4 +1,8 @@
-// Servicios de empleados
+/*
+*Nombre del servicio: grupos
+*Dirección: /src/app/empleados/servicios/grupos.service.ts
+*Objetivo: proveer los servicios de grupos al módulo de empleados
+*/
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -14,7 +18,10 @@ export class GruposService {
   baseUrl: string;
   headers: Headers;
 
-  constructor(private http: Http, private cookieService: CookieService) {
+  constructor(
+    private http: Http,
+    private cookieService: CookieService
+  ) {
     this.baseUrl = environment.apiURL;
     this.headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.cookieService.get('token') });
   }
@@ -31,7 +38,7 @@ export class GruposService {
         let r = response.json();
         let grupos = new Array<Grupo>();
 
-        r.forEach(function(item) {
+        r.forEach((item) => {
           let grupo = new Grupo;
           grupo.id = item['id'];
           grupo.nombre = item['name'];

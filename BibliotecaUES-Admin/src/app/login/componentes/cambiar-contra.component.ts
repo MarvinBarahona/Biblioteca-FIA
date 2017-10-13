@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: cambiar contraseña
+*Nombre del componente: cambiar-contra
 *Dirección: /src/app/login/componentes/cambiar-contra.component.ts
 *Objetivo: permite al usuario cambiar su contraseña.
 */
@@ -51,7 +51,7 @@ export class CambiarContraComponent implements OnInit {
   }
 
   // Método: cambiar
-  // Objetivo: Cambiar la contraseña. 
+  // Objetivo: Cambiar la contraseña.
   cambiar(){
     // Mostrar mensaje de espera
     this.message = "Cambiando contraseña...";

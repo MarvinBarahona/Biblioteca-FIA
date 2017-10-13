@@ -1,4 +1,8 @@
-// Servicios de intercambios
+/*
+*Nombre del servicio: intercambios
+*Dirección: /src/app/intercambios/servicios/intercambios.service.ts
+*Objetivo: Proveer los servicios de intercambios al módulo de intercambios
+*/
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -83,7 +87,7 @@ export class IntercambiosService {
         let r = a[0];
         let intercambios = new Array<Intercambio>();
 
-        r.forEach(function(item) {
+        r.forEach((item) => {
           let intercambio = new Intercambio;
           intercambio.id = item['id'];
           intercambio.facultad = item['notes'];
@@ -121,7 +125,7 @@ export class IntercambiosService {
 
         // Mapear las ejemplares.
         let ejemplares = new Array<Ejemplar>();
-        rc.forEach(function(item){
+        rc.forEach((item) =>{
           let ejemplar = new Ejemplar;
           ejemplar.id = item['id'];
           ejemplar.codigo = item['barcode'];

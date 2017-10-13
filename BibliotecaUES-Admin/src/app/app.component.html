@@ -2,11 +2,13 @@
 <div class="navbar-fixed">
   <nav>
     <div class="nav-wrapper">
+      <!-- Título del sitio -->
       <ul class="title left">
         <li><i class="large material-icons">insert_chart</i></li>
         <li><a href="">Biblioteca FIA</a></li>
       </ul>
 
+      <!-- Usuario -->
       <ul class="right" *ngIf='usuario'>
          <li><a materialize="dropdown" class='dropdown-button' href='javascript:void(0)' data-activates='dropdown1'>{{usuario}}<i class="material-icons right">arrow_drop_down</i></a></li>
          <ul id='dropdown1' class='dropdown-content'>

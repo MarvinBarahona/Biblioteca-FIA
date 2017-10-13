@@ -1,4 +1,7 @@
-// Clase ejemplar del módulo de Libros
+/*
+*Nombre de la clase: ejemplar
+*Dirección: /src/app/libros/servicios/ejemplar.ts
+*/
 
 export class Ejemplar{
   id: number;

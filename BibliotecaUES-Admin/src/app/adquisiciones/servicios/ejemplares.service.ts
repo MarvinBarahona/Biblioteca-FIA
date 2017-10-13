@@ -1,3 +1,9 @@
+/*
+*Nombre del servicio: ejemplares
+*Dirección: /src/app/adquisiciones/servicios/ejemplares.service.ts
+*Objetivo: Provee los servicios de ejemplares al módulo de adquisiciones
+*/
+
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -12,7 +18,10 @@ export class EjemplaresService {
   baseUrl: string;
   headers: Headers;
 
-  constructor(private http: Http, private cookieService: CookieService) {
+  constructor(
+    private http: Http,
+    private cookieService: CookieService
+  ){
     this.baseUrl = environment.apiURL;
     this.headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.cookieService.get('token') });
   }
@@ -24,7 +33,7 @@ export class EjemplaresService {
 
     // Mapeando la entrada.
     let copies = [];
-    ejemplares.forEach(function(ejemplar){
+    ejemplares.forEach((ejemplar)=>{
       if(!ejemplar.ingresado && ejemplar.codigo) copies.push({id: ejemplar.id, barcode: ejemplar.codigo});
     });
 

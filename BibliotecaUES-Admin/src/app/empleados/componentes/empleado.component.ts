@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Empleado
+*Nombre del componente: empleado
 *Dirección física: src\app\empleados\componentes\empleado.component.ts
 *Objetivo: Permite ver los datos de un empleado
 **/
@@ -20,7 +20,10 @@ export class EmpleadoComponent implements OnInit {
   errorMessage: string;
   showMessage: boolean;
 
-  constructor(private empleadosService: EmpleadosService, private route: ActivatedRoute ) { }
+  constructor(
+    private empleadosService: EmpleadosService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.showMessage = false;
@@ -36,6 +39,8 @@ export class EmpleadoComponent implements OnInit {
     );
   }
 
+  // Método: guardar
+  // Objetivo: permite guardar las políticas asignadas al empleado
   guardar(){
     // Mostrar mensajes.
     this.showMessage = true;

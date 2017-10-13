@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Entrada pendiente
+*Nombre del componente: entrada-pendiente
 *Dirección física: src\app\intercambios\componentes\entrada-pendiente.component.ts
 *Objetivo: Permite la ingresa la entrada de un intercambio
 **/
@@ -24,20 +24,26 @@ export class EntradaPendienteComponent implements OnInit {
   errorMessage: string;
   showMessage: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private intercambiosService: IntercambiosService) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private intercambiosService: IntercambiosService
+  ) { }
 
   ngOnInit() {
+    // Crear una nueva entrada de intercambio con los datos enviados en los params.
     this.entrada = new NuevaEntrada;
     this.entrada.id = this.route.snapshot.params['id'];
     this.entrada.facultad = this.route.snapshot.params['facultad'];
     this.entrada.ejemplares = new Array<NuevoEjemplar>();
   }
 
-  // Escuchar al evento emitido por el componente libro-seleccion
+  // Método: onNotify
+  // Objetivo: Escuchar al evento emitido por el componente libro-seleccion
   onNotify(libro: Libro){
     let nuevo: boolean = true;
 
-    this.entrada.ejemplares.forEach( function(e){
+    this.entrada.ejemplares.forEach((e)=>{
       if(e.libro.isbn === libro.isbn) nuevo = false;
     });
 
@@ -79,7 +85,7 @@ export class EntradaPendienteComponent implements OnInit {
     );
   }
 
-  // Método para las ventanas modales.
+  // Métodos para la ventana modal de selección de libro
   openSeleccion() {
     this.modalSeleccion.emit({ action: "modal", params: ['open'] });
   }
@@ -87,6 +93,7 @@ export class EntradaPendienteComponent implements OnInit {
     this.modalSeleccion.emit({ action: "modal", params: ['close'] });
   }
 
+  // Métodos para la ventana modal de confirmación de cancelación
   openCancel() {
     this.modalCancel.emit({ action: "modal", params: ['open'] });
   }
@@ -94,6 +101,8 @@ export class EntradaPendienteComponent implements OnInit {
     this.modalCancel.emit({ action: "modal", params: ['close'] });
   }
 
+  // Método: cancel
+  // Objetivo: cerrar la ventana modal y regresar a la vista anterior
   cancel(){
     this.closeCancel();
     this.router.navigate(['/adquisiciones']);

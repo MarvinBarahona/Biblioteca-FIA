@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: app
+*Dirección: /src/app/app.module.ts
+*Objetivo: Definición del módulo principal.
+*/
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 

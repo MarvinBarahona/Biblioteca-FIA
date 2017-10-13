@@ -1,4 +1,8 @@
-// Servicios de intercambios
+/*
+*Nombre del servicio: ejemplares
+*Dirección: /src/app/intercambios/servicios/ejemplares.service.ts
+*Objetivo: Proveer los servicios de ejemplares al módulo de intercambios
+*/
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -31,7 +35,7 @@ export class EjemplaresService {
         let r = response.json();
         let ejemplares = new Array<Ejemplar>();
 
-        r.forEach(function(item) {
+        r.forEach((item) => {
           let ejemplar = new Ejemplar;
           ejemplar.id = item['id'];
           ejemplar.codigo = item['barcode'];
@@ -81,7 +85,7 @@ export class EjemplaresService {
 
     // Mapeando la entrada.
     let copies = [];
-    ejemplares.forEach(function(ejemplar){
+    ejemplares.forEach((ejemplar)=>{
       if(!ejemplar.ingresado && ejemplar.codigo) copies.push({id: ejemplar.id, barcode: ejemplar.codigo});
     });
 

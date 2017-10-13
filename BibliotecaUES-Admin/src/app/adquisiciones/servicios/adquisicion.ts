@@ -1,4 +1,7 @@
-// Clase Adquisición
+/*
+*Nombre de la clase: adquisicion
+*Dirección: /src/app/adquisiciones/servicios/adquisicion.ts
+*/
 
 import { Ejemplar } from './';
 

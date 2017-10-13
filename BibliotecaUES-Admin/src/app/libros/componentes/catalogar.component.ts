@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Gestión de libros
+*Nombre del componente: catalogar
 *Dirección física: src\app\libros\componentes\catalogar.component.ts
 *Objetivo: Catalogar un libro
 **/
@@ -35,7 +35,10 @@ export class CatalogarComponent implements OnInit {
   // Para emitir un evento al catalogar
   @Output() eventEmitter: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private libroService: LibrosService, private route: ActivatedRoute) { }
+  constructor(
+    private libroService: LibrosService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -47,13 +50,13 @@ export class CatalogarComponent implements OnInit {
 
         // Estructura los datos para ser agregados al autocompletado
         let materiasData = {};
-        this.materias.forEach(function(materia) {
+        this.materias.forEach((materia) =>{
           materiasData[materia.nombre] = null;
         });
 
         // Materias ya agregadas
         let initialData = [];
-        this.catalogo.materias.forEach(function(materia){
+        this.catalogo.materias.forEach((materia)=>{
           initialData.push({tag: materia});
         });
 

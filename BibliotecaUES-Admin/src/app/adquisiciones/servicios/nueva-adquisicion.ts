@@ -1,4 +1,7 @@
-// Clase NuevaAdquisición
+/*
+*Nombre de la clase: nueva-adquisicion
+*Dirección: /src/app/adquisiciones/servicios/nueva-adquisicion.ts
+*/
 
 import { NuevoEjemplar } from './';
 

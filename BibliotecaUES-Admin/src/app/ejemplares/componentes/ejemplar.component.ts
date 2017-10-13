@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Gestión de ejemplares
+*Nombre del componente: ejemplar
 *Dirección física: src\app\ejemplares\componentes\ejemplar.component.ts
 *Objetivo: Mostrar información de un ejemplar específico
 **/
@@ -15,7 +15,11 @@ import { EjemplaresService, Ejemplar, Transaccion }  from './../servicios'
 export class EjemplarComponent implements OnInit {
   ejemplar: Ejemplar;
 
-  constructor(private ejemplarService: EjemplaresService, private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private ejemplarService: EjemplaresService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     // Obtiene el id del ejemplar
@@ -35,12 +39,14 @@ export class EjemplarComponent implements OnInit {
     );
   }
 
-  // Redirigir a la vista de un libro
+  // Método: linkLibro
+  // Objetivo: Redirigir a la vista de un libro
   linkLibro(id: number){
     this.router.navigate(['/libros/'+id]);
   }
 
-  // Redirigir a la vista de adquisición
+  // Método: linkProceso
+  // Objetivo: Redirigir a la vista del proceso correspondiente.
   linkProceso(transaccion: Transaccion){
     switch(transaccion.tipo){
       case "Donación":{

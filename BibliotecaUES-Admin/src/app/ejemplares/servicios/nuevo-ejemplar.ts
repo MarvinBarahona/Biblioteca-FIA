@@ -1,4 +1,7 @@
-// Clase NuevoEjemplar de Ejemplares
+/*
+*Nombre de la clase: nuevo-ejemplar
+*Dirección: /src/app/ejemplares/servicios/nuevo-ejemplar.ts
+*/
 
 import { Libro } from './';
 

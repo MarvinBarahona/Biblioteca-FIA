@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: intercambios
+*Dirección: /src/app/intercambios/intercambios.module.ts
+*Objetivo: Definición del módulo de intercambios
+*/
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';

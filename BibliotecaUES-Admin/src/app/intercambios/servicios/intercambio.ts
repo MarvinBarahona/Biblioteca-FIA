@@ -1,4 +1,7 @@
-// Clase Intercambio
+/*
+*Nombre de la clase: intercambio
+*Dirección: /src/app/intercambios/servicios/intercambio.ts
+*/
 
 import { Ejemplar } from './';
 

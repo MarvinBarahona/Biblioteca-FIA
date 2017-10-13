@@ -25,9 +25,13 @@
       <br><br>
       <div class="card-panel">
         <h5 class="center-align">Mi perfil</h5>
+        
+        <!-- Datos del empleado -->
         <p><strong>Nombre: </strong>{{usuario.nombre}}</p>
         <p><strong>Correo: </strong>{{usuario.correo}}</p>
         <p><strong>Cargo: </strong>{{usuario.grupo}}</p>
+
+        <!-- Link hacia cambiar contraseña -->
         <div class="right-align">
           <a  href="javascript:void(0)" (click)="restaurar()">¿Cambiar contraseña?</a>
         </div>

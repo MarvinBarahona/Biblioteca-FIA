@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Empleados
+*Nombre del componente: empleados
 *Dirección física: src\app\empleados\componentes\empleados.component.ts
 *Objetivo: Permite ver una tabla con todos los empleados.
 **/
@@ -20,7 +20,10 @@ export class EmpleadosComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
-  constructor(private empleadosService: EmpleadosService, private router: Router){
+  constructor(
+    private empleadosService: EmpleadosService,
+    private router: Router
+  ){
     // Opciones de datatable
     this.dtOptions = {
       paging: false,
@@ -44,7 +47,8 @@ export class EmpleadosComponent implements OnInit {
     );
   }
 
-  // Redirige a la vista de empleado
+  // Método: linkEmpleado
+  // Objetivo: Redirige a la vista de empleado
   linkEmpleado(empleado: Empleado){
     this.router.navigate(["/empleados/" + empleado.id])
   }

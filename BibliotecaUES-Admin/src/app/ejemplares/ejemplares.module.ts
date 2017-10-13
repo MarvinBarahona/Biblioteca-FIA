@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: ejemplares
+*Dirección: /src/app/ejemplares/ejemplares.module.ts
+*Objetivo: Deifición del módulo de ejemplares.
+*/
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';

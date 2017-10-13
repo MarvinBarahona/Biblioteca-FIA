@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Intercambios
+*Nombre del componente: intercambios
 *Dirección física: src\app\intercambios\componentes\intercambios.component.ts
 *Objetivo: Permite ver una tabla con todos los intercambios
 **/
@@ -20,7 +20,10 @@ export class IntercambiosComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
-  constructor(private intercambiosService: IntercambiosService, private router: Router) {
+  constructor(
+    private intercambiosService: IntercambiosService,
+    private router: Router
+  ) {
     // Opciones de datatable
     this.dtOptions = {
       pageLength: 10,
@@ -56,7 +59,8 @@ export class IntercambiosComponent implements OnInit {
     );
   }
 
-  // Redirige a la vista de intercambio
+  // Método: linkSalida
+  // Objetivo: Redirige a la vista de intercambio
   linkSalida(salida: Intercambio){
     this.router.navigate(["/intercambios/salida/" + salida.id]);
   }

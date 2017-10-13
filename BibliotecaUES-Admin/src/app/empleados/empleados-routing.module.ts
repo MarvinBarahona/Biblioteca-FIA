@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: empleados-routing
+*Dirección: /src/app/empleados/empleados-routing.ts
+*Objetivo: Definir las rutas del módulo de empleados (canActivate y data se usan para la seguridad del sitio)
+*/
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

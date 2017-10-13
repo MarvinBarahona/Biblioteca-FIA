@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Gestión de ejemplares
+*Nombre del módulo: ejemplares-root
 *Dirección física: src\app\ejemplares\componentes\ejemplares-root.component.ts
 *Objetivo: Formar la estructura base para los componentes de Ejemplares
 **/

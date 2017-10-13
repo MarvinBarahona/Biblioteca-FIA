@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: restaurar contraseña
+*Nombre del componente: restaurar-contra
 *Dirección: /src/app/login/componentes/restaurar-contra.component.ts
 *Objetivo: permite al usuario restaurar su contraseña.
 */
@@ -20,7 +20,10 @@ export class RestaurarContraComponent implements OnInit {
   errorMessage: string;
   successMessage: string;
 
-  constructor(private route: ActivatedRoute, private authService: AuthService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
       this.correo = this.route.snapshot.params['email'];

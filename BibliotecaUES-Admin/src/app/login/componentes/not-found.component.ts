@@ -1,3 +1,9 @@
+/*
+*Nombre del componente: not-found
+*Dirección: /src/app/login/componentes/not-found.component.ts
+*Objetivo: Mostrar mensaje en las rutas que no tengan componente asignado
+*/
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,10 +16,6 @@ import { Component, OnInit } from '@angular/core';
   `]
 })
 export class NotFoundComponent implements OnInit {
-
   constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

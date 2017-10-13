@@ -1,4 +1,7 @@
-// Clase NuevoLibro
+/*
+*Nombre de la clase: nuevo-libro
+*Dirección: /src/app/libro-seleccion/servicios/nuevo-libro.ts
+*/
 
 export class NuevoLibro{
   isbn: string;

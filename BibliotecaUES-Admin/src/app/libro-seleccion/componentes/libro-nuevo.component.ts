@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Gestión de libros
+*Nombre del componente: libro-nuevo
 *Dirección física: src\app\libro-seleccion\componentes\libro-nuevo.component.ts
 *Objetivo: Crear un nuevo libro
 */
@@ -79,7 +79,7 @@ export class LibroNuevoComponent implements OnInit {
 
         // Transforma los autores en un objeto para el autocompletado.
         let autoresData = {};
-        this.autores.forEach(function(autor) {
+        this.autores.forEach((autor)=> {
           autoresData[autor.nombre] = null;
         });
 
@@ -94,7 +94,7 @@ export class LibroNuevoComponent implements OnInit {
 
         // // Transforma las editoriales en un objeto para el autocompletado.
         let editorialesData = {};
-        this.editoriales.forEach(function(editorial) {
+        this.editoriales.forEach((editorial) => {
           editorialesData[editorial.nombre] = null;
         });
 

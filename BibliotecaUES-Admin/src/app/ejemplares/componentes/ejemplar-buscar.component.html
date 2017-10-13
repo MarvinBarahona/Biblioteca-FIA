@@ -26,6 +26,7 @@
         </div>
       </div>
 
+      <!-- Datos del ejemplar encontrado en la búsqueda -->
       <div *ngIf="ejemplar; else elseEjemplar">
         <div class="row">
           <div class="col s4">
@@ -40,11 +41,13 @@
         </div>
       </div>
 
+      <!-- Mensaje cuando no hay resultados de la búsqueda. -->
       <ng-template #elseEjemplar>
         <div class="row">
           <p>{{message}}</p>
         </div>
       </ng-template>
+
     </div>
     <!-- /card-panel -->
   </div>

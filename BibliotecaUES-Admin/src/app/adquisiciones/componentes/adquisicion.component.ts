@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Gestión de adquisiciones
+*Nombre del componente: adquisicion
 *Dirección física: src\app\adquisiciones\componentes\adquisicion.component.ts
 *Objetivo: Mostrar información de una adquisición especifica e ingresar códigos de barra.
 **/
@@ -88,14 +88,15 @@ export class AdquisicionComponent implements OnInit {
     );
   }
 
-  // Redirigir a la vista de un libro
+  // Método: linkLibro
+  // Objetivo: Redirigir a la vista de un libro
   linkLibro(id: number){
     this.router.navigate(['/libros/'+id]);
   }
 
-  // Redirigir a la vista del ejemplar
+  // Método: linkEjemplar
+  // Objetivo: Redirigir a la vista del ejemplar
   linkEjemplar(id: number){
     this.router.navigate(['/ejemplares/'+id]);
   }
-
 }

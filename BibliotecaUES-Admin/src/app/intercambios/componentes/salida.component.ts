@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Salida
+*Nombre del componente: salida
 *Dirección física: src\app\intercambios\componentes\salida.component.ts
 *Objetivo: Permite consultar los datos de la salida de un intercambio
 **/
@@ -42,22 +42,26 @@ export class SalidaComponent implements OnInit {
     );
   }
 
-  // Redirigir a la vista de un libro
+  // Método: linkLibro
+  // Objetivo: Redirigir a la vista de un libro
   linkLibro(id: number){
     this.router.navigate(['/libros/'+id]);
   }
 
-  // Redirigir a la vista del ejemplar
+  // Método: linkEjemplar
+  // Objetivo: Redirigir a la vista del ejemplar
   linkEjemplar(id: number){
     this.router.navigate(['/ejemplares/'+id]);
   }
 
-  // Redirige a la vista de la entrada del intercambio
+  // Método: entrada
+  // Objetivo: Redirige a la vista de la entrada del intercambio
   entrada(){
     this.router.navigate(["/intercambios/entrada/" + this.salida.relacionado]);
   }
 
-  // Redirige a la vista de registro de la entrada del intercambio
+  // Método: pendiente
+  // Objetivo: Redirige a la vista de registro de la entrada del intercambio
   pendiente(){
     this.router.navigate(["/intercambios/pendiente", {id: this.salida.id, facultad: this.salida.facultad}]);
   }

@@ -60,12 +60,15 @@
             <tbody>
               <tr *ngFor="let ejemplar of entrada.ejemplares">
                 <td>
+                  <!-- Link a la vista del ejemplar -->
                   <a *ngIf="ejemplar.ingresado || !catalogador" href="javascript:void(0)" (click)="linkEjemplar(ejemplar.id);">{{ejemplar.codigo || 'No asignado'}}</a>
+                  <!-- Permitir el ingreso del código de barra -->
                   <div *ngIf="!ejemplar.ingresado && catalogador" class="input-field col m6 offset-m1 s8 offset-s2">
                     <input type="text" class="validate" [name]="ejemplar.id" pattern="^[\d]{8}$" [(ngModel)]="ejemplar.codigo">
                     <label for="codigo" data-error="Debe ingresar 8 dígitos">Código de barra</label>
                   </div>
                 </td>
+                <!-- Libro y estado -->
                 <td><a href="javascript:void(0)" (click)="linkLibro(ejemplar.libro.id);">{{ejemplar.libro.titulo}}, {{ejemplar.libro.edicion}}ed</a></td>
                 <td>{{ejemplar.estado}}</td>
               </tr>

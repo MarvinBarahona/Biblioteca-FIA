@@ -1,4 +1,7 @@
-// Clase Politica
+/*
+*Nombre de la clase: politica
+*Dirección: /src/app/empleados/servicios/politica.ts
+*/
 
 export class Politica{
   id: number;

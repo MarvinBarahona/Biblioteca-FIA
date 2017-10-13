@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Gestión de libros
+*Nombre del componente: catalogado
 *Dirección física: src\app\libros\componentes\catalogado.component.ts
 *Objetivo: Muestra la información catalogada de un libro
 **/
@@ -21,5 +21,4 @@ import { Catalogo } from './../servicios';
 })
 export class CatalogadoComponent {
   @Input() catalogo: Catalogo;
-
 }

@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: libro-seleccion
+*Dirección: /src/app/libro-seleccion/libro-seleccion.module.ts
+*Objetivo: Definición del módulo de libro-seleccion
+*/
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';

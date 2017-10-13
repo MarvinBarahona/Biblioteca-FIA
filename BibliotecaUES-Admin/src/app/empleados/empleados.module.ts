@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: empleados-routing
+*Dirección: /src/app/empleados/empleados.module.ts
+*Objetivo: Definición del módulo de empleados
+*/
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';

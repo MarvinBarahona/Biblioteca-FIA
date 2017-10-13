@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Gestión de empleados
+*Nombre del componente: empleados-root
 *Dirección física: src\app\empleados\componentes\empleados-root.component.ts
 *Objetivo: Formar la estructura base para los componentes de empleados
 **/

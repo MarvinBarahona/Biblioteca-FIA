@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Gestión de adquisiciones
+*Nombre del componente: adquisicion-nueva
 *Dirección física: src\app\adquisiciones\componentes\adquisicion-nueva.component.ts
 *Objetivo: Crear nuevas adquisiciones
 **/
@@ -25,18 +25,23 @@ export class AdquisicionNuevaComponent implements OnInit {
   errorMessage: string;
   showMessage: boolean = false;
 
-  constructor(private router: Router, private adquisicionesService: AdquisicionesService) { }
+  constructor(
+    private router: Router,
+    private adquisicionesService: AdquisicionesService
+  ) { }
 
   ngOnInit() {
+    // Crear el nuevo objeto de adquisición
     this.adquisicion = new NuevaAdquisicion;
     this.adquisicion.ejemplares = new Array<NuevoEjemplar>();
   }
 
-  // Escuchar al evento emitido por el componente libro-seleccion
+  // Método: onNotify
+  // Objetivo: Escuchar al evento emitido por el componente libro-seleccion
   onNotify(libro: Libro){
     let nuevo: boolean = true;
 
-    this.adquisicion.ejemplares.forEach( function(e){
+    this.adquisicion.ejemplares.forEach((e) => {
       if(e.libro.isbn === libro.isbn) nuevo = false;
     });
 
@@ -78,7 +83,7 @@ export class AdquisicionNuevaComponent implements OnInit {
     );
   }
 
-  // Método para las ventanas modales.
+  // Métodos para el manejo de la ventana modal de selección de libros.
   openSeleccion() {
     this.modalSeleccion.emit({ action: "modal", params: ['open'] });
   }
@@ -86,6 +91,7 @@ export class AdquisicionNuevaComponent implements OnInit {
     this.modalSeleccion.emit({ action: "modal", params: ['close'] });
   }
 
+  // Métodos para el manejo de la ventana modal de confirmación de cancelación.
   openCancel() {
     this.modalCancel.emit({ action: "modal", params: ['open'] });
   }
@@ -93,6 +99,8 @@ export class AdquisicionNuevaComponent implements OnInit {
     this.modalCancel.emit({ action: "modal", params: ['close'] });
   }
 
+  // Método: cancel
+  // Objetivo: Cerrar la ventana modal y retornar a la vista anterior.
   cancel(){
     this.closeCancel();
     this.router.navigate(['/adquisiciones']);

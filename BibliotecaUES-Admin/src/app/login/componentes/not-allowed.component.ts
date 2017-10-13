@@ -1,3 +1,9 @@
+/*
+*Nombre del componente: not-allowed
+*Dirección: /src/app/login/componentes/not-allowed.component.ts
+*Objetivo: Mostrar mensaje de acceso denegado cuando sea necesario
+*/
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,10 +16,6 @@ import { Component, OnInit } from '@angular/core';
   `]
 })
 export class NotAllowedComponent implements OnInit {
-
   constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() { }
 }

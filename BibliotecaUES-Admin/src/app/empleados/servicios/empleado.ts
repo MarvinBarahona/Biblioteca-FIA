@@ -1,4 +1,7 @@
-// Clase Empleado
+/*
+*Nombre de la clase: empleado
+*Dirección: /src/app/empleados/servicios/empleado.ts
+*/
 
 import { Grupo, Politica } from './';
 

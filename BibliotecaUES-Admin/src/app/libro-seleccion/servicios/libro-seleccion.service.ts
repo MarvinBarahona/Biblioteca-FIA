@@ -1,4 +1,8 @@
-// Servicios de selección de libros
+/*
+*Nombre del servicio: libro-seleccion
+*Dirección: /src/app/libro-seleccion/servicios/libro-seleccion.service.ts
+*Objetivo: Proveer los servicios al módulo de libro-seleccion
+*/
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -80,7 +84,7 @@ export class LibroSeleccionService {
         // Mapeando la salida
         let libros = new Array<Libro>();
 
-        r.forEach(function(item){
+        r.forEach((item)=>{
           let libro = new Libro;
 
           libro.id = item['id'];
@@ -112,7 +116,7 @@ export class LibroSeleccionService {
         let ra = r['authors'];
         let rp = r['publishers'];
 
-        ra.forEach(function(item) {
+        ra.forEach((item) => {
           let autor = new AutoData;
 
           autor.id = item['id'];
@@ -121,7 +125,7 @@ export class LibroSeleccionService {
           autores.push(autor);
         });
 
-        rp.forEach(function(item) {
+        rp.forEach((item) => {
           let editorial = new AutoData;
 
           editorial.id = item['id'];
@@ -142,11 +146,11 @@ export class LibroSeleccionService {
     let nuevos: any[] = [];
     let buscarEn: string[] = [];
 
-    data.forEach(function(d){
+    data.forEach((d)=>{
       buscarEn.push(d.nombre);
     });
 
-    items.forEach(function(item){
+    items.forEach((item) =>{
       let i = buscarEn.indexOf(item);
       i > -1 ? viejos.push(data[i].id) : nuevos.push({name: item});
     });
@@ -160,7 +164,7 @@ export class LibroSeleccionService {
     let buscarEn: string[] = [];
     let i: number;
 
-    data.forEach(function(d){
+    data.forEach((d)=>{
       buscarEn.push(d.nombre);
     });
 

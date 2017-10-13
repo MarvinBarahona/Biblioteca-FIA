@@ -1,7 +1,14 @@
+/*
+*Nombre del servicio: adquisiciones
+*Dirección: /src/app/adquisiciones/servicios/adquisiciones.service.ts
+*Objetivo: Proveer los servicios de adquisiciones al módulo de adquisiciones.
+*/
+
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
+
 import { environment } from './../../../environments/environment';
 
 import { CookieService } from 'ngx-cookie';
@@ -12,7 +19,10 @@ export class AdquisicionesService {
   baseUrl: string;
   headers: Headers;
 
-  constructor(private http: Http, private cookieService: CookieService) {
+  constructor(
+    private http: Http,
+    private cookieService: CookieService
+  ){
     this.baseUrl = environment.apiURL;
     this.headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.cookieService.get('token') });
   }
@@ -25,13 +35,13 @@ export class AdquisicionesService {
 
     // Mapeando la entrada
     let ejemplares = [];
-    nuevaAdquisicion.ejemplares.forEach(function(ejemplar){
+    nuevaAdquisicion.ejemplares.forEach((ejemplar) => {
       ejemplares.push({bookId: ejemplar.libro.id, quantity: ejemplar.cantidad});
     });
 
     let detalles = nuevaAdquisicion.tipo == "Compra" ? {} : {donante: nuevaAdquisicion.donante};
-
     let q = JSON.stringify({ notes: nuevaAdquisicion.nombre, copies: ejemplares, details: detalles });
+
     // Realizando POST
     return this.http.post(url, q, { headers: this.headers }).map(
       // Mapeando salida
@@ -56,7 +66,8 @@ export class AdquisicionesService {
         let r2 = a[1];
         let adquisiciones = new Array<Adquisicion>();
 
-        r1.forEach(function(item) {
+        // Compras
+        r1.forEach((item) => {
           let adquisicion = new Adquisicion;
           adquisicion.id = item['id'];
           adquisicion.nombre = item['notes'];
@@ -66,7 +77,8 @@ export class AdquisicionesService {
           adquisiciones.push(adquisicion);
         });
 
-        r2.forEach(function(item) {
+        // Donaciones
+        r2.forEach((item) => {
           let adquisicion = new Adquisicion;
           adquisicion.id = item['id'];
           adquisicion.nombre = item['notes'];
@@ -105,7 +117,7 @@ export class AdquisicionesService {
 
         // Mapear las ejemplares.
         let ejemplares = new Array<Ejemplar>();
-        rc.forEach(function(item){
+        rc.forEach((item) => {
           let ejemplar = new Ejemplar;
           ejemplar.id = item['id'];
           ejemplar.codigo = item['barcode'];

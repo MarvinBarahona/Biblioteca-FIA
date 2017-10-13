@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: login
+*Dirección: /src/app/login/login.module.ts
+*Objetivo: Definición del módulo de login
+*/
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';

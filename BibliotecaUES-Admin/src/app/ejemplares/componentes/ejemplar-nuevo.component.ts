@@ -1,12 +1,12 @@
 /*
-*Nombre del módulo: Gestión de ejemplares
+*Nombre del componente: ejemplar-nuevo
 *Dirección física: src\app\ejemplares\componentes\ejemplar-nuevo.component.ts
 *Objetivo: Crear un nuevo ejemplar
 **/
 
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import {MaterializeDirective, MaterializeAction} from "angular2-materialize";
+import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
 import { EjemplaresService, NuevoEjemplar, Libro } from './../servicios';
 
@@ -25,16 +25,20 @@ export class EjemplarNuevoComponent implements OnInit {
   showMessage: boolean = false;
   errorMessage: string;
 
-  constructor(private router: Router, private ejemplaresService: EjemplaresService){}
+  constructor(
+    private router: Router,
+    private ejemplaresService: EjemplaresService
+  ){}
 
   ngOnInit() {
-    // Crear un nuevo ejemplar y asignarle y nuevo libro.
+    // Crear un nuevo ejemplar y asignarle un nuevo libro.
     this.ejemplar = new NuevoEjemplar;
     this.ejemplar.libro = new Libro;
   }
 
+  // Método: onNotify
+  // Objetivo: Escucha el evento emitido por el componente libro-seleccion
   onNotify(libro: Libro): void {
-    // Escucha el evento emitido por el componente libro-seleccion
     this.ejemplar.libro = libro;
     Materialize.toast("'" + libro.titulo + "' asignado al nuevo ejemplar", 3000);
   }
@@ -91,7 +95,7 @@ export class EjemplarNuevoComponent implements OnInit {
     }
   }
 
-  // Para las ventanas modales
+  // Métodos para la ventana modal de selección de selección de libro
   openSeleccion() {
     this.modalSeleccion.emit({ action: "modal", params: ['open'] });
   }
@@ -99,6 +103,7 @@ export class EjemplarNuevoComponent implements OnInit {
     this.modalSeleccion.emit({ action: "modal", params: ['close'] });
   }
 
+  // Métodos para la ventana modal de confirmación de cancelación
   openCancel() {
     this.modalCancel.emit({action:"modal",params:['open']});
   }
@@ -106,6 +111,8 @@ export class EjemplarNuevoComponent implements OnInit {
     this.modalCancel.emit({action:"modal",params:['close']});
   }
 
+  // Método: cancel
+  // Objetivo: cerrar la ventana modal y regresar a la ventana anterior.
   cancel(){
     this.closeCancel();
     this.router.navigate(['/ejemplares']);

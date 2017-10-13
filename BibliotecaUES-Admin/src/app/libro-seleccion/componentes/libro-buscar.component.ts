@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Gestión de libros
+*Nombre del componente: libro-buscar
 *Dirección física: src\app\libro-seleccion\componentes\libro-buscar.component.ts
 *Objetivo: Buscar un libro por medio de una tabla
 **/
@@ -22,7 +22,10 @@ export class LibroBuscarComponent implements OnInit {
   // Para emitir un evento con el libro seleccionado
   @Output() eventEmitter: EventEmitter<Libro> = new EventEmitter<Libro>();
 
-  constructor(private libroSeleccionService: LibroSeleccionService, private router: Router) {
+  constructor(
+    private libroSeleccionService: LibroSeleccionService,
+    private router: Router
+  ) {
     // Opciones del datatable
     this.dtOptions = {
       pageLength: 5,
@@ -57,7 +60,8 @@ export class LibroBuscarComponent implements OnInit {
     );
   }
 
-  // Emite evento con el libro seleccionado.
+  // Método: emitir
+  // Objetivo: Emite evento con el libro seleccionado.
   emitir(libro: Libro) {
     this.eventEmitter.emit(libro);
   }

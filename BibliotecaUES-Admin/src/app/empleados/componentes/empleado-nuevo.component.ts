@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Empleado nuevo
+*Nombre del componente: empleado-nuevo
 *Dirección física: src\app\empleados\componentes\empleado-nuevo.component.ts
 *Objetivo: Permite la creación de un nuevo empleado.
 **/
@@ -27,7 +27,11 @@ export class EmpleadoNuevoComponent implements OnInit {
 
   modalCancel = new EventEmitter<string | MaterializeAction>();
 
-  constructor(private router: Router, private empleadosService: EmpleadosService, private gruposService: GruposService) { }
+  constructor(
+    private router: Router,
+    private empleadosService: EmpleadosService,
+    private gruposService: GruposService
+  ) { }
 
   ngOnInit() {
     // Inicializando el objeto
@@ -46,6 +50,8 @@ export class EmpleadoNuevoComponent implements OnInit {
     );
   }
 
+// Método: crear
+// Objetivo: Permite la creación de un nuevo empleado
   crear(){
     // Mostrar mensaje de espera.
     this.showMessage = true;
@@ -73,7 +79,7 @@ export class EmpleadoNuevoComponent implements OnInit {
     );
   }
 
-  // Para el modal de cancelar
+  // Métodos para el manejo del modal de confirmar cancelación.
   openCancel() {
     this.modalCancel.emit({ action: "modal", params: ['open'] });
   }
@@ -81,6 +87,8 @@ export class EmpleadoNuevoComponent implements OnInit {
     this.modalCancel.emit({ action: "modal", params: ['close'] });
   }
 
+  // Método: cancel
+  // Objetivo: cerrar el modal y retornar a la vista anterior
   cancel(){
     this.closeCancel();
     this.router.navigate(['/empleados']);

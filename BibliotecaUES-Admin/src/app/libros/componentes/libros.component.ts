@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Gestión de libros
+*Nombre del componente: libros
 *Dirección física: src\app\libros\componentes\libros.component.ts
 *Objetivo: Mostrar el listado de libros disponibles en una tabla
 **/
@@ -19,7 +19,10 @@ export class LibrosComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
-  constructor(private librosService: LibrosService, private router: Router) {
+  constructor(
+    private librosService: LibrosService,
+    private router: Router
+  ) {
     // Opciones del datatable
     this.dtOptions = {
       pageLength: 10,
@@ -55,7 +58,8 @@ export class LibrosComponent implements OnInit {
     );
   }
 
-  // Redirige a la vista individual del libro
+  // Método: linkLibro
+  // Objetivo: Redirige a la vista individual del libro
   linkLibro(libro: Libro){
     this.router.navigate(["/libros/"+libro.id])
   }

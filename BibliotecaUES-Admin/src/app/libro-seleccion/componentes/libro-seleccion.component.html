@@ -1,4 +1,5 @@
 <ul materialize="collapsible" class="collapsible popout" data-collapsible="accordion">
+
   <li>
     <div class="collapsible-header active">Buscar libro</div>
     <div class="collapsible-body">
@@ -6,6 +7,7 @@
       <libro-buscar (eventEmitter)='onNotify($event)'></libro-buscar>
     </div>
   </li>
+
   <li>
     <div class="collapsible-header">Nuevo libro</div>
     <div class="collapsible-body">
@@ -13,4 +15,5 @@
       <libro-nuevo (eventEmitter)='onNotify($event)'></libro-nuevo>
     </div>
   </li>
+  
 </ul>

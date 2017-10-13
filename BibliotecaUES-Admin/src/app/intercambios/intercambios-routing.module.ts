@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: intercambios-routing
+*Dirección: /src/app/intercambios/intercambios-routing.module.ts
+*Objetivo: Definir las rutas del módulo de intercambios (canActivate y data usados para la seguridad del sitio)
+*/
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

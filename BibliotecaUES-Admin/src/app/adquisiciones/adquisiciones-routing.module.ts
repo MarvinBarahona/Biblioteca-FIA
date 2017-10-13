@@ -1,3 +1,9 @@
+/*
+*Nombre del módule: adquisiciones-routing
+*Dirección: /src/app/adquisiciones/adquisiciones-routing.module.ts
+*Objetivo: Routing para el módulo de adquisiciones (canActivate y data se usan para la seguridad del sitio)
+*/
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

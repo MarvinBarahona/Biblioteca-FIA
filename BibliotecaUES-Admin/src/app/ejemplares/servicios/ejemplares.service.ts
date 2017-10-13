@@ -1,9 +1,13 @@
-// Servicios de ejemplares
+/*
+*Nombre del servicio: ejemplares
+*Dirección: /src/app/ejemplares/servicios/ejemplares.service.ts
+*Objetivo: Provee los servicios al módulo de ejemplares
+*/
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 import { environment } from './../../../environments/environment';
 
 import { CookieService } from 'ngx-cookie';
@@ -14,7 +18,10 @@ export class EjemplaresService {
   baseUrl: string;
   headers: Headers;
 
-  constructor(private http: Http, private cookieService: CookieService) {
+  constructor(
+    private http: Http,
+    private cookieService: CookieService
+  ) {
     this.baseUrl = environment.apiURL;
     this.headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.cookieService.get('token') });
   }
@@ -75,7 +82,7 @@ export class EjemplaresService {
         let r = response.json();
         let ejemplares = new Array<Ejemplar>();
 
-        r.forEach(function(item) {
+        r.forEach((item) => {
           let ejemplar = new Ejemplar;
           ejemplar.id = item['id'];
           ejemplar.codigo = item['barcode'];
@@ -109,7 +116,7 @@ export class EjemplaresService {
 
         // Mapear las transacciones.
         let transacciones = new Array<Transaccion>();
-        rt.forEach(function(item){
+        rt.forEach((item) =>{
           let transaccion = new Transaccion;
           transaccion.id = item['id'];
           transaccion.nombre = item['notes'];

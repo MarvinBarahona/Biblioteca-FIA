@@ -1,4 +1,8 @@
-// Servicios de libros.
+/*
+*Nombre del servicio: libros
+*Dirección: /src/app/libros/servicios/libros.service.ts
+*Objetivo: Proveer los servicios al módulo de libros
+*/
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -74,7 +78,7 @@ export class LibrosService {
         // Mapeando la salida
         let libros = new Array<Libro>();
 
-        r.forEach(function(item) {
+        r.forEach((item) => {
           let libro = new Libro;
 
           libro.id = item['id'];
@@ -116,14 +120,14 @@ export class LibrosService {
         libro.anio = rb['year'];
         libro.catalogado = rb['catalogued'];
         libro.autores = [];
-        rb['Authors'].forEach(function(author) {
+        rb['Authors'].forEach((author) =>{
           libro.autores.push(author['name']);
         });
 
         // Mapeando el catalogo
         let catalogo = new Catalogo;
         catalogo.materias = [];
-        rb['Subjects'].forEach(function(subject) {
+        rb['Subjects'].forEach((subject) => {
           catalogo.materias.push(subject['name']);
         });
         catalogo.categoria = rb['category'];
@@ -133,7 +137,7 @@ export class LibrosService {
 
         // Mapeando los ejemplares
         let ejemplares = new Array<Ejemplar>();
-        rc.forEach(function(item) {
+        rc.forEach((item) => {
           let ejemplar = new Ejemplar;
           ejemplar.id = item['id'];
           ejemplar.codigo = item['barcode'];
@@ -159,7 +163,7 @@ export class LibrosService {
 
         // Mapeando la salida
         let materias = new Array<AutoData>();
-        r.forEach(function(item) {
+        r.forEach((item)  =>{
           let materia = new AutoData;
 
           materia.id = item['id'];
@@ -180,11 +184,11 @@ export class LibrosService {
     let nuevos: any[] = [];
     let buscarEn: string[] = [];
 
-    data.forEach(function(d) {
+    data.forEach((d) => {
       buscarEn.push(d.nombre);
     });
 
-    items.forEach(function(item) {
+    items.forEach((item) => {
       let i = buscarEn.indexOf(item);
       i > -1 ? viejos.push(data[i].id) : nuevos.push({ name: item });
     });

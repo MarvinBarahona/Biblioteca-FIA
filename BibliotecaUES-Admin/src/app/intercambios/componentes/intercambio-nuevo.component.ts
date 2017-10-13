@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Interacmbio
+*Nombre del componente: intercambio-nuevo
 *Dirección física: src\app\intercambios\componentes\intercambio-nuevo.component.ts
 *Objetivo: Permite la ingresar un nuevo intercambio
 **/
@@ -83,7 +83,7 @@ export class IntercambioNuevoComponent implements OnInit {
 
         // Transforma los códigos en un objeto para el autocompletado
         let codigosData = {};
-        this.codigos.forEach(function(codigo){
+        this.codigos.forEach((codigo)=>{
           codigosData[codigo] = null;
         });
 
@@ -149,7 +149,7 @@ export class IntercambioNuevoComponent implements OnInit {
     );
   }
 
-  // Para la ventana modal de cancelación.
+  // Métodos para la ventana modal de cancelación.
   openCancel() {
     this.modalCancel.emit({ action: "modal", params: ['open'] });
   }
@@ -157,6 +157,8 @@ export class IntercambioNuevoComponent implements OnInit {
     this.modalCancel.emit({ action: "modal", params: ['close'] });
   }
 
+  // Método: cancel
+  // Objetivo: cerrar la ventana modal y regresar a la vista anterior
   cancel(){
     this.closeCancel();
     this.router.navigate(['/intercambios']);

@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Gestión de adquisiciones
+*Nombre del componente: adquisiciones-root
 *Dirección física: src\app\adquisiciones\componentes\dquisiciones-root.ts
 *Objetivo: Formar la estructura base para los componentes de Adquisiciones
 **/
@@ -12,6 +12,7 @@ declare var $: any;
   templateUrl: './adquisiciones-root.component.html'
 })
 export class AdquisicionesRootComponent implements OnInit {
+
   ngOnInit() {
     // Cerrar el menú al darle click a una opción.
     $("#toogle_menu").sideNav({closeOnClick: true});

@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Entrada de un intercambio
+*Nombre del componente: entrada
 *Dirección física: src\app\intercambios\componentes\entrada.component.ts
 *Objetivo: Mostrar información de la entrada de un intercambio e ingreso de códigos de barra
 **/
@@ -88,17 +88,20 @@ export class EntradaComponent implements OnInit {
     );
   }
 
+  // Método: linkLibro
   // Redirigir a la vista de un libro
   linkLibro(id: number){
     this.router.navigate(['/libros/'+id]);
   }
 
-  // Redirigir a la vista del ejemplar
+  // Método: linkEjemplar
+  // Objetivo: Redirigir a la vista del ejemplar
   linkEjemplar(id: number){
     this.router.navigate(['/ejemplares/'+id]);
   }
 
-  // Redirige a la vista de la salida del intercambio
+  // Método: salida
+  // Objetivo: Redirige a la vista de la salida del intercambio
   salida(){
     this.router.navigate(["/intercambios/salida/" + this.entrada.relacionado]);
   }

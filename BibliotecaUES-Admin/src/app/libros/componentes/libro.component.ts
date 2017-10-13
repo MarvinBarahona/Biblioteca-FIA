@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Gestión de libros
+*Nombre del compoenente: libro
 *Dirección física: src\app\libros\componentes\libro.component.ts
 *Objetivo: Mostrar información de un libro específico
 **/
@@ -46,12 +46,14 @@ export class LibroComponent implements OnInit {
     );
   }
 
-  // Para escuchar el evento que confirma que el libro se ha catalogado
+  // Método: onNotify
+  // Objetivo: para escuchar el evento que confirma que el libro se ha catalogado
   onNotify(message: string){
     this.libro.catalogado = true;
   }
 
-  // Redirigir a la vista de un ejemplar
+  // Método: linkEjemplar
+  // Objetivo: Redirigir a la vista de un ejemplar
   linkEjemplar(id: number){
     this.router.navigate(['/ejemplares/'+id]);
   }

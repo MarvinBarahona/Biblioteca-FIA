@@ -1,9 +1,13 @@
-// Servicios de empleados
+/*
+*Nombre del servicio: empleados
+*Dirección: /src/app/empleados/servicios/empleados.service.ts
+*Objetivo: Proveer los servicios de empleados al módulo de empleados.
+*/
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 import { environment } from './../../../environments/environment';
 
 import { CookieService } from 'ngx-cookie';
@@ -14,7 +18,10 @@ export class EmpleadosService {
   baseUrl: string;
   headers: Headers;
 
-  constructor(private http: Http, private cookieService: CookieService) {
+  constructor(
+    private http: Http,
+    private cookieService: CookieService
+  ) {
     this.baseUrl = environment.apiURL;
     this.headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.cookieService.get('token') });
   }

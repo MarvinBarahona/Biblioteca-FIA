@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Gestión de adquisiciones
+*Nombre del módulo: adquisiciones
 *Dirección física: src\app\adquisiciones\componentes\adquisiciones.component.ts
 *Objetivo: Mostrar una tabla con las diferentes adquisiciones
 **/
@@ -20,7 +20,10 @@ export class AdquisicionesComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
-  constructor(private adquisicionesService: AdquisicionesService, private router: Router) {
+  constructor(
+    private adquisicionesService: AdquisicionesService,
+    private router: Router
+  ) {
     // Opciones de datatable
     this.dtOptions = {
       pageLength: 10,
@@ -56,7 +59,8 @@ export class AdquisicionesComponent implements OnInit {
     );
   }
 
-  // Rediriga a la vista de  adquisición
+  // Método: linkAdquisicion
+  // Objetivo: Rediriga a la vista de  adquisición
   linkAdquisicion(adquisicion: Adquisicion) {
     this.router.navigate(["/adquisiciones/" + adquisicion.id])
   }

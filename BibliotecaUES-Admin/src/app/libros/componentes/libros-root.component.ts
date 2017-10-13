@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Gestión de libros
+*Nombre del componente: libros-root
 *Dirección física: src\app\libros\componentes\libros-root.component.ts
 *Objetivo: Formar la estructura base para los componentes de Libros
 **/

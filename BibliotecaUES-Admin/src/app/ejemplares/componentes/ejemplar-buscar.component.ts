@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Gestión de ejemplares
+*Nombre del componente: ejemplar-buscar
 *Dirección física: src\app\ejemplares\componentes\ejemplar-buscar.component.ts
 *Objetivo: Buscar ejemplares por medio del código de barra
 **/
@@ -27,29 +27,36 @@ export class EjemplarBuscarComponent implements OnInit {
   codigo: string;
   message: string = "No se encontraron resultados"
 
-  constructor(private ejemplaresService: EjemplaresService, private router: Router) { }
+  constructor(
+    private ejemplaresService: EjemplaresService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-    this.codigos = new Array<string>();
+    // Iniciarlizar el autocompletado del campo del buscador.
     this.inicializarAutocompletado();
   }
 
-  // Inicializar input con opciones de autocompletar
+  // Método: inicializarAutocompletado
+  // Objetivo: Inicializar el autocompletado del campo del buscador.
   inicializarAutocompletado(){
+    this.codigos = new Array<string>();
+
+    // Consumir el servicio de obteción de todos los ejemplares registrados.
     this.ejemplaresService.obtenerTodos().subscribe(
       ejemplares => {
         this.ejemplares = ejemplares;
 
-        var i=0;
-        for(var i:number; i<this.ejemplares.length; i++){
-          if(ejemplares[i].codigo != null){
-            this.codigos.push(ejemplares[i].codigo);
+        // Hacer un arreglo para la asignación de data del autocompletado
+        this.ejemplares.forEach((ejemplar)=>{
+          if(ejemplar.codigo != null){
+            this.codigos.push(ejemplar.codigo);
           }
-        }
+        });
 
         // Transforma los códigos en un objeto para el autocompletado
         let codigosData = {};
-        this.codigos.forEach(function(codigo){
+        this.codigos.forEach((codigo)=>{
           codigosData[codigo] = null;
         });
 
@@ -66,10 +73,13 @@ export class EjemplarBuscarComponent implements OnInit {
     );
   }
 
-  //Buscar un lejemplar por medio del código de barra
+  // Método: buscar
+  // Objetivo: Permite realizar la búsqueda de un ejemplar por su código de barra.
   buscar(){
     this.ejemplar = null;
     this.message = "Buscando...";
+
+    // Consumir el servicio de búsqueda.
     this.ejemplaresService.obtenerPorCodigo(this.codigo).subscribe(
       ejemplar => {
         this.ejemplar = ejemplar;
@@ -80,12 +90,14 @@ export class EjemplarBuscarComponent implements OnInit {
     )
   }
 
-  // Redirigir a la vista de un libro
+  // Método: linkLibro
+  // Objetivo: Redirigir a la vista de un libro
   linkLibro(id: number){
     this.router.navigate(['/libros/'+id]);
   }
 
-  // Redirigir a la vista de un ejemplar
+  // Método: linkEjemplar
+  // Objetivo: Redirigir a la vista de un ejemplar
   linkEjemplar(id: number){
     this.router.navigate(['/ejemplares/'+id]);
   }

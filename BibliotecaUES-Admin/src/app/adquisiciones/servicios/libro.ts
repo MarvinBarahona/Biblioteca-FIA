@@ -1,4 +1,8 @@
-// Clase Libro de Libros
+/*
+*Nombre de la clase: libro
+*Dirección: /src/app/adquisiciones/servicios/libro.ts
+*Objetivo:
+*/
 
 export class Libro{
   id: number;
