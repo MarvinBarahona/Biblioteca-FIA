@@ -87,12 +87,12 @@ export class IntercambiosService {
         let r = a[0];
         let intercambios = new Array<Intercambio>();
 
-        r.forEach((item) => {
+        r.forEach((_intercambio) => {
           let intercambio = new Intercambio;
-          intercambio.id = item['id'];
-          intercambio.facultad = item['notes'];
-          intercambio.fecha = item['createdAt'];
-          intercambio.usuario = item['fullname'];
+          intercambio.id = _intercambio['id'];
+          intercambio.facultad = _intercambio['notes'];
+          intercambio.fecha = _intercambio['createdAt'];
+          intercambio.usuario = _intercambio['fullname'];
           intercambios.push(intercambio);
         });
 
@@ -125,15 +125,15 @@ export class IntercambiosService {
 
         // Mapear las ejemplares.
         let ejemplares = new Array<Ejemplar>();
-        rc.forEach((item) =>{
+        rc.forEach((_ejemplar) =>{
           let ejemplar = new Ejemplar;
-          ejemplar.id = item['id'];
-          ejemplar.codigo = item['barcode'];
-          ejemplar.estado = item['state'];
+          ejemplar.id = _ejemplar['id'];
+          ejemplar.codigo = _ejemplar['barcode'];
+          ejemplar.estado = _ejemplar['state'];
           ejemplar.ingresado = ejemplar.codigo? true: false;
 
           // Mapear el libro
-          let rb = item['book'];
+          let rb = _ejemplar['book'];
           let libro = new Libro;
           libro.id = rb['id'];
           libro.titulo = rb['title'];

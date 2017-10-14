@@ -1,4 +1,8 @@
-// Servicios de libros.
+/*
+*Nombre del servicio: libros
+*Dirección física: src/app/libros/servicios/libros.service.ts
+*Objetivo: Proveer los servicios al módulo libros
+**/
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -31,19 +35,19 @@ export class LibrosService {
         // Mapeando la salida
         let libros = new Array<Libro>();
 
-        r.forEach(function(item) {
+        r.forEach((_libro) => {
           let libro = new Libro;
 
-          libro.id = item['id'];
-          libro.isbn = item['isbn'];
-          libro.titulo = item['title'];
-          libro.edicion = item['edition'];
-          libro.autor = item['authorName'];
-          libro.editorial = item['publisherName'];
+          libro.id = _libro['id'];
+          libro.isbn = _libro['isbn'];
+          libro.titulo = _libro['title'];
+          libro.edicion = _libro['edition'];
+          libro.autor = _libro['authorName'];
+          libro.editorial = _libro['publisherName'];
 
           // Mapeando el catalogo
           let catalogo = new Catalogo;
-          catalogo.img = item['image'];
+          catalogo.img = _libro['image'];
           libro.catalogo = catalogo;
           libros.push(libro);
         });
@@ -74,14 +78,14 @@ export class LibrosService {
         libro.anio = r['year'];
         libro.catalogado = r['catalogued'];
         libro.autores = [];
-        r['Authors'].forEach(function(author) {
+        r['Authors'].forEach((author) => {
           libro.autores.push(author['name']);
         });
 
         // Mapeando el catalogo
         let catalogo = new Catalogo;
         catalogo.materias = [];
-        r['Subjects'].forEach(function(subject) {
+        r['Subjects'].forEach((subject) => {
           catalogo.materias.push(subject['name']);
         });
         catalogo.categoria = r['category'];
@@ -106,19 +110,19 @@ export class LibrosService {
         // Mapeando la salida
         let libros = new Array<Libro>();
 
-        r.forEach(function(item) {
+        r.forEach((_libro) => {
           let libro = new Libro;
 
-          libro.id = item['id'];
-          libro.isbn = item['isbn'];
-          libro.titulo = item['title'];
-          libro.edicion = item['edition'];
-          libro.autor = item['authorName'];
-          libro.editorial = item['publisherName'];
+          libro.id = _libro['id'];
+          libro.isbn = _libro['isbn'];
+          libro.titulo = _libro['title'];
+          libro.edicion = _libro['edition'];
+          libro.autor = _libro['authorName'];
+          libro.editorial = _libro['publisherName'];
 
           // Mapeando el catalogo
           let catalogo = new Catalogo;
-          catalogo.img = item['image'];
+          catalogo.img = _libro['image'];
           libro.catalogo = catalogo;
           libros.push(libro);
         });

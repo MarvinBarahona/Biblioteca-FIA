@@ -1,4 +1,8 @@
-// Servicios de ejemplares
+/*
+*Nombre del servicio: ejemplares
+*Dirección física: src/app/trasladar/servicios/ejemplares.service.ts
+*Objetivo: Proveer los servicios de ejemplares al módulo trasladar
+**/
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -31,11 +35,11 @@ export class EjemplaresService {
         let r = response.json();
         let ejemplares = new Array<Ejemplar>();
 
-        r.forEach(function(item) {
+        r.forEach((_ejemplar) =>{
           let ejemplar = new Ejemplar;
-          ejemplar.id = item['id'];
-          ejemplar.codigo = item['barcode'];
-          ejemplar.estado = item['state'];
+          ejemplar.id = _ejemplar['id'];
+          ejemplar.codigo = _ejemplar['barcode'];
+          ejemplar.estado = _ejemplar['state'];
           ejemplares.push(ejemplar);
         });
         return ejemplares;

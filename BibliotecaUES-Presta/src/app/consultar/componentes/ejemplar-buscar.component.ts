@@ -1,6 +1,6 @@
 /*
-*Nombre del módulo: Gestión de ejemplares
-*Dirección física: src\app\ejemplares\componentes\ejemplar-buscar.component.ts
+*Nombre del componente: ejemplar-buscar
+*Dirección física: src\app\consultar\componentes\ejemplar-buscar.component.ts
 *Objetivo: Buscar ejemplares por medio del código de barra
 **/
 
@@ -30,10 +30,12 @@ export class EjemplarBuscarComponent implements OnInit {
   constructor(private ejemplaresService: EjemplaresService, private router: Router) { }
 
   ngOnInit() {
+    // Iniciar el autocompletado en el input de búsqueda.
     this.inicializarAutocompletado();
   }
 
-  // Inicializar input con opciones de autocompletar
+  //Método: inicializarAutocompletado
+  //Objetivo: Inicializar input con opciones de autocompletar
   inicializarAutocompletado(){
     this.ejemplaresService.obtenerTodos().subscribe(
       ejemplares => {
@@ -48,7 +50,7 @@ export class EjemplarBuscarComponent implements OnInit {
 
         // Transforma los códigos en un objeto para el autocompletado
         let codigosData = {};
-        this.codigos.forEach(function(codigo){
+        this.codigos.forEach((codigo)=>{
           codigosData[codigo] = null;
         });
 
@@ -65,7 +67,8 @@ export class EjemplarBuscarComponent implements OnInit {
     );
   }
 
-  //Buscar un libro por medio del código de barra
+  //Método: buscar
+  //Objetivo: Buscar un libro por medio del código de barra
   buscar(){
     this.ejemplar = null;
     this.message = "Buscando...";
@@ -80,12 +83,14 @@ export class EjemplarBuscarComponent implements OnInit {
     )
   }
 
-  // Redirigir a la vista de un libro
+  //Método: linkLibro
+  //Objetivo: Redirigir a la vista de un libro
   linkLibro(id: number){
     this.router.navigate(['/consultar/libro/'+id]);
   }
 
-  // Redirigir a la vista de un ejemplar
+  //Método: linkEjemplar
+  //Objetivo: Redirigir a la vista de un ejemplar
   linkEjemplar(id: number){
     this.router.navigate(['/consultar/ejemplar/'+id]);
   }

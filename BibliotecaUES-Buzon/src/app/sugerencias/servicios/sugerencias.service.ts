@@ -1,4 +1,8 @@
-// Servicio de sugerencias.
+/*
+*Nombre del servicio: sugerencias
+*Dirección física: src/app/sugerencias/servicios/sugerencias.service.ts
+*Objetivo: Proveer servicios al módulo de sugerencias
+**/
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -26,7 +30,7 @@ export class SugerenciasService {
     // Mapeando la entrada
     let _sugerencia = { subjectId: idMateria, title: sugerencia.titulo, author: sugerencia.autor, publisher: sugerencia.editorial, edition: sugerencia.edicion, isbn: sugerencia.isbn, price: sugerencia.precio };
 
-
+    // Agregar la cantidad si es docente
     if (docente) {
       _sugerencia['quantity'] = sugerencia.cantidad;
     }
@@ -58,17 +62,17 @@ export class SugerenciasService {
         let rc = r['majors'];
         let rm = r['courses']
 
-        rc.forEach(function(item) {
+        rc.forEach((_carrera) => {
           // Mapear el objeto carrera
           let carrera = new Carrera;
-          carrera.id = item['id'];
-          carrera.nombre = item['name'];
+          carrera.id = _carrera['id'];
+          carrera.nombre = _carrera['name'];
           carrera.materias = [];
 
           carreras.push(carrera);
         });
 
-        rm.forEach(function(subject) {
+        rm.forEach((subject) =>{
           // Mapear el objeto materia
           let materia = new Materia;
 
@@ -99,16 +103,16 @@ export class SugerenciasService {
         // Mapeando la salida
         let sugerencias = new Array<Sugerencia>();
 
-        r.forEach(function(item) {
+        r.forEach((_sugerencia) => {
           let sugerencia = new Sugerencia;
 
-          sugerencia.id = item['id'];
-          sugerencia.titulo = item['title'];
-          sugerencia.autor = item['author'];
-          sugerencia.edicion = item['edition'];
-          sugerencia.isbn = item['isbn'];
-          sugerencia.votos = item['upvotes'];
-          sugerencia.pedidos = item['orders'];
+          sugerencia.id = _sugerencia['id'];
+          sugerencia.titulo = _sugerencia['title'];
+          sugerencia.autor = _sugerencia['author'];
+          sugerencia.edicion = _sugerencia['edition'];
+          sugerencia.isbn = _sugerencia['isbn'];
+          sugerencia.votos = _sugerencia['upvotes'];
+          sugerencia.pedidos = _sugerencia['orders'];
 
           sugerencias.push(sugerencia);
         });
@@ -131,16 +135,16 @@ export class SugerenciasService {
         // Mapeando la salida
         let sugerencias = new Array<Sugerencia>();
 
-        r.forEach(function(item) {
+        r.forEach((_sugerencia) =>{
           let sugerencia = new Sugerencia;
 
-          sugerencia.id = item['id'];
-          sugerencia.titulo = item['title'];
-          sugerencia.autor = item['author'];
-          sugerencia.edicion = item['edition'];
-          sugerencia.isbn = item['isbn'];
-          sugerencia.votos = item['upvotes'];
-          sugerencia.pedidos = item['orders'];
+          sugerencia.id = _sugerencia['id'];
+          sugerencia.titulo = _sugerencia['title'];
+          sugerencia.autor = _sugerencia['author'];
+          sugerencia.edicion = _sugerencia['edition'];
+          sugerencia.isbn = _sugerencia['isbn'];
+          sugerencia.votos = _sugerencia['upvotes'];
+          sugerencia.pedidos = _sugerencia['orders'];
 
           sugerencias.push(sugerencia);
         });
@@ -179,14 +183,14 @@ export class SugerenciasService {
         // Mapear materias con sus respectivos votos y pedidos
         let materias = new Array<Materia>();
 
-        r['Courses'].forEach((item) => {
+        r['Courses'].forEach((_materia) => {
           let materia = new Materia;
-          materia.id= item['id'];
-          materia.nombre = item['name'];
-          materia.votos = item['upvotes'];
-          materia.pedidos = item['orders'];
+          materia.id= _materia['id'];
+          materia.nombre = _materia['name'];
+          materia.votos = _materia['upvotes'];
+          materia.pedidos = _materia['orders'];
 
-          item['votes'].forEach((voto)=>{
+          _materia['votes'].forEach((voto)=>{
             if(voto.userId == usuario.id){
               materia.usuario = true;
               sugerencia.usuario = true;

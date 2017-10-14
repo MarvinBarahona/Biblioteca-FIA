@@ -1,3 +1,9 @@
+/*
+*Nombre del componente: not-allowed
+*Dirección física: src/app/login/componentes/not-allowed.component.ts
+*Objetivo: Mostrar un mensaje cuando no se permita el acceso a una vista
+**/
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,10 +16,6 @@ import { Component, OnInit } from '@angular/core';
   `]
 })
 export class NotAllowedComponent implements OnInit {
-
   constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

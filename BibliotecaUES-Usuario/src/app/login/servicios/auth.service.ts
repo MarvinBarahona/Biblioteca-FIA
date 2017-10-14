@@ -1,4 +1,8 @@
-// Servicios de autenticación
+/*
+*Nombre del servicio: auth
+*Dirección física: src/app/login/servicios/auth.service.ts
+*Objetivo: Proveer los servicios al módulo login
+**/
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -32,7 +36,6 @@ export class AuthService {
     );
   }
 
-
   // Método privado: mapearUsuario
   // Objetivo: convertir un json de respuesta en un objeto ve Usuario.
   private mapearUsuario(r: any): Usuario{
@@ -45,5 +48,4 @@ export class AuthService {
 
     return usuario;
   }
-
 }

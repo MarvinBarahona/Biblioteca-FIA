@@ -1,4 +1,7 @@
-// Clase materia del módulo de sugerencias
+/*
+*Nombre de la clase: materia
+*Dirección física: src/app/sugerencias/servicios/materia.ts
+**/
 
 export class Materia{
   id: number;

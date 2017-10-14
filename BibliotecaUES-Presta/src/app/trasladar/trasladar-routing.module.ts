@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: trasladar-routing
+*Dirección física: src/app/trasladar/trasladar-routing.module.ts
+*Objetivo: Definir las rutas del módulo trasladar
+**/
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Consulta de libros
+*Nombre del componente: libros
 *Dirección física: src\app\libros\componentes\libros.component.ts
 *Objetivo: Mostrar el listado de libros más recientes
 **/
@@ -39,7 +39,8 @@ export class LibrosComponent implements OnInit {
     );
   }
 
-  // Buscar libros
+  //Método: buscar
+  //Objetivo: Permite la búsqueda de libros por diferentes criterios de búsqueda
   buscar(){
     switch(this.model.tipo){
       case '0':{
@@ -65,6 +66,7 @@ export class LibrosComponent implements OnInit {
 
     this.libros = null;
     this.mensajeResultado = "Resultados de la búsqueda";
+
     // Llama al servicio
     this.buscador = this.librosService.buscar(this.model.llave, this.model.valor).subscribe(
       libros => {
@@ -75,7 +77,8 @@ export class LibrosComponent implements OnInit {
 
   }
 
-  // Redirige a la vista individual del libro
+  //Método: linkLibro
+  //Objetivo: Redirige a la vista individual del libro
   linkLibro(libro: Libro){
     console.log(libro.id);
     this.router.navigate(["/libros/"+libro.id])

@@ -1,8 +1,10 @@
 <div *ngIf="libro; else elseLibro">
+
   <!-- Información del libro -->
   <div class="row">
     <div class="col s12 m12 l12">
       <div class="card-panel">
+
         <!-- Título y edición -->
         <div class="center">
           <h5>{{libro.titulo}}</h5>
@@ -10,13 +12,14 @@
         </div>
         <br>
         <div class="row">
+
           <!-- Imagen -->
           <div class="col l1 offset-l3 m2 offset-m1">
             <img src="{{libro.catalogo.img || 'assets/noImage.jpg'}}" alt="Imagen del libro" class="previa center">
           </div>
 
+          <!-- Autores -->
           <div class="col l6 offset-l1 m7 offset-m2">
-            <!-- Autores -->
             <div class="row">
               <div class="col s12 m2 offset-m1 l1">
                 <strong>Autores: </strong>

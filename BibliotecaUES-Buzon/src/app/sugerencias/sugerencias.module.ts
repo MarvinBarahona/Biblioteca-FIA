@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: sugerencias
+*Dirección física: src/app/sugerencias/sugerencias.module.ts
+*Objetivo: Declarar el módulo de sugerencias
+**/
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';

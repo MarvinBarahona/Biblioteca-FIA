@@ -78,16 +78,16 @@ export class LibrosService {
         // Mapeando la salida
         let libros = new Array<Libro>();
 
-        r.forEach((item) => {
+        r.forEach((_libro) => {
           let libro = new Libro;
 
-          libro.id = item['id'];
-          libro.isbn = item['isbn'];
-          libro.titulo = item['title'];
-          libro.edicion = item['edition'];
-          libro.autor = item['authorName'];
-          libro.editorial = item['publisherName'];
-          libro.catalogado = item['catalogued'];
+          libro.id = _libro['id'];
+          libro.isbn = _libro['isbn'];
+          libro.titulo = _libro['title'];
+          libro.edicion = _libro['edition'];
+          libro.autor = _libro['authorName'];
+          libro.editorial = _libro['publisherName'];
+          libro.catalogado = _libro['catalogued'];
 
           libros.push(libro);
         });
@@ -137,11 +137,11 @@ export class LibrosService {
 
         // Mapeando los ejemplares
         let ejemplares = new Array<Ejemplar>();
-        rc.forEach((item) => {
+        rc.forEach((_ejemplar) => {
           let ejemplar = new Ejemplar;
-          ejemplar.id = item['id'];
-          ejemplar.codigo = item['barcode'];
-          ejemplar.estado = item['state'];
+          ejemplar.id = _ejemplar['id'];
+          ejemplar.codigo = _ejemplar['barcode'];
+          ejemplar.estado = _ejemplar['state'];
           ejemplares.push(ejemplar);
         });
         libro.ejemplares = ejemplares;
@@ -163,11 +163,11 @@ export class LibrosService {
 
         // Mapeando la salida
         let materias = new Array<AutoData>();
-        r.forEach((item)  =>{
+        r.forEach((_materia)  =>{
           let materia = new AutoData;
 
-          materia.id = item['id'];
-          materia.nombre = item['name'];
+          materia.id = _materia['id'];
+          materia.nombre = _materia['name'];
 
           materias.push(materia);
         });

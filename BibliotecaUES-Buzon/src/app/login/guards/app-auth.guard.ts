@@ -1,5 +1,8 @@
-// Guard de autenticación.
-// No permite acceder a la información sin loguearse.
+/*
+*Nombre del componente: app-auth
+*Dirección física: src/app/login/guards/app-auth.guard.ts
+*Objetivo: No permite acceder a la información sin loguearse.
+**/
 
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';

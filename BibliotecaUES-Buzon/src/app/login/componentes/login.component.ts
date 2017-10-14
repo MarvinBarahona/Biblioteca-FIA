@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: iniciar sesión.
+*Nombre del componente: login
 *Dirección: /src/app/login/componentes/login.component.ts
 *Objetivo: permite al usuario iniciar sesión.
 */
@@ -31,18 +31,23 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
+    // Recuperar la siguiente vista
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/sugerencias';
   }
 
   ngAfterViewInit() {
+    // Inicializar el botón de logueo de google.
     this.googleInit();
   }
 
+  //Método: logueo
+  //Objetivo: Permite al usuario loguearse.
   logueo() {
     this.errorMessage = null;
     this.message = "Confirmando cuenta...";
     this.cd.detectChanges();
 
+    // Consumir el servicio de logueo
     this.authService.logueo(this.token).subscribe(
       r => {
         sessionStorage.setItem('token', r['token']);
@@ -57,6 +62,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
     );
   }
 
+  //Método: googleInit
+  //Objetivo: Inicializar la interfaz de Google
   googleInit() {
     gapi.load('auth2', () => {
       this.auth2 = gapi.auth2.init({
@@ -65,10 +72,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
         prompt: 'select_account',
         scope: 'profile email'
       });
+
+      // Asignar el método a un componente.
       this.attachSignin(document.getElementById('googleBtn'));
     });
   }
 
+  //Método: attachSignin
+  //Objetivo: Asignar el logueo de Google a un componente.
   attachSignin(element) {
     this.auth2.attachClickHandler(element, {}, (googleUser) => {
       let profile = googleUser.getBasicProfile();

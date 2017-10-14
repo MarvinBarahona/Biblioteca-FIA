@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: trasladar
+*Dirección física: src/app/trasladar/trasladar.module.ts
+*Objetivo: Definir el módulo trasladar
+**/
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';

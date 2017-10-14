@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: consultar
+*Dirección física: src/app/consultar/consultar.module.ts
+*Objetivo: Definir el módulo consultar
+**/
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';

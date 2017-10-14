@@ -3,12 +3,16 @@
 
     <!-- Buscador -->
     <div class="card-panel">
-      <form #buscarForm="ngForm" (submit)="buscar()">
+      <form autocomplete="off" #buscarForm="ngForm" (submit)="buscar()">
         <div class="row">
+
+          <!-- Input -->
           <div class="input-field col l7 m6 s12">
             <input id="busqueda" name="busqueda" type="text" class="validate" maxlength="60" [(ngModel)]="model.valor" required>
             <label for="busqueda">Buscar...</label>
           </div>
+
+          <!-- Select con criterios de búsqueda -->
           <div class="input-field col l2 m4 s12">
             <select id="tipo" name="tipo" materialize="material_select" [(ngModel)]="model.tipo" required>
               <option value='0' selected>Título</option>
@@ -18,6 +22,8 @@
             </select>
             <label for="tipo">Criterio:</label>
           </div>
+
+          <!-- Botón -->
           <div class="col l2 m1 s12">
             <button type="submit" class="waves-effect waves-light btn" [disabled]="!buscarForm.form.valid">Buscar</button>
           </div>
@@ -34,13 +40,17 @@
       <h4>{{mensajeResultado}}</h4>
 
       <ul class="collection" *ngIf="libros; else elseLibro">
+        <!-- Vacio -->
         <li *ngIf="libros.length == 0">Sin resultados</li>
+
+        <!-- Resultados -->
         <li *ngFor="let libro of libros" class="collection-item avatar">
           <img src="{{libro.catalogo.img || 'assets/noImage.jpg'}}" alt="Imagen del libro" class="circle">
           <h6><a href="javascript:void(0)" (click)="linkLibro(libro)">{{libro.titulo}}, {{libro.edicion}}° ed</a></h6>
           <p>{{libro.autor}}</p>
           <p>{{libro.isbn}}</p>
         </li>
+        
       </ul>
 
       <!-- Mensaje de espera -->

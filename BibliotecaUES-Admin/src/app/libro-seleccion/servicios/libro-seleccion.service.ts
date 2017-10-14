@@ -84,14 +84,14 @@ export class LibroSeleccionService {
         // Mapeando la salida
         let libros = new Array<Libro>();
 
-        r.forEach((item)=>{
+        r.forEach((_libro)=>{
           let libro = new Libro;
 
-          libro.id = item['id'];
-          libro.isbn = item['isbn'];
-          libro.titulo = item['title'];
-          libro.edicion = item['edition'];
-          libro.autor = item['authorName'];
+          libro.id = _libro['id'];
+          libro.isbn = _libro['isbn'];
+          libro.titulo = _libro['title'];
+          libro.edicion = _libro['edition'];
+          libro.autor = _libro['authorName'];
 
           libros.push(libro);
         });
@@ -116,20 +116,20 @@ export class LibroSeleccionService {
         let ra = r['authors'];
         let rp = r['publishers'];
 
-        ra.forEach((item) => {
+        ra.forEach((_autor) => {
           let autor = new AutoData;
 
-          autor.id = item['id'];
-          autor.nombre = item['name'];
+          autor.id = _autor['id'];
+          autor.nombre = _autor['name'];
 
           autores.push(autor);
         });
 
-        rp.forEach((item) => {
+        rp.forEach((_editorial) => {
           let editorial = new AutoData;
 
-          editorial.id = item['id'];
-          editorial.nombre = item['name'];
+          editorial.id = _editorial['id'];
+          editorial.nombre = _editorial['name'];
 
           editoriales.push(editorial);
         });

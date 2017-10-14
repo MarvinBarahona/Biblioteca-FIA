@@ -1,4 +1,8 @@
-// Servicios de libros.
+/*
+*Nombre del servicio: libros
+*Dirección física: src/app/consultar /servicios/libros.service.ts
+*Objetivo: Proveer los servicios de libros al módulo consultar
+**/
 
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -41,14 +45,14 @@ export class LibrosService {
         libro.anio = rb['year'];
         libro.catalogado = rb['catalogued'];
         libro.autores = [];
-        rb['Authors'].forEach(function(author) {
+        rb['Authors'].forEach((author) =>{
           libro.autores.push(author['name']);
         });
 
         // Mapeando el catalogo
         let catalogo = new Catalogo;
         catalogo.materias = [];
-        rb['Subjects'].forEach(function(subject) {
+        rb['Subjects'].forEach((subject) =>{
           catalogo.materias.push(subject['name']);
         });
         catalogo.categoria = rb['category'];
@@ -58,11 +62,11 @@ export class LibrosService {
 
         // Mapeando los ejemplares
         let ejemplares = new Array<Ejemplar>();
-        rc.forEach(function(item) {
+        rc.forEach((_ejemplar) =>{
           let ejemplar = new Ejemplar;
-          ejemplar.id = item['id'];
-          ejemplar.codigo = item['barcode'];
-          ejemplar.estado = item['state'];
+          ejemplar.id = _ejemplar['id'];
+          ejemplar.codigo = _ejemplar['barcode'];
+          ejemplar.estado = _ejemplar['state'];
           ejemplares.push(ejemplar);
         });
         libro.ejemplares = ejemplares;

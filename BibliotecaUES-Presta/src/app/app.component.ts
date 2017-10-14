@@ -1,3 +1,9 @@
+/*
+*Nombre del componente: app
+*Dirección física: src/app/app.component.ts
+*Objetivo: Componente principal
+**/
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 

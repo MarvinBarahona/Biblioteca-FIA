@@ -38,10 +38,10 @@ export class GruposService {
         let r = response.json();
         let grupos = new Array<Grupo>();
 
-        r.forEach((item) => {
+        r.forEach((_grupo) => {
           let grupo = new Grupo;
-          grupo.id = item['id'];
-          grupo.nombre = item['name'];
+          grupo.id = _grupo['id'];
+          grupo.nombre = _grupo['name'];
           grupos.push(grupo);
         });
         return grupos;

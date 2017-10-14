@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: app-routing
+*Dirección física: src/app/app-routing.module.ts
+*Objetivo: Declaración de las rutas principales
+**/
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 

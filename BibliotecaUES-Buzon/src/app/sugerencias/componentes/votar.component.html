@@ -1,9 +1,12 @@
 <div class="row">
   <div class="col s12 m12 l12">
     <div class="card-panel" *ngIf="sugerencia; else elseSugerencia;">
+
+      <!-- Título y editorial -->
       <h5 class="center">{{sugerencia.titulo}}, {{sugerencia.edicion}}ed</h5>
       <h6 class="center">{{sugerencia.editorial}}</h6>
 
+      <!-- Autor e ISBN -->
       <div class="row">
         <div class="col s12 m3 offset-m4">
           <strong>Autor: </strong> {{sugerencia.autor}}
@@ -13,16 +16,21 @@
         </div>
       </div>
 
+      <!-- Materias de la sugerencia. -->
       <div class="row">
         <div class="col s12 m3 offset-m1" *ngFor="let materia of sugerencia.materias">
           <dl>
             <dt><strong>{{materia.nombre}}</strong></dt>
+
+            <!-- Votos -->
             <dd>Votos: {{materia.votos}}
               <a href="javascript:void(0)" (click)="votar(materia.id)" *ngIf="!sugerencia.usuario">
                 <i class="fa fa-thumbs-up"></i>
               </a>
               <span *ngIf="materia.usuario">(Tu elección)</span>
             </dd>
+
+            <!-- Pedidos -->
             <dd>Pedidos: {{materia.pedidos}}</dd>
           </dl>
         </div>
@@ -31,17 +39,20 @@
       <!-- Carrera y Materias -->
       <div class="row" *ngIf="!sugerencia.usuario">
         <div class="input-field col l3 offset-l2 m5 s12">
+          <!-- Select de carrera -->
           <select materialize="material_select" name="carrera" (change)="selectCarrera($event.target.value)" required>
               <option *ngFor="let carrera of carreras">{{carrera.nombre}}</option>
             </select>
           <label for="tipo">Carrera:</label>
         </div>
 
+        <!-- Materia con autocompletado -->
         <div class="input-field col l5 m7 s12">
           <input id="materia" name="materia" type="text" class="validate" required>
           <label for="materia">Materia</label>
         </div>
 
+        <!-- Botón de agregación -->
         <div class="col l2 m1 s12">
           <button type="submit" class="waves-effect waves-light btn" [disabled]="!materia" (click)="agregar()">Agregar</button>
         </div>
@@ -50,6 +61,7 @@
     </div>
     <!-- /card-panel -->
 
+    <!-- Mensaje a mostrar durante la carga -->
     <ng-template #elseSugerencia>
       <div class="row">
         <div class="col s8 m8 offset-s2 offset-m2">

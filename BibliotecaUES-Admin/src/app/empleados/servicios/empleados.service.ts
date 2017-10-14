@@ -56,15 +56,15 @@ export class EmpleadosService {
         let r = response.json();
         let empleados = new Array<Empleado>();
 
-        r.forEach((item)=>{
+        r.forEach((_empleado)=>{
           // Mapeando objeto Empleado
           let empleado = new Empleado;
-          empleado.id = item['id'];
-          empleado.nombre = item['fullname'];
-          empleado.correo = item['email'];
+          empleado.id = _empleado['id'];
+          empleado.nombre = _empleado['fullname'];
+          empleado.correo = _empleado['email'];
 
           // Mapeando objeto Grupo de Empleado
-          let rg = item['Group'];
+          let rg = _empleado['Group'];
           let grupo = new Grupo;
           grupo.nombre = rg['name'];
           empleado.grupo = grupo;
@@ -104,13 +104,13 @@ export class EmpleadosService {
         let politicas = new Array<Politica>();
         let rp = r['Policies'];
 
-        rp.forEach((item)=>{
+        rp.forEach((_politica)=>{
           let politica = new Politica;
-          politica.id = item['id'];
-          politica.codigo = item['code'];
-          politica.nombre = item['name'];
-          politica.asignada = item['hasIt'];
-          politica.deshabilitada = item['group'];
+          politica.id = _politica['id'];
+          politica.codigo = _politica['code'];
+          politica.nombre = _politica['name'];
+          politica.asignada = _politica['hasIt'];
+          politica.deshabilitada = _politica['group'];
 
           politicas.push(politica);
         });

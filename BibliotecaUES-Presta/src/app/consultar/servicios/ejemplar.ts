@@ -1,4 +1,7 @@
-// Clase Ejemplar
+/*
+*Nombre de la clase: ejemplar
+*Dirección física: src/app/consultar/servicios/ejemplar.ts
+**/
 
 import { Transaccion, Libro } from './'
 

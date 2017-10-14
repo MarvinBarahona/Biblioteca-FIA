@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: sugerencias-routing
+*Dirección física: src/app/sugerencias/sugerencias-routing.module.ts
+*Objetivo: Declarar las rutas del módulo de sugerencias
+**/
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

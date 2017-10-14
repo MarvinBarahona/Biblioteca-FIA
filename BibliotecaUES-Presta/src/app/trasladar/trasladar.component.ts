@@ -1,6 +1,6 @@
 /*
-*Nombre del módulo:
-*Dirección física:
+*Nombre del componente: trasladar
+*Dirección física: /src/app/trasladar/trasladar.component.ts
 *Objetivo: Cambiar el estado de un ejemplar cuando este pasa del área de jefatura a la biblioteca.
 **/
 
@@ -29,14 +29,18 @@ export class TrasladarComponent implements OnInit {
   codigo: string;
   message: string = "No se encontraron resultados";
 
-  constructor(private ejemplaresService: EjemplaresService, private router: Router) { }
+  constructor(
+    private ejemplaresService: EjemplaresService,
+    private router: Router) { }
 
   ngOnInit() {
+    // Activar el nav en responsive e inicializar el autocompletado en el buscador.
     $("#toogle_menu").sideNav({closeOnClick: true});
     this.inicializarAutocompletado();
   }
 
-  // Inicializar input con opciones de autocompletar
+  //Método: inicializarAutocompletado
+  //Objetivo: Inicializar input con opciones de autocompletar
   inicializarAutocompletado(){
     this.ejemplaresService.obtenerTodos().subscribe(
       ejemplares => {
@@ -51,7 +55,7 @@ export class TrasladarComponent implements OnInit {
 
         // Transforma los códigos en un objeto para el autocompletado
         let codigosData = {};
-        this.codigos.forEach(function(codigo){
+        this.codigos.forEach((codigo)=>{
           codigosData[codigo] = null;
         });
         // Inicializar el campo con autocompletado
@@ -67,11 +71,13 @@ export class TrasladarComponent implements OnInit {
     );
   }
 
-  //Buscar un libro por medio del código de barra
+  //Método: buscar
+  //Objetivo: Buscar un libro por medio del código de barra
   buscar(){
     this.ejemplar = null;
     this.message = "Buscando...";
 
+    // Consumir servicio de búsqueda.
     this.ejemplaresService.obtenerPorCodigo(this.codigo).subscribe(
       ejemplar => {
         this.message = null;
@@ -83,9 +89,11 @@ export class TrasladarComponent implements OnInit {
     );
   }
 
-  // Trasladar libro
+  //Método: trasladar
+  //Objetivo: registrar el traslado de un ejemplar
   trasladar(){
     this.message = "Trasladando...";
+    // Consumir servicio de traslado
     this.ejemplaresService.trasladar(this.ejemplar.id).subscribe(
       message => {
         this.message = null;

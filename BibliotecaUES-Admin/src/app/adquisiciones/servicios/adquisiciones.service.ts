@@ -67,24 +67,24 @@ export class AdquisicionesService {
         let adquisiciones = new Array<Adquisicion>();
 
         // Compras
-        r1.forEach((item) => {
+        r1.forEach((_adquisicion) => {
           let adquisicion = new Adquisicion;
-          adquisicion.id = item['id'];
-          adquisicion.nombre = item['notes'];
-          adquisicion.fecha = item['createdAt'];
-          adquisicion.tipo = item['type'];
-          adquisicion.usuario = item['fullname'];
+          adquisicion.id = _adquisicion['id'];
+          adquisicion.nombre = _adquisicion['notes'];
+          adquisicion.fecha = _adquisicion['createdAt'];
+          adquisicion.tipo = _adquisicion['type'];
+          adquisicion.usuario = _adquisicion['fullname'];
           adquisiciones.push(adquisicion);
         });
 
         // Donaciones
-        r2.forEach((item) => {
+        r2.forEach((_adquisicion) => {
           let adquisicion = new Adquisicion;
-          adquisicion.id = item['id'];
-          adquisicion.nombre = item['notes'];
-          adquisicion.fecha = item['createdAt'];
-          adquisicion.tipo = item['type'];
-          adquisicion.usuario = item['fullname'];
+          adquisicion.id = _adquisicion['id'];
+          adquisicion.nombre = _adquisicion['notes'];
+          adquisicion.fecha = _adquisicion['createdAt'];
+          adquisicion.tipo = _adquisicion['type'];
+          adquisicion.usuario = _adquisicion['fullname'];
           adquisiciones.push(adquisicion);
         });
 
@@ -117,15 +117,15 @@ export class AdquisicionesService {
 
         // Mapear las ejemplares.
         let ejemplares = new Array<Ejemplar>();
-        rc.forEach((item) => {
+        rc.forEach((_ejemplar) => {
           let ejemplar = new Ejemplar;
-          ejemplar.id = item['id'];
-          ejemplar.codigo = item['barcode'];
-          ejemplar.estado = item['state'];
+          ejemplar.id = _ejemplar['id'];
+          ejemplar.codigo = _ejemplar['barcode'];
+          ejemplar.estado = _ejemplar['state'];
           ejemplar.ingresado = ejemplar.codigo? true: false;
 
           // Mapear el libro
-          let rb = item['book'];
+          let rb = _ejemplar['book'];
           let libro = new Libro;
           libro.id = rb['id'];
           libro.titulo = rb['title'];

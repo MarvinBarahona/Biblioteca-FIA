@@ -20,25 +20,31 @@
         <h5>Traslado de ejemplares</h5>
 
         <!-- Formulario para buscar  -->
-        <form #buscarEjemplarForm="ngForm" (ngSubmit)="buscar()" autocomplete="off">
+        <form autocomplete="off" #buscarEjemplarForm="ngForm" (ngSubmit)="buscar()">
           <div class="row">
+
+            <!-- Input -->
             <div class="input-field col m4 s8">
               <input id="codigo" name="codigo" type="text" class="validate" pattern="^[0-9]{8}$" [(ngModel)]="codigo" required>
               <label for="codigo" data-error="El código debe contener 8 dígitos">Código de barra</label>
             </div>
+
+            <!-- Botón -->
             <div class="col m1 s1">
               <button class="btn waves-effect waves-green search" type="submit"[disabled]="!buscarEjemplarForm.form.valid"><i class="medium material-icons">search</i></button>
             </div>
           </div>
-        </form>
 
-        <!-- Resultados de la búsqueda -->
+        </form>
+        <!-- /form -->
+
         <div class="row">
           <div class="col s12">
             <p>Resultado de la búsqueda:</p>
           </div>
         </div>
 
+        <!-- Resultados de la búsqueda -->
         <div *ngIf="ejemplar">
           <div class="row">
             <div class="col s4">
@@ -51,15 +57,19 @@
               <p><strong>Estado: </strong>{{ejemplar.estado}}</p>
             </div>
           </div>
+
+          <!-- Botones -->
           <div class="row" *ngIf="ejemplar.estado == 'Disponible' || ejemplar.estado == 'Inactivo'">
             <div class="col m6 offset-m4 s8 offset-s2">
               <a class="btn waves-effect waves-green search" href="javascript:void(0)" (click)="trasladar()">{{ejemplar.estado == 'Disponible'? 'Enviar':'Recibir'}}</a>
             </div>
           </div>
         </div>
+
         <div class="row" *ngIf="message">
           <p>{{message}}</p>
         </div>
+
       </div>
       <!-- /card-panel -->
     </div>

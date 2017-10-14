@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: libros-routing
+*Dirección física: src/app/libros/libros-routing.module.ts
+*Objetivo: Definir las rutas del módulo libros
+**/
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

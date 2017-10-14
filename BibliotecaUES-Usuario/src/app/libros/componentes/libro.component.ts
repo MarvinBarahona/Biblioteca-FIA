@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: Gestión de libros
+*Nombre del componente: libro
 *Dirección física: src\app\libros\componentes\libro.component.ts
 *Objetivo: Mostrar información de un libro específico
 **/
@@ -21,7 +21,11 @@ import { LibrosService, Libro } from './../servicios'
 export class LibroComponent implements OnInit {
   libro: Libro;
 
-constructor(private libroService: LibrosService, private route: ActivatedRoute, private router: Router){}
+constructor(
+  private libroService: LibrosService,
+  private route: ActivatedRoute,
+  private router: Router
+){}
 
   ngOnInit() {
     // Obtiene el id del libro
@@ -40,12 +44,8 @@ constructor(private libroService: LibrosService, private route: ActivatedRoute, 
     );
   }
 
-  // Para escuchar el evento que confirma que el libro se ha catalogado
-  onNotify(message: string){
-    this.libro.catalogado = true;
-  }
-
-  // Redirigir a la vista de un ejemplar
+  //Método: linkEjemplar
+  //Objetivo: Redirigir a la vista de un ejemplar
   linkEjemplar(id: number){
     this.router.navigate(['/consultar/ejemplar/'+id]);
   }

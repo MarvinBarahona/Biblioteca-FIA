@@ -1,4 +1,7 @@
-// Clase carrera del módulo de sugerencias
+/*
+*Nombre de la clase: carrera
+*Dirección física: src/app/sugerencias/servicios/carrera.ts
+**/
 
 import { Materia } from './';
 

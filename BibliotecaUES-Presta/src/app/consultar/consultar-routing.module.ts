@@ -1,3 +1,9 @@
+/*
+*Nombre del módulo: consultar-routing
+*Dirección física: src/app/consultar/consultar-routing.module.ts
+*Objetivo: Definir las rutas del módulo consultar
+**/
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

@@ -1,4 +1,7 @@
-// Clase Libro
+/*
+*Nombre de la clase: libro
+*Dirección física: src/app/libros/servicios/libro.ts
+**/
 
 import { Catalogo, Ejemplar } from './';
 

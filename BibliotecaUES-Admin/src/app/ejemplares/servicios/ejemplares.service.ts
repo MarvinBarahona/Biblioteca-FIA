@@ -82,11 +82,11 @@ export class EjemplaresService {
         let r = response.json();
         let ejemplares = new Array<Ejemplar>();
 
-        r.forEach((item) => {
+        r.forEach((_ejemplar) => {
           let ejemplar = new Ejemplar;
-          ejemplar.id = item['id'];
-          ejemplar.codigo = item['barcode'];
-          ejemplar.estado = item['state'];
+          ejemplar.id = _ejemplar['id'];
+          ejemplar.codigo = _ejemplar['barcode'];
+          ejemplar.estado = _ejemplar['state'];
           ejemplares.push(ejemplar);
         });
         return ejemplares;
@@ -116,14 +116,14 @@ export class EjemplaresService {
 
         // Mapear las transacciones.
         let transacciones = new Array<Transaccion>();
-        rt.forEach((item) =>{
+        rt.forEach((_transaccion) =>{
           let transaccion = new Transaccion;
-          transaccion.id = item['id'];
-          transaccion.nombre = item['notes'];
-          transaccion.fecha = item['createdAt'];
-          transaccion.usuario = item['userName'];
-          transaccion.tipo = item['type'];
-          transaccion.individual = item['single'];
+          transaccion.id = _transaccion['id'];
+          transaccion.nombre = _transaccion['notes'];
+          transaccion.fecha = _transaccion['createdAt'];
+          transaccion.usuario = _transaccion['userName'];
+          transaccion.tipo = _transaccion['type'];
+          transaccion.individual = _transaccion['single'];
           transacciones.push(transaccion);
         });
         ejemplar.transacciones = transacciones;

@@ -1,4 +1,7 @@
-// Clase sugerencia del módulo de sugerencias
+/*
+*Nombre de la clase: sugerencia
+*Dirección física: src/app/sugerencias/servicios/sugerencia.ts
+**/
 
 import { Materia } from './';
 

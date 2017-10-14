@@ -1,7 +1,7 @@
 /*
-*Nombre del módulo: Gestión de ejemplares
-*Dirección física: src\app\ejemplares\componentes\ejemplares-root.component.ts
-*Objetivo: Formar la estructura base para los componentes de Ejemplares
+*Nombre del componente: consultar-root
+*Dirección física: src\app\consultar\componentes\consultar-root.component.ts
+*Objetivo: Formar la estructura base para los componentes de consultar
 **/
 
 import { Component, OnInit } from '@angular/core';
@@ -12,11 +12,8 @@ declare var $: any;
   templateUrl: './consultar-root.component.html',
 })
 export class ConsultarRootComponent implements OnInit {
-
   constructor() { }
-
   ngOnInit() {
     $("#toogle_menu").sideNav({closeOnClick: true});
   }
-
 }

@@ -1,6 +1,6 @@
 /*
-*Nombre del módulo: Gestión de ejemplares
-*Dirección física: src\app\ejemplares\componentes\ejemplar.component.ts
+*Nombre del módulo: ejemplar
+*Dirección física: src\app\consultar\componentes\ejemplar.component.ts
 *Objetivo: Mostrar información de un ejemplar específico
 **/
 
@@ -15,7 +15,11 @@ import { EjemplaresService, Ejemplar }  from './../servicios'
 export class EjemplarComponent implements OnInit {
   ejemplar: Ejemplar;
 
-  constructor(private ejemplarService: EjemplaresService, private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private ejemplarService: EjemplaresService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     // Obtiene el id del ejemplar
@@ -35,7 +39,8 @@ export class EjemplarComponent implements OnInit {
     );
   }
 
-  // Redirigir a la vista de un libro
+  //Método: linkLibro
+  //Objetivo: Redirigir a la vista de un libro
   linkLibro(id: number){
     this.router.navigate(['/consultar/libro/'+id]);
   }

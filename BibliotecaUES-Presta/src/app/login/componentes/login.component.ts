@@ -1,5 +1,5 @@
 /*
-*Nombre del módulo: iniciar sesión. 
+*Nombre del componente: login
 *Dirección: /src/app/login/componentes/login.component.ts
 *Objetivo: permite al usuario iniciar sesión.
 */
@@ -26,14 +26,13 @@ export class LoginComponent implements OnInit {
     private cookieService: CookieService
   ) { }
 
-  ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/consultar';
-  }
-
+  // Método: logueo
+  // Objetivo: Permite al usuario iniciar sesión
   logueo() {
     this.errorMessage = undefined;
     this.message = "Iniciando sesión..."
 
+    // Consumir el servicio de logueo
     this.authService.logueo(this.model.correo, this.model.contra).subscribe(
       r => {
         this.cookieService.put('token', r['token']);
@@ -50,5 +49,10 @@ export class LoginComponent implements OnInit {
         }
       }
     );
+  }
+
+  ngOnInit() {
+    // Captura el siguiente URL
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/consultar';
   }
 }
