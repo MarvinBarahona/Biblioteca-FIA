@@ -1,0 +1,95 @@
+<!-- Side nav -->
+<ul id="slide-out" class="side-nav fixed">
+  <li>
+    <a routerLink="/consultar"><i class="fa fa-search"></i>Consultar</a>
+  </li>
+  <li>
+    <a routerLink="/trasladar"><i class="fa fa-paper-plane-o"></i>Trasladar</a>
+  </li>
+  <li>
+    <a routerLink="/prestamos"><i class="fa fa-calendar-check-o"></i>Prestamos</a>
+  </li>
+  <li class="active">
+    <a routerLink="/reservaciones"><i class="fa fa-bookmark"></i>Reservaciones</a>
+  </li>
+</ul>
+<!-- /Side nav -->
+
+<!-- Espacio para los componentes (ver el css de este componente) -->
+<div class="component">
+  <div>
+    <h4 class="center-align">Sección de reservaciones</h4>
+  </div>
+  <div class="row">
+    <div class="col s12 m12 l12">
+      <div class="card-panel">
+        <div class="card-content">
+          <h5>Listado de reservaciones</h5>
+
+          <!-- Table -->
+          <!-- <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"> -->
+          <table>
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Libro</th>
+                <th>Prestar</th>
+                <th>Cancelar</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- Mensaje de carga -->
+              <div>
+                <p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Cargando datos...</p>
+              </div>
+
+              <!-- Reservaciones -->
+              <!-- <tr *ngFor="let reservacion of reservaciones"> -->
+              <tr>
+                <td>########</td>
+                <td>título</td>
+                <td><a href="javascript:void(0)" (click)="openPrestar()">Prestar</a></td>
+                <td><a href="javascript:void(0)" (click)="cancelar()">Cancelar</a></td>
+              </tr>
+              <tr>
+                <td>########</td>
+                <td>título</td>
+                <td><button type="button" class="btn waves-effect waves-green" (click)="openPrestar()">Prestar</button></td>
+                <td><button type="button" class="btn waves-effect waves-green">Cancelar</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /Table -->
+
+        </div>
+        <!-- /card-content -->
+      </div>
+      <!-- /card-panel -->
+    </div>
+    <!-- /col -->
+  </div>
+  <!-- row -->
+</div>
+
+<!-- Ventana modal para prestar un libro -->
+<div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalPrestar">
+  <div class="modal-content">
+    <h5>Ingrese el carnet del estudiante:</h5><br>
+    <div class="row">
+      <div class="col m6 offset-m3 s12">
+        <input type="text" class="text" placeholder="Carnet">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col m6 offset-m3 s12">
+        <input type="text" class="datepicker" placeholder="Seleccione la fecha de devolución">
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-light btn-flat" >Prestar</a>
+    <a class="waves-effect waves-light btn-flat" (click)="closePrestar()">Cerrar</a>
+  </div>
+</div>

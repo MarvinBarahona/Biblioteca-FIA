@@ -18,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ConsultarModule } from './consultar/consultar.module';
 import { TrasladarModule } from './trasladar/trasladar.module';
 import { PrestamosModule } from './prestamos/prestamos.module';
+import { ReservacionesModule } from './reservaciones/reservaciones.module';
 import { LoginModule } from './login';
 
 @NgModule({
@@ -31,6 +32,7 @@ import { LoginModule } from './login';
     ConsultarModule,
     TrasladarModule,
     PrestamosModule,
+    ReservacionesModule,
     AppRoutingModule
   ],
   declarations: [
