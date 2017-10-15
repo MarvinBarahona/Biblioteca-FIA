@@ -17,6 +17,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { ConsultarModule } from './consultar/consultar.module';
 import { TrasladarModule } from './trasladar/trasladar.module';
+import { PrestamosModule } from './prestamos/prestamos.module';
 import { LoginModule } from './login';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { LoginModule } from './login';
     LoginModule,
     ConsultarModule,
     TrasladarModule,
+    PrestamosModule,
     AppRoutingModule
   ],
   declarations: [
