@@ -3,10 +3,15 @@
 *Dirección física: src\app\libros\componentes\libro.component.ts
 *Objetivo: Mostrar información de un libro específico
 **/
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
+
 import { LibrosService, Libro } from './../servicios'
+
+declare var $: any;
+declare var Materialize: any;
 
 @Component({
   templateUrl: './libro.component.html',
@@ -20,6 +25,8 @@ import { LibrosService, Libro } from './../servicios'
 })
 export class LibroComponent implements OnInit {
   libro: Libro;
+
+  modalReservar = new EventEmitter<string | MaterializeAction>();
 
 constructor(
   private libroService: LibrosService,
@@ -49,4 +56,12 @@ constructor(
   linkEjemplar(id: number){
     this.router.navigate(['/consultar/ejemplar/'+id]);
   }
+
+  // Métodos para el manejo de la ventana modal de renovación.
+  openReservar() {
+    this.modalReservar.emit({ action: "modal", params: ['open'] });
+  }
+  closeReservar() {
+    this.modalReservar.emit({ action: "modal", params: ['close'] });
+  }Reservar
 }

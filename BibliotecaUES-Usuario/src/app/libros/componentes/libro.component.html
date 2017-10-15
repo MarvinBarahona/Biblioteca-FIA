@@ -66,7 +66,6 @@
             </div>
           </div>
         </div>
-
       </div>
       <!-- /card-panel -->
     </div>
@@ -84,16 +83,20 @@
           <table class="striped col s12 m8 offset-m2 l8 offset-l2">
             <thead>
               <tr>
-                <th>Signatura</th>
+                <th>Código de autor</th>
+                <th>Materia</th>
                 <th>Estado</th>
                 <th>Código de barra</th>
+                <th>Reservar</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let ejemplar of libro.ejemplares">
-                <td>{{libro.catalogo.categoria}} - {{libro.catalogo.codigoAutor}}</td>
+                <td>{{libro.catalogo.codigoAutor}}</td>
+                <td>{{libro.catalogo.categoria}}</td>
                 <td>{{ejemplar.estado}}</td>
                 <td>{{ejemplar.codigo || 'No asignado'}}</td>
+                <td><a class="waves-effect waves-light btn col m2 offset-m2 s4 " (click)="openReservar()">Reservar</a></td>
               </tr>
             </tbody>
           </table>
@@ -118,3 +121,33 @@
     </div>
   </div>
 </ng-template>
+
+<!-- Ventana modal para agregar libro -->
+<div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalReservar">
+  <div class="modal-content">
+    <h5>Reservar</h5>
+    <div class="row">
+      <div class="col m6 offset-m3 s12">
+        Préstamo para el día: fecha del día actual o siguiente
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col m6 offset-m3 s12">
+        <p>Hora de retiro</p>
+        <p>
+          <input name="hora" type="radio" id="am" />
+          <label for="am">8:00 a.m - 12:00 m.</label>
+        </p>
+        <p>
+          <input name="hora" type="radio" id="pm" />
+          <label for="pm">12:00 m. - 4:00 p.m.</label>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-light btn-flat">Renovar</a>
+    <a class="waves-effect waves-light btn-flat" (click)="closeReservar()">Cerrar</a>
+  </div>
+</div>
