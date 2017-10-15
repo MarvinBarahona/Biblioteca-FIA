@@ -1,0 +1,103 @@
+<!-- Side nav -->
+<ul id="slide-out" class="side-nav fixed">
+  <li>
+    <a routerLink="/consultar"><i class="fa fa-search"></i>Consultar</a>
+  </li>
+  <li>
+    <a routerLink="/trasladar"><i class="fa fa-paper-plane-o"></i>Trasladar</a>
+  </li>
+  <li class="active">
+    <a routerLink="/prestamos"><i class="fa fa-calendar-check-o"></i>Prestamos</a>
+  </li>
+</ul>
+<!-- /Side nav -->
+
+<!-- Espacio para los componentes (ver el css de este componente) -->
+<div class="component">
+  <div>
+    <h4 class="center-align">Sección de préstamos</h4>
+  </div>
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card-panel">
+          <h6>Devolver o renovar</h6>
+
+        <!-- Formulario para buscar  -->
+        <form autocomplete="off" #buscarEjemplarForm="ngForm" (ngSubmit)="buscar()">
+          <div class="row">
+
+            <!-- Input -->
+            <div class="input-field col m4 s8">
+              <input id="codigo" name="codigo" type="text" class="validate" pattern="^[0-9]{8}$" [(ngModel)]="codigo" required>
+              <label for="codigo" data-error="El código debe contener 8 dígitos">Código de barra</label>
+            </div>
+
+            <!-- Botón -->
+            <div class="col m1 s1">
+              <button class="btn waves-effect waves-green search" type="submit"[disabled]="!buscarEjemplarForm.form.valid"><i class="medium material-icons">search</i></button>
+            </div>
+          </div>
+
+        </form>
+        <!-- /form -->
+
+        <div class="row">
+          <div class="col s12">
+            <p>Resultado de la búsqueda:</p>
+          </div>
+        </div>
+
+        <!-- Resultados de la búsqueda -->
+        <div *ngIf="ejemplar">
+          <div class="row">
+            <div class="col m4 s12">
+              <p><strong>Código de barra: </strong>99999999</p>
+            </div>
+            <div class="col m8 s12">
+              <p><strong>Titulo: </strong>Título del libro buscado</p>
+            </div>
+            <div class="col m6 s12">
+              <p><strong>Prestamista: </strong>1°nombre 2°nombre 1°apellido 2°apellido</p>
+            </div>
+            <div class="col m6 s12">
+              <p><strong>Fecha de devolución: </strong>dd/mm/aaaa</p>
+            </div>
+          </div>
+
+          <!-- Botones -->
+          <div class="row">
+            <div class="center">
+              <a class="waves-effect waves-light btn col m2 offset-m2 s4 " >Devolver</a>
+              <a class="waves-effect waves-light btn col m2 offset-m2 s4 " (click)="openRenovar()">Renovar</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="message">
+          <p>{{message}}</p>
+        </div>
+
+      </div>
+      <!-- /card-panel -->
+    </div>
+    <!-- /col -->
+  </div>
+  <!-- /row -->
+</div>
+
+<!-- Ventana modal para agregar libro -->
+<div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalRenovar">
+  <div class="modal-content">
+    <h5>Nueva fecha de devolución</h5>
+    <div class="row">
+      <div class="col m6 s12">
+        <input type="text" class="datepicker" placeholder="Seleccione la fecha de devolución">
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-light btn-flat" >Renovar</a>
+    <a class="waves-effect waves-light btn-flat" (click)="closeRenovar()">Cerrar</a>
+  </div>
+</div>

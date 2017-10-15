@@ -1,22 +1,21 @@
+/*
+*Nombre del módulo: prestamos-routing
+*Dirección física: src/app/prestamos/prestamos-routing.module.ts
+*Objetivo: Definir las rutas del módulo prestamos
+**/
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PrestamosRootComponent } from './componentes';
+import { PrestamosComponent } from './prestamos.component';
 import { AppAuthGuard } from './../login'
 
 const routes: Routes = [
   {
     path: 'prestamos',
-    component: PrestamosRootComponent,
-    children: [
-      {
-        path: '',
-        // component: 
-        // canActivate: [AppAuthGuard],
-        // data: {politica: 143}
-      }
-
-    ]
+    component: PrestamosComponent
+    // canActivate: [AppAuthGuard],
+    // data: { politica:  }
   }
 ];
 

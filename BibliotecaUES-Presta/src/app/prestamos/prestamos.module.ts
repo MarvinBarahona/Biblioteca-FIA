@@ -13,7 +13,7 @@ import { CookieModule } from 'ngx-cookie';
 import { MaterializeModule } from 'angular2-materialize';
 
 import { PrestamosRoutingModule } from './prestamos-routing.module';
-import { PrestamosRootComponent } from './componentes';
+import { PrestamosComponent } from './prestamos.component';
 // import {  } from './servicios';
 
 @NgModule({
@@ -26,7 +26,7 @@ import { PrestamosRootComponent } from './componentes';
     PrestamosRoutingModule
   ],
   declarations: [
-    PrestamosRootComponent
+    PrestamosComponent
   ],
   providers: [
   ]
