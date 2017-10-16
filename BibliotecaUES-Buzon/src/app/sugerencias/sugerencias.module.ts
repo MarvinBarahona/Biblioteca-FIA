@@ -13,7 +13,10 @@ import { MaterializeModule } from 'angular2-materialize';
 import { DataTablesModule } from 'angular-datatables';
 
 import { SugerenciasRoutingModule } from './sugerencias-routing.module';
-import { SugerenciasRootComponent, SugerenciasComponent, VotarComponent, SugerenciaNuevaEstudianteComponent, SugerenciaNuevaDocenteComponent} from './componentes';
+import { SugerenciasRootComponent, SugerenciasComponent, VotarComponent,
+         SugerenciaNuevaEstudianteComponent, SugerenciaNuevaDocenteComponent,
+         MisSugerenciasComponent
+       } from './componentes';
 import { SugerenciasService } from './servicios';
 
 @NgModule({
@@ -30,7 +33,8 @@ import { SugerenciasService } from './servicios';
     SugerenciasComponent,
     VotarComponent,
     SugerenciaNuevaEstudianteComponent,
-    SugerenciaNuevaDocenteComponent
+    SugerenciaNuevaDocenteComponent,
+    MisSugerenciasComponent
   ],
   providers: [
     SugerenciasService
