@@ -4,3 +4,4 @@ export { SugerenciaNuevaEstudianteComponent } from './sugerencia-nueva-estudiant
 export { SugerenciaNuevaDocenteComponent } from './sugerencia-nueva-docente.component';
 export { SugerenciasComponent } from './sugerencias.component';
 export { MisSugerenciasComponent } from './mis-sugerencias.component';
+export { PedidoComponent } from './pedido.component';

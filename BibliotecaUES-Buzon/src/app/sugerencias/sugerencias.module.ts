@@ -15,7 +15,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { SugerenciasRoutingModule } from './sugerencias-routing.module';
 import { SugerenciasRootComponent, SugerenciasComponent, VotarComponent,
          SugerenciaNuevaEstudianteComponent, SugerenciaNuevaDocenteComponent,
-         MisSugerenciasComponent
+         MisSugerenciasComponent, PedidoComponent
        } from './componentes';
 import { SugerenciasService } from './servicios';
 
@@ -34,7 +34,8 @@ import { SugerenciasService } from './servicios';
     VotarComponent,
     SugerenciaNuevaEstudianteComponent,
     SugerenciaNuevaDocenteComponent,
-    MisSugerenciasComponent
+    MisSugerenciasComponent,
+    PedidoComponent
   ],
   providers: [
     SugerenciasService

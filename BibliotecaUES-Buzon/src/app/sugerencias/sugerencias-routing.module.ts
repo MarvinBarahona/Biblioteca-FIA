@@ -9,7 +9,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppAuthGuard } from './../login/';
 import { SugerenciasRootComponent, VotarComponent, SugerenciaNuevaEstudianteComponent,
-         SugerenciaNuevaDocenteComponent, SugerenciasComponent, MisSugerenciasComponent
+         SugerenciaNuevaDocenteComponent, SugerenciasComponent, MisSugerenciasComponent,
+         PedidoComponent
        } from './componentes';
 
 const routes: Routes = [
@@ -45,7 +46,13 @@ const routes: Routes = [
         path: 'missugerencias',
         component: MisSugerenciasComponent
         // canActivate: [AppAuthGuard],
-        // data: {politica: 410}
+        // data: {politica: }
+      },
+      {
+        path: 'pedido',
+        component: PedidoComponent
+        // canActivate: [AppAuthGuard],
+        // data: {politica: }
       }
     ]
   }
