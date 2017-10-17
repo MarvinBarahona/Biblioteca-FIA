@@ -51,7 +51,7 @@ export class AdquisicionNuevaComponent implements OnInit {
       ejemplar.cantidad = 1;
       this.adquisicion.ejemplares.push(ejemplar);
 
-      Materialize.toast("'" + libro.titulo + "' agregado a la adquisición", 3000);
+      Materialize.toast("'" + libro.titulo + "' agregado a la adquisición", 3000, 'toastSuccess');
     }
   }
 
@@ -73,7 +73,7 @@ export class AdquisicionNuevaComponent implements OnInit {
     this.adquisicionesService.crear(this.adquisicion).subscribe(
       message => {
         this.showMessage= false;
-        Materialize.toast("Adquisición creada", 3000);
+        Materialize.toast("Adquisición creada", 3000, 'toastSuccess');
         this.router.navigate(['/adquisiciones']);
       },
       error => {

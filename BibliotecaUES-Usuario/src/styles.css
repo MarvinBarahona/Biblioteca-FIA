@@ -54,6 +54,15 @@ ul{
   /*box-shadow: none!important;*/
 }
 
+/* Para los Materialize.toast */
+.toastSuccess{
+  background-color: rgb(48, 128, 56);
+}
+
+.toastError{
+  background-color: rgb(134, 45, 37);
+}
+
 /*Copiado de bootstrap*/
 
 .alert {

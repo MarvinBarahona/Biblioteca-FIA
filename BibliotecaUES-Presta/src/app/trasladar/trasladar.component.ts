@@ -98,7 +98,7 @@ export class TrasladarComponent implements OnInit {
       message => {
         this.message = null;
         this.ejemplar.estado = this.ejemplar.estado == 'Disponible'? 'Inactivo':'Disponible';
-        Materialize.toast("Ejemplar trasladado", 3000);
+        Materialize.toast("Ejemplar trasladado", 3000, 'toastSuccess');
       },
       error => {
         this.message = "Error trasladando ejemplar";

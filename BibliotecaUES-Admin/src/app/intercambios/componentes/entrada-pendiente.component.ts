@@ -53,7 +53,7 @@ export class EntradaPendienteComponent implements OnInit {
       ejemplar.cantidad = 1;
       this.entrada.ejemplares.push(ejemplar);
 
-      Materialize.toast("'" + libro.titulo + "' agregado a la adquisición", 3000);
+      Materialize.toast("'" + libro.titulo + "' agregado a la adquisición", 3000, 'toastSuccess');
     }
   }
 
@@ -75,7 +75,7 @@ export class EntradaPendienteComponent implements OnInit {
     this.intercambiosService.crearEntrada(this.entrada).subscribe(
       message => {
         this.showMessage= false;
-        Materialize.toast("Entrada agregada", 3000);
+        Materialize.toast("Entrada agregada", 3000, 'toastSuccess');
         this.router.navigate(['/intercambios/salida/' + this.entrada.id]);
       },
       error => {

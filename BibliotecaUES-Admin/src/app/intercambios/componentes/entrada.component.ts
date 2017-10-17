@@ -71,7 +71,7 @@ export class EntradaComponent implements OnInit {
     this.ejemplaresService.catalogar(this.entrada.ejemplares).subscribe(
       message =>{
         this.showMessage= false;
-        Materialize.toast("Datos guardados", 3000);
+        Materialize.toast("Datos guardados", 3000, 'toastSuccess');
 
         let pendiente = false;
         this.entrada.ejemplares.forEach( (ejemplar) => {

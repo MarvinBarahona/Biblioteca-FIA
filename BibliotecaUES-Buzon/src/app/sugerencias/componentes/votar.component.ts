@@ -74,10 +74,10 @@ export class VotarComponent implements OnInit {
             materia.usuario = true;
           }
         });
-        Materialize.toast("Voto agregado", 3000);
+        Materialize.toast("Voto agregado", 3000, 'toastSuccess');
       },
       error => {
-        Materialize.toast("Error al agregar voto", 3000);
+        Materialize.toast("Error al agregar voto", 3000, 'toastError');
       }
     );
   }
@@ -104,10 +104,10 @@ export class VotarComponent implements OnInit {
           this.materia.usuario = true;
           this.sugerencia.materias.push(this.materia);
 
-          Materialize.toast("Voto agregado", 3000);
+          Materialize.toast("Voto agregado", 3000, 'toastSuccess');
         },
         error => {
-          Materialize.toast("Error al agregar voto", 3000);
+          Materialize.toast("Error al agregar voto", 3000, 'toastError');
         }
       );
     }

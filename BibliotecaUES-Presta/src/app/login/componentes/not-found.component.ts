@@ -13,6 +13,10 @@ import { Component, OnInit } from '@angular/core';
     #error404{
       width: 100%;
     }
+
+    .card-panel{
+      margin-top: 30px;
+    }
   `]
 })
 export class NotFoundComponent implements OnInit {

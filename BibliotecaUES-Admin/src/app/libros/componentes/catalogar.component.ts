@@ -84,7 +84,7 @@ export class CatalogarComponent implements OnInit {
     this.libroService.catalogar(this.id, this.catalogo, this.materias).subscribe(
       message => {
         this.showMessage = false;
-        Materialize.toast("Información guardada", 3000);
+        Materialize.toast("Información guardada", 3000, 'toastSuccess');
       },
       error => {
         this.showMessage = false;
@@ -102,10 +102,10 @@ export class CatalogarComponent implements OnInit {
     this.libroService.catalogar(this.id, this.catalogo, this.materias).subscribe(
       message => {
         this.showMessage = false;
-        Materialize.toast("Información guardada", 3000);
+        Materialize.toast("Información guardada", 3000, 'toastSuccess');
         this.libroService.finalizarCatalogacion(this.id).subscribe(
           message => {
-            Materialize.toast("Libro catalogado exitosamente", 3000);
+            Materialize.toast("Libro catalogado exitosamente", 3000, 'toastSuccess');
             this.eventEmitter.emit("Catalogado");
           },
           error => {

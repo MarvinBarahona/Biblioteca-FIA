@@ -13,6 +13,10 @@ import { Component, OnInit } from '@angular/core';
     #error403{
       width: 100%;
     }
+
+    .card-panel{
+      margin-top: 30px;
+    }
   `]
 })
 export class NotAllowedComponent implements OnInit {

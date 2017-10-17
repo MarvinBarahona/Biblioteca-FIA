@@ -50,7 +50,7 @@ export class EmpleadoComponent implements OnInit {
     this.empleadosService.asignarPoliticas(this.empleado).subscribe(
       message => {
         this.showMessage= false;
-        Materialize.toast("Politicas guardadas", 3000);
+        Materialize.toast("Politicas guardadas", 3000, 'toastSuccess');
       },
       error => {
         this.showMessage= false;

@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { LibrosModule } from './libros/libros.module';
+import { LoginModule } from './login/login.module';
 
 import { AuthService } from './login/servicios/';
 
@@ -27,6 +28,7 @@ import { AuthService } from './login/servicios/';
     Angular2FontawesomeModule,
     CookieModule.forRoot(),
     LibrosModule,
+    LoginModule,
     AppRoutingModule
   ],
   declarations: [

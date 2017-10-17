@@ -139,7 +139,7 @@ export class IntercambioNuevoComponent implements OnInit {
 
     this.intercambiosService.crear(this.intercambio).subscribe(
       message => {
-        Materialize.toast("Intercambio creado", 3000);
+        Materialize.toast("Intercambio creado", 3000, 'toastSuccess');
         this.router.navigate(['/intercambios']);
       },
       error => {

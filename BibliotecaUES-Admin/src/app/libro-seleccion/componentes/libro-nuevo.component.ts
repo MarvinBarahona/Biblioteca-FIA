@@ -49,7 +49,7 @@ export class LibroNuevoComponent implements OnInit {
         // Emite el libro para comunicarse con otro componente.
         this.eventEmitter.emit(libro);
         // Muestra un toast con el mensaje de creación
-        Materialize.toast('Libro creado', 3000);
+        Materialize.toast('Libro creado', 3000, 'toastSuccess');
         this.limpiar(form);
       },
       error => {

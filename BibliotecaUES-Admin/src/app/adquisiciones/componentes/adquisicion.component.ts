@@ -71,7 +71,7 @@ export class AdquisicionComponent implements OnInit {
     this.ejemplaresService.catalogar(this.adquisicion.ejemplares).subscribe(
       message =>{
         this.showMessage= false;
-        Materialize.toast("Datos guardados", 3000);
+        Materialize.toast("Datos guardados", 3000, 'toastSuccess');
 
         let pendiente = false;
         this.adquisicion.ejemplares.forEach( (ejemplar) => {

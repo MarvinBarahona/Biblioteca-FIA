@@ -64,7 +64,7 @@ export class EmpleadoNuevoComponent implements OnInit {
 
     this.empleadosService.crear(this.empleado).subscribe(
       message => {
-        Materialize.toast("Empleado creado", 3000);
+        Materialize.toast("Empleado creado", 3000, 'toastSuccess');
         this.router.navigate(['/empleados']);
       },
       error => {

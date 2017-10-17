@@ -61,7 +61,7 @@ export class CambiarContraComponent implements OnInit {
     this.authService.cambiarContra(this.contra, this.id, this.token).subscribe(
       message => {
         this.message = null;
-        Materialize.toast("Contraseña cambiada con éxito", 3000);
+        Materialize.toast("Contraseña cambiada con éxito", 3000, 'toastSuccess');
         this.router.navigate(['/login']);
       },
       error => {

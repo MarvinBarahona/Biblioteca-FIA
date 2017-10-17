@@ -40,7 +40,7 @@ export class EjemplarNuevoComponent implements OnInit {
   // Objetivo: Escucha el evento emitido por el componente libro-seleccion
   onNotify(libro: Libro): void {
     this.ejemplar.libro = libro;
-    Materialize.toast("'" + libro.titulo + "' asignado al nuevo ejemplar", 3000);
+    Materialize.toast("'" + libro.titulo + "' asignado al nuevo ejemplar", 3000, 'toastSuccess');
   }
 
   // Método: crear
@@ -56,7 +56,7 @@ export class EjemplarNuevoComponent implements OnInit {
       case "Compra":{
         this.ejemplaresService.crearCompra(this.ejemplar).subscribe(
           message => {
-            Materialize.toast("Ejemplar creado", 3000);
+            Materialize.toast("Ejemplar creado", 3000, 'toastSuccess');
             this.router.navigate(['/ejemplares']);
           },
           error => {
@@ -76,7 +76,7 @@ export class EjemplarNuevoComponent implements OnInit {
       case "Donación":{
         this.ejemplaresService.crearDonacion(this.ejemplar).subscribe(
           message => {
-            Materialize.toast("Ejemplar creado", 3000);
+            Materialize.toast("Ejemplar creado", 3000, 'toastSuccess');
             this.router.navigate(['/ejemplares']);
           },
           error => {
