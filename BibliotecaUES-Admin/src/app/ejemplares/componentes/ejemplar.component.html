@@ -49,7 +49,11 @@
               <td>{{transaccion.tipo}}</td>
               <td>{{transaccion.fecha | date:"d/M/y"}}</td>
               <td>{{transaccion.usuario}}</td>
-              <td><a href="javascript:void(0)" (click)="linkProceso(transaccion)">{{transaccion.nombre}}</a></td>
+              <td>
+                <a *ngIf="transaccion.tipo=='Donación' || transaccion.tipo=='Compra'" [routerLink]="['/adquisiciones/'+transaccion.id]">{{transaccion.nombre}}</a>
+                <a *ngIf="transaccion.tipo=='Entrada'" [routerLink]="['/intercambios/entrada/'+transaccion.id]">{{transaccion.nombre}}</a>
+                <a *ngIf="transaccion.tipo=='Salida'" [routerLink]="['/intercambios/salida/'+transaccion.id]">{{transaccion.nombre}}</a>
+              </td>
             </tr>
           </tbody>
         </table>

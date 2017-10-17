@@ -56,11 +56,4 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
-  // Método: restaurar
-  // Objetivo: Redirigir a la vista de restaurar contraseña
-  restaurar(){
-    if(this.model.correo) this.router.navigate(["/restaurar", {email: this.model.correo}]);
-    else this.router.navigate(["/restaurar"]);
-  }
 }

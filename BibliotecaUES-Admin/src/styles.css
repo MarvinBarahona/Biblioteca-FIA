@@ -37,10 +37,6 @@ ul{
   margin: 0 50px 0 50px;
 }
 
-.card .card-action a {
-  color: #0781bb !important;
-}
-
 /* Cambiar el color de los placeholder en chrome, opera y firefoz*/
 ::-webkit-input-placeholder {
   /* WebKit browsers */

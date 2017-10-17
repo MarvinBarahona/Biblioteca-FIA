@@ -58,10 +58,4 @@ export class IntercambiosComponent implements OnInit {
       }
     );
   }
-
-  // Método: linkSalida
-  // Objetivo: Redirige a la vista de intercambio
-  linkSalida(salida: Intercambio){
-    this.router.navigate(["/intercambios/salida/" + salida.id]);
-  }
 }

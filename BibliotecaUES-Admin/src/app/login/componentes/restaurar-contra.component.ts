@@ -26,7 +26,7 @@ export class RestaurarContraComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-      this.correo = this.route.snapshot.params['email'];
+      this.correo = this.route.snapshot.queryParams['email'];
   }
 
   // Método: restaurar

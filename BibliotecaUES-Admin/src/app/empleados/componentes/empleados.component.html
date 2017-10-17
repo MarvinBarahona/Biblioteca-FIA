@@ -22,7 +22,7 @@
 
             <!-- Empleados -->
             <tr *ngFor="let empleado of empleados">
-              <td><a href="javascript:void(0)" (click)="linkEmpleado(empleado);">{{empleado.nombre}}</a></td>
+              <td><a [routerLink]="['/empleados/'+empleado.id]">{{empleado.nombre}}</a></td>
               <td>{{empleado.grupo.nombre}}</td>
               <td>{{empleado.correo}}</td>
             </tr>
@@ -35,7 +35,7 @@
 
       <!-- Acciones -->
       <div class="card-action">
-        <button routerLink="/empleados/nuevo" type="submit" class="btn waves-effect waves-green">Nuevo</button>
+        <a routerLink="/empleados/nuevo" type="submit" class="btn waves-effect waves-green">Nuevo</a>
       </div>
 
     </div>

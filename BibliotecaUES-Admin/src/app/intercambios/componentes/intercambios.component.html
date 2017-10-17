@@ -21,7 +21,7 @@
 
             <!-- Empleados -->
             <tr *ngFor="let intercambio of intercambios">
-              <td><a href="javascript:void(0)" (click)="linkSalida(intercambio);">{{intercambio.facultad}}</a></td>
+              <td><a [routerLink]="['/intercambios/salida/'+intercambio.id]">{{intercambio.facultad}}</a></td>
               <td>{{intercambio.fecha | date:"d/M/y"}}</td>
             </tr>
           </tbody>
@@ -33,7 +33,7 @@
 
       <!-- Acciones -->
       <div class="card-action">
-        <button routerLink="/intercambios/nuevo" type="submit" class="btn waves-effect waves-green">Nuevo</button>
+        <a routerLink="/intercambios/nuevo" type="submit" class="btn waves-effect waves-green">Nuevo</a>
       </div>
 
     </div>

@@ -38,31 +38,4 @@ export class EjemplarComponent implements OnInit {
       }
     );
   }
-
-  // Método: linkProceso
-  // Objetivo: Redirigir a la vista del proceso correspondiente.
-  linkProceso(transaccion: Transaccion){
-    switch(transaccion.tipo){
-      case "Donación":{
-        this.router.navigate(['/adquisiciones/' + transaccion.id]);
-        break;
-      }
-      case "Compra":{
-        this.router.navigate(['/adquisiciones/' + transaccion.id]);
-        break;
-      }
-      case "Entrada":{
-        this.router.navigate(['/intercambios/entrada/' + transaccion.id]);
-        break;
-      }
-      case "Salida":{
-        this.router.navigate(['/intercambios/salida/' + transaccion.id]);
-        break;
-      }
-      default:{
-        break;
-      }
-    }
-
-  }
 }

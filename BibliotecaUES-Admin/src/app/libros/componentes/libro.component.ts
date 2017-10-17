@@ -51,10 +51,4 @@ export class LibroComponent implements OnInit {
   onNotify(message: string){
     this.libro.catalogado = true;
   }
-
-  // Método: linkEjemplar
-  // Objetivo: Redirigir a la vista de un ejemplar
-  linkEjemplar(id: number){
-    this.router.navigate(['/ejemplares/'+id]);
-  }
 }

@@ -42,24 +42,6 @@ export class SalidaComponent implements OnInit {
     );
   }
 
-  // Método: linkLibro
-  // Objetivo: Redirigir a la vista de un libro
-  linkLibro(id: number){
-    this.router.navigate(['/libros/'+id]);
-  }
-
-  // Método: linkEjemplar
-  // Objetivo: Redirigir a la vista del ejemplar
-  linkEjemplar(id: number){
-    this.router.navigate(['/ejemplares/'+id]);
-  }
-
-  // Método: entrada
-  // Objetivo: Redirige a la vista de la entrada del intercambio
-  entrada(){
-    this.router.navigate(["/intercambios/entrada/" + this.salida.relacionado]);
-  }
-
   // Método: pendiente
   // Objetivo: Redirige a la vista de registro de la entrada del intercambio
   pendiente(){

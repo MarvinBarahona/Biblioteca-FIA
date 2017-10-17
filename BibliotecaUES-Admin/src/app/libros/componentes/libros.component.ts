@@ -57,10 +57,4 @@ export class LibrosComponent implements OnInit {
       }
     );
   }
-
-  // Método: linkLibro
-  // Objetivo: Redirige a la vista individual del libro
-  linkLibro(libro: Libro){
-    this.router.navigate(["/libros/"+libro.id])
-  }
 }

@@ -46,10 +46,4 @@ export class EmpleadosComponent implements OnInit {
       }
     );
   }
-
-  // Método: linkEmpleado
-  // Objetivo: Redirige a la vista de empleado
-  linkEmpleado(empleado: Empleado){
-    this.router.navigate(["/empleados/" + empleado.id])
-  }
 }

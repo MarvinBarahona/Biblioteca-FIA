@@ -33,8 +33,8 @@ export class EntradaPendienteComponent implements OnInit {
   ngOnInit() {
     // Crear una nueva entrada de intercambio con los datos enviados en los params.
     this.entrada = new NuevaEntrada;
-    this.entrada.id = this.route.snapshot.params['id'];
-    this.entrada.facultad = this.route.snapshot.params['facultad'];
+    this.entrada.id = this.route.snapshot.queryParams['id'];
+    this.entrada.facultad = this.route.snapshot.queryParams['facultad'];
     this.entrada.ejemplares = new Array<NuevoEjemplar>();
   }
 

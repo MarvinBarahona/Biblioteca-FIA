@@ -4,7 +4,7 @@
       <h4>Inicio de sesión</h4>
 
       <!-- Formulario -->
-      <form autocomplete="off" #loginForm="ngForm" (ngSubmit)="logueo()">
+      <form #loginForm="ngForm" (ngSubmit)="logueo()">
         <div class="row">
           <!-- Correo -->
           <div class="input-field col s12 l8 offset-l2">
@@ -24,7 +24,7 @@
             <button type="submit" class="btn waves-effect waves-light" [disabled]="!loginForm.form.valid">Iniciar sesión</button>
           </div>
           <div class="right">
-            <a href="javascript:void(0)" (click)="restaurar()">¿Olvidó su contraseña?</a>
+            <a routerLink="/restaurar">¿Olvidó su contraseña?</a>
           </div>
         </div>
       </form>

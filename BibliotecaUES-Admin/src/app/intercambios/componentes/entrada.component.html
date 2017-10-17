@@ -30,7 +30,7 @@
         <div class="row">
           <div class="col s12 m5 offset-m1">
             <strong>Salida: </strong>
-            <a href="javascript:void(0)" (click)="salida()">Ver la salida del intercambio </a>
+            <a [routerLink]="['/intercambios/salida/' + this.entrada.relacionado]">Ver la salida del intercambio </a>
           </div>
         </div>
 
@@ -61,7 +61,7 @@
               <tr *ngFor="let ejemplar of entrada.ejemplares">
                 <td>
                   <!-- Link a la vista del ejemplar -->
-                  <a *ngIf="ejemplar.ingresado || !catalogador" href="javascript:void(0)" (click)="linkEjemplar(ejemplar.id);">{{ejemplar.codigo || 'No asignado'}}</a>
+                  <a *ngIf="ejemplar.ingresado || !catalogador" [routerLink]="['/ejemplares/'+ejemplar.id]">{{ejemplar.codigo || 'No asignado'}}</a>
                   <!-- Permitir el ingreso del código de barra -->
                   <div *ngIf="!ejemplar.ingresado && catalogador" class="input-field col m6 offset-m1 s8 offset-s2">
                     <input type="text" class="validate" [name]="ejemplar.id" pattern="^[\d]{8}$" [(ngModel)]="ejemplar.codigo">
@@ -69,7 +69,7 @@
                   </div>
                 </td>
                 <!-- Libro y estado -->
-                <td><a href="javascript:void(0)" (click)="linkLibro(ejemplar.libro.id);">{{ejemplar.libro.titulo}}, {{ejemplar.libro.edicion}}ed</a></td>
+                <td><a [routerLink]="['/libros/'+ejemplar.libro.id]">{{ejemplar.libro.titulo}}, {{ejemplar.libro.edicion}}ed</a></td>
                 <td>{{ejemplar.estado}}</td>
               </tr>
             </tbody>
