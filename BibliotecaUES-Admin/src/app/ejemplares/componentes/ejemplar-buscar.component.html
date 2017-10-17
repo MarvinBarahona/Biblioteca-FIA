@@ -30,10 +30,10 @@
       <div *ngIf="ejemplar; else elseEjemplar">
         <div class="row">
           <div class="col s4">
-            <p><strong>Código de barra: </strong><a href="javascript:void(0)" (click)="linkEjemplar(ejemplar.id)">{{ejemplar.codigo}}</a></p>
+            <p><strong>Código de barra: </strong><a [routerLink]="'/ejemplares/'+ejemplar.id">{{ejemplar.codigo}}</a></p>
           </div>
           <div class="col s4">
-            <p><strong>Titulo: </strong><a href="javascript:void(0)" (click)="linkLibro(ejemplar.libro.id)">{{ejemplar.libro.titulo}}, {{ejemplar.libro.edicion}}ed</a></p>
+            <p><strong>Titulo: </strong><a [routerLink]="'/libros/'+ejemplar.libro.id">{{ejemplar.libro.titulo}}, {{ejemplar.libro.edicion}}ed</a></p>
           </div>
           <div class="col s4">
             <p><strong>Estado: </strong>{{ejemplar.estado}}</p>

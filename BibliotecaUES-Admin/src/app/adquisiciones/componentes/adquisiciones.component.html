@@ -22,7 +22,7 @@
 
             <!-- Adquisiciones -->
             <tr *ngFor="let adquisicion of adquisiciones">
-              <td><a href="javascript:void(0)" (click)="linkAdquisicion(adquisicion)">{{adquisicion.nombre}}</a></td>
+              <td><a [routerLink]="'/adquisiciones/'+adquisicion.id">{{adquisicion.nombre}}</a></td>
               <td>{{adquisicion.tipo}}</td>
               <td>{{adquisicion.fecha | date:"d/M/y"}}</td>
             </tr>

@@ -89,16 +89,4 @@ export class EjemplarBuscarComponent implements OnInit {
       }
     )
   }
-
-  // Método: linkLibro
-  // Objetivo: Redirigir a la vista de un libro
-  linkLibro(id: number){
-    this.router.navigate(['/libros/'+id]);
-  }
-
-  // Método: linkEjemplar
-  // Objetivo: Redirigir a la vista de un ejemplar
-  linkEjemplar(id: number){
-    this.router.navigate(['/ejemplares/'+id]);
-  }
 }

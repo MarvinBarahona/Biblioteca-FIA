@@ -39,12 +39,6 @@ export class EjemplarComponent implements OnInit {
     );
   }
 
-  // Método: linkLibro
-  // Objetivo: Redirigir a la vista de un libro
-  linkLibro(id: number){
-    this.router.navigate(['/libros/'+id]);
-  }
-
   // Método: linkProceso
   // Objetivo: Redirigir a la vista del proceso correspondiente.
   linkProceso(transaccion: Transaccion){

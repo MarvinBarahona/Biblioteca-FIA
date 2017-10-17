@@ -58,10 +58,4 @@ export class AdquisicionesComponent implements OnInit {
       }
     );
   }
-
-  // Método: linkAdquisicion
-  // Objetivo: Rediriga a la vista de  adquisición
-  linkAdquisicion(adquisicion: Adquisicion) {
-    this.router.navigate(["/adquisiciones/" + adquisicion.id])
-  }
 }
