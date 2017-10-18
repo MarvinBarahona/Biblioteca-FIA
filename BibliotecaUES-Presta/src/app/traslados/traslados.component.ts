@@ -1,36 +1,41 @@
 /*
-*Nombre del componente: ejemplar-buscar
-*Dirección física: src\app\consultar\componentes\ejemplar-buscar.component.ts
-*Objetivo: Buscar ejemplares por medio del código de barra
+*Nombre del componente: traslados
+*Dirección física: /src/app/traslados/traslados.component.ts
+*Objetivo: Cambiar el estado de un ejemplar cuando este pasa del área de jefatura a la biblioteca.
 **/
 
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { EjemplaresService, Ejemplar } from './../servicios';
+import { EjemplaresService, Ejemplar }  from './servicios';
 
-declare var $:any;
+declare var $: any;
+declare var Materialize: any;
 
 @Component({
-  templateUrl: './ejemplar-buscar.component.html',
+  templateUrl: './traslados.component.html',
   styles: [`
-      .search {
-        margin-top:25px;
-        left: -25px;
-      }
+    .search{
+      margin-top: 20px;
+      left:-20px;
+    }
   `]
 })
-export class EjemplarBuscarComponent implements OnInit {
+
+export class TrasladosComponent implements OnInit {
   ejemplares: Ejemplar[];
   codigos = Array<string>();
   ejemplar: Ejemplar;
   codigo: string;
-  message: string = "No se encontraron resultados"
+  message: string = "No se encontraron resultados";
 
-  constructor(private ejemplaresService: EjemplaresService, private router: Router) { }
+  constructor(
+    private ejemplaresService: EjemplaresService,
+    private router: Router) { }
 
   ngOnInit() {
-    // Iniciar el autocompletado en el input de búsqueda.
+    // Activar el nav en responsive e inicializar el autocompletado en el buscador.
+    $("#toogle_menu").sideNav({closeOnClick: true});
     this.inicializarAutocompletado();
   }
 
@@ -53,12 +58,11 @@ export class EjemplarBuscarComponent implements OnInit {
         this.codigos.forEach((codigo)=>{
           codigosData[codigo] = null;
         });
-
         // Inicializar el campo con autocompletado
         $('#codigo').autocomplete({
           data: codigosData,
           limit: 5,
-          minLength: 3,
+          minLength: 4,
           onAutocomplete: (val) => {
             this.codigo = val;
           }
@@ -73,12 +77,31 @@ export class EjemplarBuscarComponent implements OnInit {
     this.ejemplar = null;
     this.message = "Buscando...";
 
+    // Consumir servicio de búsqueda.
     this.ejemplaresService.obtenerPorCodigo(this.codigo).subscribe(
       ejemplar => {
+        this.message = null;
         this.ejemplar = ejemplar;
       },
       error => {
         this.message = "No se encontraron resultado para " + this.codigo;
+      }
+    );
+  }
+
+  //Método: trasladar
+  //Objetivo: registrar el traslado de un ejemplar
+  trasladar(){
+    this.message = "Trasladando...";
+    // Consumir servicio de traslado
+    this.ejemplaresService.trasladar(this.ejemplar.id).subscribe(
+      message => {
+        this.message = null;
+        this.ejemplar.estado = this.ejemplar.estado == 'Disponible'? 'Inactivo':'Disponible';
+        Materialize.toast("Ejemplar trasladado", 3000, 'toastSuccess');
+      },
+      error => {
+        this.message = "Error trasladando ejemplar";
       }
     )
   }

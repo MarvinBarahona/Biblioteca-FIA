@@ -39,7 +39,7 @@
       <!-- Resultados -->
       <div class="row" *ngIf="sugerencias; else elseSugerencias">
         <!-- Cuando el resultado es nulo -->
-        <div class="sugerencia" *ngIf="sugerencias.length == 0" >Sin resultados</div>
+        <div *ngIf="sugerencias.length == 0">Sin resultados</div>
 
         <!-- Mostrar resultados -->
         <div class="col l4 offset-l1 m10 offset-m1 s12 sugerencia" *ngFor="let sugerencia of sugerencias">

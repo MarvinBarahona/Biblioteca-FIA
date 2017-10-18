@@ -15,8 +15,8 @@ import { CookieModule } from 'ngx-cookie';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { ConsultarModule } from './consultar/consultar.module';
-import { TrasladarModule } from './trasladar/trasladar.module';
+import { ConsultasModule } from './consultas/consultas.module';
+import { TrasladosModule } from './traslados/traslados.module';
 import { PrestamosModule } from './prestamos/prestamos.module';
 import { ReservacionesModule } from './reservaciones/reservaciones.module';
 import { LoginModule } from './login';
@@ -29,8 +29,8 @@ import { LoginModule } from './login';
     Angular2FontawesomeModule,
     CookieModule.forRoot(),
     LoginModule,
-    ConsultarModule,
-    TrasladarModule,
+    ConsultasModule,
+    TrasladosModule,
     PrestamosModule,
     ReservacionesModule,
     AppRoutingModule

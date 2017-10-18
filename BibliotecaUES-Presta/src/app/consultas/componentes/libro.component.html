@@ -1,0 +1,99 @@
+<div *ngIf="libro; else elseLibro">
+  <!-- Información del libro -->
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card-panel">
+        <h5>Información del libro</h5>
+
+        <div class="row">
+          <!-- Titulo e imagen -->
+          <div class="col s10 offset-s2 l4">
+            <strong>Título: </strong><span>{{libro.titulo}}</span>
+            <br><br>
+            <img src="{{libro.catalogo.img || 'assets/noImage.jpg'}}" alt="Imagen del libro" class="previa">
+          </div>
+
+          <!-- Edición, ISBN y editorial -->
+          <div class="col s6 l4">
+            <strong>Edición: </strong><span>{{libro.edicion}}</span>
+            <br><br>
+            <strong>ISBN: </strong><span>{{libro.isbn}}</span>
+            <br><br>
+            <strong>Editorial: </strong><span>{{libro.editorial}}</span>
+          </div>
+
+          <!-- Autores -->
+          <div class="col s6 l4">
+            <strong>Autores: </strong>
+            <ul>
+              <li *ngFor="let autor of libro.autores">{{autor}}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Materias-->
+          <div class="col s10 offset-s2 l4">
+            <!-- Materias -->
+            <strong>Materias: </strong>
+            <ul>
+              <li *ngFor="let materia of libro.catalogo.materias">{{materia}}</li>
+            </ul>
+          </div>
+
+          <!-- País y categoria -->
+          <div class="col s6 l4">
+            <strong>País: </strong><span>{{libro.pais}}</span>
+            <br><br>
+            <strong>Código Dewey: </strong><span>{{libro.catalogo.categoria}}</span>
+          </div>
+
+          <!-- Año y código de autor -->
+          <div class="col s6 l4">
+            <strong>Año: </strong><span>{{libro.anio}}</span>
+            <br><br>
+            <strong>Código de autor: </strong><span>{{libro.catalogo.codigoAutor}}</span>
+          </div>
+
+        </div>
+        <!-- /card-panel -->
+      </div>
+      <!-- /col -->
+    </div>
+    <!-- row de información del libro -->
+
+    <!-- Ejemplares -->
+    <div class="row">
+      <div class="col s12 m12">
+        <div class="card-panel">
+
+          <!-- Ejemplares -->
+          <ul class="collection with-header">
+            <li class="collection-header">
+              <h5>Ejemplares</h5>
+            </li>
+            <li class="collection-item" *ngFor="let ejemplar of libro.ejemplares">
+              <a [routerLink]="['/consultas/ejemplar/'+ejemplar.id]">{{ejemplar.codigo || "No asignado"}} </a> ({{ejemplar.estado}})
+            </li>
+          </ul>
+
+        </div>
+        <!-- /card-panel -->
+      </div>
+      <!-- /col -->
+    </div>
+    <!-- row -->
+  </div>
+  <!-- libro -->
+
+  <!-- Mensaje de espera -->
+  <ng-template #elseLibro>
+    <div class="row">
+      <div class="col s8 m8 offset-s2 offset-m2">
+        <p>Cargando...</p>
+        <div class="progress">
+          <div class="indeterminate"></div>
+        </div>
+      </div>
+    </div>
+  </ng-template>

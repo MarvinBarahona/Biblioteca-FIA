@@ -53,6 +53,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     // Captura el siguiente URL
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/consultar';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/consultas';
   }
 }

@@ -12,7 +12,7 @@ import { AppAuthGuard } from './login';
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/consultar',
+    redirectTo: '/consultas',
     pathMatch: 'full'
   },
   {

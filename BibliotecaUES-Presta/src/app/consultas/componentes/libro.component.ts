@@ -1,6 +1,6 @@
 /*
 *Nombre del componente: libro
-*Dirección física: src\app\consultar\componentes\libro.component.ts
+*Dirección física: src\app\consultas\componentes\libro.component.ts
 *Objetivo: Mostrar información de un libro específico
 **/
 import { Component, OnInit } from '@angular/core';

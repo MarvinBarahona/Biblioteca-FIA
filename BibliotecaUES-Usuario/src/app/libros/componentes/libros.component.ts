@@ -16,6 +16,15 @@ import { LibrosService, Libro } from './../servicios';
       margin-top: 20px;
       left:-20px;
     }
+    .libro{
+      border: 1px solid;
+      margin: 10px;
+    }
+    img{
+      width: 100px;
+      height: 130px;
+      cursor: pointer;
+    }
   `]
 })
 export class LibrosComponent implements OnInit {

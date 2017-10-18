@@ -1,6 +1,6 @@
 /*
 *Nombre del módulo: ejemplar
-*Dirección física: src\app\consultar\componentes\ejemplar.component.ts
+*Dirección física: src\app\consultas\componentes\ejemplar.component.ts
 *Objetivo: Mostrar información de un ejemplar específico
 **/
 

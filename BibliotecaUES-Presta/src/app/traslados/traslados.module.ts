@@ -1,7 +1,7 @@
 /*
-*Nombre del módulo: trasladar
-*Dirección física: src/app/trasladar/trasladar.module.ts
-*Objetivo: Definir el módulo trasladar
+*Nombre del módulo: traslados
+*Dirección física: src/app/traslados/traslados.module.ts
+*Objetivo: Definir el módulo traslados
 **/
 
 import { NgModule } from '@angular/core';
@@ -12,8 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { CookieModule } from 'ngx-cookie';
 import { MaterializeModule } from 'angular2-materialize';
 
-import { TrasladarRoutingModule } from './trasladar-routing.module';
-import { TrasladarComponent } from './trasladar.component';
+import { TrasladosRoutingModule } from './traslados-routing.module';
+import { TrasladosComponent } from './traslados.component';
 import { EjemplaresService } from './servicios';
 
 @NgModule({
@@ -22,14 +22,14 @@ import { EjemplaresService } from './servicios';
     HttpModule,
     FormsModule,
     MaterializeModule,
-    TrasladarRoutingModule,
+    TrasladosRoutingModule,
     CookieModule.forChild()
   ],
   declarations: [
-    TrasladarComponent
+    TrasladosComponent
   ],
   providers: [
     EjemplaresService
   ]
 })
-export class TrasladarModule { }
+export class TrasladosModule { }
