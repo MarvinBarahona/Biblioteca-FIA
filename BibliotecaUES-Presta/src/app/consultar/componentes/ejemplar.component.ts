@@ -38,10 +38,4 @@ export class EjemplarComponent implements OnInit {
       }
     );
   }
-
-  //Método: linkLibro
-  //Objetivo: Redirigir a la vista de un libro
-  linkLibro(id: number){
-    this.router.navigate(['/consultar/libro/'+id]);
-  }
 }

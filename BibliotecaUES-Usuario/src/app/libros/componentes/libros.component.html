@@ -46,7 +46,7 @@
         <!-- Resultados -->
         <li *ngFor="let libro of libros" class="collection-item avatar">
           <img src="{{libro.catalogo.img || 'assets/noImage.jpg'}}" alt="Imagen del libro" class="circle">
-          <h6><a href="javascript:void(0)" (click)="linkLibro(libro)">{{libro.titulo}}, {{libro.edicion}}° ed</a></h6>
+          <h6><a [routerLink]="['/libros/'+libro.id]">{{libro.titulo}}, {{libro.edicion}}° ed</a></h6>
           <p>{{libro.autor}}</p>
           <p>{{libro.isbn}}</p>
         </li>

@@ -39,10 +39,4 @@ constructor(private libroService: LibrosService, private route: ActivatedRoute, 
       }
     );
   }
-
-  //Método: linkEjemplar
-  //Objetivo: Redirigir a la vista de un ejemplar
-  linkEjemplar(id: number){
-    this.router.navigate(['/consultar/ejemplar/'+id]);
-  }
 }
