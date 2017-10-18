@@ -85,7 +85,7 @@
           <p>{{errorMessage}}</p>
         </div>
         <div class="alert alert-warning col s6 offset-s3" *ngIf="showFailMessage">
-          <p>El ISBN ingresado ya está registrado. <a href="javascript:void(0)" (click)="linkSugerencia()">Ver sugerencia</a></p>
+          <p>El ISBN ingresado ya está registrado. <a [routerLink]="['/sugerencias/votar/'+sugerencia.id]">Ver sugerencia</a></p>
         </div>
       </div>
 

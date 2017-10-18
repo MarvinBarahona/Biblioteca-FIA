@@ -22,10 +22,17 @@ export class SugerenciasComponent implements OnInit {
   sugerencias: Sugerencia[];
   textoBusqueda: string;
   criterioBusqueda: string;
+  docente: boolean;
+  estudiante: boolean;
 
   constructor(private sugerenciasService: SugerenciasService, private router: Router) {}
 
   ngOnInit(): void {
+    // Determinar si el usuario es docente o estudiante.
+    let grupo = JSON.parse(sessionStorage.getItem('usuario'))['grupo'];
+    this.docente = grupo == "Docente";
+    this.estudiante = grupo == "Estudiante";
+
     // Asignar el criterio de búsqueda por defecto.
     this.criterioBusqueda = '0';
 
@@ -67,20 +74,11 @@ export class SugerenciasComponent implements OnInit {
     );
   }
 
-  //Método: linkSugerencia
-  //Objetivo: redirigir a la vista de sugerencia
-  linkSugerencia(id: string){
-    let docente = JSON.parse(sessionStorage.getItem('usuario'))['grupo'] == "Docente";
-    if(docente) this.router.navigate(['/sugerencias/pedir/' + id]);
-    else this.router.navigate(['/sugerencias/votar/' + id]);
-  }
-
   //Método: linkCrear
   //Objetivo: Redirige a la creación de una sugerencia
   linkCrear(){
-    let docente = JSON.parse(sessionStorage.getItem('usuario'))['grupo'] == "Docente";
-    if(docente) this.router.navigate(['/sugerencias/nueva/docente']);
-    else this.router.navigate(['/sugerencias/nueva/estudiante']);
+    if(this.docente) this.router.navigate(['/sugerencias/nueva/docente']);
+    if(this.estudiante) this.router.navigate(['/sugerencias/nueva/estudiante']);
   }
 
 }
