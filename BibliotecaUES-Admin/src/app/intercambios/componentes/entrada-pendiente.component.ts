@@ -13,7 +13,13 @@ import { IntercambiosService, NuevaEntrada, NuevoEjemplar, Libro } from './../se
 declare var Materialize: any;
 
 @Component({
-  templateUrl: './entrada-pendiente.component.html'
+  templateUrl: './entrada-pendiente.component.html',
+  styles: [`
+    .modal-fixed-footer{
+      height: 600px;
+      width: 800px;
+    }
+  `]
 })
 export class EntradaPendienteComponent implements OnInit {
   entrada: NuevaEntrada;

@@ -49,7 +49,7 @@
                 <tr *ngFor="let ejemplar of adquisicion.ejemplares">
                   <td>{{ejemplar.libro.titulo}}</td>
                   <td><input class="validate col m3 offset-m1" type="number" name="cantidad" min="1" max="20" [(ngModel)]="ejemplar.cantidad" required></td>
-                  <td><a  (click)="eliminarEjemplar(ejemplar)"><i class="material-icons borrar">delete</i></a></td>
+                  <td><a (click)="eliminarEjemplar(ejemplar)"><i class="material-icons borrar">delete</i></a></td>
                 </tr>
               </tbody>
             </table>

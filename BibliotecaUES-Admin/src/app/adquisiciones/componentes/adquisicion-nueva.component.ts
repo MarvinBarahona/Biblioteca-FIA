@@ -13,7 +13,13 @@ import { AdquisicionesService, NuevaAdquisicion, NuevoEjemplar, Libro } from './
 declare var Materialize: any;
 
 @Component({
-  templateUrl: './adquisicion-nueva.component.html'
+  templateUrl: './adquisicion-nueva.component.html',
+  styles: [`
+    .modal-fixed-footer{
+      height: 600px;
+      width: 800px;
+    }
+  `]
 })
 
 export class AdquisicionNuevaComponent implements OnInit {

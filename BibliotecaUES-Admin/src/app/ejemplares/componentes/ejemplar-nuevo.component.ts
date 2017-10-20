@@ -13,8 +13,17 @@ import { EjemplaresService, NuevoEjemplar, Libro } from './../servicios';
 declare var Materialize: any;
 
 @Component({
-  selector: 'ejemplar-nuevo',
-  templateUrl: './ejemplar-nuevo.component.html'
+  templateUrl: './ejemplar-nuevo.component.html',
+  styles: [`
+    .modal-fixed-footer{
+      height: 600px;
+      width: 800px;
+    }
+
+    .btnSelect{
+      margin-top: 50px;
+    }
+  `]
 })
 
 export class EjemplarNuevoComponent implements OnInit {
