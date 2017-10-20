@@ -62,7 +62,7 @@ export class TrasladarComponent implements OnInit {
         $('#codigo').autocomplete({
           data: codigosData,
           limit: 5,
-          minLength: 4,
+          minLength: 2,
           onAutocomplete: (val) => {
             this.codigo = val;
           }

@@ -64,7 +64,7 @@ export class EjemplarBuscarComponent implements OnInit {
         $('#codigo').autocomplete({
           data: codigosData,
           limit: 5,
-          minLength: 3,
+          minLength: 2,
           onAutocomplete: (val) =>{
             this.codigo = val;
           }
