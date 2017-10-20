@@ -46,7 +46,7 @@
   <!-- Acciones -->
   <div class="row">
     <button class="waves-effect waves-light btn col m2 s12 offset-m3" [disabled]="!catalogarForm.form.valid" (click)="guardar()">Guardar</button>
-    <button class="waves-effect waves-light btn col m2 s12 offset-m1" [disabled]="!catalogo.categoria || !catalogo.codigoAutor || catalogo.materias.length == 0 || !catalogo.img" (click)="catalogar()">Catalogar</button>
+    <button class="waves-effect waves-light btn col m2 s12 offset-m1" [disabled]="!catalogarForm.form.valid || !catalogo.categoria || !catalogo.codigoAutor || catalogo.materias.length == 0 || !catalogo.img" (click)="catalogar()">Catalogar</button>
   </div>
 
 </form>
