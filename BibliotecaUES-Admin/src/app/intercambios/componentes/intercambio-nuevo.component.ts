@@ -14,7 +14,13 @@ declare var Materialize: any;
 declare var $:any;
 
 @Component({
-  templateUrl: './intercambio-nuevo.component.html'
+  templateUrl: './intercambio-nuevo.component.html',
+  styles: [`
+    .search{
+      margin-top: 20px;
+      left:-20px;
+    }
+  `]
 })
 export class IntercambioNuevoComponent implements OnInit {
   intercambio: Intercambio;

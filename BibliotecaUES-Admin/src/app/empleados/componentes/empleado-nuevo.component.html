@@ -62,11 +62,11 @@
 <!-- Ventana modal para asegurar la acción de cancelar -->
 <div id="modal2" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalCancel">
   <div class="modal-content">
-    <h4>Cancelar acción</h4>
-    <p>¿Desea cancelar la creación del empleado?</p>
+    <h4>Confirmar cancelación</h4>
+    <p>¿Desea cancelar el registro del empleado?</p>
   </div>
   <div class="modal-footer">
-    <a class="waves-effect waves-green btn-flat" (click)="closeCancel()">Regresar</a>
-    <a class="modal-action modal-close waves-effect btn-flat" (click)="cancel()">Confirmar</a>
+    <a class="waves-effect waves-green btn-flat" (click)="closeCancel()">No</a>
+    <a class="modal-action modal-close waves-effect btn-flat" (click)="cancel()">Sí</a>
   </div>
 </div>

@@ -4,8 +4,9 @@
 *Objetivo: Permite ver los datos de un empleado
 **/
 
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
 import { EmpleadosService, Empleado, Grupo, Politica } from './../servicios/';
 
@@ -19,10 +20,12 @@ export class EmpleadoComponent implements OnInit {
 
   errorMessage: string;
   showMessage: boolean;
+  modalCancel = new EventEmitter<string | MaterializeAction>();
 
   constructor(
     private empleadosService: EmpleadosService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -59,4 +62,18 @@ export class EmpleadoComponent implements OnInit {
     );
   }
 
+  // Métodos para el manejo de la ventana modal de confirmación de cancelación.
+  openCancel() {
+    this.modalCancel.emit({ action: "modal", params: ['open'] });
+  }
+  closeCancel() {
+    this.modalCancel.emit({ action: "modal", params: ['close'] });
+  }
+
+  // Método: cancel
+  // Objetivo: Cerrar la ventana modal y retornar a la vista anterior.
+  cancel(){
+    this.closeCancel();
+    this.router.navigate(['/empleados']);
+  }
 }

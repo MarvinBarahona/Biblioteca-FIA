@@ -84,6 +84,7 @@ export class IntercambiosService {
       // Mapeando la salida
       (response: Response) => {
         let a = response.json();
+        console.log(a);
         let r = a[0];
         let intercambios = new Array<Intercambio>();
 

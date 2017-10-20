@@ -11,6 +11,10 @@ ul{
   margin-top: 0px;
 }
 
+a{
+  cursor: pointer;
+}
+
 /*Para el side nav*/
 /* Pone el side-nav abajo del navbar */
 #slide-out{

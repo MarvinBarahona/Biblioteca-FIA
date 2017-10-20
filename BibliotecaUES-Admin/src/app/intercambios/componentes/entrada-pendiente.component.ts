@@ -105,6 +105,6 @@ export class EntradaPendienteComponent implements OnInit {
   // Objetivo: cerrar la ventana modal y regresar a la vista anterior
   cancel(){
     this.closeCancel();
-    this.router.navigate(['/adquisiciones']);
+    this.router.navigate(['/intercambios/salida/'+this.entrada.id]);
   }
 }

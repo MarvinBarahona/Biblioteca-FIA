@@ -11,6 +11,10 @@ ul{
   margin-top: 0px;
 }
 
+a{
+  cursor: pointer;
+}
+
 /* Para el navbar */
 
 /* Pone el side-nav abajo del navbar */

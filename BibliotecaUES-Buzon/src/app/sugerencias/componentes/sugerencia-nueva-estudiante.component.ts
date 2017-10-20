@@ -3,7 +3,7 @@
 *Dirección física: src\app\sugerencias\componentes\sugerencia-nueva-estudiante.component.ts
 *Objetivo: Crear sugerencia de un estudiante
 **/
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
@@ -26,6 +26,7 @@ export class SugerenciaNuevaEstudianteComponent implements OnInit {
   errorMessage: string;
   showFailMessage: boolean;
   linkId: string;
+  modalCancel = new EventEmitter<string | MaterializeAction>();
 
   constructor(
     private sugerenciasService: SugerenciasService,
@@ -115,5 +116,20 @@ export class SugerenciaNuevaEstudianteComponent implements OnInit {
         });
       }
     });
+  }
+
+  // Métodos para el manejo de la ventana modal de confirmación de cancelación.
+  openCancel() {
+    this.modalCancel.emit({ action: "modal", params: ['open'] });
+  }
+  closeCancel() {
+    this.modalCancel.emit({ action: "modal", params: ['close'] });
+  }
+
+  // Método: cancel
+  // Objetivo: Cerrar la ventana modal y retornar a la vista anterior.
+  cancel(){
+    this.closeCancel();
+    this.router.navigate(['/sugerencias']);
   }
 }

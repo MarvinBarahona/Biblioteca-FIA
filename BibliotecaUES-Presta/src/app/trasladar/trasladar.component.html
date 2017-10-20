@@ -54,10 +54,10 @@
         <div *ngIf="ejemplar">
           <div class="row">
             <div class="col s4">
-              <p><strong>Código de barra: </strong><a href="javascript:void(0)" (click)="linkEjemplar(ejemplar.id)">{{ejemplar.codigo}}</a></p>
+              <p><strong>Código de barra: </strong><a (click)="linkEjemplar(ejemplar.id)">{{ejemplar.codigo}}</a></p>
             </div>
             <div class="col s4">
-              <p><strong>Titulo: </strong><a href="javascript:void(0)" (click)="linkLibro(ejemplar.libro.id)">{{ejemplar.libro.titulo}}</a></p>
+              <p><strong>Titulo: </strong><a (click)="linkLibro(ejemplar.libro.id)">{{ejemplar.libro.titulo}}</a></p>
             </div>
             <div class="col s4">
               <p><strong>Estado: </strong>{{ejemplar.estado}}</p>
@@ -67,7 +67,7 @@
           <!-- Botones -->
           <div class="row" *ngIf="ejemplar.estado == 'Disponible' || ejemplar.estado == 'Inactivo'">
             <div class="col m6 offset-m4 s8 offset-s2">
-              <a class="btn waves-effect waves-green search" href="javascript:void(0)" (click)="trasladar()">{{ejemplar.estado == 'Disponible'? 'Enviar':'Recibir'}}</a>
+              <a class="btn waves-effect waves-green search" (click)="trasladar()">{{ejemplar.estado == 'Disponible'? 'Enviar':'Recibir'}}</a>
             </div>
           </div>
         </div>

@@ -31,7 +31,7 @@
                 <tr *ngFor="let ejemplar of entrada.ejemplares">
                   <td>{{ejemplar.libro.titulo}}</td>
                   <td><input class="col m3 offset-m1" type="number" name="cantidad" min="1" max="20" [(ngModel)]="ejemplar.cantidad" required></td>
-                  <td><a href="javascript:void(0);" (click)="eliminarEjemplar(ejemplar)"><i class="material-icons borrar">delete</i></a></td>
+                  <td><a  (click)="eliminarEjemplar(ejemplar)"><i class="material-icons borrar">delete</i></a></td>
                 </tr>
               </tbody>
             </table>
@@ -92,11 +92,11 @@
 <!-- Ventana modal para asegurar la acción de cancelar -->
 <div id="modal2" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalCancel">
   <div class="modal-content">
-    <h4>Cancelar acción</h4>
-    <p>¿Desea cancelar el ingreso del ejemplares?</p>
+    <h4>Confirmar cancelación</h4>
+    <p>¿Desea cancelar el ingreso del intercambio?</p>
   </div>
   <div class="modal-footer">
-    <a class="waves-effect waves-green btn-flat" (click)="closeCancel()">Regresar</a>
-    <a class="modal-action modal-close waves-effect btn-flat" (click)="cancel()">Confirmar</a>
+    <a class="waves-effect waves-green btn-flat" (click)="closeCancel()">No</a>
+    <a class="modal-action modal-close waves-effect btn-flat" (click)="cancel()">Sí</a>
   </div>
 </div>

@@ -24,7 +24,7 @@
 
             <!-- Votos -->
             <dd>Votos: votos
-              <a href="javascript:void(0)" (click)="votar(materia.id)" *ngIf="!sugerencia.usuario">
+              <a (click)="votar(materia.id)" *ngIf="!sugerencia.usuario">
                 <i class="fa fa-thumbs-up"></i>
               </a>
               <span *ngIf="materia.usuario">(Tu elección)</span>

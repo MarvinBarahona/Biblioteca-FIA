@@ -36,9 +36,11 @@
           </div>
         </div>
 
+        <br>
         <!-- Acciones -->
         <div class="row">
-          <button type="button" class="waves-effect waves-light btn col m2 s12 offset-m3" (click)="guardar()">Guardar</button>
+          <button type="button" class="waves-effect waves-light btn col m2 offset-m4 s4" (click)="guardar()">Guardar</button>
+          <a class="waves-effect waves-light btn col m2 offset-m1 s4 " (click)="openCancel()">Cancelar</a>
         </div>
 
         <!-- Mensajes -->
@@ -71,3 +73,15 @@
     </div>
   </div>
 </ng-template>
+
+<!-- Ventana modal para asegurar la acción de cancelar -->
+<div id="modal2" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalCancel">
+  <div class="modal-content">
+    <h4>Confirmar cancelación</h4>
+    <p>¿Desea cancelar la asignación de permisos?</p>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-green btn-flat" (click)="closeCancel()">No</a>
+    <a class="modal-action modal-close waves-effect btn-flat" (click)="cancel()">Sí</a>
+  </div>
+</div>
