@@ -11,6 +11,7 @@
               <th>Nombre</th>
               <th>Cargo</th>
               <th>Correo</th>
+              <th>Eliminar</th>
             </tr>
           </thead>
           <tbody>
@@ -25,6 +26,7 @@
               <td><a [routerLink]="['/empleados/'+empleado.id]">{{empleado.nombre}}</a></td>
               <td>{{empleado.grupo.nombre}}</td>
               <td>{{empleado.correo}}</td>
+              <td><a (click)="openEliminar(empleado)"><i class="material-icons borrar">delete</i></a></td>
             </tr>
           </tbody>
         </table>
@@ -44,3 +46,15 @@
   <!-- /col -->
 </div>
 <!-- /row -->
+
+<!-- Ventana modal para confirmar la eliminación del empleado -->
+<div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalEliminar">
+  <div class="modal-content">
+    <h5>Eliminar empleado</h5>
+    <p>¿Desea eliminar al empleado {{nombre}}?</p>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-light btn-flat" (click)="eliminar()">Sí</a>
+    <a class="waves-effect waves-light btn-flat" (click)="closeEliminar()">No</a>
+  </div>
+</div>

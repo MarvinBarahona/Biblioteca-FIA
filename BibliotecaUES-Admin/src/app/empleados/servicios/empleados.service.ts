@@ -144,4 +144,19 @@ export class EmpleadosService {
       }
     );
   }
+
+  // Método: eliminar
+  // Objetivo: Soft delete de un empleado, ya no podrá iniciar sesión ni se mostrará en la vista de empleados.
+  eliminar(empleado: Empleado): Observable<string>{
+    let url = this.baseUrl + "/users/" + empleado.id;
+
+    // Realizando POST
+    return this.http.delete(url, { headers: this.headers }).map(
+      // Mapeando salida
+      (response: Response) => {
+        let r = response.json();
+        return r['message'];
+      }
+    );
+  }
 }
