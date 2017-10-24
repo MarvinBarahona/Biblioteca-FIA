@@ -1,6 +1,6 @@
 /*
 *Nombre de la clase: ejemplar
-*Dirección física: src/app/traslados/servicios/ejemplar.ts
+*Dirección física: src/app/prestamos/servicios/ejemplar.ts
 **/
 
 import {  Libro } from './'

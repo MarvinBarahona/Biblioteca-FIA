@@ -11,4 +11,5 @@ export class Reservacion{
   ejemplar: Ejemplar;
   fecha: Date;
   fechaDevolucion: Date;
+  activa: boolean;
 }

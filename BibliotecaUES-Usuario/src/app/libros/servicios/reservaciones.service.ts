@@ -1,7 +1,7 @@
 /*
-*Nombre del servicio: libros
-*Dirección física: src/app/consultas /servicios/libros.service.ts
-*Objetivo: Proveer los servicios de libros al módulo consultas
+*Nombre del servicio: reservaciones
+*Dirección física: src/app/libros/servicios/reservaciones.service.ts
+*Objetivo: Proveer los servicios de reservaciones al módulo libros
 **/
 
 import { Injectable } from '@angular/core';
@@ -10,17 +10,16 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { environment } from './../../../environments/environment';
 
-import { CookieService } from 'ngx-cookie';
-import { Libro, Catalogo, Ejemplar } from './';
+import { Libro, Ejemplar, Catalogo } from './';
 
 @Injectable()
-export class LibrosService {
+export class SugerenciasService {
   baseUrl: string;
   headers: Headers;
 
-  constructor(private http: Http, private cookieService: CookieService) {
+  constructor(private http: Http) {
     this.baseUrl = environment.apiURL;
-    this.headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.cookieService.get('token') });
+    this.headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': sessionStorage.getItem('token') });
   }
 
   // Método: obtener
@@ -74,6 +73,21 @@ export class LibrosService {
 
         return libro;
       }
+    );
+  }
+
+  // Método: reservacion
+  // Objetivo: Confirmar la reservación de un ejemplar
+  reservacion(id: number, titulo: string): Observable<string> {
+    let url = this.baseUrl + '/transactions/reservations';
+
+    let q = JSON.stringify({
+      copies: [id],
+      details: { bookTitle: titulo }
+    });
+
+    return this.http.put(url, q, { headers: this.headers }).map(
+      res => res.json()
     );
   }
 }

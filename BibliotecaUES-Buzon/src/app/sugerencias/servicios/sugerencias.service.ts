@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { environment } from './../../../environments/environment';
 
-import { Sugerencia, Materia, Carrera } from './';
+import { Sugerencia, Materia, Carrera, MiSugerencia } from './';
 
 @Injectable()
 export class SugerenciasService {
@@ -154,6 +154,37 @@ export class SugerenciasService {
     );
   }
 
+  // Método: misSugerencia
+  // Objetivo: recuperar las sugerencias del usuario
+  misSugerencia(id: number, docente: boolean): Observable<MiSugerencia[]>{
+    let url = this.baseUrl + '/suggestions/user/' + id;
+
+    // Realizando el GET
+    return this.http.get(url, { headers: this.headers }).map(
+      (response: Response) => {
+        let r = response.json();
+
+        // Mapeando la salida
+        let sugerencias = new Array<MiSugerencia>();
+
+        r.forEach((_sugerencia) =>{
+          let sugerencia = new MiSugerencia;
+
+          sugerencia.id = _sugerencia['id'];
+          sugerencia.titulo = _sugerencia['title'];
+          sugerencia.estado = _sugerencia['state'];
+          sugerencia.materia = _sugerencia['subject']['name'];
+
+          if(docente) sugerencia.cantidad = _sugerencia['order']['quantity'];
+
+          sugerencias.push(sugerencia);
+        });
+
+        return sugerencias;
+      }
+    );
+  }
+
   // Método: obtener
   // Objetivo: recuperar una sugerencia
   obtener(id: number): Observable<Sugerencia> {
@@ -209,11 +240,28 @@ export class SugerenciasService {
   }
 
   // Método: votar
-  // Objetivo: agregar un voto
+  // Objetivo: agregar un voto a la sugerencia
   votar(sugerenciaId: number, materiaId: number): Observable<string> {
     let url = this.baseUrl + '/suggestions/' + sugerenciaId + '/votes';
 
     let q = JSON.stringify({ subjectId: materiaId });
+
+    // Realizando POST
+    return this.http.post(url, q, { headers: this.headers }).map(
+      // Mapeando salida
+      (response: Response) => {
+        let r = response.json();
+        return r['message'];
+      }
+    );
+  }
+
+  // Método: agregarPedido
+  // Objetivo: agregar un pedido a la sugerencia
+  agregarPedido(sugerenciaId: number, materiaId: number, cantidad: number, precio: number): Observable<string> {
+    let url = this.baseUrl + '/suggestions/' + sugerenciaId + '/orders';
+
+    let q = JSON.stringify({ subjectId: materiaId, quantity: cantidad, price: precio });
 
     // Realizando POST
     return this.http.post(url, q, { headers: this.headers }).map(

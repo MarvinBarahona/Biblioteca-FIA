@@ -35,30 +35,33 @@ export class ReservacionesService {
         let r = response.json();
         let reservaciones = new Array<Reservacion>();
 
-        r.forEach((_reservacion) =>{
+        r.forEach((_reservacion) => {
           let reservacion = new Reservacion;
           reservacion.id = _reservacion['id'];
-		  reservacion.fecha = _reservacion['createdAt'];
+          reservacion.fecha = _reservacion['createdAt'];
 
-		  let _ejemplar = _reservacion['copies'][0];
-		  let _detalle = _reservacion['details'];
+          let _ejemplar = _reservacion['copies'][0];
+          let _detalle = _reservacion['details'];
 
-		  let ejemplar = new Ejemplar;
-		  ejemplar.id = _ejemplar['id'];
-		  ejemplar.codigo = _ejemplar['code'];
-		  ejemplar.titulo = _detalle['bookTitle'];
-		  reservacion.ejemplar = ejemplar;
+          let ejemplar = new Ejemplar;
+          ejemplar.id = _ejemplar['id'];
+          ejemplar.codigo = _ejemplar['code'];
+          ejemplar.titulo = _detalle['bookTitle'];
+          reservacion.ejemplar = ejemplar;
 
-		  let _email = _reservacion['email'];
-		  let i = _email.indexOf('@');
-		  let email = _email.split(0,i);
-		  let estudiante = email.indexOf('.') == -1;
+          let _email = _reservacion['email'];
+          let _user = _reservacion['users'][0];
+          let i = _email.indexOf('@');
+          let email = _email.split(0, i);
+          let estudiante = email.indexOf('.') == -1;
 
-		  let prestamista = new Prestamista;
-		  // prestamista.id =
-		  prestamista.nombre = _reservacion['userName'];
-		  prestamista.carnet = estudiante ? email.toUpperCase() : null;
-		  reservacion.prestamista = prestamista;
+          let prestamista = new Prestamista;
+          prestamista.id = _user['userId'];
+          prestamista.nombre = _reservacion['userName'];
+          prestamista.carnet = estudiante ? email.toUpperCase() : null;
+          reservacion.prestamista = prestamista;
+
+          reservacion.activa = _reservacion['RelatedId']? true : false;
 
           reservaciones.push(reservacion);
         });
@@ -69,14 +72,14 @@ export class ReservacionesService {
 
   // Método: prestar
   // Objetivo: Confirmar el préstamo de una reservación
-  prestar(reservacion: Reservacion): Observable<string>{
+  prestar(reservacion: Reservacion): Observable<string> {
     let url = this.baseUrl + '/transactions/loans';
 
-	let q = JSON.stringify({
-		copies: [reservacion.ejemplar.id],
-		details: {bookTitle: reservacion.ejemplar.titulo, lenderName: reservacion.prestamista.nombre, returnDate: reservacion.fechaDevolucion, userId: reservacion.prestamista.id},
-		transactionId: reservacion.id
-	});
+    let q = JSON.stringify({
+      copies: [reservacion.ejemplar.id],
+      details: { bookTitle: reservacion.ejemplar.titulo, lenderName: reservacion.prestamista.nombre, returnDate: reservacion.fechaDevolucion, userId: reservacion.prestamista.id },
+      transactionId: reservacion.id
+    });
 
     return this.http.put(url, q, { headers: this.headers }).map(
       res => res.json()
@@ -85,13 +88,13 @@ export class ReservacionesService {
 
   // Método: cancelar
   // Objetivo: Cancelar una reservación
-  cancelar(reservacion: Reservacion): Observable<string>{
+  cancelar(reservacion: Reservacion): Observable<string> {
     let url = this.baseUrl + '/transactions/annulments';
 
-	let q = JSON.stringify({
-		copies: [reservacion.ejemplar.id],
-		transactionId: reservacion.id
-	});
+    let q = JSON.stringify({
+      copies: [reservacion.ejemplar.id],
+      transactionId: reservacion.id
+    });
 
     return this.http.put(url, q, { headers: this.headers }).map(
       res => res.json()

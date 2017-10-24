@@ -1,7 +1,7 @@
 /*
 *Nombre del servicio: libros
 *Dirección física: src/app/libros/servicios/libros.service.ts
-*Objetivo: Proveer los servicios al módulo libros
+*Objetivo: Proveer los servicios de libro al módulo libros
 **/
 
 import { Injectable } from '@angular/core';

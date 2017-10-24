@@ -1,7 +1,7 @@
 /*
 *Nombre del servicio: ejemplares
-*Dirección física: src/app/traslados/servicios/ejemplares.service.ts
-*Objetivo: Proveer los servicios de ejemplares al módulo traslados
+*Dirección física: src/app/prestamos/servicios/ejemplares.service.ts
+*Objetivo: Proveer los servicios de ejemplares al módulo prestamos
 **/
 
 import { Injectable } from '@angular/core';
@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
 import { environment } from './../../../environments/environment';
 
 import { CookieService } from 'ngx-cookie';
-import { Ejemplar, Libro } from './';
+import { Ejemplar, Libro, Transaccion, Prestamista } from './';
 
 @Injectable()
 export class EjemplaresService {
@@ -47,33 +47,46 @@ export class EjemplaresService {
     );
   }
 
-  // Método: obtenerPorCodigo
-  // Objetivo: obtener un ejemplar por su código de barra.
-  obtenerPorCodigo(codigo: string): Observable<Ejemplar>{
-    let url = this.baseUrl + '/copies/barcode/' + codigo;
+  // Método: obtenerTransaccionPorCodigo
+  // Objetivo: obtener una transacción de un ejemplar por su código de barra.
+  obtenerTransaccionPorCodigo(codigo: string): Observable<Transaccion>{
+    let url = this.baseUrl + '/copies/' + codigo + '/transaction';
 
     // Realizando GET
     return this.http.get(url, { headers: this.headers }).map(
       // Mapeando la salida
       (response: Response) => {
         let r = response.json();
-        let ejemplar = new Ejemplar;
-        let rc = r['copy'];
-        let rb = r['book'];
+        let _ejemplar = r['copy'];
+        let _transaccion = r['transaction'];
+        let _autoriza = _transaccion['users'][0];
 
-        // Mapear el objeto de ejemplar
-        ejemplar.id = rc['id'];
-        ejemplar.codigo = rc['barcode'];
-        ejemplar.estado = rc['state'];
+        let transaccion = new Transaccion;
+        transaccion.ejemplar = new Ejemplar;
+        transaccion.ejemplar.libro = new Libro;
 
-        // Mapear el libros
-        let libro = new Libro;
-        libro.id = rb['id'];
-        libro.titulo = rb['title'];
-        libro.edicion = rb['edition'];
-        ejemplar.libro = libro;
+        transaccion.id = _transaccion['id'];
+        transaccion.fecha = _transaccion['createdAt'];
+        transaccion.autoriza = _autoriza['userName'];
 
-        return ejemplar;
+        transaccion.ejemplar.id = _ejemplar['id'];
+        transaccion.ejemplar.codigo = _ejemplar['barcode'];
+        transaccion.ejemplar.estado = _ejemplar['state'];
+
+        transaccion.esPrestamo = _transaccion['type'] == "Préstamo";
+
+        if(transaccion.esPrestamo){
+          let _prestamista = _transaccion['users'][1];
+          transaccion.prestamista = new Prestamista;
+          transaccion.prestamista.id = _prestamista['userId'];
+          transaccion.prestamista.nombre = _prestamista['userName'];
+
+          let _detalles = _transaccion['details'];
+          transaccion.ejemplar.libro.titulo = _detalles['bookTitle'];
+          transaccion.fechaDevolucion = _detalles['returnDate'];
+        }
+
+        return transaccion;
       }
     );
   }
