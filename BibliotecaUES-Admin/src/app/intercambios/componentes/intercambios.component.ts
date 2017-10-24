@@ -11,6 +11,8 @@ import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
 import { IntercambiosService, Intercambio } from './../servicios/';
 
+declare var $: any;
+
 @Component({
   templateUrl: './intercambios.component.html'
 })
@@ -24,12 +26,15 @@ export class IntercambiosComponent implements OnInit {
     private intercambiosService: IntercambiosService,
     private router: Router
   ) {
+    // Para el sorting de las fechas
+    $.fn.dataTable.moment( 'DD/MM/YYYY' );
+
     // Opciones de datatable
     this.dtOptions = {
       pageLength: 10,
       pagingType: 'simple_numbers',
-      lengthMenu: [10,15,20],
-      order: [[1, "desc"], [0, "asc"]],
+      lengthMenu: [10, 15, 20],
+      order: [[3, "asc"], [2, "desc"]],
       language: {
         "emptyTable": "Sin registros disponibles en la tabla",
         "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",

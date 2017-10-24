@@ -9,7 +9,9 @@
           <thead>
             <tr>
               <th>Facultad</th>
+              <th>Creada por</th>
               <th>Fecha</th>
+              <th>Completo?</th>
             </tr>
           </thead>
           <tbody>
@@ -22,7 +24,9 @@
             <!-- Empleados -->
             <tr *ngFor="let intercambio of intercambios">
               <td><a [routerLink]="['/intercambios/salida/'+intercambio.id]">{{intercambio.facultad}}</a></td>
-              <td>{{intercambio.fecha | date:"d/M/y"}}</td>
+              <td>{{intercambio.usuario}}</td>
+              <td>{{intercambio.fecha | date:"d/MM/y"}}</td>
+              <td>{{intercambio.completo? "Sí" : "No"}}</td>
             </tr>
           </tbody>
         </table>

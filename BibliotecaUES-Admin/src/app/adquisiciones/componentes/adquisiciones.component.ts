@@ -10,6 +10,8 @@ import { Subject } from 'rxjs/Rx';
 
 import { AdquisicionesService, Adquisicion } from './../servicios';
 
+declare var $: any;
+
 @Component({
   templateUrl: './adquisiciones.component.html'
 })
@@ -24,12 +26,15 @@ export class AdquisicionesComponent implements OnInit {
     private adquisicionesService: AdquisicionesService,
     private router: Router
   ) {
+    // Para el sorting de las fechas. 
+    $.fn.dataTable.moment( 'DD/MM/YYYY' );
+
     // Opciones de datatable
     this.dtOptions = {
       pageLength: 10,
       pagingType: 'simple_numbers',
       lengthMenu: [10, 15, 20],
-      order: [[2, "desc"], [0, "asc"]],
+      order: [[3, "desc"], [0, "asc"]],
       language: {
         "emptyTable": "Sin registros disponibles en la tabla",
         "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",

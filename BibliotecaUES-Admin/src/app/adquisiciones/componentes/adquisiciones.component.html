@@ -10,6 +10,7 @@
             <tr>
               <th>Nombre</th>
               <th>Tipo</th>
+              <th>Creada por</th>
               <th>Fecha de creación</th>
             </tr>
           </thead>
@@ -24,7 +25,8 @@
             <tr *ngFor="let adquisicion of adquisiciones">
               <td><a [routerLink]="'/adquisiciones/'+adquisicion.id">{{adquisicion.nombre}}</a></td>
               <td>{{adquisicion.tipo}}</td>
-              <td>{{adquisicion.fecha | date:"d/M/y"}}</td>
+              <td>{{adquisicion.usuario}}</td>
+              <td>{{adquisicion.fecha | date:"d/MM/y"}}</td>
             </tr>
 
           </tbody>

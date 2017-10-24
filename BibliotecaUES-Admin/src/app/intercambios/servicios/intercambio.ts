@@ -12,4 +12,5 @@ export class Intercambio{
   ejemplares: Ejemplar[];
   fecha: Date;
   relacionado: number;
+  completo: boolean;
 }
