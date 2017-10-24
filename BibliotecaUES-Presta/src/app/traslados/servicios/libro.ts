@@ -3,8 +3,6 @@
 *Dirección física: src/app/traslados/servicios/libro.ts
 **/
 
-import { Ejemplar } from './';
-
 export class Libro{
   id: number;
   isbn: string;

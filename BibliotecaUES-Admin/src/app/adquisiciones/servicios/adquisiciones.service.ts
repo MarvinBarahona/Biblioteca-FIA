@@ -73,7 +73,7 @@ export class AdquisicionesService {
           adquisicion.nombre = _adquisicion['notes'];
           adquisicion.fecha = _adquisicion['createdAt'];
           adquisicion.tipo = _adquisicion['type'];
-          adquisicion.usuario = _adquisicion['fullname'];
+          adquisicion.usuario = _adquisicion['userName'];
           adquisiciones.push(adquisicion);
         });
 
@@ -84,7 +84,7 @@ export class AdquisicionesService {
           adquisicion.nombre = _adquisicion['notes'];
           adquisicion.fecha = _adquisicion['createdAt'];
           adquisicion.tipo = _adquisicion['type'];
-          adquisicion.usuario = _adquisicion['fullname'];
+          adquisicion.usuario = _adquisicion['userName'];
           adquisiciones.push(adquisicion);
         });
 

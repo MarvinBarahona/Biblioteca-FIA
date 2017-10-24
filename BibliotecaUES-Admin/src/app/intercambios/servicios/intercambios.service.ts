@@ -92,7 +92,7 @@ export class IntercambiosService {
           intercambio.id = _intercambio['id'];
           intercambio.facultad = _intercambio['notes'];
           intercambio.fecha = _intercambio['createdAt'];
-          intercambio.usuario = _intercambio['fullname'];
+          intercambio.usuario = _intercambio['userName'];
           intercambios.push(intercambio);
         });
 
