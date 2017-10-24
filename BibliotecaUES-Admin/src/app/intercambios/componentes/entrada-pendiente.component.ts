@@ -91,6 +91,23 @@ export class EntradaPendienteComponent implements OnInit {
     );
   }
 
+  // Método: cantidadIncorrectas
+  // Objetivo: Determinar si se han ingresado cantidades inválida
+  cantidadesIncorrectas(): boolean {
+    let inc = false;
+    this.entrada.ejemplares.forEach((ejemplar) => {
+      if (!this.isInt(ejemplar.cantidad) || ejemplar.cantidad < 1) inc = true;
+    });
+
+    return inc;
+  }
+
+  // Método: isInt
+  // Objetivo: Determinar si un valor es un entero
+  isInt(value: any): boolean {
+    return !isNaN(value) && parseInt(value) == value && !isNaN(parseInt(value, 10));
+  }
+
   // Métodos para la ventana modal de selección de libro
   openSeleccion() {
     this.modalSeleccion.emit({ action: "modal", params: ['open'] });

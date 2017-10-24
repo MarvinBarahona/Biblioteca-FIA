@@ -31,11 +31,11 @@
   <!-- Año, edición e ISBN -->
   <div class="row">
     <div class="input-field col s3">
-      <input id="anio" name="anio" type="number" class="validate" min="1950" max="2050" [(ngModel)]="libro.anio" required>
+      <input id="anio" name="anio" type="number" class="validate" min="1950" max="2050" [(ngModel)]="libro.anio" #anio="ngModel" [range]="[1950, 2050]" required>
       <label for="anio" data-error="Valor entre 1950 y 2050">Año</label>
     </div>
     <div class="input-field col s3">
-      <input id="edicion" name="edicion" type="number" class="validate" min="1" max="30" [(ngModel)]="libro.edicion" required>
+      <input id="edicion" name="edicion" type="number" class="validate" min="1" max="30" [(ngModel)]="libro.edicion" #edicion="ngModel" [range]="[1, 30]" required>
       <label for="edicion" data-error="Valor entre 1 y 30">Edición</label>
     </div>
     <div class="input-field col s6">
@@ -47,7 +47,7 @@
   <!-- Botones del formulario -->
   <div class="row">
     <div class="center">
-      <button type="submit" class="btn waves-effect waves-green" [disabled]="!libroNuevoForm.form.valid || libro.autores.length == 0">Guardar</button>
+      <button type="submit" class="btn waves-effect waves-green" [disabled]="!libroNuevoForm.form.valid || libro.autores.length == 0 || anio.errors?.range || edicion.errors?.range">Guardar</button>
       <button type="button" class="btn waves-effect waves-green" (click)="limpiar(libroNuevoForm)">Limpiar</button>
     </div>
   </div>

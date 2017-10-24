@@ -30,7 +30,7 @@
               <tbody>
                 <tr *ngFor="let ejemplar of entrada.ejemplares">
                   <td>{{ejemplar.libro.titulo}}</td>
-                  <td><input class="col m3 offset-m1" type="number" name="cantidad" min="1" max="20" [(ngModel)]="ejemplar.cantidad" required></td>
+                  <td><input class="col m3 offset-m1 validate" type="number" name="cantidad" min="1" max="20" [(ngModel)]="ejemplar.cantidad" required></td>
                   <td><a  (click)="eliminarEjemplar(ejemplar)"><i class="material-icons borrar">delete</i></a></td>
                 </tr>
               </tbody>
@@ -45,7 +45,7 @@
         <br>
         <div class="row">
           <a class="waves-effect waves-light btn col m2 offset-m2 s4 " (click)="openSeleccion()">Agregar</a>
-          <button type="submit" class="waves-effect waves-light btn col m2 offset-m1 s4" [disabled]="!nuevaEntradaForm.form.valid || entrada.ejemplares.length==0">Guardar</button>
+          <button type="submit" class="waves-effect waves-light btn col m2 offset-m1 s4" [disabled]="!nuevaEntradaForm.form.valid || entrada.ejemplares.length==0 || cantidadesIncorrectas()">Guardar</button>
           <a class="waves-effect waves-light btn col m2 offset-m1 s4 " (click)="openCancel()">Cancelar</a>
         </div>
 

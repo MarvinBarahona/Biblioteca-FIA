@@ -63,7 +63,7 @@
         <br>
         <div class="row">
           <a class="waves-effect waves-light btn col m2 offset-m2 s4 " (click)="openSeleccion()">Agregar</a>
-          <button type="submit" class="waves-effect waves-light btn col m2 offset-m1 s4" [disabled]="!nuevaAdquisicionForm.form.valid || (adquisicion.tipo=='Donación' && !adquisicion.donante) || adquisicion.ejemplares.length==0">Guardar</button>
+          <button type="submit" class="waves-effect waves-light btn col m2 offset-m1 s4" [disabled]="!nuevaAdquisicionForm.form.valid || (adquisicion.tipo=='Donación' && !adquisicion.donante) || adquisicion.ejemplares.length==0 || cantidadesIncorrectas()">Guardar</button>
           <a class="waves-effect waves-light btn col m2 offset-m1 s4 " (click)="openCancel()">Cancelar</a>
         </div>
 

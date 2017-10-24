@@ -44,7 +44,7 @@
 
           <!-- Edición -->
           <div class="input-field col l1 offset-l2 m2 s12">
-            <input id="edicion" name="edicion" type="number" class="validate" [(ngModel)]="sugerencia.edicion" min="1" max="30" required>
+            <input id="edicion" name="edicion" type="number" class="validate" [(ngModel)]="sugerencia.edicion" min="1" max="30" #edicion="ngModel" [range]="[1, 30]" required>
             <label for="edicion" data-error="Valor entre 1 y 30">Edición</label>
           </div>
 
@@ -62,7 +62,7 @@
 
           <!-- Precio -->
           <div class="input-field col l1 m2 s12">
-            <input id="precio" name="precio" type="number" class="validate" [(ngModel)]="sugerencia.precio" min="1" max="200" step="0.01" required>
+            <input id="precio" name="precio" type="number" class="validate" [(ngModel)]="sugerencia.precio" min="1" max="200" step="0.01" #precio="ngModel" [range]="[1, 200]" required>
             <label for="precio">Precio</label>
           </div>
         </div>
@@ -70,7 +70,7 @@
         <!-- Botones del formulario -->
         <div class="row">
           <div class="center">
-            <button type="submit" class="btn waves-effect waves-green col m2 offset-m4" [disabled]="!sugerenciaNuevaForm.form.valid || !idMateria">Guardar</button>
+            <button type="submit" class="btn waves-effect waves-green col m2 offset-m4" [disabled]="!sugerenciaNuevaForm.form.valid || !idMateria || precio.errors?.range || edicion.errors?.range">Guardar</button>
             <a type="button" class="btn waves-effect waves-green col m2 offset-m1" (click)="openCancel()">Cancelar</a>
           </div>
         </div>
