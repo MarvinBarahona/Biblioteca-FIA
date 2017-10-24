@@ -14,7 +14,13 @@ declare var Materialize: any;
 declare var $:any;
 
 @Component({
-  templateUrl: './intercambio-nuevo.component.html'
+  templateUrl: './intercambio-nuevo.component.html',
+  styles: [`
+    .search{
+      margin-top: 20px;
+      left:-20px;
+    }
+  `]
 })
 export class IntercambioNuevoComponent implements OnInit {
   intercambio: Intercambio;
@@ -91,7 +97,7 @@ export class IntercambioNuevoComponent implements OnInit {
         $('#codigo').autocomplete({
           data: codigosData,
           limit: 5,
-          minLength: 3,
+          minLength: 2,
           onAutocomplete: (val) =>{
             this.codigo = val;
           }

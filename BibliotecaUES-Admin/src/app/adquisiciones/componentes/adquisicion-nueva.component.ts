@@ -13,7 +13,13 @@ import { AdquisicionesService, NuevaAdquisicion, NuevoEjemplar, Libro } from './
 declare var Materialize: any;
 
 @Component({
-  templateUrl: './adquisicion-nueva.component.html'
+  templateUrl: './adquisicion-nueva.component.html',
+  styles: [`
+    .modal-fixed-footer{
+      height: 600px;
+      width: 800px;
+    }
+  `]
 })
 
 export class AdquisicionNuevaComponent implements OnInit {
@@ -38,14 +44,14 @@ export class AdquisicionNuevaComponent implements OnInit {
 
   // Método: onNotify
   // Objetivo: Escuchar al evento emitido por el componente libro-seleccion
-  onNotify(libro: Libro){
+  onNotify(libro: Libro) {
     let nuevo: boolean = true;
 
     this.adquisicion.ejemplares.forEach((e) => {
-      if(e.libro.isbn === libro.isbn) nuevo = false;
+      if (e.libro.isbn === libro.isbn) nuevo = false;
     });
 
-    if(nuevo){
+    if (nuevo) {
       let ejemplar = new NuevoEjemplar;
       ejemplar.libro = libro;
       ejemplar.cantidad = 1;
@@ -57,14 +63,14 @@ export class AdquisicionNuevaComponent implements OnInit {
 
   // Método: eliminarEjemplar
   // Objetivo: eliminar un ejemplar de la tabla de ejemplares a crear.
-  eliminarEjemplar(ejemplar: NuevoEjemplar){
+  eliminarEjemplar(ejemplar: NuevoEjemplar) {
     let i = this.adquisicion.ejemplares.indexOf(ejemplar);
-    if(i > -1) this.adquisicion.ejemplares.splice(i, 1);
+    if (i > -1) this.adquisicion.ejemplares.splice(i, 1);
   }
 
   // Método: crear
   // Objetivo: crear una nueva adquisición, por donación o compra.
-  crear(){
+  crear() {
     // Mostrar mensajes.
     this.showMessage = true;
     this.errorMessage = null;
@@ -72,16 +78,34 @@ export class AdquisicionNuevaComponent implements OnInit {
     // Llamar al servicio
     this.adquisicionesService.crear(this.adquisicion).subscribe(
       message => {
-        this.showMessage= false;
+        this.showMessage = false;
         Materialize.toast("Adquisición creada", 3000, 'toastSuccess');
         this.router.navigate(['/adquisiciones']);
       },
       error => {
-        this.showMessage= false;
+        this.showMessage = false;
         this.errorMessage = "Error al crear la adquisición";
       }
     );
   }
+
+  // Método: cantidadIncorrectas
+  // Objetivo: Determinar si se han ingresado cantidades inválida
+  cantidadesIncorrectas(): boolean {
+    let inc = false;
+    this.adquisicion.ejemplares.forEach((ejemplar) => {
+      if (!this.isInt(ejemplar.cantidad) || ejemplar.cantidad < 1) inc = true;
+    });
+
+    return inc;
+  }
+
+  // Método: isInt
+  // Objetivo: Determinar si un valor es un entero
+  isInt(value: any): boolean {
+    return !isNaN(value) && parseInt(value) == value && !isNaN(parseInt(value, 10));
+  }
+
 
   // Métodos para el manejo de la ventana modal de selección de libros.
   openSeleccion() {
@@ -101,7 +125,7 @@ export class AdquisicionNuevaComponent implements OnInit {
 
   // Método: cancel
   // Objetivo: Cerrar la ventana modal y retornar a la vista anterior.
-  cancel(){
+  cancel() {
     this.closeCancel();
     this.router.navigate(['/adquisiciones']);
   }

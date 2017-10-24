@@ -5,13 +5,13 @@
 
       <!-- Código de Autor -->
       <div class="input-field col l6 m8 s6">
-        <input id="codautor" name="codautor" type="text" class="validate" maxlength="5" pattern="^[A-Z]{1}[\d]{3}[A-Z]{1}$" [(ngModel)]="catalogo.codigoAutor" required>
+        <input id="codautor" name="codautor" type="text" class="validate" maxlength="5" pattern="^[A-Z]{1}[\d]{3}[A-Z]{1}$" [(ngModel)]="catalogo.codigoAutor">
         <label for="codautor" data-error="Debe tener el formato A999A">Código de autor</label>
       </div>
 
       <!-- Código Dewey -->
       <div class="input-field col l7 m10 s12">
-        <input id="dewey" name="dewey" type="text" class="validate" maxlength="60" pattern="^[\d.]+$" [(ngModel)]="catalogo.categoria" required>
+        <input id="dewey" name="dewey" type="text" class="validate" maxlength="60" pattern="^[\d.]+$" [(ngModel)]="catalogo.categoria">
         <label for="dewey" data-error="Debe contener solo números y puntos">Código Dewey</label>
       </div>
 
@@ -45,8 +45,8 @@
 
   <!-- Acciones -->
   <div class="row">
-    <a class="waves-effect waves-light btn col m2 s12 offset-m3" (click)="guardar()">Guardar</a>
-    <button class="waves-effect waves-light btn col m2 s12 offset-m1" [disabled]="!catalogarForm.form.valid || catalogo.materias.length == 0 || !catalogo.img" (click)="catalogar()">Catalogar</button>
+    <button class="waves-effect waves-light btn col m2 s12 offset-m3" [disabled]="!catalogarForm.form.valid" (click)="guardar()">Guardar</button>
+    <button class="waves-effect waves-light btn col m2 s12 offset-m1" [disabled]="!catalogarForm.form.valid || !catalogo.categoria || !catalogo.codigoAutor || catalogo.materias.length == 0 || !catalogo.img" (click)="catalogar()">Catalogar</button>
   </div>
 
 </form>

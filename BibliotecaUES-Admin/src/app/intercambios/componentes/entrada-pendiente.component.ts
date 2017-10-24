@@ -13,7 +13,13 @@ import { IntercambiosService, NuevaEntrada, NuevoEjemplar, Libro } from './../se
 declare var Materialize: any;
 
 @Component({
-  templateUrl: './entrada-pendiente.component.html'
+  templateUrl: './entrada-pendiente.component.html',
+  styles: [`
+    .modal-fixed-footer{
+      height: 600px;
+      width: 800px;
+    }
+  `]
 })
 export class EntradaPendienteComponent implements OnInit {
   entrada: NuevaEntrada;
@@ -85,6 +91,23 @@ export class EntradaPendienteComponent implements OnInit {
     );
   }
 
+  // Método: cantidadIncorrectas
+  // Objetivo: Determinar si se han ingresado cantidades inválida
+  cantidadesIncorrectas(): boolean {
+    let inc = false;
+    this.entrada.ejemplares.forEach((ejemplar) => {
+      if (!this.isInt(ejemplar.cantidad) || ejemplar.cantidad < 1) inc = true;
+    });
+
+    return inc;
+  }
+
+  // Método: isInt
+  // Objetivo: Determinar si un valor es un entero
+  isInt(value: any): boolean {
+    return !isNaN(value) && parseInt(value) == value && !isNaN(parseInt(value, 10));
+  }
+
   // Métodos para la ventana modal de selección de libro
   openSeleccion() {
     this.modalSeleccion.emit({ action: "modal", params: ['open'] });
@@ -105,6 +128,6 @@ export class EntradaPendienteComponent implements OnInit {
   // Objetivo: cerrar la ventana modal y regresar a la vista anterior
   cancel(){
     this.closeCancel();
-    this.router.navigate(['/adquisiciones']);
+    this.router.navigate(['/intercambios/salida/'+this.entrada.id]);
   }
 }

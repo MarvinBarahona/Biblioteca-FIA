@@ -73,12 +73,4 @@ export class SugerenciasComponent implements OnInit {
       }
     );
   }
-
-  //Método: linkCrear
-  //Objetivo: Redirige a la creación de una sugerencia
-  linkCrear(){
-    if(this.docente) this.router.navigate(['/sugerencias/nueva/docente']);
-    if(this.estudiante) this.router.navigate(['/sugerencias/nueva/estudiante']);
-  }
-
 }

@@ -60,7 +60,8 @@
 
       <!-- Botón de agregar nueva sugerencia -->
       <div class="row">
-        <a class="btn btn-floating btn cyan pulse right" href="javascript:void(0)" (click)="linkCrear()">+</a>
+        <a *ngIf="docente" class="btn btn-floating btn cyan pulse right" routerLink="/sugerencias/nueva/docente">+</a>
+        <a *ngIf="estudiante" class="btn btn-floating btn cyan pulse right" routerLink="/sugerencias/nueva/estudiante">+</a>
       </div>
 
       <!-- Mensaje de espera -->
