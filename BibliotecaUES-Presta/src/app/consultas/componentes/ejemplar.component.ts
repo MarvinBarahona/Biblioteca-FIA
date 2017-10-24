@@ -1,6 +1,6 @@
 /*
 *Nombre del módulo: ejemplar
-*Dirección física: src\app\consultar\componentes\ejemplar.component.ts
+*Dirección física: src\app\consultas\componentes\ejemplar.component.ts
 *Objetivo: Mostrar información de un ejemplar específico
 **/
 
@@ -37,11 +37,5 @@ export class EjemplarComponent implements OnInit {
         }
       }
     );
-  }
-
-  //Método: linkLibro
-  //Objetivo: Redirigir a la vista de un libro
-  linkLibro(id: number){
-    this.router.navigate(['/consultar/libro/'+id]);
   }
 }

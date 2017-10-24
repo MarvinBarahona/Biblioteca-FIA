@@ -1,6 +1,6 @@
 /*
 *Nombre del componente: ejemplar-buscar
-*Dirección física: src\app\consultar\componentes\ejemplar-buscar.component.ts
+*Dirección física: src\app\consultas\componentes\ejemplar-buscar.component.ts
 *Objetivo: Buscar ejemplares por medio del código de barra
 **/
 
@@ -81,17 +81,5 @@ export class EjemplarBuscarComponent implements OnInit {
         this.message = "No se encontraron resultado para " + this.codigo;
       }
     )
-  }
-
-  //Método: linkLibro
-  //Objetivo: Redirigir a la vista de un libro
-  linkLibro(id: number){
-    this.router.navigate(['/consultar/libro/'+id]);
-  }
-
-  //Método: linkEjemplar
-  //Objetivo: Redirigir a la vista de un ejemplar
-  linkEjemplar(id: number){
-    this.router.navigate(['/consultar/ejemplar/'+id]);
   }
 }

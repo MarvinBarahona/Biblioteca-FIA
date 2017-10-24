@@ -1,19 +1,19 @@
 /*
-*Nombre del módulo: consultar-routing
-*Dirección física: src/app/consultar/consultar-routing.module.ts
-*Objetivo: Definir las rutas del módulo consultar
+*Nombre del módulo: consultas-routing
+*Dirección física: src/app/consultas/consultas-routing.module.ts
+*Objetivo: Definir las rutas del módulo consultas
 **/
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ConsultarRootComponent, EjemplarBuscarComponent, EjemplarComponent, LibroComponent } from './componentes';
+import { ConsultasRootComponent, EjemplarBuscarComponent, EjemplarComponent, LibroComponent } from './componentes';
 import { AppAuthGuard } from './../login'
 
 const routes: Routes = [
   {
-    path: 'consultar',
-    component: ConsultarRootComponent,
+    path: 'consultas',
+    component: ConsultasRootComponent,
     children: [
       {
         path: '',
@@ -43,4 +43,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [AppAuthGuard]
 })
-export class ConsultarRoutingModule { }
+export class ConsultasRoutingModule { }

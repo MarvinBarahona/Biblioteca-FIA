@@ -1,6 +1,6 @@
 /*
 *Nombre del componente: libro
-*Dirección física: src\app\consultar\componentes\libro.component.ts
+*Dirección física: src\app\consultas\componentes\libro.component.ts
 *Objetivo: Mostrar información de un libro específico
 **/
 import { Component, OnInit } from '@angular/core';
@@ -38,11 +38,5 @@ constructor(private libroService: LibrosService, private route: ActivatedRoute, 
         }
       }
     );
-  }
-
-  //Método: linkEjemplar
-  //Objetivo: Redirigir a la vista de un ejemplar
-  linkEjemplar(id: number){
-    this.router.navigate(['/consultar/ejemplar/'+id]);
   }
 }

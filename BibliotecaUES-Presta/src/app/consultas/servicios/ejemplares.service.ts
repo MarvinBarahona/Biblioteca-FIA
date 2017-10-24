@@ -1,7 +1,7 @@
 /*
 *Nombre del servicio: ejemplares
-*Dirección física: src/app/trasladar/servicios/ejemplares.service.ts
-*Objetivo: Proveer los servicios de ejemplares al módulo trasladar
+*Dirección física: src/app/consultas/servicios/ejemplares.service.ts
+*Objetivo: Proveer los servicios de ejemplares al módulo consultas
 **/
 
 import { Injectable } from '@angular/core';
@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
 import { environment } from './../../../environments/environment';
 
 import { CookieService } from 'ngx-cookie';
-import { Ejemplar, Libro } from './';
+import { Ejemplar, Transaccion, Libro } from './';
 
 @Injectable()
 export class EjemplaresService {
@@ -35,7 +35,7 @@ export class EjemplaresService {
         let r = response.json();
         let ejemplares = new Array<Ejemplar>();
 
-        r.forEach((_ejemplar) =>{
+        r.forEach((_ejemplar) => {
           let ejemplar = new Ejemplar;
           ejemplar.id = _ejemplar['id'];
           ejemplar.codigo = _ejemplar['barcode'];
@@ -43,6 +43,53 @@ export class EjemplaresService {
           ejemplares.push(ejemplar);
         });
         return ejemplares;
+      }
+    );
+  }
+
+  // Método: obtener
+  // Objetivo: obtener un ejemplar
+  obtener(id: number): Observable<Ejemplar> {
+    let url = this.baseUrl + '/copies/' + id;
+
+    // Realizando GET
+    return this.http.get(url, { headers: this.headers }).map(
+      // Mapeando la salida
+      (response: Response) => {
+        let r = response.json();
+        let ejemplar = new Ejemplar;
+        let rc = r['copy'];
+        let rt = rc['transactions'];
+        let rb = r['book'];
+
+        // Mapear el objeto de ejemplar
+        ejemplar.id = rc['id'];
+        ejemplar.codigo = rc['barcode'];
+        ejemplar.estado = rc['state'];
+
+        // Mapear las transacciones.
+        let transacciones = new Array<Transaccion>();
+        rt.forEach((_transaccion)=>{
+          let transaccion = new Transaccion;
+          transaccion.id = _transaccion['id'];
+          transaccion.nombre = _transaccion['notes'];
+          transaccion.fecha = _transaccion['createdAt'];
+          transaccion.usuario = _transaccion['userName'];
+          transaccion.tipo = _transaccion['type'];
+          transaccion.individual = _transaccion['single'];
+          transacciones.push(transaccion);
+        });
+
+        ejemplar.transacciones = transacciones;
+
+        // Mapear el libros
+        let libro = new Libro;
+        libro.id = rb['id'];
+        libro.titulo = rb['title'];
+        libro.edicion = rb['edition'];
+        ejemplar.libro = libro;
+
+        return ejemplar;
       }
     );
   }
@@ -75,16 +122,6 @@ export class EjemplaresService {
 
         return ejemplar;
       }
-    );
-  }
-
-  // Método: trasladar
-  // Objetivo: Cambia estado de inactivo a disponible o viceversa
-  trasladar(id: number): Observable<string>{
-    let url = this.baseUrl + '/copies/' + id;
-
-    return this.http.put(url, {}, { headers: this.headers }).map(
-      res => res.json()
     );
   }
 }

@@ -1,6 +1,6 @@
 /*
 *Nombre de la clase: transccion
-*Dirección física: src/app/consultar/servicios/transccion.ts
+*Dirección física: src/app/consultas/servicios/transccion.ts
 **/
 
 export class Transaccion{

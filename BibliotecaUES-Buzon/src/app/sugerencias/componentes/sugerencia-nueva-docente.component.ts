@@ -24,7 +24,6 @@ export class SugerenciaNuevaDocenteComponent implements OnInit {
   showMessage: boolean;
   errorMessage: string;
   showFailMessage: boolean;
-  linkId: string;
 
   modalCancel = new EventEmitter<string | MaterializeAction>();
 
@@ -66,7 +65,7 @@ export class SugerenciaNuevaDocenteComponent implements OnInit {
         else{
           this.showFailMessage = true;
           this.showMessage = false;
-          this.linkId = r['suggestionId'];
+          this.sugerencia.id = r['suggestionId'];
         }
       },
       (error) => {
@@ -74,15 +73,9 @@ export class SugerenciaNuevaDocenteComponent implements OnInit {
         let errors = r['errors'];
         this.showFailMessage = true;
         this.showMessage = false;
-        this.linkId = errors['suggestionId'];
+        this.sugerencia.id= errors['suggestionId'];
       }
     );
-  }
-
-  //Método: linkSugerencia
-  //Objetivo: Redireccionar a la vista de la sugerencia
-  linkSugerencia(){
-    this.router.navigate(['/sugerencias/votar/'+this.linkId]);
   }
 
   //Método: selectCarrera

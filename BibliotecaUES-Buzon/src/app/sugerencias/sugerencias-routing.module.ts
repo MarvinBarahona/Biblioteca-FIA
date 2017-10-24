@@ -49,7 +49,7 @@ const routes: Routes = [
         // data: {politica: }
       },
       {
-        path: 'pedido',
+        path: 'pedir/:id',
         component: PedidoComponent
         // canActivate: [AppAuthGuard],
         // data: {politica: }

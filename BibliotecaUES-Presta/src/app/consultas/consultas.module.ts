@@ -1,7 +1,7 @@
 /*
-*Nombre del módulo: consultar
-*Dirección física: src/app/consultar/consultar.module.ts
-*Objetivo: Definir el módulo consultar
+*Nombre del módulo: consultas
+*Dirección física: src/app/consultas/consultas.module.ts
+*Objetivo: Definir el módulo consultas
 **/
 
 import { NgModule } from '@angular/core';
@@ -12,8 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { CookieModule } from 'ngx-cookie';
 import { MaterializeModule } from 'angular2-materialize';
 
-import { ConsultarRoutingModule } from './consultar-routing.module';
-import { ConsultarRootComponent, EjemplarBuscarComponent, EjemplarComponent, LibroComponent } from './componentes';
+import { ConsultasRoutingModule } from './consultas-routing.module';
+import { ConsultasRootComponent, EjemplarBuscarComponent, EjemplarComponent, LibroComponent } from './componentes';
 import { EjemplaresService, LibrosService } from './servicios';
 
 @NgModule({
@@ -23,10 +23,10 @@ import { EjemplaresService, LibrosService } from './servicios';
     FormsModule,
     MaterializeModule,
     CookieModule.forChild(),
-    ConsultarRoutingModule
+    ConsultasRoutingModule
   ],
   declarations: [
-    ConsultarRootComponent,
+    ConsultasRootComponent,
     EjemplarBuscarComponent,
     EjemplarComponent,
 	  LibroComponent
@@ -36,4 +36,4 @@ import { EjemplaresService, LibrosService } from './servicios';
 	  LibrosService
   ]
 })
-export class ConsultarModule { }
+export class ConsultasModule { }

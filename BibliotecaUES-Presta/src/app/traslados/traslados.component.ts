@@ -1,6 +1,6 @@
 /*
-*Nombre del componente: trasladar
-*Dirección física: /src/app/trasladar/trasladar.component.ts
+*Nombre del componente: traslados
+*Dirección física: /src/app/traslados/traslados.component.ts
 *Objetivo: Cambiar el estado de un ejemplar cuando este pasa del área de jefatura a la biblioteca.
 **/
 
@@ -13,7 +13,7 @@ declare var $: any;
 declare var Materialize: any;
 
 @Component({
-  templateUrl: './trasladar.component.html',
+  templateUrl: './traslados.component.html',
   styles: [`
     .search{
       margin-top: 20px;
@@ -22,7 +22,7 @@ declare var Materialize: any;
   `]
 })
 
-export class TrasladarComponent implements OnInit {
+export class TrasladosComponent implements OnInit {
   ejemplares: Ejemplar[];
   codigos = Array<string>();
   ejemplar: Ejemplar;

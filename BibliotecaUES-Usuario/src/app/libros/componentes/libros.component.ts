@@ -16,6 +16,15 @@ import { LibrosService, Libro } from './../servicios';
       margin-top: 20px;
       left:-20px;
     }
+    .libro{
+      border: 1px solid;
+      margin: 10px;
+    }
+    img{
+      width: 100px;
+      height: 130px;
+      cursor: pointer;
+    }
   `]
 })
 export class LibrosComponent implements OnInit {
@@ -74,13 +83,5 @@ export class LibrosComponent implements OnInit {
         this.libros = libros;
       }
     );
-
-  }
-
-  //Método: linkLibro
-  //Objetivo: Redirige a la vista individual del libro
-  linkLibro(libro: Libro){
-    console.log(libro.id);
-    this.router.navigate(["/libros/"+libro.id])
   }
 }

@@ -1,19 +1,19 @@
 /*
-*Nombre del módulo: trasladar-routing
-*Dirección física: src/app/trasladar/trasladar-routing.module.ts
-*Objetivo: Definir las rutas del módulo trasladar
+*Nombre del módulo: traslados-routing
+*Dirección física: src/app/traslados/traslados-routing.module.ts
+*Objetivo: Definir las rutas del módulo traslados
 **/
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TrasladarComponent } from './trasladar.component';
+import { TrasladosComponent } from './traslados.component';
 import { AppAuthGuard } from './../login'
 
 const routes: Routes = [
   {
-    path: 'trasladar',
-    component: TrasladarComponent,
+    path: 'traslados',
+    component: TrasladosComponent,
     canActivate: [AppAuthGuard],
     data: { politica: 143 }
   }
@@ -25,4 +25,4 @@ const routes: Routes = [
   providers: [AppAuthGuard]
 })
 
-export class TrasladarRoutingModule { }
+export class TrasladosRoutingModule { }
