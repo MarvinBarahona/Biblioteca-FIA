@@ -220,13 +220,12 @@ export class SugerenciasService {
           materia.nombre = _materia['name'];
           materia.votos = _materia['upvotes'];
           materia.pedidos = _materia['orders'];
-
+          materia.usuario = false;
           _materia['votes'].forEach((voto)=>{
             if(voto.userId == usuario.id){
               materia.usuario = true;
               sugerencia.usuario = true;
             }
-            else materia.usuario = false;
           });
 
           materias.push(materia);
