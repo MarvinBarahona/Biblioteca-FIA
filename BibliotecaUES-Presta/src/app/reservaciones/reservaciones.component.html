@@ -70,6 +70,7 @@
 <div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalPrestar">
   <div class="modal-content">
     <h5>Confirmación del préstamo</h5><br>
+    <p>Préstamo del ejemplar: {{codigo}}</p><br>
     <div class="row">
       <div class="input-field col m1 offset-m5 s12">
         <input name="carnet" [(ngModel)]="carnet" type="text">

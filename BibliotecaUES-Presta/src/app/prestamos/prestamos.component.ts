@@ -28,6 +28,7 @@ export class PrestamosComponent implements OnInit {
   ejemplares: Ejemplar[];
   transaccion: Transaccion;
   fechaDevolucion: Date;
+  hoy: Date;
 
   codigos = Array<string>();
   codigo: string;
@@ -39,12 +40,14 @@ export class PrestamosComponent implements OnInit {
   constructor(
     private router: Router,
     private prestamosService: PrestamosService,
-    private ejemplaresService: EjemplareService
+    private ejemplaresService: EjemplaresService
   ) { }
 
   ngOnInit() {
     // Activar el nav en responsive.
     $("#toogle_menu").sideNav({ closeOnClick: true });
+
+    this.hoy = new Date;
 
     // Iniciar el autocompletado en el input de búsqueda.
     this.inicializarAutocompletado();
@@ -99,7 +102,7 @@ export class PrestamosComponent implements OnInit {
         }
         else{
           this.message = "El ejemplar buscado no está prestado";
-        }        
+        }
       },
       error => {
         this.message = "No se encontraron resultado para " + this.codigo;

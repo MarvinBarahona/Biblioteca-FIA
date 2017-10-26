@@ -14,7 +14,7 @@ import { CookieService } from 'ngx-cookie';
 import { Transaccion } from './';
 
 @Injectable()
-export class EjemplaresService {
+export class PrestamosService {
   baseUrl: string;
   headers: Headers;
 

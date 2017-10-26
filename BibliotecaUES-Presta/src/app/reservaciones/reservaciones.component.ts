@@ -31,6 +31,7 @@ export class ReservacionesComponent implements OnInit {
   carnet: string;
   fechaDevolucion: Date;
   hoy: Date;
+  codigo: string;
 
   modalPrestar = new EventEmitter<string | MaterializeAction>();
   modalCancelar = new EventEmitter<string | MaterializeAction>();
@@ -131,6 +132,7 @@ export class ReservacionesComponent implements OnInit {
   // Métodos para el manejo de la ventana modal de préstamos.
   openPrestar(reservacion: Reservacion) {
     this.reservacion = reservacion;
+    this.codigo = this.reservacion.ejemplar.codigo;
     this.modalPrestar.emit({ action: "modal", params: ['open'] });
   }
   closePrestar() {

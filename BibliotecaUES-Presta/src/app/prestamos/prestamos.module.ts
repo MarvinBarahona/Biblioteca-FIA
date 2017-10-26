@@ -14,7 +14,7 @@ import { MaterializeModule } from 'angular2-materialize';
 
 import { PrestamosRoutingModule } from './prestamos-routing.module';
 import { PrestamosComponent } from './prestamos.component';
-// import {  } from './servicios';
+import { EjemplaresService, PrestamosService } from './servicios';
 
 @NgModule({
   imports: [
@@ -29,6 +29,8 @@ import { PrestamosComponent } from './prestamos.component';
     PrestamosComponent
   ],
   providers: [
+    EjemplaresService,
+    PrestamosService
   ]
 })
 export class PrestamosModule { }
