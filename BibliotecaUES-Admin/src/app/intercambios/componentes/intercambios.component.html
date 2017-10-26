@@ -25,7 +25,7 @@
             <tr *ngFor="let intercambio of intercambios">
               <td><a [routerLink]="['/intercambios/salida/'+intercambio.id]">{{intercambio.facultad}}</a></td>
               <td>{{intercambio.usuario}}</td>
-              <td>{{intercambio.fecha | date:"d/MM/y"}}</td>
+              <td>{{intercambio.fecha | date:"dd/MM/y"}}</td>
               <td>{{intercambio.completo? "Sí" : "No"}}</td>
             </tr>
           </tbody>

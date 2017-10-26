@@ -102,7 +102,6 @@ export class PedidoComponent implements OnInit {
         //Agregar pedido a la materia
         this.sugerencia.usuario = true;
         this.sugerencia.materias.forEach((materia)=>{
-          console.log("ok");
           if(materia.id = idMateria){
             materia.pedidos++;
             materia.usuario = true;

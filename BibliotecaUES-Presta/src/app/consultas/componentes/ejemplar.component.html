@@ -47,7 +47,7 @@
             <!-- Mensaje de carga -->
             <tr *ngFor="let transaccion of ejemplar.transacciones">
               <td>{{transaccion.tipo}}</td>
-              <td>{{transaccion.fecha | date:"d/M/y"}}</td>
+              <td>{{transaccion.fecha | date:"dd/MM/y"}}</td>
               <td>{{transaccion.usuario}}</td>
               <td>{{transaccion.nombre}}</td>
             </tr>

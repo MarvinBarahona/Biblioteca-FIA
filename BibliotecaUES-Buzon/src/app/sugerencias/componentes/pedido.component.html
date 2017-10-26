@@ -26,7 +26,7 @@
             <dd>Votos: {{materia.votos}}</dd>
 
             <!-- Pedidos -->
-            <dd>Pedidos: {{materia.pedidos}}</dd>
+            <dd>Pedidos: {{materia.pedidos}} <span *ngIf="materia.usuario">(Tu elección)</span></dd>
           </dl>
         </div>
       </div>

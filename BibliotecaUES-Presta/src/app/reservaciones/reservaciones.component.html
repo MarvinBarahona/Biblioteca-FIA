@@ -48,7 +48,7 @@
               <tr *ngFor="let reservacion of reservaciones">
                 <td>{{reservacion.prestamista.nombre}}</td>
                 <td>{{reservacion.ejemplar.titulo}}</td>
-                <td>{{reservacion.fecha | date: 'dd/MM/yy'}}</td>
+                <td>{{reservacion.fecha | date:"dd/MM/yy"}}</td>
                 <td><button type="button" class="btn" (click)="openPrestar(reservacion)"><i class="material-icons">check</i></button></td>
                 <td><button type="button" class="btn"><i class="material-icons">close</i></button></td>
               </tr>
