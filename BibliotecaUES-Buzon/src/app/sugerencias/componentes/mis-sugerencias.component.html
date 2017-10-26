@@ -6,14 +6,25 @@
         <thead>
           <th>Título</th>
           <th>Materia</th>
-          <th>Cantidad</th>
+          <th *ngIf="docente">Cantidad</th>
           <th>Estado</th>
         </thead>
         <tbody>
-          <td>Título del libro</td>
-          <td>Materia</td>
-          <td>Cantidad</td>
-          <td>Estado</td>
+          <!-- Mensaje de carga -->
+          <!-- <div>
+            <p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Cargando datos...</p>
+          </div> -->
+
+          <!-- Mis sugerencias -->
+          <tr *ngFor="let sugerencia of sugerencias">
+            <td>
+              <a *ngIf="docente" [routerLink]="['/sugerencias/pedir/'+sugerencia.id]">{{sugerencia.titulo}}</a>
+              <a *ngIf="!docente" [routerLink]="['/sugerencias/votar/'+sugerencia.id]">{{sugerencia.titulo}}</a>
+            </td>
+            <td>{{sugerencia.materia}}</td>
+            <td *ngIf="docente">{{sugerencia.cantidad}}</td>
+            <td>{{sugerencia.estado}}</td>
+          </tr>
         </tbody>
       </table>
 
