@@ -15,7 +15,7 @@ import { DataTablesModule } from 'angular-datatables';
 
 import { LibrosRoutingModule } from './libros-routing.module';
 import { LibrosRootComponent, LibrosComponent, LibroComponent } from './componentes';
-import { LibrosService } from './servicios';
+import { LibrosService, ReservacionesService } from './servicios';
 
 @NgModule({
   imports: [
@@ -33,7 +33,8 @@ import { LibrosService } from './servicios';
     LibroComponent
   ],
   providers: [
-    LibrosService
+    LibrosService,
+    ReservacionesService
   ]
 })
 export class LibrosModule { }

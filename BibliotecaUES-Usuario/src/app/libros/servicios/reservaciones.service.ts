@@ -13,7 +13,7 @@ import { environment } from './../../../environments/environment';
 import { Libro, Ejemplar, Catalogo } from './';
 
 @Injectable()
-export class SugerenciasService {
+export class ReservacionesService {
   baseUrl: string;
   headers: Headers;
 
@@ -86,7 +86,7 @@ export class SugerenciasService {
       details: { bookTitle: titulo }
     });
 
-    return this.http.put(url, q, { headers: this.headers }).map(
+    return this.http.post(url, q, { headers: this.headers }).map(
       res => res.json()
     );
   }

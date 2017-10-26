@@ -5,7 +5,7 @@
         <div class="row">
 
           <!-- Información del libro, en parte izquierda -->
-          <div class="col l8 s12">
+          <div class="col l7 s12">
 
             <!-- Título y edición en encabezado -->
             <div class="center">
@@ -17,12 +17,12 @@
             <!-- Libro -->
             <div class="row">
               <!-- Imagen -->
-              <div class="col l3 offset-l2 m2 offset-m1">
+              <div class="col l3 offset-l1 m2 offset-m1">
                 <img src="{{libro.catalogo.img || 'assets/noImage.jpg'}}" alt="Imagen del libro" class="previa center">
               </div>
 
               <!-- Texto -->
-              <div class="col l6 offset-l1 m7 offset-m2">
+              <div class="col l7 offset-l1 m7 offset-m2">
 
                 <!-- Autores -->
                 <div class="row">
@@ -76,10 +76,26 @@
 
 
           <!-- Ejemplares -->
-          <div class="col l4 s12">
-            <div class="alert alert-info">
+          <div class="col l5 s12">
+            <div *ngIf="!logueado" class="alert alert-info">
               Inicie sesión para ver los ejemplares.
             </div>
+            <table *ngIf="logueado" class="striped col s12 m8 offset-m2 l8 offset-l2">
+              <thead>
+                <tr>
+                  <th>Código de barra</th>
+                  <th>Estado</th>
+                  <th>Reservar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ejemplar of libro.ejemplares">
+                  <td>{{ejemplar.estado}}</td>
+                  <td>{{ejemplar.codigo || 'No asignado'}}</td>
+                  <td><a *ngIf="ejemplar.estado == 'Disponible'" class="waves-effect waves-light" (click)="openReservar(ejemplar)">Reservar</a></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
         </div>
@@ -92,41 +108,6 @@
   <!-- row -->
 </div>
 <!-- libro -->
-
-  <!-- Ejemplares -->
-  <!-- <div class="row">
-    <div class="col s12 m12 l12">
-      <div class="card-panel">
-
-        <h5>Ejemplares</h5>
-        <div class="row">
-          <table class="striped col s12 m8 offset-m2 l8 offset-l2">
-            <thead>
-              <tr>
-                <th>Código de autor</th>
-                <th>Materia</th>
-                <th>Estado</th>
-                <th>Código de barra</th>
-                <th>Reservar</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let ejemplar of libro.ejemplares">
-                <td>{{libro.catalogo.codigoAutor}}</td>
-                <td>{{libro.catalogo.categoria}}</td>
-                <td>{{ejemplar.estado}}</td>
-                <td>{{ejemplar.codigo || 'No asignado'}}</td>
-                <td><a class="waves-effect waves-light btn col m2 offset-m2 s4 " (click)="openReservar()">Reservar</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-    </div>
-  </div> -->
-
-  <!-- row -->
 
 
 <!-- Mensaje de espera -->
@@ -144,29 +125,11 @@
 <!-- Ventana modal para reservar un ejemplar -->
 <div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalReservar">
   <div class="modal-content">
-    <h5>Reservar</h5>
-    <div class="row">
-      <div class="col m6 offset-m3 s12">
-        Préstamo para el día: fecha del día actual o siguiente
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col m6 offset-m3 s12">
-        <p>Hora de retiro</p>
-        <p>
-          <input name="hora" type="radio" id="am" />
-          <label for="am">8:00 a.m - 12:00 m.</label>
-        </p>
-        <p>
-          <input name="hora" type="radio" id="pm" />
-          <label for="pm">12:00 m. - 4:00 p.m.</label>
-        </p>
-      </div>
-    </div>
+    <h5>Confirmar reservación</h5>
+    <p>Reservación termina: {{fechaFin}}</p>
   </div>
   <div class="modal-footer">
-    <a class="waves-effect waves-light btn-flat">Renovar</a>
-    <a class="waves-effect waves-light btn-flat" (click)="closeReservar()">Cerrar</a>
+    <a class="waves-effect waves-light btn-flat" (click)="reservar()">Reservar</a>
+    <a class="waves-effect waves-light btn-flat" (click)="closeReservar()">Cancelar</a>
   </div>
 </div>
