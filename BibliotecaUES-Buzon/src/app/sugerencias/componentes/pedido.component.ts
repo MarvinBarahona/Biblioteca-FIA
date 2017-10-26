@@ -19,6 +19,8 @@ export class PedidoComponent implements OnInit {
   materia: Materia;
   carreras: Carrera[];
   carreraSelect: Carrera;
+  cantidad: number;
+  precio: number;
 
   constructor(
     private sugerenciasService: SugerenciasService,
@@ -37,6 +39,22 @@ export class PedidoComponent implements OnInit {
         // Para actualizar la vista del select
         this.cd.detectChanges();
         this.carreraSelect = this.carreras[0];
+      }
+    );
+
+    //Recuperar la sugerencia
+    this.sugerenciasService.obtener(id).subscribe(
+      sugerencia => {
+        this.sugerencia = sugerencia;
+
+        // Espera debido a que el HTML se carga inmediatamente.
+        setTimeout(() => {this.inicializarAutocompletado();}, 500);
+      },
+      error =>{
+        //Si la sugerencia no existe
+        if(error.status == 404){
+          this.router.navigate(['/error404'], { skipLocationChange: true });
+        }
       }
     );
 
@@ -73,5 +91,28 @@ export class PedidoComponent implements OnInit {
         });
       }
     });
+  }
+
+  //Método: realizarPedido
+  //Objetivo: Añadir un pedido a una sugerencia existente
+  realizarPedido(idMateria: number){
+    // Consumir servicio
+    this.sugerenciasService.agregarPedido(this.sugerencia.id, idMateria, this.cantidad, this.precio).subscribe(
+      message => {
+        //Agregar pedido a la materia
+        this.sugerencia.usuario = true;
+        this.sugerencia.materias.forEach((materia)=>{
+          console.log("ok");
+          if(materia.id = idMateria){
+            materia.pedidos++;
+            materia.usuario = true;
+          }
+        });
+        Materialize.toast("Pedido agregado", 3000, 'toastSuccess');
+      },
+      error => {
+        Materialize.toast("Error al agregar pedido.", 3000, 'toastError');
+      }
+    );
   }
 }

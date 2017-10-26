@@ -3,16 +3,16 @@
     <div class="card-panel" *ngIf="sugerencia; else elseSugerencia;">
 
       <!-- Título y editorial -->
-      <h5 class="center">titulo, edición ed</h5>
-      <h6 class="center">editorial</h6>
+      <h5 class="center">{{sugerencia.titulo}}, {{sugerencia.edicion}} ed</h5>
+      <h6 class="center">{{sugerencia.editorial}}</h6>
 
       <!-- Autor e ISBN -->
       <div class="row">
         <div class="col s12 m3 offset-m4">
-          <strong>Autor: </strong> autor
+          <strong>Autor: </strong> {{sugerencia.autor}}
         </div>
         <div class="col s12 m3">
-          <strong>ISBN: </strong> isbn
+          <strong>ISBN: </strong> {{sugerencia.isbn}}
         </div>
       </div>
 
@@ -20,18 +20,13 @@
       <div class="row">
         <div class="col s12 m3 offset-m1" *ngFor="let materia of sugerencia.materias">
           <dl>
-            <dt><strong>materia</strong></dt>
+            <dt><strong>{{materia.nombre}}</strong></dt>
 
             <!-- Votos -->
-            <dd>Votos: votos
-              <a (click)="votar(materia.id)" *ngIf="!sugerencia.usuario">
-                <i class="fa fa-thumbs-up"></i>
-              </a>
-              <span *ngIf="materia.usuario">(Tu elección)</span>
-            </dd>
+            <dd>Votos: {{materia.votos}}</dd>
 
             <!-- Pedidos -->
-            <dd>Pedidos: pedidos</dd>
+            <dd>Pedidos: {{materia.pedidos}}</dd>
           </dl>
         </div>
       </div>
@@ -39,11 +34,11 @@
       <!-- Carrera y Materias -->
       <div class="row" *ngIf="!sugerencia.usuario">
         <strong>Agregar un pedido: </strong>
-        
+
         <div class="input-field col l3 offset-l2 m5 s12">
           <!-- Select de carrera -->
           <select materialize="material_select" name="carrera" (change)="selectCarrera($event.target.value)" required>
-              <option *ngFor="let carrera of carreras">carrera</option>
+              <option *ngFor="let carrera of carreras">{{carrera.nombre}}</option>
             </select>
           <label for="tipo">Carrera:</label>
         </div>
@@ -56,13 +51,19 @@
 
         <!-- Cantidad -->
         <div class="input-field col l1 offset-l2 m2 s12">
-          <input id="cantidad" name="cantidad" type="number" class="validate" min="1" max="10" required>
+          <input id="cantidad" name="cantidad" type="number" class="validate" min="1" max="10" [(ngModel)]="cantidad" required>
           <label for="cantidad" data-error="Valor entre 1 y 10">Cantidad</label>
+        </div>
+
+        <!-- Precio -->
+        <div class="input-field col l1 offset-l2 m2 s12">
+          <input id="precio" name="precio" type="number" class="validate" min="1" max="100" [(ngModel)]="precio" required>
+          <label for="precio" data-error="Valor entre 1 y 100">Precio</label>
         </div>
 
         <!-- Botón de agregación -->
         <div class="col l2 m1 s12">
-          <button type="submit" class="waves-effect waves-light btn" [disabled]="!materia" (click)="agregar()">Agregar</button>
+          <button type="submit" class="waves-effect waves-light btn" [disabled]="!materia" (click)="realizarPedido(materia.id)">Agregar</button>
         </div>
       </div>
 
