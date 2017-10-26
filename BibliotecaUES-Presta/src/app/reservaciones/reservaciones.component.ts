@@ -27,6 +27,7 @@ declare var Materialize: any;
 
 export class ReservacionesComponent implements OnInit {
   reservaciones: Reservacion[];
+  reservacion: Reservacion;
   carnet: string;
   fechaDevolucion: Date;
   hoy: Date;
