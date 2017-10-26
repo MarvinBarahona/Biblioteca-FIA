@@ -89,7 +89,16 @@ export class LibroComponent implements OnInit {
         Materialize.toast("Ejemplar reservado", 3000, "toastSuccess");
       },
       error => {
-        Materialize.toast("Error al reservar el ejemplar", 3000, "toastError");
+        // Si sobrepasa el límite establecido.
+        if (error.status == 422) {
+          Materialize.toast("¡No puedes reservar más libros!", 3000, "toastError");
+        }
+        else if(error.status == 403){
+          Materialize.toast("No tienes permisos para reservar libros", 3000, "toastError");
+        }
+        else{
+          Materialize.toast("Error al reservar el ejemplar", 3000, "toastError");
+        }
       }
     );
   }

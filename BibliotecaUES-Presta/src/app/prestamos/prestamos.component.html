@@ -23,7 +23,7 @@
   <div class="row">
     <div class="col s12 m12">
       <div class="card-panel">
-          <h6>Devolver o renovar</h6>
+        <h6>Devolver o renovar</h6>
 
         <!-- Formulario para buscar  -->
         <form autocomplete="off" #buscarEjemplarForm="ngForm" (ngSubmit)="buscar()">
@@ -37,41 +37,42 @@
 
             <!-- Botón -->
             <div class="col m1 s1">
-              <button class="btn waves-effect waves-green search" type="submit"[disabled]="!buscarEjemplarForm.form.valid"><i class="medium material-icons">search</i></button>
+              <button class="btn waves-effect waves-green search" type="submit" [disabled]="!buscarEjemplarForm.form.valid"><i class="medium material-icons">search</i></button>
             </div>
           </div>
 
         </form>
         <!-- /form -->
 
+        <!-- Resultados de la búsqueda -->
         <div class="row">
           <div class="col s12">
             <p>Resultado de la búsqueda:</p>
           </div>
         </div>
 
-        <!-- Resultados de la búsqueda -->
-        <div *ngIf="ejemplar">
+
+        <div *ngIf="transaccion">
           <div class="row">
             <div class="col m4 s12">
-              <p><strong>Código de barra: </strong>99999999</p>
+              <p><strong>Código de barra: </strong>{{transaccion.ejemplar.codigo}}</p>
             </div>
             <div class="col m8 s12">
-              <p><strong>Titulo: </strong>Título del libro buscado</p>
+              <p><strong>Titulo: </strong>{{transaccion.ejemplar.libro.titulo}}</p>
             </div>
             <div class="col m6 s12">
-              <p><strong>Prestamista: </strong>1°nombre 2°nombre 1°apellido 2°apellido</p>
+              <p><strong>Prestamista: </strong>{{transaccion.prestamista.nombre}}</p>
             </div>
             <div class="col m6 s12">
-              <p><strong>Fecha de devolución: </strong>dd/mm/aaaa</p>
+              <p><strong>Fecha de devolución: </strong>{{transaccion.fechaDevolucion}}</p>
             </div>
           </div>
 
           <!-- Botones -->
           <div class="row">
             <div class="center">
-              <a class="waves-effect waves-light btn col m2 offset-m2 s4 " >Devolver</a>
-              <a class="waves-effect waves-light btn col m2 offset-m2 s4 " (click)="openRenovar()">Renovar</a>
+              <a class="waves-effect waves-light btn col m2 offset-m2 s4" (click)="openDevolver">Devolver</a>
+              <a class="waves-effect waves-light btn col m2 offset-m2 s4" (click)="openRenovar()">Renovar</a>
             </div>
           </div>
         </div>
@@ -91,16 +92,28 @@
 <!-- Ventana modal para agregar libro -->
 <div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalRenovar">
   <div class="modal-content">
-    <h5>Nueva fecha de devolución</h5>
+    <h5>Confirmar la renovación</h5>
     <div class="row">
-      <div class="col m6 s12">
-        <input type="text" class="datepicker" placeholder="Seleccione la fecha de devolución">
+      <div class="input-field col m1 offset-m5 s12">
+        <input name="fecha" [(ngModel)]="fechaDevolucion" type="date">
+        <label for="fecha" class="active">Fecha de devolución</label>
       </div>
     </div>
-
   </div>
   <div class="modal-footer">
-    <a class="waves-effect waves-light btn-flat" >Renovar</a>
+    <a class="waves-effect waves-light btn-flat" (click)="renovar()">Renovar</a>
     <a class="waves-effect waves-light btn-flat" (click)="closeRenovar()">Cerrar</a>
+  </div>
+</div>
+
+<!-- Ventana modal para cancelar una renovación -->
+<div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalDevolver">
+  <div class="modal-content">
+    <h5>Devolución del préstamo</h5><br>
+    <p>¿Confirma la devolución del ejemplar?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="waves-effect waves-light btn-flat" (click)="devolver()">Confirmar</button>
+    <a class="waves-effect waves-light btn-flat" (click)="closeDevolver()">Cerrar</a>
   </div>
 </div>

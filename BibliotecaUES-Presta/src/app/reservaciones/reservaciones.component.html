@@ -27,12 +27,12 @@
           <h5>Listado de reservaciones</h5>
 
           <!-- Table -->
-          <!-- <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"> -->
-          <table>
+          <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
             <thead>
               <tr>
-                <th>Código</th>
+                <th>Prestamista</th>
                 <th>Libro</th>
+                <th>Hora</th>
                 <th>Prestar</th>
                 <th>Cancelar</th>
               </tr>
@@ -45,18 +45,12 @@
               </div>
 
               <!-- Reservaciones -->
-              <!-- <tr *ngFor="let reservacion of reservaciones"> -->
-              <tr>
-                <td>########</td>
-                <td>título</td>
-                <td><a (click)="openPrestar()">Prestar</a></td>
-                <td><a (click)="cancelar()">Cancelar</a></td>
-              </tr>
-              <tr>
-                <td>########</td>
-                <td>título</td>
-                <td><button type="button" class="btn waves-effect waves-green" (click)="openPrestar()">Prestar</button></td>
-                <td><button type="button" class="btn waves-effect waves-green">Cancelar</button></td>
+              <tr *ngFor="let reservacion of reservaciones">
+                <td>{{reservacion.prestamista.nombre}}</td>
+                <td>{{reservacion.ejemplar.titulo}}</td>
+                <td>{{reservacion.fecha | date: 'dd/MM/yy'}}</td>
+                <td><button type="button" class="btn" (click)="openPrestar(reservacion)"><i class="material-icons">check</i></button></td>
+                <td><button type="button" class="btn"><i class="material-icons">close</i></button></td>
               </tr>
             </tbody>
           </table>
@@ -75,21 +69,32 @@
 <!-- Ventana modal para prestar un libro -->
 <div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalPrestar">
   <div class="modal-content">
-    <h5>Ingrese el carnet del estudiante:</h5><br>
+    <h5>Confirmación del préstamo</h5><br>
     <div class="row">
-      <div class="col m6 offset-m3 s12">
-        <input type="text" class="text" placeholder="Carnet">
+      <div class="input-field col m1 offset-m5 s12">
+        <input name="carnet" [(ngModel)]="carnet" type="text">
+        <label for="carnet">Carnet del prestamista</label>
+      </div>
+      <div class="input-field col m1 offset-m5 s12">
+        <input name="fecha" [(ngModel)]="fechaDevolucion" type="date">
+        <label for="fecha" class="active">Fecha de devolución</label>
       </div>
     </div>
-    <div class="row">
-      <div class="col m6 offset-m3 s12">
-        <input type="text" class="datepicker" placeholder="Seleccione la fecha de devolución">
-      </div>
-    </div>
-
   </div>
   <div class="modal-footer">
-    <a class="waves-effect waves-light btn-flat" >Prestar</a>
+    <button class="waves-effect waves-light btn-flat" (click)="prestar()">Prestar</button>
     <a class="waves-effect waves-light btn-flat" (click)="closePrestar()">Cerrar</a>
+  </div>
+</div>
+
+<!-- Ventana modal para cancelar una renovación -->
+<div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalCancelar">
+  <div class="modal-content">
+    <h5>Cancelación de la reservación</h5><br>
+    <p>¿Confirma la cancelación de la reservación?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="waves-effect waves-light btn-flat" (click)="cancelar()">Confirmar</button>
+    <a class="waves-effect waves-light btn-flat" (click)="closeCancelar()">Cerrar</a>
   </div>
 </div>

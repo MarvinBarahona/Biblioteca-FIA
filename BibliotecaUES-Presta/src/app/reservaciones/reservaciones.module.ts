@@ -14,7 +14,7 @@ import { MaterializeModule } from 'angular2-materialize';
 
 import { ReservacionesRoutingModule } from './reservaciones-routing.module';
 import { ReservacionesComponent } from './reservaciones.component';
-// import {  } from './servicios';
+import { ReservacionesService } from './servicios';
 
 @NgModule({
   imports: [
@@ -29,6 +29,7 @@ import { ReservacionesComponent } from './reservaciones.component';
     ReservacionesComponent
   ],
   providers: [
+    ReservacionesService
   ]
 })
 export class ReservacionesModule { }

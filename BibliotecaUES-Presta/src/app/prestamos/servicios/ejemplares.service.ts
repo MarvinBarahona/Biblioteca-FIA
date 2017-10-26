@@ -73,7 +73,7 @@ export class EjemplaresService {
         transaccion.ejemplar.codigo = _ejemplar['barcode'];
         transaccion.ejemplar.estado = _ejemplar['state'];
 
-        transaccion.esPrestamo = _transaccion['type'] == "Préstamo";
+        transaccion.esPrestamo = _transaccion['type'] == "Préstamo" || _transaccion['type'] == "Renovación";
 
         if(transaccion.esPrestamo){
           let _prestamista = _transaccion['users'][1];

@@ -32,7 +32,7 @@ export class ReservacionesService {
     return this.http.get(url, { headers: this.headers }).map(
       // Mapeando la salida
       (response: Response) => {
-        let r = response.json();
+        let r = (response.json())[0];
         let reservaciones = new Array<Reservacion>();
 
         r.forEach((_reservacion) => {
@@ -49,8 +49,8 @@ export class ReservacionesService {
           ejemplar.titulo = _detalle['bookTitle'];
           reservacion.ejemplar = ejemplar;
 
-          let _email = _reservacion['email'];
           let _user = _reservacion['users'][0];
+          let _email = _user['userEmail'];
           let i = _email.indexOf('@');
           let email = _email.split(0, i);
           let estudiante = email.indexOf('.') == -1;
@@ -61,9 +61,9 @@ export class ReservacionesService {
           prestamista.carnet = estudiante ? email.toUpperCase() : null;
           reservacion.prestamista = prestamista;
 
-          reservacion.activa = _reservacion['RelatedId']? true : false;
+          let activa = _reservacion['RelatedId']? false : true;
 
-          reservaciones.push(reservacion);
+          if(activa) reservaciones.push(reservacion);
         });
         return reservaciones;
       }
@@ -81,7 +81,7 @@ export class ReservacionesService {
       transactionId: reservacion.id
     });
 
-    return this.http.put(url, q, { headers: this.headers }).map(
+    return this.http.post(url, q, { headers: this.headers }).map(
       res => res.json()
     );
   }
@@ -96,7 +96,7 @@ export class ReservacionesService {
       transactionId: reservacion.id
     });
 
-    return this.http.put(url, q, { headers: this.headers }).map(
+    return this.http.post(url, q, { headers: this.headers }).map(
       res => res.json()
     );
   }
