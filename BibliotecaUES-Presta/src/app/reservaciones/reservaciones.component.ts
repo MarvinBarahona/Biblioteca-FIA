@@ -17,7 +17,7 @@ declare var Materialize: any;
 
 @Component({
   templateUrl: './reservaciones.component.html',
-  styles:[`
+  styles: [`
     .modal{
       heigth: 400px;
       weigth: 200px;
@@ -29,7 +29,7 @@ export class ReservacionesComponent implements OnInit {
   reservaciones: Reservacion[];
   reservacion: Reservacion;
   carnet: string;
-  fechaDevolucion: Date;
+  fechaDevolucion: string;
   hoy: Date;
   codigo: string;
 
@@ -44,14 +44,14 @@ export class ReservacionesComponent implements OnInit {
     private reservacionesService: ReservacionesService,
   ) {
     // Para el sorting de las fechas.
-    $.fn.dataTable.moment( 'DD/MM/YYYY' );
+    $.fn.dataTable.moment('DD/MM/YYYY hh:mm');
 
     // Opciones de datatable
     this.dtOptions = {
       pageLength: 10,
       pagingType: 'simple_numbers',
       lengthMenu: [10, 15, 20],
-      order: [[2, "desc"], [0, "asc"]],
+      order: [[2, "asc"]],
       language: {
         "emptyTable": "Sin registros disponibles en la tabla",
         "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
@@ -87,41 +87,45 @@ export class ReservacionesComponent implements OnInit {
 
   //Método: presta
   //Objetivo: Confirmar el préstamo de un libro
-  prestar(){
-    if(this.carnet == null || this.fechaDevolucion == null){
+  prestar() {
+    if (this.carnet == null || this.fechaDevolucion == null) {
       Materialize.toast("Hay campos vacios", 3000, "toastError");
     }
-    else if(this.carnet != this.reservacion.prestamista.carnet){
+    else if (this.carnet != this.reservacion.prestamista.carnet) {
       Materialize.toast("El carnet no coincide con el del prestamista", 3000, "toastError");
     }
-    else if(this.fechaDevolucion <= this.hoy){
-      Materialize.toast("La fecha de devolución debe ser mayor a la de hoy", 3000, "toastError");
+    else {
+      let fecha = new Date(this.fechaDevolucion + " 0:00")
+      if (fecha <= this.hoy) {
+        Materialize.toast("La fecha de devolución debe ser mayor a la de hoy", 3000, "toastError");
+      }
+      else {
+        this.reservacion.fechaDevolucion = fecha;
+        this.reservacionesService.prestar(this.reservacion).subscribe(
+          msg => {
+            this.closePrestar();
+            Materialize.toast("Préstamo registrado", 3000, "toastSuccess");
+            let i = this.reservaciones.indexOf(this.reservacion);
+            if (i > -1) this.reservaciones.splice(i, 1);
+          },
+          error => {
+            Materialize.toast("Error al registrar el préstamo", 3000, "toastError");
+          }
+        );
+      }
     }
-    else{
-      this.reservacion.fechaDevolucion = this.fechaDevolucion;
-      this.reservacionesService.prestar(this.reservacion).subscribe(
-        msg => {
-          this.closePrestar();
-          Materialize.toast("Préstamo registrado", 3000, "toastSuccess");
-          let i = this.reservaciones.indexOf(this.reservacion);
-          if(i > -1) this.reservaciones.splice(i, 1);
-        },
-        error => {
-          Materialize.toast("Error al registrar el préstamo", 3000, "toastError");
-        }
-      );
-    }
+
   }
 
   //Método: cancelar
   //Objetivo: Cancelar la reservación de un ejemplar
-  cancelar(){
+  cancelar() {
     this.reservacionesService.cancelar(this.reservacion).subscribe(
       msg => {
         this.closeCancelar();
         Materialize.toast("Reservación cancelada", 3000, "toastSuccess");
         let i = this.reservaciones.indexOf(this.reservacion);
-        if(i > -1) this.reservaciones.splice(i, 1);
+        if (i > -1) this.reservaciones.splice(i, 1);
       },
       error => {
         Materialize.toast("Error al cancelar la reservación", 3000, "toastError");

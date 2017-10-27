@@ -40,19 +40,18 @@ export class ReservacionesService {
           reservacion.id = _reservacion['id'];
           reservacion.fecha = _reservacion['createdAt'];
 
-          let _ejemplar = _reservacion['copies'][0];
           let _detalle = _reservacion['details'];
 
           let ejemplar = new Ejemplar;
-          ejemplar.id = _ejemplar['id'];
-          ejemplar.codigo = _ejemplar['code'];
+          ejemplar.id = _detalle['copieId'];
+          ejemplar.codigo = _detalle['copieCode'];
           ejemplar.titulo = _detalle['bookTitle'];
           reservacion.ejemplar = ejemplar;
 
           let _user = _reservacion['users'][0];
-          let _email = _user['userEmail'];
+          let _email = _user['email'];
           let i = _email.indexOf('@');
-          let email = _email.split(0, i);
+          let email = _email.slice(0, i);
           let estudiante = email.indexOf('.') == -1;
 
           let prestamista = new Prestamista;

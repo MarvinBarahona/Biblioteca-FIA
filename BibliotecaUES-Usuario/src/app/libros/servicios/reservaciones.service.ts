@@ -78,12 +78,12 @@ export class ReservacionesService {
 
   // Método: reservacion
   // Objetivo: Confirmar la reservación de un ejemplar
-  reservacion(id: number, titulo: string): Observable<string> {
+  reservacion(id: number, titulo: string, codigo: string): Observable<string> {
     let url = this.baseUrl + '/transactions/reservations';
 
     let q = JSON.stringify({
       copies: [id],
-      details: { bookTitle: titulo }
+      details: { bookTitle: titulo, copieId: id, copieCode: codigo }
     });
 
     return this.http.post(url, q, { headers: this.headers }).map(

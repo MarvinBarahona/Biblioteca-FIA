@@ -48,7 +48,7 @@
               <tr *ngFor="let reservacion of reservaciones">
                 <td>{{reservacion.prestamista.nombre}}</td>
                 <td>{{reservacion.ejemplar.titulo}}</td>
-                <td>{{reservacion.fecha | date:"dd/MM/yy"}}</td>
+                <td>{{reservacion.fecha | date:"dd/MM/yy HH:mm"}}</td>
                 <td><button type="button" class="btn" (click)="openPrestar(reservacion)"><i class="material-icons">check</i></button></td>
                 <td><button type="button" class="btn"><i class="material-icons">close</i></button></td>
               </tr>
@@ -72,11 +72,11 @@
     <h5>Confirmación del préstamo</h5><br>
     <p>Préstamo del ejemplar: {{codigo}}</p><br>
     <div class="row">
-      <div class="input-field col m1 offset-m5 s12">
+      <div class="input-field col m5 offset-m1 s12">
         <input name="carnet" [(ngModel)]="carnet" type="text">
         <label for="carnet">Carnet del prestamista</label>
       </div>
-      <div class="input-field col m1 offset-m5 s12">
+      <div class="input-field col m5 offset-m1 s12">
         <input name="fecha" [(ngModel)]="fechaDevolucion" type="date">
         <label for="fecha" class="active">Fecha de devolución</label>
       </div>

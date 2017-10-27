@@ -82,7 +82,7 @@ export class LibroComponent implements OnInit {
   // Método: reservar
   // Objetivo: Reservar un ejemplar.
   reservar(){
-    this.reservacionesService.reservacion(this.ejemplar.id, this.libro.titulo).subscribe(
+    this.reservacionesService.reservacion(this.ejemplar.id, this.libro.titulo, this.ejemplar.codigo).subscribe(
       msg => {
         this.closeReservar();
         this.ejemplar.estado = "Reservado";
@@ -90,7 +90,7 @@ export class LibroComponent implements OnInit {
       },
       error => {
         // Si sobrepasa el límite establecido.
-        if (error.status == 422) {
+        if (error.status == 400) {
           Materialize.toast("¡No puedes reservar más libros!", 3000, "toastError");
         }
         else if(error.status == 403){
