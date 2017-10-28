@@ -31,41 +31,49 @@
         </div>
       </div>
 
-      <!-- Carrera y Materias -->
-      <div class="row" *ngIf="!sugerencia.usuario">
-        <strong>Agregar un pedido: </strong>
+      <br>
 
-        <div class="input-field col l3 offset-l2 m5 s12">
-          <!-- Select de carrera -->
-          <select materialize="material_select" name="carrera" (change)="selectCarrera($event.target.value)" required>
+      <!-- Agregar un pedido -->
+      <div *ngIf="!sugerencia.usuario">
+        <div class="row">
+          <strong class="col l2 offset-l1">Agregar un pedido: </strong>
+
+          <div class="input-field col l3 m5 s12">
+            <!-- Select de carrera -->
+            <select materialize="material_select" name="carrera" (change)="selectCarrera($event.target.value)" required>
               <option *ngFor="let carrera of carreras">{{carrera.nombre}}</option>
             </select>
-          <label for="tipo">Carrera:</label>
+            <label for="tipo">Carrera:</label>
+          </div>
+
+          <!-- Materia con autocompletado -->
+          <div class="input-field col l4 m7 s12">
+            <input id="materia" name="materia" type="text" class="validate" required>
+            <label for="materia">Materia</label>
+          </div>
+
+        </div>
+        <div class="row">
+          <!-- Cantidad -->
+          <div class="input-field col l1 offset-l4 m2 s12">
+            <input id="cantidad" name="cantidad" type="number" class="validate" min="1" max="10" [(ngModel)]="cantidad" required>
+            <label for="cantidad" data-error="Valor entre 1 y 10">Cantidad</label>
+          </div>
+
+          <!-- Precio -->
+          <div class="input-field col l1 offset-l2 m2 s12">
+            <input id="precio" name="precio" type="number" class="validate" min="1" max="100" [(ngModel)]="precio" required>
+            <label for="precio" data-error="Valor entre 1 y 100">Precio</label>
+          </div>
         </div>
 
-        <!-- Materia con autocompletado -->
-        <div class="input-field col l5 m7 s12">
-          <input id="materia" name="materia" type="text" class="validate" required>
-          <label for="materia">Materia</label>
-        </div>
-
-        <!-- Cantidad -->
-        <div class="input-field col l1 offset-l2 m2 s12">
-          <input id="cantidad" name="cantidad" type="number" class="validate" min="1" max="10" [(ngModel)]="cantidad" required>
-          <label for="cantidad" data-error="Valor entre 1 y 10">Cantidad</label>
-        </div>
-
-        <!-- Precio -->
-        <div class="input-field col l1 offset-l2 m2 s12">
-          <input id="precio" name="precio" type="number" class="validate" min="1" max="100" [(ngModel)]="precio" required>
-          <label for="precio" data-error="Valor entre 1 y 100">Precio</label>
-        </div>
 
         <!-- Botón de agregación -->
-        <div class="col l2 m1 s12">
+        <div class="center">
           <button type="submit" class="waves-effect waves-light btn" [disabled]="!materia" (click)="realizarPedido(materia.id)">Agregar</button>
         </div>
       </div>
+      <!-- /Agregar pedido -->
 
     </div>
     <!-- /card-panel -->
