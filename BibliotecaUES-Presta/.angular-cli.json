@@ -29,7 +29,9 @@
       "../node_modules/hammerjs/hammer.js",
       "../node_modules/materialize-css/dist/js/materialize.js",
       "../node_modules/datatables.net/js/jquery.dataTables.js",
-      "../node_modules/datatables.net-plugins/sorting/datetime-moment.js"
+      "../node_modules/datatables.net-plugins/sorting/datetime-moment.js",
+      "../node_modules/pdfmake/build/pdfmake.min.js",
+      "../node_modules/pdfmake/build/vfs_fonts.js"
     ],
     "environmentSource": "environments/environment.ts",
     "environments": {

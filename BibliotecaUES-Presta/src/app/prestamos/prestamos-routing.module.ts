@@ -13,9 +13,9 @@ import { AppAuthGuard } from './../login'
 const routes: Routes = [
   {
     path: 'prestamos',
-    component: PrestamosComponent
-    // canActivate: [AppAuthGuard],
-    // data: { politica:  }
+    component: PrestamosComponent,
+    canActivate: [AppAuthGuard],
+    data: { politica: 215 }
   }
 ];
 

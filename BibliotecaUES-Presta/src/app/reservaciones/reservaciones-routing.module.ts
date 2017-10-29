@@ -13,9 +13,9 @@ import { AppAuthGuard } from './../login'
 const routes: Routes = [
   {
     path: 'reservaciones',
-    component: ReservacionesComponent
-    // canActivate: [AppAuthGuard],
-    // data: { politica:  }
+    component: ReservacionesComponent,
+    canActivate: [AppAuthGuard],
+    data: { politica: 215 }
   }
 ];
 

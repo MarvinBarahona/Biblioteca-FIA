@@ -38,7 +38,7 @@ export class ReservacionesService {
         r.forEach((_reservacion) => {
           let reservacion = new Reservacion;
           reservacion.id = _reservacion['id'];
-          reservacion.fecha = _reservacion['createdAt'];
+          reservacion.fecha = new Date(_reservacion['createdAt']);
 
           let _detalle = _reservacion['details'];
 

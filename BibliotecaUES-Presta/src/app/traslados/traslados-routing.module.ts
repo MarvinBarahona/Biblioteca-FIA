@@ -15,7 +15,7 @@ const routes: Routes = [
     path: 'traslados',
     component: TrasladosComponent,
     canActivate: [AppAuthGuard],
-    data: { politica: 143 }
+    data: { politica: 223 }
   }
 ];
 

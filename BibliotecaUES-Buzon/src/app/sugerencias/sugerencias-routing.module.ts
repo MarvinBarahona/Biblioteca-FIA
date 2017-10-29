@@ -44,15 +44,15 @@ const routes: Routes = [
       },
       {
         path: 'missugerencias',
-        component: MisSugerenciasComponent
-        // canActivate: [AppAuthGuard],
-        // data: {politica: }
+        component: MisSugerenciasComponent,
+        canActivate: [AppAuthGuard],
+        data: {politica: 400}
       },
       {
         path: 'pedir/:id',
-        component: PedidoComponent
-        // canActivate: [AppAuthGuard],
-        // data: {politica: }
+        component: PedidoComponent,
+        canActivate: [AppAuthGuard],
+        data: {politica: 420}
       }
     ]
   }

@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs/Rx';
 
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
+import { PdfmakeService } from 'ng-pdf-make/pdfmake/pdfmake.service';
 
 import { ReservacionesService, Reservacion } from './servicios';
 
@@ -42,6 +43,7 @@ export class ReservacionesComponent implements OnInit {
   constructor(
     private router: Router,
     private reservacionesService: ReservacionesService,
+    private pdfmake: PdfmakeService
   ) {
     // Para el sorting de las fechas.
     $.fn.dataTable.moment('DD/MM/YYYY hh:mm');
@@ -74,8 +76,6 @@ export class ReservacionesComponent implements OnInit {
     // Activar el nav en responsive.
     $("#toogle_menu").sideNav({ closeOnClick: true });
 
-    this.hoy = new Date;
-
     // Cargar las reservaciones
     this.reservacionesService.obtenerTodas().subscribe(
       reservaciones => {
@@ -85,13 +85,14 @@ export class ReservacionesComponent implements OnInit {
     );
   }
 
-  //Método: presta
+  //Método: prestar
   //Objetivo: Confirmar el préstamo de un libro
   prestar() {
+    this.hoy = new Date;
     if (this.carnet == null || this.fechaDevolucion == null) {
       Materialize.toast("Hay campos vacios", 3000, "toastError");
     }
-    else if (this.carnet != this.reservacion.prestamista.carnet) {
+    else if (this.carnet.toUpperCase() != this.reservacion.prestamista.carnet) {
       Materialize.toast("El carnet no coincide con el del prestamista", 3000, "toastError");
     }
     else {
@@ -103,10 +104,11 @@ export class ReservacionesComponent implements OnInit {
         this.reservacion.fechaDevolucion = fecha;
         this.reservacionesService.prestar(this.reservacion).subscribe(
           msg => {
-            this.closePrestar();
-            Materialize.toast("Préstamo registrado", 3000, "toastSuccess");
+            this.crearPdf(this.reservacion);
             let i = this.reservaciones.indexOf(this.reservacion);
             if (i > -1) this.reservaciones.splice(i, 1);
+            Materialize.toast("Préstamo registrado", 3000, "toastSuccess");
+            this.closePrestar();
           },
           error => {
             Materialize.toast("Error al registrar el préstamo", 3000, "toastError");
@@ -131,6 +133,37 @@ export class ReservacionesComponent implements OnInit {
         Materialize.toast("Error al cancelar la reservación", 3000, "toastError");
       }
     );
+  }
+
+  //Método: crearPfd
+  //Objetivo: Crear el pdf del comprobante del préstamo
+  crearPdf(reservacion: Reservacion){
+    // Configurando las fuentes
+    this.pdfmake.configureStyles({ header: { fontSize: 18, bold: true } });
+
+    // Resetar el contenido de la página
+    this.pdfmake.docDefinition.content = [];
+
+    // COnfigurar el tamaño y orientación de la páginas
+    this.pdfmake.docDefinition.pageSize = "A5";
+    this.pdfmake.docDefinition.pageOrientation = 'landscape';
+
+    // Agregando encabezados
+    this.pdfmake.addText('Universidad de El Salvador', 'header');
+    this.pdfmake.addText('Biblioteca de ingeniería y arquitectura', 'header');
+    this.pdfmake.addText('\n\n');
+
+    // Agregando el cuerpo del comprobante
+    this.pdfmake.addText('Prestamista: ' + reservacion.prestamista.nombre + ' (' + reservacion.prestamista.carnet + ')');
+    this.pdfmake.addText('\n');
+    this.pdfmake.addText('Título: ' + reservacion.ejemplar.titulo + ' (' + reservacion.ejemplar.codigo + ')');
+    this.pdfmake.addText('\n');
+    this.pdfmake.addText('Fecha y hora del préstamo: ' + this.hoy.toLocaleDateString() + ', ' + this.hoy.toLocaleTimeString());
+    this.pdfmake.addText('\n');
+    this.pdfmake.addText('Fecha de devolución: ' + reservacion.fechaDevolucion.toLocaleDateString());
+
+    // Imprimir el comprobante
+    this.pdfmake.download("Comprobante");
   }
 
   // Métodos para el manejo de la ventana modal de préstamos.
