@@ -54,37 +54,38 @@
             <br><br>
             <strong>Código de autor: </strong><span>{{libro.catalogo.codigoAutor}}</span>
           </div>
+		</div>
 
-        </div>
-        <!-- /card-panel -->
-      </div>
-      <!-- /col -->
+       </div>
+       <!-- /card-panel -->
     </div>
-    <!-- row de información del libro -->
-
-    <!-- Ejemplares -->
-    <div class="row">
-      <div class="col s12 m12">
-        <div class="card-panel">
-
-          <!-- Ejemplares -->
-          <ul class="collection with-header">
-            <li class="collection-header">
-              <h5>Ejemplares</h5>
-            </li>
-            <li class="collection-item" *ngFor="let ejemplar of libro.ejemplares">
-              <a [routerLink]="['/consultas/ejemplar/'+ejemplar.id]">{{ejemplar.codigo || "No asignado"}} </a> ({{ejemplar.estado}})
-            </li>
-          </ul>
-
-        </div>
-        <!-- /card-panel -->
-      </div>
-      <!-- /col -->
-    </div>
-    <!-- row -->
+    <!-- /col -->
   </div>
-  <!-- libro -->
+  <!-- row de información del libro -->
+
+  <!-- Ejemplares -->
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card-panel">
+        <!-- Ejemplares -->
+        <ul class="collection with-header">
+          <li class="collection-header">
+            <h5>Ejemplares</h5>
+          </li>
+          <li class="collection-item" *ngFor="let ejemplar of libro.ejemplares">
+            <a [routerLink]="['/consultas/ejemplar/'+ejemplar.id]">{{ejemplar.codigo || "No asignado"}} </a> ({{ejemplar.estado}})
+          </li>
+        </ul>
+
+      </div>
+      <!-- /card-panel -->
+    </div>
+    <!-- /col -->
+  </div>
+  <!-- row -->
+</div>
+<!-- libro -->
+  
 
   <!-- Mensaje de espera -->
   <ng-template #elseLibro>
