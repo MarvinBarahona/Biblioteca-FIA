@@ -34,7 +34,7 @@ export class PrestamosService {
       transactionId: prestamo.id
     });
 
-    return this.http.put(url, q, { headers: this.headers }).map(
+    return this.http.post(url, q, { headers: this.headers }).map(
       res => res.json()
     );
   }
@@ -50,7 +50,7 @@ export class PrestamosService {
       transactionId: prestamo.id
     });
 
-    return this.http.put(url, q, { headers: this.headers }).map(
+    return this.http.post(url, q, { headers: this.headers }).map(
       res => res.json()
     );
   }

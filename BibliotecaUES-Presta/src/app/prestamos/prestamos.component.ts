@@ -21,6 +21,11 @@ declare var Materialize: any;
       margin-top: 20px;
       left:-20px;
     }
+
+    .modal{
+      height: 250px;
+      width: 500px;
+    }
   `]
 })
 
@@ -56,31 +61,37 @@ export class PrestamosComponent implements OnInit {
   //Método: renovar
   //Objetivo: Confirmar le renovación de un préstamo
   renovar(){
-    if(this.fechaDevolucion == null || this.fechaDevolucion <= this.hoy){
-      Materialize.toast("La fecha de devolución debe ser mayor a la de hoy", 3000, "toastError");
+    if(this.fechaDevolucion == null){
+      Materialize.toast("Ingrese la fecha de devolución", 3000, "toastError");
     }
     else{
-      this.transaccion.fechaDevolucion = this.fechaDevolucion;
-      this.prestamosService.renovacion(this.transaccion).subscribe(
-        msg => {
-          this.closeRenovar();
-          this.transaccion = null;
-          Materialize.toast("Préstamo renovado", 3000, "toastSuccess");
-        },
-        error => {
-          Materialize.toast("Error al registrar la renovación", 3000, "toastError");
-        }
-      );
+      let fecha = new Date(this.fechaDevolucion + " 0:00");
+      if(fecha <= this.hoy){
+        Materialize.toast("La fecha de devolución debe ser mayor a la de hoy", 3000, "toastError");
+      }
+      else{
+        this.transaccion.fechaDevolucion = this.fechaDevolucion;
+        this.prestamosService.renovacion(this.transaccion).subscribe(
+          msg => {
+            this.closeRenovar();
+            this.transaccion = null;
+            Materialize.toast("Préstamo renovado", 3000, "toastSuccess");
+          },
+          error => {
+            Materialize.toast("Error al registrar la renovación", 3000, "toastError");
+          }
+        );
+      }
     }
   }
 
   //Método: devolver
   //Objetivo: Confimar la devolución de un ejemplar
-  cancelar(){
+  devolver(){
     this.prestamosService.devolucion(this.transaccion).subscribe(
       msg => {
         this.closeDevolver();
-        this.transaccion.esPrestamo = false;
+        this.transaccion = null;
         Materialize.toast("Ejemplar devuelto", 3000, "toastSuccess");
       },
       error => {
@@ -98,6 +109,7 @@ export class PrestamosComponent implements OnInit {
     this.ejemplaresService.obtenerTransaccionPorCodigo(this.codigo).subscribe(
       transaccion => {
         if(transaccion.esPrestamo){
+          this.message = null;
           this.transaccion = transaccion;
         }
         else{

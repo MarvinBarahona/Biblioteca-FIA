@@ -95,7 +95,7 @@ export class ReservacionesComponent implements OnInit {
       Materialize.toast("El carnet no coincide con el del prestamista", 3000, "toastError");
     }
     else {
-      let fecha = new Date(this.fechaDevolucion + " 0:00")
+      let fecha = new Date(this.fechaDevolucion + " 0:00");
       if (fecha <= this.hoy) {
         Materialize.toast("La fecha de devolución debe ser mayor a la de hoy", 3000, "toastError");
       }

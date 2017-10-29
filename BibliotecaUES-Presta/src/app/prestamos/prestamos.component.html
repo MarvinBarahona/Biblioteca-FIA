@@ -64,14 +64,14 @@
               <p><strong>Prestamista: </strong>{{transaccion.prestamista.nombre}}</p>
             </div>
             <div class="col m6 s12">
-              <p><strong>Fecha de devolución: </strong>{{transaccion.fechaDevolucion}}</p>
+              <p><strong>Fecha de devolución: </strong>{{transaccion.fechaDevolucion | date: "dd/MM/y"}}</p>
             </div>
           </div>
 
           <!-- Botones -->
           <div class="row">
             <div class="center">
-              <a class="waves-effect waves-light btn col m2 offset-m2 s4" (click)="openDevolver">Devolver</a>
+              <a class="waves-effect waves-light btn col m2 offset-m2 s4" (click)="openDevolver()">Devolver</a>
               <a class="waves-effect waves-light btn col m2 offset-m2 s4" (click)="openRenovar()">Renovar</a>
             </div>
           </div>
@@ -94,7 +94,7 @@
   <div class="modal-content">
     <h5>Confirmar la renovación</h5>
     <div class="row">
-      <div class="input-field col m1 offset-m5 s12">
+      <div class="input-field col m6 offset-m2 s12">
         <input name="fecha" [(ngModel)]="fechaDevolucion" type="date">
         <label for="fecha" class="active">Fecha de devolución</label>
       </div>

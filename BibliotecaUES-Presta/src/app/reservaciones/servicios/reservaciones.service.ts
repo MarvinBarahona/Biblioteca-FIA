@@ -92,6 +92,7 @@ export class ReservacionesService {
 
     let q = JSON.stringify({
       copies: [reservacion.ejemplar.id],
+      details: {userId: reservacion.prestamista.id },
       transactionId: reservacion.id
     });
 
