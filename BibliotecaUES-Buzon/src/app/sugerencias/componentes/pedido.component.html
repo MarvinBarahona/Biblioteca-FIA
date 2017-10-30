@@ -36,9 +36,10 @@
       <!-- Agregar un pedido -->
       <div *ngIf="!sugerencia.usuario">
         <div class="row">
-          <strong class="col l2 offset-l1">Agregar un pedido: </strong>
+          <strong class="col l11 offset-l1">Agregar un pedido: </strong>
+          <br>
 
-          <div class="input-field col l3 m5 s12">
+          <div class="input-field col l3 offset-l1 m4 offset-m1 s12">
             <!-- Select de carrera -->
             <select materialize="material_select" name="carrera" (change)="selectCarrera($event.target.value)" required>
               <option *ngFor="let carrera of carreras">{{carrera.nombre}}</option>
@@ -47,26 +48,23 @@
           </div>
 
           <!-- Materia con autocompletado -->
-          <div class="input-field col l4 m7 s12">
+          <div class="input-field col l4 m6 s12">
             <input id="materia" name="materia" type="text" class="validate" required>
             <label for="materia">Materia</label>
           </div>
 
-        </div>
-        <div class="row">
           <!-- Cantidad -->
-          <div class="input-field col l1 offset-l4 m2 s12">
+          <div class="input-field col l1 m2 offset-m1 s12">
             <input id="cantidad" name="cantidad" type="number" class="validate" min="1" max="10" [(ngModel)]="cantidad" required>
             <label for="cantidad" data-error="Valor entre 1 y 10">Cantidad</label>
           </div>
 
           <!-- Precio -->
-          <div class="input-field col l1 offset-l2 m2 s12">
+          <div class="input-field col l1 m2 s12">
             <input id="precio" name="precio" type="number" class="validate" min="1" max="100" [(ngModel)]="precio" required>
             <label for="precio" data-error="Valor entre 1 y 100">Precio</label>
           </div>
         </div>
-
 
         <!-- Botón de agregación -->
         <div class="center">
