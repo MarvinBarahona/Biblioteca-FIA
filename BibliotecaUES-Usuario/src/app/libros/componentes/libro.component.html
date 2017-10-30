@@ -126,7 +126,8 @@
 <div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalReservar">
   <div class="modal-content">
     <h5>Confirmar reservación</h5>
-    <p>Reservación termina: {{fechaFin}}</p>
+    <p>Reservación termina: {{fechaFin}} <span class="red-text">*</span></p>
+    <p><i><span class="red-text">*</span> Formato de 24 horas</i></p>
   </div>
   <div class="modal-footer">
     <a class="waves-effect waves-light btn-flat" (click)="reservar()">Reservar</a>

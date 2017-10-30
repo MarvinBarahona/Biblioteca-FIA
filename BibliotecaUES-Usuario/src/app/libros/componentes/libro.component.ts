@@ -110,7 +110,7 @@ export class LibroComponent implements OnInit {
 
     // Asignar hora de cancelación de la reservación;
     let hora = (new Date).getHours();
-    if(hora <= 8 ) this.fechaFin = "Hoy a las 12:00 md";
+    if(hora <= 8 ) this.fechaFin = "Hoy a las 12:00";
     else if(hora < 12) this.fechaFin = "Hoy a las " + (hora + 4) + ":00";
     else if(hora < 16) this.fechaFin = "Hoy a las 16:00";
     else this.fechaFin = "Mañana a las 12:00";
