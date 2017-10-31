@@ -146,7 +146,7 @@ export class ReservacionesComponent implements OnInit {
   //Objetivo: Crear el pdf del comprobante del préstamo
   crearPdf(reservacion: Reservacion){
     // Configurando las fuentes
-    this.pdfmake.configureStyles({ header: { fontSize: 18, bold: true } });
+    this.pdfmake.configureStyles({ header: { fontSize: 13, bold: true } });
 
     // Resetar el contenido de la página
     this.pdfmake.docDefinition.content = [];
@@ -170,7 +170,7 @@ export class ReservacionesComponent implements OnInit {
     this.pdfmake.addText('Fecha de devolución: ' + reservacion.fechaDevolucion.toLocaleDateString());
 
     // Imprimir el comprobante
-    this.pdfmake.download("Comprobante");
+    this.pdfmake.download("Comprobante " +this.carnet.toUpperCase() +  " - "+ this.codigo);
   }
 
   // Métodos para el manejo de la ventana modal de préstamos.
