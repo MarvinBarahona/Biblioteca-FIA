@@ -19,9 +19,14 @@ declare var Materialize: any;
 @Component({
   templateUrl: './reservaciones.component.html',
   styles: [`
-    .modal{
-      heigth: 400px;
-      weigth: 200px;
+    #modalP{
+      height: 350px;
+      width: 700px;
+    }
+
+    #modalC{
+      height: 250px;
+      width: 600px;
     }
   `]
 })
@@ -105,10 +110,12 @@ export class ReservacionesComponent implements OnInit {
         this.reservacionesService.prestar(this.reservacion).subscribe(
           msg => {
             this.crearPdf(this.reservacion);
-            let i = this.reservaciones.indexOf(this.reservacion);
-            if (i > -1) this.reservaciones.splice(i, 1);
             Materialize.toast("Préstamo registrado", 3000, "toastSuccess");
             this.closePrestar();
+            let i = this.reservaciones.indexOf(this.reservacion);
+            if (i > -1) this.reservaciones.splice(i, 1);
+            this.fechaDevolucion = null;
+            this.carnet = null;
           },
           error => {
             Materialize.toast("Error al registrar el préstamo", 3000, "toastError");

@@ -50,7 +50,7 @@
                 <td>{{reservacion.ejemplar.titulo}}</td>
                 <td>{{reservacion.fecha | date:"dd/MM/yy HH:mm"}}</td>
                 <td><button type="button" class="btn" (click)="openPrestar(reservacion)"><i class="material-icons">check</i></button></td>
-                <td><button type="button" class="btn"><i class="material-icons" (click)="openCancelar(reservacion)">close</i></button></td>
+                <td><button type="button" class="btn" (click)="openCancelar(reservacion)"><i class="material-icons">close</i></button></td>
               </tr>
             </tbody>
           </table>
@@ -67,7 +67,7 @@
 </div>
 
 <!-- Ventana modal para prestar un libro -->
-<div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalPrestar">
+<div id="modalP" class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalPrestar">
   <div class="modal-content">
     <h5>Confirmación del préstamo</h5><br>
     <p>Préstamo del ejemplar: {{codigo}}</p><br>
@@ -83,19 +83,19 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button class="waves-effect waves-light btn-flat" (click)="prestar()">Prestar</button>
-    <a class="waves-effect waves-light btn-flat" (click)="closePrestar()">Cerrar</a>
+    <a class="btn waves-effect waves-light" (click)="prestar()">Prestar</a>
+    <a class="btn waves-effect waves-light" (click)="closePrestar()">Cerrar</a>
   </div>
 </div>
 
 <!-- Ventana modal para cancelar una renovación -->
-<div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalCancelar">
+<div id="modalC" class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalCancelar">
   <div class="modal-content">
     <h5>Cancelación de la reservación</h5><br>
     <p>¿Confirma la cancelación de la reservación?</p>
   </div>
   <div class="modal-footer">
-    <button class="waves-effect waves-light btn-flat" (click)="cancelar()">Confirmar</button>
-    <a class="waves-effect waves-light btn-flat" (click)="closeCancelar()">Cerrar</a>
+    <a class="btn waves-effect waves-light" (click)="cancelar()">Confirmar</a>
+    <a class="btn waves-effect waves-light" (click)="closeCancelar()">Cerrar</a>
   </div>
 </div>

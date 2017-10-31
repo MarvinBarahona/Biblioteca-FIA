@@ -66,7 +66,7 @@ export class EjemplaresService {
         transaccion.ejemplar.libro = new Libro;
 
         transaccion.id = _transaccion['id'];
-        transaccion.fecha = _transaccion['createdAt'];
+        transaccion.fecha = new Date(_transaccion['createdAt']);
         transaccion.autoriza = _autoriza['userName'];
 
         transaccion.ejemplar.id = _ejemplar['id'];
@@ -83,7 +83,7 @@ export class EjemplaresService {
 
           let _detalles = _transaccion['details'];
           transaccion.ejemplar.libro.titulo = _detalles['bookTitle'];
-          transaccion.fechaDevolucion = _detalles['returnDate'];
+          transaccion.fechaDevolucion = new Date(_detalles['returnDate'] + " 0:00");
         }
 
         return transaccion;

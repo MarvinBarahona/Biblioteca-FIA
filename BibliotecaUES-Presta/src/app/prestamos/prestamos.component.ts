@@ -22,7 +22,12 @@ declare var Materialize: any;
       left:-20px;
     }
 
-    .modal{
+    #modalD{
+      height: 260px;
+      width: 600px;
+    }
+
+    #modalR{
       height: 250px;
       width: 500px;
     }
@@ -52,8 +57,6 @@ export class PrestamosComponent implements OnInit {
     // Activar el nav en responsive.
     $("#toogle_menu").sideNav({ closeOnClick: true });
 
-    this.hoy = new Date;
-
     // Iniciar el autocompletado en el input de búsqueda.
     this.inicializarAutocompletado();
   }
@@ -61,13 +64,14 @@ export class PrestamosComponent implements OnInit {
   //Método: renovar
   //Objetivo: Confirmar le renovación de un préstamo
   renovar(){
+    this.hoy = this.transaccion.fechaDevolucion;
     if(this.fechaDevolucion == null){
       Materialize.toast("Ingrese la fecha de devolución", 3000, "toastError");
     }
     else{
       let fecha = new Date(this.fechaDevolucion + " 0:00");
       if(fecha <= this.hoy){
-        Materialize.toast("La fecha de devolución debe ser mayor a la de hoy", 3000, "toastError");
+        Materialize.toast("La fecha de devolución debe ser mayor a la anterior", 3000, "toastError");
       }
       else{
         this.transaccion.fechaDevolucion = this.fechaDevolucion;
@@ -76,6 +80,7 @@ export class PrestamosComponent implements OnInit {
             this.closeRenovar();
             this.transaccion = null;
             Materialize.toast("Préstamo renovado", 3000, "toastSuccess");
+            this.fechaDevolucion = null;
           },
           error => {
             Materialize.toast("Error al registrar la renovación", 3000, "toastError");

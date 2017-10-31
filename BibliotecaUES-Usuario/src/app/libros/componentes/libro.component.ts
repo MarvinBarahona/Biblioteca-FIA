@@ -110,10 +110,20 @@ export class LibroComponent implements OnInit {
 
     // Asignar hora de cancelación de la reservación;
     let hora = (new Date).getHours();
-    if(hora <= 8 ) this.fechaFin = "Hoy a las 12:00 md";
-    else if(hora < 12) this.fechaFin = "Hoy a las " + (hora + 4) + ":00";
-    else if(hora < 16) this.fechaFin = "Hoy a las 16:00";
-    else this.fechaFin = "Mañana a las 12:00";
+    let dia = (new Date).getDay();
+
+    if(dia == 0 || dia == 6 && hora >= 12){
+      this.fechaFin = "El lunes a las 8:00 am";
+    }
+    else if (dia == 6){
+      this.fechaFin = "Hoy a las 12:00 md";
+    }
+    else{
+      if(hora <= 8 ) this.fechaFin = "Hoy a las 12:00 md";
+      else if(hora < 12) this.fechaFin = "Hoy a las " + (hora + 4 - 12) + ":00 pm";
+      else if(hora < 16) this.fechaFin = "Hoy a las 4:00 pm";
+      else this.fechaFin = "Mañana a las 12:00 md";
+    }
 
     // Abrir modal
     this.modalReservar.emit({ action: "modal", params: ['open'] });

@@ -29,6 +29,14 @@ a{
   }
 }
 
+#slide-out li.active{
+  background-color: #D5DCFA;
+}
+
+#slide-out li.active a, #slide-out li.active i{
+  color: #16245D;
+}
+
 /* Cards */
 .card, .card-panel {
   margin: 0 50px 0 50px;

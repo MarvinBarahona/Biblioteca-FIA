@@ -126,6 +126,8 @@ export class EjemplaresService {
           transaccion.individual = _transaccion['single'];
           transacciones.push(transaccion);
         });
+        // Ordenar las transacciones por orden de creación.
+        transacciones.sort((a, b) => {return a.id - b.id});
         ejemplar.transacciones = transacciones;
 
         // Mapear el libros
