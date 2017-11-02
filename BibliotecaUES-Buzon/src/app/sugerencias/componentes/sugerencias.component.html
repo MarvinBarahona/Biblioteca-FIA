@@ -44,9 +44,11 @@
         <!-- Mostrar resultados -->
         <div class="col l4 offset-l1 m10 offset-m1 s12 sugerencia" *ngFor="let sugerencia of sugerencias">
           <strong>
-            <a *ngIf="docente" [routerLink]="['/sugerencias/pedir/'+sugerencia.id]">{{sugerencia.titulo}} ({{sugerencia.autor}})</a>
-            <a *ngIf="estudiante" [routerLink]="['/sugerencias/votar/'+sugerencia.id]">{{sugerencia.titulo}} ({{sugerencia.autor}})</a>
+            <a *ngIf="docente" [routerLink]="['/sugerencias/pedir/'+sugerencia.id]">{{sugerencia.titulo}}</a>
+            <a *ngIf="estudiante" [routerLink]="['/sugerencias/votar/'+sugerencia.id]">{{sugerencia.titulo}}</a>
           </strong>
+          <br>
+          <span>{{sugerencia.autor}}</span>
           <br>
           <span>
             <strong>ISBN: </strong>{{sugerencia.isbn}}

@@ -19,8 +19,6 @@ export class PedidoComponent implements OnInit {
   materia: Materia;
   carreras: Carrera[];
   carreraSelect: Carrera;
-  cantidad: number;
-  precio: number;
 
   constructor(
     private sugerenciasService: SugerenciasService,
@@ -97,7 +95,7 @@ export class PedidoComponent implements OnInit {
   //Objetivo: Añadir un pedido a una sugerencia existente
   realizarPedido(idMateria: number){
     // Consumir servicio
-    this.sugerenciasService.agregarPedido(this.sugerencia.id, idMateria, this.cantidad, this.precio).subscribe(
+    this.sugerenciasService.agregarPedido(this.sugerencia.id, idMateria, this.sugerencia.cantidad, this.sugerencia.precio).subscribe(
       message => {
         this.sugerencia.materias.forEach((materia)=>{
           if(materia.id == idMateria){

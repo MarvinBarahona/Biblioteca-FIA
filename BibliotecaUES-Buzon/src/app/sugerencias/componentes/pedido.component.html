@@ -47,28 +47,30 @@
             <label for="tipo">Carrera:</label>
           </div>
 
-          <!-- Materia con autocompletado -->
-          <div class="input-field col l4 m6 s12">
-            <input id="materia" name="materia" type="text" class="validate" required>
-            <label for="materia">Materia</label>
-          </div>
+          <form #pedidoForm="ngForm" autocomplete="off">
+            <!-- Materia con autocompletado -->
+            <div class="input-field col l4 m6 s12">
+              <input id="materia" name="materia" type="text" class="validate" required>
+              <label for="materia">Materia</label>
+            </div>
 
-          <!-- Cantidad -->
-          <div class="input-field col l1 m2 offset-m1 s12">
-            <input id="cantidad" name="cantidad" type="number" class="validate" [(ngModel)]="sugerencia.cantidad" min="1" max="10" #cantidad="ngModel" [range]="[1, 10]" required>
-            <label for="cantidad" data-error="Valor entre 1 y 10">Cantidad</label>
-          </div>
+            <!-- Cantidad -->
+            <div class="input-field col l1 m2 offset-m1 s12">
+              <input id="cantidad" name="cantidad" type="number" class="validate" [(ngModel)]="sugerencia.cantidad" min="1" max="10" #cantidad="ngModel" [range]="[1, 10]" required>
+              <label for="cantidad" data-error="Valor entre 1 y 10">Cantidad</label>
+            </div>
 
-          <!-- Precio -->
-          <div class="input-field col l1 m2 s12">
-            <input id="precio" name="precio" type="number" class="validate" [(ngModel)]="sugerencia.precio" min="1" max="100" step="0.01" #precio="ngModel" [range]="[1, 100]" required>
-            <label for="precio" data-error="Valor entre 1 y 100">Precio</label>
-          </div>
+            <!-- Precio -->
+            <div class="input-field col l1 m2 s12">
+              <input id="precio" name="precio" type="number" class="validate" [(ngModel)]="sugerencia.precio" min="1" max="100" step="0.01" #precio="ngModel" [range]="[1, 100]" required>
+              <label for="precio" data-error="Valor entre 1 y 100">Precio</label>
+            </div>
+          </form>
         </div>
 
         <!-- Botón de agregación -->
         <div class="center">
-          <button type="submit" class="waves-effect waves-light btn" [disabled]="!materia || precio.errors?.range || cantidad.errors?.range" (click)="realizarPedido(materia.id)">Agregar</button>
+          <button type="submit" class="waves-effect waves-light btn" [disabled]="!pedidoForm.form.valid || !materia || precio.errors?.range || cantidad.errors?.range" (click)="realizarPedido(materia.id)">Agregar</button>
         </div>
       </div>
       <!-- /Agregar pedido -->
