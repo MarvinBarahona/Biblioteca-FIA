@@ -83,7 +83,7 @@ export class EjemplaresService {
 
           let _detalles = _transaccion['details'];
           transaccion.ejemplar.libro.titulo = _detalles['bookTitle'];
-          transaccion.fechaDevolucion = new Date(_detalles['returnDate'] + " 0:00");
+          transaccion.fechaDevolucion = new Date(_detalles['returnDate']);
         }
 
         return transaccion;

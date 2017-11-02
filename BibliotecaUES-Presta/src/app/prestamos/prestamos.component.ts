@@ -8,6 +8,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
+import { DatepickerOptions } from 'ng2-datepicker';
 
 import { EjemplaresService, PrestamosService, Transaccion, Ejemplar }  from './servicios';
 
@@ -23,12 +24,12 @@ declare var Materialize: any;
     }
 
     #modalD{
-      height: 260px;
-      width: 600px;
+      height: 250px;
+      width: 500px;
     }
 
     #modalR{
-      height: 250px;
+      height: 360px;
       width: 500px;
     }
   `]
@@ -47,11 +48,20 @@ export class PrestamosComponent implements OnInit {
   modalRenovar = new EventEmitter<string | MaterializeAction>();
   modalDevolver = new EventEmitter<string | MaterializeAction>();
 
+  dpOptions: DatepickerOptions = {};
+
   constructor(
     private router: Router,
     private prestamosService: PrestamosService,
     private ejemplaresService: EjemplaresService
-  ) { }
+  ) {
+    this.dpOptions = {
+      minYear: 2017,
+      maxYear: 2025,
+      displayFormat: 'DD/MM/YYYY',
+      barTitleFormat: 'MMMM YYYY'
+    }
+  }
 
   ngOnInit() {
     // Activar el nav en responsive.
@@ -59,6 +69,9 @@ export class PrestamosComponent implements OnInit {
 
     // Iniciar el autocompletado en el input de búsqueda.
     this.inicializarAutocompletado();
+
+    // Inicializar la fecha de devolución
+    this.fechaDevolucion = new Date;
   }
 
   //Método: renovar
@@ -69,8 +82,7 @@ export class PrestamosComponent implements OnInit {
       Materialize.toast("Ingrese la fecha de devolución", 3000, "toastError");
     }
     else{
-      let fecha = new Date(this.fechaDevolucion + " 0:00");
-      if(fecha <= this.hoy){
+      if(this.fechaDevolucion <= this.hoy){
         Materialize.toast("La fecha de devolución debe ser mayor a la anterior", 3000, "toastError");
       }
       else{
@@ -80,7 +92,7 @@ export class PrestamosComponent implements OnInit {
             this.closeRenovar();
             this.transaccion = null;
             Materialize.toast("Préstamo renovado", 3000, "toastSuccess");
-            this.fechaDevolucion = null;
+            this.fechaDevolucion = new Date;
           },
           error => {
             Materialize.toast("Error al registrar la renovación", 3000, "toastError");

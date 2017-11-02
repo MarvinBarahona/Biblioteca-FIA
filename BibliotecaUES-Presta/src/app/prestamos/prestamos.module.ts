@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 
 import { CookieModule } from 'ngx-cookie';
 import { MaterializeModule } from 'angular2-materialize';
+import { NgDatepickerModule } from 'ng2-datepicker';
 
 import { PrestamosRoutingModule } from './prestamos-routing.module';
 import { PrestamosComponent } from './prestamos.component';
@@ -23,6 +24,7 @@ import { EjemplaresService, PrestamosService } from './servicios';
     FormsModule,
     MaterializeModule,
     CookieModule.forChild(),
+    NgDatepickerModule,
     PrestamosRoutingModule
   ],
   declarations: [

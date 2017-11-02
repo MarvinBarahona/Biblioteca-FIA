@@ -90,12 +90,12 @@
 </div>
 
 <!-- Ventana modal para confirmar renovación-->
-<div id="modalD" class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalRenovar">
+<div id="modalR" class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalRenovar">
   <div class="modal-content">
     <h5>Confirmar la renovación</h5>
     <div class="row">
       <div class="input-field col m6 offset-m2 s12">
-        <input name="fecha" [(ngModel)]="fechaDevolucion" type="date">
+        <ng-datepicker [(ngModel)]="fechaDevolucion" [options]="dpOptions"></ng-datepicker>
         <label for="fecha" class="active">Fecha de devolución</label>
       </div>
     </div>
@@ -107,7 +107,7 @@
 </div>
 
 <!-- Ventana modal para cancelar una renovación -->
-<div id="modalR" class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalDevolver">
+<div id="modalD" class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalDevolver">
   <div class="modal-content">
     <h5>Devolución del préstamo</h5><br>
     <p>¿Confirma la devolución del ejemplar?</p>

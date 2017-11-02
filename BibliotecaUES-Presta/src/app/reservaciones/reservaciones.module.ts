@@ -13,6 +13,7 @@ import { CookieModule } from 'ngx-cookie';
 import { MaterializeModule } from 'angular2-materialize';
 import { DataTablesModule } from 'angular-datatables';
 import { PdfmakeModule } from 'ng-pdf-make';
+import { NgDatepickerModule } from 'ng2-datepicker';
 
 import { ReservacionesRoutingModule } from './reservaciones-routing.module';
 import { ReservacionesComponent } from './reservaciones.component';
@@ -27,6 +28,7 @@ import { ReservacionesService } from './servicios';
     DataTablesModule,
     PdfmakeModule,
     CookieModule.forChild(),
+    NgDatepickerModule,
     ReservacionesRoutingModule
   ],
   declarations: [

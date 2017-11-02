@@ -10,6 +10,7 @@ import { Subject } from 'rxjs/Rx';
 
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 import { PdfmakeService } from 'ng-pdf-make/pdfmake/pdfmake.service';
+import { DatepickerOptions } from 'ng2-datepicker';
 
 import { ReservacionesService, Reservacion } from './servicios';
 
@@ -20,8 +21,8 @@ declare var Materialize: any;
   templateUrl: './reservaciones.component.html',
   styles: [`
     #modalP{
-      height: 350px;
-      width: 700px;
+      height: 450px;
+      width: 900px;
     }
 
     #modalC{
@@ -35,7 +36,7 @@ export class ReservacionesComponent implements OnInit {
   reservaciones: Reservacion[];
   reservacion: Reservacion;
   carnet: string;
-  fechaDevolucion: string;
+  fechaDevolucion: Date;
   hoy: Date;
   codigo: string;
 
@@ -44,6 +45,7 @@ export class ReservacionesComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
+  dpOptions: DatepickerOptions = {};
 
   constructor(
     private router: Router,
@@ -75,11 +77,21 @@ export class ReservacionesComponent implements OnInit {
         }
       }
     };
+
+    this.dpOptions = {
+      minYear: 2017,
+      maxYear: 2025,
+      displayFormat: 'DD/MM/YYYY',
+      barTitleFormat: 'MMMM YYYY'
+    }
   }
 
   ngOnInit(): void {
     // Activar el nav en responsive.
     $("#toogle_menu").sideNav({ closeOnClick: true });
+
+    // Inicializar la fecha de devolución
+    this.fechaDevolucion = new Date;
 
     // Cargar las reservaciones
     this.reservacionesService.obtenerTodas().subscribe(
@@ -101,12 +113,11 @@ export class ReservacionesComponent implements OnInit {
       Materialize.toast("El carnet no coincide con el del prestamista", 3000, "toastError");
     }
     else {
-      let fecha = new Date(this.fechaDevolucion + " 0:00");
-      if (fecha <= this.hoy) {
+      if (this.fechaDevolucion <= this.hoy) {
         Materialize.toast("La fecha de devolución debe ser mayor a la de hoy", 3000, "toastError");
       }
       else {
-        this.reservacion.fechaDevolucion = fecha;
+        this.reservacion.fechaDevolucion = this.fechaDevolucion;
         this.reservacionesService.prestar(this.reservacion).subscribe(
           msg => {
             this.crearPdf(this.reservacion);
@@ -114,7 +125,9 @@ export class ReservacionesComponent implements OnInit {
             this.closePrestar();
             let i = this.reservaciones.indexOf(this.reservacion);
             if (i > -1) this.reservaciones.splice(i, 1);
-            this.fechaDevolucion = null;
+
+            // Restaura los valroes iniciales
+            this.fechaDevolucion = new Date;
             this.carnet = null;
           },
           error => {
