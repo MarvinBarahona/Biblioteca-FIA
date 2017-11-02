@@ -14,9 +14,12 @@ export class Sugerencia{
   isbn: string;
   votos: number;
   pedidos: number;
+  estado: string;
 
   precio: number;
   cantidad: number;
+
+  razonRechazo: string;
 
   materias: Materia[];
 

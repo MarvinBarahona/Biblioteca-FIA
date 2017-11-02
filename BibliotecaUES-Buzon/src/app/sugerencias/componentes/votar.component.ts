@@ -24,6 +24,7 @@ export class VotarComponent implements OnInit {
   materia: Materia;
   carreras: Carrera[];
   carreraSelect: Carrera;
+  pendiente: boolean;
 
   constructor(
     private sugerenciasService: SugerenciasService,
@@ -34,6 +35,9 @@ export class VotarComponent implements OnInit {
 
   ngOnInit() {
     let id = this.route.snapshot.params['id'];
+
+    // Determinar si se puede votar.
+    this.pendiente = this.sugerencia.estado == "Pendiente";
 
     // Recuperar las carreras
     this.sugerenciasService.obtenerCarreras().subscribe(

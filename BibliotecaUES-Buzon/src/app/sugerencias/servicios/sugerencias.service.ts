@@ -113,6 +113,7 @@ export class SugerenciasService {
           sugerencia.isbn = _sugerencia['isbn'];
           sugerencia.votos = _sugerencia['upvotes'];
           sugerencia.pedidos = _sugerencia['orders'];
+          sugerencia.estado = _sugerencia['state'];
 
           sugerencias.push(sugerencia);
         });
@@ -125,7 +126,7 @@ export class SugerenciasService {
   // Método: top10
   // Objetivo: recuperar un listado de las 10 sugerencias con más pedidos
   top10(): Observable<Sugerencia[]> {
-    let url = this.baseUrl + '/suggestions';
+    let url = this.baseUrl + '/suggestions?state=Pendiente&orderBy=orders';
 
     // Realizando el GET
     return this.http.get(url, { headers: this.headers }).map(
@@ -145,6 +146,7 @@ export class SugerenciasService {
           sugerencia.isbn = _sugerencia['isbn'];
           sugerencia.votos = _sugerencia['upvotes'];
           sugerencia.pedidos = _sugerencia['orders'];
+          sugerencia.estado = _sugerencia['state'];
 
           sugerencias.push(sugerencia);
         });
@@ -206,6 +208,7 @@ export class SugerenciasService {
         sugerencia.autor = r['author'];
         sugerencia.isbn = r['isbn'];
         sugerencia.editorial = r['publisher'];
+        sugerencia.estado = r['state'];
         sugerencia.materias = [];
 
         // Pone el valor inicial a FALSO
@@ -232,6 +235,15 @@ export class SugerenciasService {
         });
 
         sugerencia.materias = materias;
+
+        if(sugerencia.estado == "Aceptada"){
+          sugerencia.cantidad = r['totalOrders'];
+          sugerencia.precio = r['price'];
+        }
+
+        if(sugerencia.estado = "Rechazada"){
+          sugerencia.razonRechazo = r['reason'];
+        }
 
         return sugerencia;
       }

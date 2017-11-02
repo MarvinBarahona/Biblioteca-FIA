@@ -8,11 +8,14 @@
 
       <!-- Autor e ISBN -->
       <div class="row">
-        <div class="col s12 m3 offset-m4">
+        <div class="col s12 m3 offset-m2">
           <strong>Autor: </strong> {{sugerencia.autor}}
         </div>
         <div class="col s12 m3">
           <strong>ISBN: </strong> {{sugerencia.isbn}}
+        </div>
+        <div class="col s12 m3">
+          <strong>Estado: </strong> {{sugerencia.estado}}
         </div>
       </div>
 
@@ -24,7 +27,7 @@
 
             <!-- Votos -->
             <dd>Votos: {{materia.votos}}
-              <a (click)="votar(materia.id)" *ngIf="!sugerencia.usuario">
+              <a (click)="votar(materia.id)" *ngIf="!sugerencia.usuario && pendiente">
                 <i class="fa fa-thumbs-up"></i>
               </a>
               <span *ngIf="materia.usuario">(Tu elección)</span>
@@ -37,7 +40,7 @@
       </div>
 
       <!-- Carrera y Materias -->
-      <div class="row" *ngIf="!sugerencia.usuario">
+      <div class="row" *ngIf="!sugerencia.usuario && pendiente">
         <div class="input-field col l3 offset-l2 m5 s12">
           <!-- Select de carrera -->
           <select materialize="material_select" name="carrera" (change)="selectCarrera($event.target.value)" required>
@@ -56,6 +59,14 @@
         <div class="col l2 m1 s12">
           <button type="submit" class="waves-effect waves-light btn" [disabled]="!materia" (click)="agregar()">Agregar</button>
         </div>
+      </div>
+
+      <div *ngIf="sugerencia.estado == 'Aceptada'">
+        <strong>La sugerencia fue aceptada, se ordenarán {{sugerencia.cantidad}} ejemplares</strong>
+      </div>
+
+      <div *ngIf="sugerencia.estado == 'Rechazada'">
+        <p>La sugerencia fue rechazada debido a {{sugerencia.razonRechazo}}</p>
       </div>
 
     </div>

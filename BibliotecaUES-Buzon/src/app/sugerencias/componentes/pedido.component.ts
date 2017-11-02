@@ -19,6 +19,7 @@ export class PedidoComponent implements OnInit {
   materia: Materia;
   carreras: Carrera[];
   carreraSelect: Carrera;
+  pendiente: boolean;
 
   constructor(
     private sugerenciasService: SugerenciasService,
@@ -44,6 +45,9 @@ export class PedidoComponent implements OnInit {
     this.sugerenciasService.obtener(id).subscribe(
       sugerencia => {
         this.sugerencia = sugerencia;
+
+        // Determinar si se puede votar.
+        this.pendiente = this.sugerencia.estado == "Pendiente";
 
         // Espera debido a que el HTML se carga inmediatamente.
         setTimeout(() => {this.inicializarAutocompletado();}, 500);
