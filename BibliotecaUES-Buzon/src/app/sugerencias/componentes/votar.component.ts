@@ -69,7 +69,7 @@ export class VotarComponent implements OnInit {
         // Agregar voto a la materia
         this.sugerencia.usuario = true;
         this.sugerencia.materias.forEach((materia)=>{
-          if(materia.id = idMateria){
+          if(materia.id == idMateria){
             materia.votos++;
             materia.usuario = true;
           }

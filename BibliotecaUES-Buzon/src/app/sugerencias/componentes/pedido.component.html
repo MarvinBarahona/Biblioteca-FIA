@@ -55,20 +55,20 @@
 
           <!-- Cantidad -->
           <div class="input-field col l1 m2 offset-m1 s12">
-            <input id="cantidad" name="cantidad" type="number" class="validate" min="1" max="10" [(ngModel)]="cantidad" required>
+            <input id="cantidad" name="cantidad" type="number" class="validate" [(ngModel)]="sugerencia.cantidad" min="1" max="10" #cantidad="ngModel" [range]="[1, 10]" required>
             <label for="cantidad" data-error="Valor entre 1 y 10">Cantidad</label>
           </div>
 
           <!-- Precio -->
           <div class="input-field col l1 m2 s12">
-            <input id="precio" name="precio" type="number" class="validate" min="1" max="100" [(ngModel)]="precio" required>
+            <input id="precio" name="precio" type="number" class="validate" [(ngModel)]="sugerencia.precio" min="1" max="100" step="0.01" #precio="ngModel" [range]="[1, 100]" required>
             <label for="precio" data-error="Valor entre 1 y 100">Precio</label>
           </div>
         </div>
 
         <!-- Botón de agregación -->
         <div class="center">
-          <button type="submit" class="waves-effect waves-light btn" [disabled]="!materia" (click)="realizarPedido(materia.id)">Agregar</button>
+          <button type="submit" class="waves-effect waves-light btn" [disabled]="!materia || precio.errors?.range || cantidad.errors?.range" (click)="realizarPedido(materia.id)">Agregar</button>
         </div>
       </div>
       <!-- /Agregar pedido -->

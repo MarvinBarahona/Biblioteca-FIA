@@ -99,14 +99,21 @@ export class PedidoComponent implements OnInit {
     // Consumir servicio
     this.sugerenciasService.agregarPedido(this.sugerencia.id, idMateria, this.cantidad, this.precio).subscribe(
       message => {
-        //Agregar pedido a la materia
-        this.sugerencia.usuario = true;
         this.sugerencia.materias.forEach((materia)=>{
-          if(materia.id = idMateria){
+          if(materia.id == idMateria){
             materia.pedidos++;
             materia.usuario = true;
+            this.sugerencia.usuario = true;
           }
         });
+
+        if(!this.sugerencia.usuario){
+          this.sugerencia.usuario = true;
+          this.materia.votos = 0;
+          this.materia.pedidos = 1;
+          this.materia.usuario = true;
+          this.sugerencia.materias.push(this.materia);
+        }
         Materialize.toast("Pedido agregado", 3000, 'toastSuccess');
       },
       error => {
