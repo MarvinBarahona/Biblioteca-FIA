@@ -10,4 +10,5 @@ export class Transaccion{
   usuario: string;
   tipo: string;
   individual: boolean;
+  detalles: any;
 }

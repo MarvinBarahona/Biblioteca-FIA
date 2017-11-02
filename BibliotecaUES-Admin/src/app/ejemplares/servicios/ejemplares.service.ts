@@ -124,6 +124,7 @@ export class EjemplaresService {
           transaccion.usuario = _transaccion['userName'];
           transaccion.tipo = _transaccion['type'];
           transaccion.individual = _transaccion['single'];
+          transaccion.detalles = _transaccion['details'];
           transacciones.push(transaccion);
         });
         // Ordenar las transacciones por orden de creación.
