@@ -46,7 +46,7 @@ export class PedidoComponent implements OnInit {
       sugerencia => {
         this.sugerencia = sugerencia;
 
-        // Determinar si se puede votar.
+        // Determinar si se puede hacer un pedido
         this.pendiente = this.sugerencia.estado == "Pendiente";
 
         // Espera debido a que el HTML se carga inmediatamente.

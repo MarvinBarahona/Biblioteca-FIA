@@ -112,7 +112,7 @@ export class PrestamosComponent implements OnInit {
         Materialize.toast("Ejemplar devuelto", 3000, "toastSuccess");
       },
       error => {
-        Materialize.toast("Error al cancelar la reservación", 3000, "toastError");
+        Materialize.toast("Error al devolver el ejemplar", 3000, "toastError");
       }
     );
   }

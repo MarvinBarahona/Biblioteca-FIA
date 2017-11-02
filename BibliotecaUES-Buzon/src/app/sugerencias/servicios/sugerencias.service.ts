@@ -241,7 +241,7 @@ export class SugerenciasService {
           sugerencia.precio = r['price'];
         }
 
-        if(sugerencia.estado = "Rechazada"){
+        if(sugerencia.estado == "Rechazada"){
           sugerencia.razonRechazo = r['reason'];
         }
 

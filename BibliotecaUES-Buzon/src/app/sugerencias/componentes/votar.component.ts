@@ -36,9 +36,6 @@ export class VotarComponent implements OnInit {
   ngOnInit() {
     let id = this.route.snapshot.params['id'];
 
-    // Determinar si se puede votar.
-    this.pendiente = this.sugerencia.estado == "Pendiente";
-
     // Recuperar las carreras
     this.sugerenciasService.obtenerCarreras().subscribe(
       carreras => {
@@ -53,6 +50,9 @@ export class VotarComponent implements OnInit {
     this.sugerenciasService.obtener(id).subscribe(
       sugerencia => {
         this.sugerencia = sugerencia;
+
+        // Determinar si se puede votar.
+        this.pendiente = this.sugerencia.estado == "Pendiente";
 
         // Espera debido a que el HTML se carga inmediatamente.
         setTimeout(() => {this.inicializarAutocompletado();}, 500);
