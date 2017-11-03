@@ -23,6 +23,10 @@
             <span>{{ejemplar.estado}}</span>
           </div>
         </div>
+
+        <div class="row">
+          <button class="waves-effect waves-light btn col m2 offset-m10 s12" (click)="openRetirar()">Retirar</button>
+        </div>
       </div>
       <!-- /card-panel -->
     </div>
@@ -34,7 +38,7 @@
     <div class="col s12 m12">
       <div class="card-panel">
         <h5>Transacciones</h5>
-        <table class="row-border hover">
+        <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
           <thead>
             <tr>
               <th>Transacción</th>
@@ -43,6 +47,7 @@
               <th>Proceso</th>
             </tr>
           </thead>
+
           <tbody>
             <!-- Mensaje de carga -->
             <tr *ngFor="let transaccion of ejemplar.transacciones">
@@ -79,3 +84,21 @@
     </div>
   </div>
 </ng-template>
+
+<!-- Ventana modal para asegurar la acción de retirar -->
+<div id="modal" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalRetirar">
+  <div class="modal-content">
+    <h5>Confirmar retiro del ejemplar</h5>
+    <!-- Causa -->
+    <div class="row">
+      <div class="input-field col l7 offset-l1 m8 offset-m2 s12">
+        <input id="causa" name="causa" type="text" class="validate" required>
+        <label for="causa">Causa</label>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-green btn-flat" (click)="closeRetirar()">Cerrar</a>
+    <a class="modal-action modal-close waves-effect btn-flat" (click)="retirar()">Aceptar</a>
+  </div>
+</div>

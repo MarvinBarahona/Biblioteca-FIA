@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 
 import { CookieModule } from 'ngx-cookie';
 import { MaterializeModule } from 'angular2-materialize';
+import { DataTablesModule } from 'angular-datatables';
 
 import { EjemplaresRoutingModule } from './ejemplares-routing.module';
 import { EjemplaresRootComponent, EjemplarBuscarComponent, EjemplarComponent, EjemplarNuevoComponent } from './componentes';
@@ -24,6 +25,7 @@ import { LibroSeleccionModule } from './../libro-seleccion';
     HttpModule,
     FormsModule,
     MaterializeModule,
+    DataTablesModule,
     CookieModule.forChild(),
     EjemplaresRoutingModule,
     LibroSeleccionModule
