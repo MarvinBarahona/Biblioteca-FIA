@@ -24,8 +24,11 @@
           </div>
         </div>
 
+        <!-- Acciones -->
         <div class="row">
-          <button class="waves-effect waves-light btn col m2 offset-m10 s12" (click)="openRetirar()">Retirar</button>
+          <button *ngIf="ejemplar.estado=='Prestado'" class="waves-effect waves-light btn col m2 offset-m1 s12" (click)="openReportar('daño')">Daño</button>
+          <button *ngIf="ejemplar.estado=='Prestado'" class="waves-effect waves-light btn col m2 offset-m1 s12" (click)="openReportar('extravío')">Extravío</button>
+          <button class="waves-effect waves-light btn col m2 offset-m1 s12" (click)="openRetirar()">Retirar</button>
         </div>
       </div>
       <!-- /card-panel -->
@@ -100,5 +103,17 @@
   <div class="modal-footer">
     <a class="waves-effect waves-green btn-flat" (click)="closeRetirar()">Cerrar</a>
     <a class="modal-action modal-close waves-effect btn-flat" (click)="retirar()">Aceptar</a>
+  </div>
+</div>
+
+<!-- Ventana modal para asegurar la acción de retirar -->
+<div id="modal1" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalReportar">
+  <div class="modal-content">
+    <h5>Confirmar {{incidente}} del ejemplar</h5>
+    <p>¿Desea completar la acción?</p>    
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-green btn-flat" (click)="closeReportar()">Cerrar</a>
+    <a class="modal-action modal-close waves-effect btn-flat" (click)="reportar()">Aceptar</a>
   </div>
 </div>

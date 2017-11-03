@@ -18,11 +18,13 @@ declare var $: any;
 })
 export class EjemplarComponent implements OnInit {
   ejemplar: Ejemplar;
+  incidente: string;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
   modalRetirar = new EventEmitter<string|MaterializeAction>();
+  modalReportar = new EventEmitter<string|MaterializeAction>();
 
   constructor(
     private ejemplarService: EjemplaresService,
@@ -87,5 +89,20 @@ export class EjemplarComponent implements OnInit {
   // Objetivo: Retirar el ejemplar.
   retirar(){
     this.closeRetirar();
+  }
+
+  // Métodos para la ventana modal de confirmación de incidente
+  openReportar(incidente: string) {
+    this.incidente = incidente;
+    this.modalReportar.emit({action:"modal",params:['open']});
+  }
+  closeReportar() {
+    this.modalReportar.emit({action:"modal",params:['close']});
+  }
+
+  // Método: reportar
+  // Objetivo: Reportar el ejemplar.
+  reportar(){
+    this.closeReportar();
   }
 }
