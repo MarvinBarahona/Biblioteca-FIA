@@ -20,6 +20,7 @@ import { EjemplaresModule } from './ejemplares/ejemplares.module';
 import { AdquisicionesModule } from './adquisiciones/adquisiciones.module';
 import { EmpleadosModule } from './empleados/empleados.module';
 import { IntercambiosModule } from './intercambios/intercambios.module';
+import { PercancesModule } from './percances/percances.module';
 import { LoginModule } from './login';
 
 @NgModule({
@@ -35,6 +36,7 @@ import { LoginModule } from './login';
     AdquisicionesModule,
     EmpleadosModule,
     IntercambiosModule,
+    PercancesModule,
     AppRoutingModule
   ],
   declarations: [
