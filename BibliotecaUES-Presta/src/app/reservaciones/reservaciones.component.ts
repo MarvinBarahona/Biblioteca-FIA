@@ -170,7 +170,7 @@ export class ReservacionesComponent implements OnInit {
 
     // Agregando encabezados
     this.pdfmake.addText('Universidad de El Salvador', 'header');
-    this.pdfmake.addText('Biblioteca de ingeniería y arquitectura', 'header');
+    this.pdfmake.addText('Biblioteca de Ingeniería y Arquitectura', 'header');
     this.pdfmake.addText('\n\n');
 
     // Agregando el cuerpo del comprobante
