@@ -7,21 +7,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PercancesRootComponent, PercancesComponent } from './componentes';
+import { PercancesComponent } from './percances.component';
 import { AppAuthGuard } from './../login';
 
 const routes: Routes = [
   {
     path: 'percances',
-    component: PercancesRootComponent,
-    children: [
-      {
-        path: '',
-        component: PercancesComponent,
-        canActivate: [AppAuthGuard],
-        data: {politica: 143}
-      }
-    ]
+    component: PercancesComponent,
+    canActivate: [AppAuthGuard],
+    data: {politica: 143}
   }
 ];
 

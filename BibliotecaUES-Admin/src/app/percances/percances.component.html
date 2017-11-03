@@ -1,0 +1,74 @@
+<!-- Side nav -->
+<ul id="slide-out" class="side-nav fixed">
+  <li>
+    <a routerLink="/ejemplares"><i class="fa fa-files-o"></i>Ejemplares</a>
+  </li>
+  <li>
+    <a routerLink="/libros"><i class="fa fa-book"></i>Libros</a>
+  </li>
+  <li>
+    <a routerLink="/adquisiciones"><i class="fa fa-shopping-bag"></i>Adquisiciones</a>
+  </li>
+  <li>
+    <a routerLink="/intercambios"><i class="fa fa-exchange"></i>Intercambios</a>
+  </li>
+  <li class="active">
+    <a routerLink="/percances"><i class="fa fa-exclamation-triangle"></i>Daños y extravíos</a>
+  </li>
+  <li>
+    <a routerLink="/empleados"><i class="fa fa-users"></i>Empleados</a>
+  </li>
+</ul>
+<!-- /Side nav -->
+
+<div class="component">
+  <div>
+    <h4 class="center-align">Sección de daños y extravíos</h4>
+  </div>
+  <div class="row">
+    <div class="col s12 m12 l12">
+      <div class="card-panel">
+        <div class="card-content">
+
+          <h5>Listado de daños y extravios</h5>
+
+          <!-- Table -->
+          <!-- <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"> -->
+          <table class="row-border hover">
+            <thead>
+              <tr>
+                <th>Ejemplar</th>
+                <th>Libro</th>
+                <th>Prestamista</th>
+                <th>Fecha</th>
+                <th>Resuelto?</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- Mensaje de carga -->
+              <div>
+                <p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Cargando datos...</p>
+              </div>
+
+              <!-- Adquisiciones -->
+              <tr>
+                <td><a>Código de barra</a></td>
+                <td>Libro</td>
+                <td>Nombre del prestamista</td>
+                <td>.fecha | date:"dd/MM/y"</td>
+                <td>S/N</td>
+              </tr>
+
+            </tbody>
+          </table>
+          <!-- /Table -->
+
+        </div>
+      </div>
+      <!-- /card-panel -->
+    </div>
+    <!-- /col -->
+  </div>
+  <!-- row -->
+</div>

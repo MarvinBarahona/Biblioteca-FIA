@@ -14,7 +14,7 @@ import { MaterializeModule } from 'angular2-materialize';
 import { DataTablesModule } from 'angular-datatables';
 
 import { PercancesRoutingModule } from './percances-routing.module';
-import { PercancesRootComponent, PercancesComponent } from './componentes';
+import { PercancesComponent } from './percances.component';
 // import { PercancesService } from './servicios';
 
 @NgModule({
@@ -28,7 +28,6 @@ import { PercancesRootComponent, PercancesComponent } from './componentes';
     PercancesRoutingModule
   ],
   declarations: [
-    PercancesRootComponent,
     PercancesComponent
   ],
   providers: [
