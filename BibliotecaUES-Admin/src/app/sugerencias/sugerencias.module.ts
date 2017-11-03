@@ -1,0 +1,38 @@
+/*
+*Nombre del módulo: sugerencias
+*Dirección física: src/app/sugerencias/sugerencias.module.ts
+*Objetivo: Definir el módulo sugerencias
+**/
+
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
+
+import { CookieModule } from 'ngx-cookie';
+import { MaterializeModule } from 'angular2-materialize';
+import { DataTablesModule } from 'angular-datatables';
+
+import { SugerenciasRoutingModule } from './sugerencias-routing.module';
+import { SugerenciasRootComponent, SugerenciasComponent } from './componentes';
+// import { SugerenciasService } from './servicios';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    HttpModule,
+    FormsModule,
+    DataTablesModule,
+    MaterializeModule,
+    CookieModule.forChild(),
+    SugerenciasRoutingModule
+  ],
+  declarations: [
+    SugerenciasRootComponent,
+    SugerenciasComponent
+  ],
+  providers: [
+    // SugerenciasService
+  ]
+})
+export class SugerenciasModule { }
