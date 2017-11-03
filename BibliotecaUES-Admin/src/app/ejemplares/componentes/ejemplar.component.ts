@@ -14,11 +14,18 @@ import { EjemplaresService, Ejemplar, Transaccion } from './../servicios'
 declare var $: any;
 
 @Component({
-  templateUrl: './ejemplar.component.html'
+  templateUrl: './ejemplar.component.html',
+  styles: [`
+    .btnSelect{
+      margin-top: 40px;
+    }
+  `]
 })
 export class EjemplarComponent implements OnInit {
   ejemplar: Ejemplar;
   incidente: string;
+  resolver: boolean;
+  opcion: string;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -31,6 +38,7 @@ export class EjemplarComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
+    this.resolver = false;
     // Para el sorting de las fechas.
     $.fn.dataTable.moment( 'DD/MM/YYYY' );
 
@@ -105,4 +113,17 @@ export class EjemplarComponent implements OnInit {
   reportar(){
     this.closeReportar();
   }
+
+  //Método: habilitar
+  //Objetivo: Mostrar las opciones existentes para reponer un ejemplar
+  habilitar(resolver: boolean){
+    this.resolver = resolver;
+  }
+
+  //Método: manejarOpciones
+  // Objetivo: Habilitar elementos según sea el caso
+  manejarOpciones(opcion: string){
+    this.opcion = opcion;
+  }
+
 }

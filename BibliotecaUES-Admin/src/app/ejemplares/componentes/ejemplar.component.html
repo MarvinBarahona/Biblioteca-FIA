@@ -28,12 +28,81 @@
         <div class="row">
           <button *ngIf="ejemplar.estado=='Prestado'" class="waves-effect waves-light btn col m2 offset-m1 s12" (click)="openReportar('daño')">Daño</button>
           <button *ngIf="ejemplar.estado=='Prestado'" class="waves-effect waves-light btn col m2 offset-m1 s12" (click)="openReportar('extravío')">Extravío</button>
+          <button class="waves-effect waves-light btn col m3 offset-m1 s12" (click)="habilitar(true)">Reponer ejemplar</button>
           <button class="waves-effect waves-light btn col m2 offset-m1 s12" (click)="openRetirar()">Retirar</button>
         </div>
       </div>
       <!-- /card-panel -->
     </div>
   </div>
+
+  <!-- Apartado de resolución de daño/extravío -->
+  <div class="row" *ngIf="resolver">
+    <div class="col s12 m12 l12">
+      <div class="card-panel">
+
+        <!-- Opciones -->
+        <div class="row">
+          <form>
+            <p>
+              <input name="opciones" type="radio" id="exonerar" (click)="manejarOpciones('exonerar')" />
+              <label for="exonerar">Exonerar</label>
+            </p>
+            <p>
+              <input name="opciones" type="radio" id="igual" (click)="manejarOpciones('igual')" />
+              <label for="igual">Misma edición</label>
+            </p>
+            <p>
+              <input name="opciones" type="radio" id="mayor" (click)="manejarOpciones('mayor')" />
+              <label for="mayor">Mayor edición</label>
+            </p>
+          </form>
+        </div>
+
+        <!-- Exonerar -->
+        <div class="row" *ngIf="opcion=='exonerar'">
+          <strong>¿Exonerar la reposición?</strong>
+          <button type="submit" class="btn waves-effect waves-green">Aceptar</button>
+        </div>
+
+        <!-- Reponer con la misma versión -->
+        <div class="row" *ngIf="opcion=='igual'">
+          <button type="submit" class="btn waves-effect waves-green">Reponer</button>
+        </div>
+
+        <!-- Reponer con una versión mayor -->
+        <div class="row" *ngIf="opcion=='mayor'">
+          <!-- Seleccionar libro -->
+          <div class="row">
+            <div class="input-field col m6 s7 offset-m1">
+              <strong>Libro: </strong><br>
+              <input id="libro" type="text" name="libro" readonly required>
+            </div>
+            <a class="waves-effect waves-light btn col m3 s4 offset-m1 btnSelect" (click)="openSeleccion()">Seleccionar</a>
+          </div>
+
+          <!-- Código de barras -->
+          <div class="row">
+            <div class="input-field col offset-m1 s6">
+              <input id="codigo" name="codigo" type="text" class="validate" pattern="^[\d]{8}$" required>
+              <label for="codigo" data-error="Ingrese 8 dígitos">Código de barras</label>
+            </div>
+          </div>
+
+          <!-- Acciones -->
+          <div class="row">
+            <div class="center">
+              <button type="submit" class="btn waves-effect waves-green" >Guardar</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /card-panel -->
+    </div>
+    <!-- /col -->
+  </div>
+  <!-- row -->
 
 
   <!-- Tabla de transacciones -->
@@ -110,7 +179,7 @@
 <div id="modal1" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalReportar">
   <div class="modal-content">
     <h5>Confirmar {{incidente}} del ejemplar</h5>
-    <p>¿Desea completar la acción?</p>    
+    <p>¿Desea completar la acción?</p>
   </div>
   <div class="modal-footer">
     <a class="waves-effect waves-green btn-flat" (click)="closeReportar()">Cerrar</a>
