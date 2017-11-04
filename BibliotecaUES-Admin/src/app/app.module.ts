@@ -22,6 +22,7 @@ import { EmpleadosModule } from './empleados/empleados.module';
 import { IntercambiosModule } from './intercambios/intercambios.module';
 import { PercancesModule } from './percances/percances.module';
 import { SugerenciasModule } from './sugerencias/sugerencias.module';
+import { DescartesModule } from './descartes/descartes.module';
 import { LoginModule } from './login';
 
 @NgModule({
@@ -39,6 +40,7 @@ import { LoginModule } from './login';
     IntercambiosModule,
     PercancesModule,
     SugerenciasModule,
+    DescartesModule,
     AppRoutingModule
   ],
   declarations: [
