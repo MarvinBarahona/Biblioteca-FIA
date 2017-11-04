@@ -158,12 +158,12 @@
 </ng-template>
 
 <!-- Ventana modal para asegurar la acción de retirar -->
-<div id="modal" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalRetirar">
+<div id="modal" class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalRetirar">
   <div class="modal-content">
     <h5>Confirmar retiro del ejemplar</h5>
     <!-- Causa -->
     <div class="row">
-      <div class="input-field col l7 offset-l1 m8 offset-m2 s12">
+      <div class="input-field">
         <input id="causa" name="causa" type="text" class="validate" required>
         <label for="causa">Causa</label>
       </div>
@@ -175,8 +175,8 @@
   </div>
 </div>
 
-<!-- Ventana modal para asegurar la acción de retirar -->
-<div id="modal1" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalReportar">
+<!-- Ventana modal para asegurar la acción de daño o extravío -->
+<div id="modal1" class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalReportar">
   <div class="modal-content">
     <h5>Confirmar {{incidente}} del ejemplar</h5>
     <p>¿Desea completar la acción?</p>

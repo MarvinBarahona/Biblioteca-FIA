@@ -16,7 +16,7 @@ declare var Materialize: any;
   templateUrl: './entrada-pendiente.component.html',
   styles: [`
     .modal-fixed-footer{
-      height: 600px;
+      height: 700px;
       width: 800px;
     }
   `]

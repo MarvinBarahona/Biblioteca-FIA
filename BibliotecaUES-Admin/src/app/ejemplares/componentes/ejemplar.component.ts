@@ -18,6 +18,11 @@ declare var $: any;
   styles: [`
     .btnSelect{
       margin-top: 40px;
+      left: -60px!important;
+    }
+    #modal, #modal1{
+      height: 250px;
+      width: 350px;
     }
   `]
 })

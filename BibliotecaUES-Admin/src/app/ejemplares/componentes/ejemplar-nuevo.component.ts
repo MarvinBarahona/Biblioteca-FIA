@@ -16,19 +16,28 @@ declare var Materialize: any;
   templateUrl: './ejemplar-nuevo.component.html',
   styles: [`
     .modal-fixed-footer{
-      height: 600px;
+      height: 700px;
       width: 800px;
     }
 
     .btnSelect{
-      margin-top: 50px;
+      margin-top: 40px;
+      left: -80px!important;
+    }
+
+
+    @media only screen and (max-width : 600px) {
+      .btnSelect{
+        margin-top: 0;
+        left: 0!important;
+      }
     }
   `]
 })
 
 export class EjemplarNuevoComponent implements OnInit {
   modalSeleccion = new EventEmitter<string | MaterializeAction>();
-  modalCancel = new EventEmitter<string|MaterializeAction>();
+  modalCancel = new EventEmitter<string | MaterializeAction>();
   ejemplar: NuevoEjemplar;
 
   showMessage: boolean = false;
@@ -37,7 +46,7 @@ export class EjemplarNuevoComponent implements OnInit {
   constructor(
     private router: Router,
     private ejemplaresService: EjemplaresService
-  ){}
+  ) { }
 
   ngOnInit() {
     // Crear un nuevo ejemplar y asignarle un nuevo libro.
@@ -54,26 +63,26 @@ export class EjemplarNuevoComponent implements OnInit {
 
   // Método: crear
   // Objetivo: crear un nuevo ejemplar, ya sea compra o donación.
-  crear(){
+  crear() {
     // Mostrar mensaje de espera.
     this.showMessage = true;
     this.errorMessage = null;
 
     // Selecciona el método de creación dependiendo del motivo de la creación.
-    switch(this.ejemplar.tipo){
+    switch (this.ejemplar.tipo) {
       // Para la compra de un ejemplar
-      case "Compra":{
+      case "Compra": {
         this.ejemplaresService.crearCompra(this.ejemplar).subscribe(
           message => {
             Materialize.toast("Ejemplar creado", 3000, 'toastSuccess');
             this.router.navigate(['/ejemplares']);
           },
           error => {
-            this.showMessage= false;
-            if(error.status == 422){
+            this.showMessage = false;
+            if (error.status == 422) {
               this.errorMessage = "El código de barras ingresado ya está en uso";
             }
-            else{
+            else {
               this.errorMessage = "Error al crear el ejemplar";
             }
           }
@@ -82,25 +91,25 @@ export class EjemplarNuevoComponent implements OnInit {
       }
 
       // Para la donación de un ejemplar
-      case "Donación":{
+      case "Donación": {
         this.ejemplaresService.crearDonacion(this.ejemplar).subscribe(
           message => {
             Materialize.toast("Ejemplar creado", 3000, 'toastSuccess');
             this.router.navigate(['/ejemplares']);
           },
           error => {
-            this.showMessage= false;
-            if(error.status == 422){
+            this.showMessage = false;
+            if (error.status == 422) {
               this.errorMessage = "El código de barras ingresado ya está en uso";
             }
-            else{
+            else {
               this.errorMessage = "Error al crear el ejemplar";
             }
           }
         );
         break;
       }
-      default:{}
+      default: { }
     }
   }
 
@@ -114,15 +123,15 @@ export class EjemplarNuevoComponent implements OnInit {
 
   // Métodos para la ventana modal de confirmación de cancelación
   openCancel() {
-    this.modalCancel.emit({action:"modal",params:['open']});
+    this.modalCancel.emit({ action: "modal", params: ['open'] });
   }
   closeCancel() {
-    this.modalCancel.emit({action:"modal",params:['close']});
+    this.modalCancel.emit({ action: "modal", params: ['close'] });
   }
 
   // Método: cancel
   // Objetivo: cerrar la ventana modal y regresar a la ventana anterior.
-  cancel(){
+  cancel() {
     this.closeCancel();
     this.router.navigate(['/ejemplares']);
   }

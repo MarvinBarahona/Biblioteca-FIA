@@ -7,17 +7,17 @@
 
         <!-- Seleccionar libro -->
         <div class="row">
-          <div class="input-field col m6 s7 offset-m1">
+          <div class="input-field col m6 offset-m1 s12">
             <strong>Libro: </strong>
             <input id="libro" type="text" name="libro" [(ngModel)]="ejemplar.libro.titulo" readonly required>
           </div>
-          <a class="waves-effect waves-light btn col m3 s4 offset-m1 btnSelect" (click)="openSeleccion()">Seleccionar</a>
+          <a class="waves-effect waves-light btn col m3 s12 offset-m1 btnSelect" (click)="openSeleccion()">Seleccionar</a>
         </div>
 
         <!-- Origen del ejemplar -->
         <div class="row">
 
-          <div class="input-field col s6">
+          <div class="input-field col l2 offset-l1 m4 offset-m1 s12">
             <select name="tipo" materialize="material_select" [(ngModel)]="ejemplar.tipo" required>
                   <option value="" disabled selected>Seleccionar...</option>
                   <option>Compra</option>
@@ -26,14 +26,14 @@
             <label>Motivo</label>
           </div>
 
-          <div class="input-field col s6" *ngIf="ejemplar.tipo == 'Donación'">
+          <div class="input-field col  m5 s12" *ngIf="ejemplar.tipo == 'Donación'">
             <input id="donante" type="text" class="validate" name="donante" [(ngModel)]="ejemplar.donante">
             <label for="donante">Donante</label>
           </div>
         </div>
         <!-- Código de barras -->
         <div class="row">
-          <div class="input-field col s6">
+          <div class="input-field col m5 offset-m1 s12">
             <input id="codigo" name="codigo" type="text" class="validate" pattern="^[\d]{8}$" [(ngModel)]="ejemplar.codigo" required>
             <label for="codigo" data-error="Ingrese 8 dígitos">Código de barras</label>
           </div>
