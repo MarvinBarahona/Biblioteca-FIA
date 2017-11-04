@@ -14,7 +14,7 @@ import { MaterializeModule } from 'angular2-materialize';
 import { DataTablesModule } from 'angular-datatables';
 
 import { SugerenciasRoutingModule } from './sugerencias-routing.module';
-import { SugerenciasRootComponent, SugerenciasComponent } from './componentes';
+import { SugerenciasRootComponent, SugerenciasComponent, SugerenciaComponent } from './componentes';
 // import { SugerenciasService } from './servicios';
 
 @NgModule({
@@ -29,7 +29,8 @@ import { SugerenciasRootComponent, SugerenciasComponent } from './componentes';
   ],
   declarations: [
     SugerenciasRootComponent,
-    SugerenciasComponent
+    SugerenciasComponent,
+    SugerenciaComponent
   ],
   providers: [
     // SugerenciasService

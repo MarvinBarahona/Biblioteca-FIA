@@ -7,7 +7,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { SugerenciasRootComponent, SugerenciasComponent } from './componentes';
+import { SugerenciasRootComponent, SugerenciasComponent, SugerenciaComponent } from './componentes';
 import { AppAuthGuard } from './../login'
 
 const routes: Routes = [
@@ -19,7 +19,13 @@ const routes: Routes = [
         path: '',
         component: SugerenciasComponent,
         canActivate: [AppAuthGuard],
-        data: {politica: 143}//Cambiar a politica 400 de momento no existe
+        data: {politica: 400}
+      },
+      {
+        path: ':id',
+        component: SugerenciaComponent,
+        canActivate: [AppAuthGuard],
+        data: {politica: 400}
       }
     ]
   }

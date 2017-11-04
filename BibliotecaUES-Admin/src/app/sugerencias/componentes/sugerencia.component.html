@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="col s12 m12 l12">
+    <div class="card-panel">
+
+      <!-- Información del libro -->
+      <div class="row">
+        <div class="col l4 offset-l1 m6 offset-m1 s12">
+          <p><strong>Título: </strong> asdfasdf</p>
+          <p><strong>Autor: </strong> Autor</p>
+          <p><strong>Editorial: </strong> Editorial</p>
+        </div>
+        <div class="col l4 offset-l1 m5 s12">
+          <p><strong>Edición: </strong> Edición</p>
+          <p><strong>ISBN: </strong> ISBN</p>
+          <p><strong>Precio sugerido: </strong> Precio sugerido</p>
+        </div>
+      </div>
+
+      <!-- Pedidos -->
+      <div class="row">
+        <div class="col l1 offset-l1 m1 offset-m1 s12">
+          <strong>Pedidos: </strong>
+        </div>
+        <div class="col l9 m10 s12">
+          <p>Juan Pérez solicita 2 ejemplares para la materia 'Programación III'</p>
+          <p>Juana de Arco solicita 2 ejemplares para la materia 'Introducción a la Informática'</p>
+        </div>
+      </div>
+
+      <!-- Votos -->
+      <div class="row">
+        <div class="col l1 offset-l1 m1 offset-m1 s12">
+          <strong>Votos: </strong>
+        </div>
+        <div class="col l9 m10 s12">
+          <p>3 votos en la materia 'Programación III'</p>
+          <p>5 votos en la materia 'Introducción a la Informática'</p>
+        </div>
+      </div>
+
+      <!-- Acciones -->
+      <div class="row">
+        <div class="center">
+          <button type="button" class="btn waves-effect waves-green" (click)="openAprobar()">Aprobar</button>
+          <button type="button" class="btn waves-effect waves-green" (click)="openDenegar()">Denegar</button>
+        </div>
+      </div>
+    </div>
+    <!-- /card-panel -->
+  </div>
+  <!-- /col -->
+</div>
+<!-- row -->
+
+
+<!-- Ventana modal para aprobar un pedido -->
+<div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalAprobar">
+  <div class="modal-content">
+    <h5>Aprobar sugerencia</h5>
+    <!-- Precio -->
+    <div class="input-field">
+      <input id="precio" name="precio" type="number" class="validate" min="1" max="100" step="0.01" required>
+      <label for="precio" data-error="Valor entre 1 y 100">Precio</label>
+    </div>
+
+    <!-- Cantidad -->
+    <div class="input-field">
+      <input id="cantidad" name="cantidad" type="number" class="validate" min="1" max="10" required>
+      <label for="cantidad" data-error="Valor entre 1 y 10">Cantidad</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="btn waves-effect waves-light" (click)="aprobar()">Aceptar</a>
+    <a class="btn waves-effect waves-light" (click)="closeAprobar()">Cerrar</a>
+  </div>
+</div>
+
+<!-- Ventana modal para denegar un pedido -->
+<div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalDenegar">
+  <div class="modal-content">
+    <h5>Denegar sugerencia</h5>
+    <!-- Razón -->
+    <div class="row">
+      <div class="input-field col l8 offset-l2 s12">
+        <input id="razon" name="razon" type="text" class="validate" required>
+        <label for="razon">Razón</label>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="btn waves-effect waves-light" (click)="denegar()">Aceptar</a>
+    <a class="btn waves-effect waves-light" (click)="closeDenegar()">Cerrar</a>
+  </div>
+</div>
