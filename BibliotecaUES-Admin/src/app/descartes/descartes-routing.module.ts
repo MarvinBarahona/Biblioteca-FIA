@@ -22,16 +22,16 @@ const routes: Routes = [
         data: {politica: 143}
       },
       {
-        path: ':id',
-        component: DescarteComponent,
-        canActivate: [AppAuthGuard],
-        data: {politica: 143}
-      },
-      {
         path: 'nuevo',
         component: DescarteNuevoComponent,
         canActivate: [AppAuthGuard],
         data: {politica: 114}
+      },
+      {
+        path: ':id',
+        component: DescarteComponent,
+        canActivate: [AppAuthGuard],
+        data: {politica: 143}
       }
     ]
   }

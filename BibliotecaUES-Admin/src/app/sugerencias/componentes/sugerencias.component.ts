@@ -12,6 +12,8 @@ import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
 // import {  } from './../servicios';
 
+declare var $: any;
+
 @Component({
   templateUrl: './sugerencias.component.html',
   styles: [`
@@ -23,7 +25,7 @@ import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 })
 export class SugerenciasComponent implements OnInit {
 
-  modalFinalizar = new EventEmitter<string|MaterializeAction>();
+  modalFinalizar = new EventEmitter<string | MaterializeAction>();
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -35,7 +37,7 @@ export class SugerenciasComponent implements OnInit {
     this.dtOptions = {
       pageLength: 10,
       pagingType: 'simple_numbers',
-      lengthMenu: [10,15,20],
+      lengthMenu: [10, 15, 20],
       order: [[3, 'asc']],
       language: {
         "emptyTable": "Sin registros disponibles en la tabla",
@@ -56,20 +58,21 @@ export class SugerenciasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    // Inicializando Tabs
+    $('ul.tabs').tabs();
   }
 
   // Métodos para la ventana modal de confirmación de cierre de ciclo
   openFinalizar(incidente: string) {
-    this.modalFinalizar.emit({action:"modal",params:['open']});
+    this.modalFinalizar.emit({ action: "modal", params: ['open'] });
   }
   closeFinalizar() {
-    this.modalFinalizar.emit({action:"modal",params:['close']});
+    this.modalFinalizar.emit({ action: "modal", params: ['close'] });
   }
 
   // Método: reportar
   // Objetivo: Reportar el ejemplar.
-  finalizar(){
+  finalizar() {
     this.closeFinalizar();
   }
 }
