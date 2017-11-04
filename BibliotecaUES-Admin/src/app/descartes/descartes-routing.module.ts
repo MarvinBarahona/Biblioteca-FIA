@@ -7,7 +7,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { DescartesRootComponent, DescartesComponent, DescarteNuevoComponent } from './componentes';
+import { DescartesRootComponent, DescartesComponent, DescarteNuevoComponent, DescarteComponent } from './componentes';
 import { AppAuthGuard } from './../login'
 
 const routes: Routes = [
@@ -21,12 +21,12 @@ const routes: Routes = [
         canActivate: [AppAuthGuard],
         data: {politica: 143}
       },
-    //   {
-    //     path: ':id',
-    //     component: DescarteComponent,
-    //     canActivate: [AppAuthGuard],
-    //     data: {politica: 143}
-    //   }
+      {
+        path: ':id',
+        component: DescarteComponent,
+        canActivate: [AppAuthGuard],
+        data: {politica: 143}
+      },
       {
         path: 'nuevo',
         component: DescarteNuevoComponent,
