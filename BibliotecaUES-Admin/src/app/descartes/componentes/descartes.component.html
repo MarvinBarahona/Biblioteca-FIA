@@ -1,7 +1,37 @@
 <div class="row">
   <div class="col s12 m12 l12">
     <div class="card-panel">
-      
+      <!-- Table -->
+      <!-- <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"> -->
+      <table class="row-border hover">
+        <thead>
+          <tr>
+            <th>Proceso</th>
+            <th>Autorizado por</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- Mensaje de carga -->
+          <div>
+            <p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Cargando datos...</p>
+          </div>
+
+          <!-- Adquisiciones -->
+          <tr>
+            <td><a [routerLink]="'/descartes/1'">Descarte de junio de 2017</a></td>
+            <td>Juan Pérez</td>
+            <td>.fecha | date:"dd/MM/y"</td>
+          </tr>
+
+        </tbody>
+      </table>
+      <!-- /Table -->
+
+      <div class="row">
+        <a class="btn waves-effect waves-green" [routerLink]="/descartes/nuevo">Nuevo</a>
+      </div>
     </div>
     <!-- /card-panel -->
   </div>

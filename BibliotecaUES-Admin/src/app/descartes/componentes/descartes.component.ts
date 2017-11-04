@@ -19,6 +19,9 @@ export class DescartesComponent implements OnInit {
   constructor(
     private router: Router
   ) {
+    // Para el sorting de las fechas.
+    $.fn.dataTable.moment( 'DD/MM/YYYY' );
+
     // Opciones de datatable
     this.dtOptions = {
       pageLength: 10,
@@ -46,4 +49,6 @@ export class DescartesComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  
 }
