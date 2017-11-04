@@ -98,9 +98,28 @@
 
       </div>
 
+      <br><hr>
+
+      <div class="row">
+        <div class="right">
+          <button type="submit" class="btn waves-effect waves-green" (click)="openFinalizar()">Finalizar ciclo</button>
+        </div>
+      </div>
     </div>
     <!-- /card-panel -->
   </div>
   <!-- /col -->
 </div>
 <!-- row -->
+
+<!-- Ventana modal para asegurar la acción de finalizar ciclo -->
+<div id="modal" class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalFinalizar">
+  <div class="modal-content">
+    <h5>Confirmar acción</h5>
+    <p>Click en Aceptar si desea limpiar las tablas aceptadas y rechazadas</p>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-green btn-flat" (click)="closeFinalizar()">Cerrar</a>
+    <a class="modal-action modal-close waves-effect btn-flat" (click)="finalizar()">Aceptar</a>
+  </div>
+</div>

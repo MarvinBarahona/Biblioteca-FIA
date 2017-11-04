@@ -5,16 +5,25 @@
 **/
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Rx';
+import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
 // import {  } from './../servicios';
 
 @Component({
-  templateUrl: './sugerencias.component.html'
+  templateUrl: './sugerencias.component.html',
+  styles: [`
+    .modal{
+      height: 250px;
+      width: 350px;
+    }
+  `]
 })
 export class SugerenciasComponent implements OnInit {
+
+  modalFinalizar = new EventEmitter<string|MaterializeAction>();
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -48,5 +57,19 @@ export class SugerenciasComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  // Métodos para la ventana modal de confirmación de cierre de ciclo
+  openFinalizar(incidente: string) {
+    this.modalFinalizar.emit({action:"modal",params:['open']});
+  }
+  closeFinalizar() {
+    this.modalFinalizar.emit({action:"modal",params:['close']});
+  }
+
+  // Método: reportar
+  // Objetivo: Reportar el ejemplar.
+  finalizar(){
+    this.closeFinalizar();
   }
 }
