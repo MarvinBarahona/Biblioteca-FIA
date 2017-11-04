@@ -4,16 +4,25 @@
 *Objetivo: Mostrar información de un ejemplar específico
 **/
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
 import { EjemplaresService, Ejemplar }  from './../servicios'
 
 @Component({
-  templateUrl: './ejemplar.component.html'
+  templateUrl: './ejemplar.component.html',
+  styles: [`
+    .modal{
+      height: 250px;
+      width: 350px;
+    }
+  `]
 })
 export class EjemplarComponent implements OnInit {
   ejemplar: Ejemplar;
+
+  modalRetirar = new EventEmitter<string|MaterializeAction>();
 
   constructor(
     private ejemplarService: EjemplaresService,
@@ -37,5 +46,19 @@ export class EjemplarComponent implements OnInit {
         }
       }
     );
+  }
+
+  // Métodos para la ventana modal de confirmación de retiro
+  openRetirar() {
+    this.modalRetirar.emit({action:"modal",params:['open']});
+  }
+  closeRetirar() {
+    this.modalRetirar.emit({action:"modal",params:['close']});
+  }
+
+  // Método: retirar
+  // Objetivo: Retirar el ejemplar.
+  retirar(){
+    this.closeRetirar();
   }
 }
