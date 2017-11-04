@@ -1,23 +1,25 @@
 /*
-*Nombre del componente: descartes
-*Dirección física: src/app/descartes/componentes/descartes.component.ts
-*Objetivo: Mostrar el listado de descartes realizados
+*Nombre del componente: descarte-nuevo
+*Dirección física: src/app/descarte/componentes/descarte-nuevo.component.ts
+*Objetivo: Realizar el descarte de uno o varios ejemplares
 **/
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Rx';
+import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
 // import {  } from './../servicios';
 
 declare var $: any;
 
 @Component({
-  templateUrl: './descartes.component.html'
+  templateUrl: './descarte-nuevo.component.html'
 })
 
-export class DescartesComponent implements OnInit {
+export class DescarteNuevoComponent implements OnInit {
 
+  modalCancel = new EventEmitter<string | MaterializeAction>();
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -56,5 +58,18 @@ export class DescartesComponent implements OnInit {
 
   }
 
+  // Métodos para el manejo de la ventana modal de confirmación de cancelación.
+  openCancel() {
+    this.modalCancel.emit({ action: "modal", params: ['open'] });
+  }
+  closeCancel() {
+    this.modalCancel.emit({ action: "modal", params: ['close'] });
+  }
 
+  // Método: cancel
+  // Objetivo: Cerrar la ventana modal y retornar a la vista anterior.
+  cancel() {
+    this.closeCancel();
+    this.router.navigate(['/descartes']);
+  }
 }

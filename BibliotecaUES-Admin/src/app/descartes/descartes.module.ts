@@ -14,7 +14,7 @@ import { MaterializeModule } from 'angular2-materialize';
 import { DataTablesModule } from 'angular-datatables';
 
 import { DescartesRoutingModule } from './descartes-routing.module';
-import { DescartesRootComponent, DescartesComponent } from './componentes/';
+import { DescartesRootComponent, DescartesComponent, DescarteNuevoComponent } from './componentes/';
 // import { DescartesService } from './servicios';
 
 
@@ -30,7 +30,8 @@ import { DescartesRootComponent, DescartesComponent } from './componentes/';
   ],
   declarations: [
     DescartesRootComponent,
-    DescartesComponent
+    DescartesComponent,
+    DescarteNuevoComponent
   ],
   providers: [
     // DescartesService

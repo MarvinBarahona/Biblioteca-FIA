@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col s12 m12 l12">
+    <div class="card-panel">
+      <!-- Table -->
+      <!-- <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"> -->
+      <table class="row-border hover">
+        <thead>
+          <tr>
+            <th>Seleccionar</th>
+            <th>Libro</th>
+            <th>Ejemplar</th>
+            <th>Estado</th>
+            <th>Fecha de la última transacción</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- Mensaje de carga -->
+          <div>
+            <p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Cargando datos...</p>
+          </div>
+
+          <!-- Adquisiciones -->
+          <tr>
+            <td class="center">
+              <input type="checkbox" class="filled-in" id="1" checked="checked" />
+              <label for="1"></label>
+            </td>
+            <td>Título del libro</td>
+            <td>Código de barras</td>
+            <td>Estado</td>
+            <td>.fecha | date:"dd/MM/y"</td>
+          </tr>
+
+        </tbody>
+      </table>
+      <!-- /Table -->
+
+      <div class="row">
+        <div class="center">
+          <button type="submit" class="btn waves-effect waves-green">Descartar</button>
+          <button type="button" class="btn waves-effect waves-green" (click)="openCancel()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+    <!-- /card-panel -->
+  </div>
+  <!-- /col -->
+</div>
+<!-- row -->
+
+<!-- Ventana modal para asegurar la acción de cancelar -->
+<div id="modal" class="modal bottom-sheet" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalCancel">
+  <div class="modal-content">
+    <h4>Confirmar cancelación</h4>
+    <p>¿Desea cancelar el proceso de descarte?</p>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-green btn-flat" (click)="closeCancel()">No</a>
+    <a class="modal-action modal-close waves-effect btn-flat" (click)="cancel()">Sí</a>
+  </div>
+</div>
