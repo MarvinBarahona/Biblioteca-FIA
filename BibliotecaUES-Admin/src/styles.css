@@ -15,6 +15,19 @@ a{
   cursor: pointer;
 }
 
+/*Para los tabs de materialize*/
+.tabs .tab a{
+  color: rgb(80, 113, 231);
+}
+
+.tabs .tab a:hover, .tabs .tab a.active{
+  color: rgb(23, 65, 136);
+}
+
+.tabs .indicator{
+  background-color: rgb(33, 78, 154);
+}
+
 /*Para el side nav*/
 /* Pone el side-nav abajo del navbar */
 #slide-out{
