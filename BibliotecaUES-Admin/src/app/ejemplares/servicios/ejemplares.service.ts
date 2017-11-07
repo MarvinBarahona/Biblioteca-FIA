@@ -1,7 +1,7 @@
 /*
 *Nombre del servicio: ejemplares
 *Dirección: /src/app/ejemplares/servicios/ejemplares.service.ts
-*Objetivo: Provee los servicios al módulo de ejemplares
+*Objetivo: Provee los servicios de ejemplares al módulo de ejemplares
 */
 
 import { Injectable } from '@angular/core';

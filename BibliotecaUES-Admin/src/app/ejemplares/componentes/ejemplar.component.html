@@ -26,8 +26,8 @@
 
         <!-- Acciones -->
         <div class="row">
-          <button *ngIf="ejemplar.estado=='Prestado'" class="waves-effect waves-light btn col m2 offset-m1 s12" (click)="openReportar('daño')">Daño</button>
-          <button *ngIf="ejemplar.estado=='Prestado'" class="waves-effect waves-light btn col m2 offset-m1 s12" (click)="openReportar('extravío')">Extravío</button>
+          <button *ngIf="ejemplar.estado=='Prestado'" class="waves-effect waves-light btn col m2 offset-m1 s12" (click)="openReportar('Daño')">Daño</button>
+          <button *ngIf="ejemplar.estado=='Prestado'" class="waves-effect waves-light btn col m2 offset-m1 s12" (click)="openReportar('Extravío')">Extravío</button>
           <button *ngIf="ejemplar.estado=='Inactivo'" class="waves-effect waves-light btn col m2 offset-m1 s12" (click)="openRetirar()">Retirar</button>
         </div>
       </div>
@@ -36,7 +36,7 @@
   </div>
 
   <!-- Apartado de resolución de daño/extravío -->
-  <div class="row" *ngIf="ejemplar.estado == 'Inhabilitado'">
+  <div class="row" *ngIf="ejemplar.estado == 'Inhabilitado' && permisoAgregar">
     <div class="col s12 m12 l12">
       <div class="card-panel">
 
@@ -61,19 +61,19 @@
         <!-- Exonerar -->
         <div class="row" *ngIf="opcion=='exonerar'">
           <strong>¿Exonerar la reposición?</strong><br>
-          <button type="submit" class="btn waves-effect waves-green">Exonerar</button>
+          <button type="submit" (click)="exonerar()" class="btn waves-effect waves-green">Exonerar</button>
         </div>
 
         <!-- Reponer con la misma versión -->
         <div class="row" *ngIf="opcion=='igual'">
           <strong>¿Reponer con un ejemplar de la misma edición?</strong><br>
-          <button type="submit" class="btn waves-effect waves-green">Reponer</button>
+          <button type="submit" (click)="restaurar()" class="btn waves-effect waves-green">Reponer</button>
         </div>
 
         <!-- Reponer con una versión mayor -->
         <div class="row" *ngIf="opcion=='mayor'">
-          <form #nuevoEjemplarForm="ngForm">
-            
+          <form #nuevoEjemplarForm="ngForm" (submit)="sustituir()">
+
             <!-- Seleccionar libro -->
             <div class="row">
               <div class="input-field col m6 s7 offset-m1">
@@ -115,7 +115,7 @@
     <div class="col s12 m12">
       <div class="card-panel">
         <h5>Transacciones</h5>
-        <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+        <table class="row-border hover" datatable #tablaTransacciones [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
           <thead>
             <tr>
               <th>Transacción</th>
@@ -168,7 +168,7 @@
     <libro-seleccion (eventEmitter)='onNotify($event)'></libro-seleccion>
   </div>
   <div class="modal-footer">
-    <a class="waves-effect waves-light btn-flat" (click)="closeSeleccion()">Cerrar</a>
+    <a class="waves-effect waves-light btn" (click)="closeSeleccion()">Cerrar</a>
   </div>
 </div>
 
@@ -179,14 +179,14 @@
     <!-- Causa -->
     <div class="row">
       <div class="input-field">
-        <input id="causa" name="causa" type="text" class="validate" required>
+        <input id="causa" name="motivo" type="text" class="validate" [(ngModel)]="motivo">
         <label for="causa">Causa</label>
       </div>
     </div>
   </div>
   <div class="modal-footer">
-    <a class="waves-effect waves-green btn-flat" (click)="closeRetirar()">Cerrar</a>
-    <a class="modal-action modal-close waves-effect btn-flat" (click)="retirar()">Aceptar</a>
+    <a class="waves-effect waves-green btn" (click)="closeRetirar()">Cerrar</a>
+    <a class="modal-action modal-close waves-effect btn" (click)="retirar()">Aceptar</a>
   </div>
 </div>
 
@@ -197,7 +197,7 @@
     <p>¿Desea completar la acción?</p>
   </div>
   <div class="modal-footer">
-    <a class="waves-effect waves-green btn-flat" (click)="closeReportar()">Cerrar</a>
-    <a class="modal-action modal-close waves-effect btn-flat" (click)="reportar()">Aceptar</a>
+    <a class="waves-effect waves-green btn" (click)="closeReportar()">Cerrar</a>
+    <a class="modal-action modal-close waves-effect btn" (click)="reportar()">Aceptar</a>
   </div>
 </div>

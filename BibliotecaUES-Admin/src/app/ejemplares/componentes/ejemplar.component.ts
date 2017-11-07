@@ -4,15 +4,19 @@
 *Objetivo: Mostrar información de un ejemplar específico
 **/
 
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
+import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs/Rx';
+import { CookieService } from 'ngx-cookie';
 
-import { EjemplaresService, Ejemplar, Transaccion, NuevoEjemplar, Libro } from './../servicios'
+import { EjemplaresService, TransaccionesService, Ejemplar, Transaccion, NuevoEjemplar, Libro } from './../servicios'
 
 declare var $: any;
 declare var Materialize: any;
+
+
 
 @Component({
   templateUrl: './ejemplar.component.html',
@@ -23,7 +27,7 @@ declare var Materialize: any;
     }
     #modal, #modal1{
       height: 250px;
-      width: 350px;
+      width: 500px;
     }
   `]
 })
@@ -31,9 +35,10 @@ export class EjemplarComponent implements OnInit {
   ejemplar: Ejemplar;
   incidente: string;
   opcion: string;
+  permisoAgregar: boolean;
 
   nuevoEjemplar: NuevoEjemplar;
-
+  motivo: string;
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -42,10 +47,14 @@ export class EjemplarComponent implements OnInit {
   modalRetirar = new EventEmitter<string|MaterializeAction>();
   modalReportar = new EventEmitter<string|MaterializeAction>();
 
+  @ViewChild(DataTableDirective)dtElement: DataTableDirective;
+
   constructor(
     private ejemplarService: EjemplaresService,
+    private transaccionesService: TransaccionesService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) {
     // Para el sorting de las fechas.
     $.fn.dataTable.moment( 'DD/MM/YYYY' );
@@ -74,6 +83,11 @@ export class EjemplarComponent implements OnInit {
         }
       }
     };
+
+    // Determinar si el usuario posee permisos para resolver daños / extravíos
+    let usuario = this.cookieService.getObject('usuario');
+    let i = usuario['politicas'].indexOf(113);
+    this.permisoAgregar = i != -1;
   }
 
   ngOnInit() {
@@ -84,7 +98,6 @@ export class EjemplarComponent implements OnInit {
     this.ejemplarService.obtener(id).subscribe(
       ejemplar => {
         this.ejemplar = ejemplar;
-        this.ejemplar.estado = "Inhabilitado";
         setTimeout(()=>{this.dtTrigger.next();}, 500);
       },
       error => {
@@ -122,7 +135,30 @@ export class EjemplarComponent implements OnInit {
   // Método: retirar
   // Objetivo: Retirar el ejemplar.
   retirar(){
-    this.closeRetirar();
+    this.transaccionesService.retirar(this.ejemplar, this.motivo).subscribe(
+      (message)=>{
+        // Agregar la nueva transacción a los pedidos.
+        let nuevaTransaccion = new Transaccion;
+        nuevaTransaccion.fecha = new Date;
+        nuevaTransaccion.usuario = this.obtenerUsuario();
+        nuevaTransaccion.tipo = "Retiro";
+        nuevaTransaccion.nombre = this.motivo;
+        this.ejemplar.transacciones.push(nuevaTransaccion);
+
+        // Recargar la tabla de transacciones
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api)=>{dtInstance.destroy(); this.dtTrigger.next();});
+
+        // Cambiar el estado del ejemplar
+        this.ejemplar.estado = "Retirado";
+
+        Materialize.toast("Ejemplar retirado", 3000, "toastSuccess");
+        // Cerrar el modal
+        this.closeRetirar();
+      },
+      (error)=>{
+        Materialize.toast("Error al retirar el ejemplar", 3000, "toastError");
+      }
+    );
   }
 
   // Métodos para la ventana modal de confirmación de incidente
@@ -137,7 +173,126 @@ export class EjemplarComponent implements OnInit {
   // Método: reportar
   // Objetivo: Reportar el ejemplar.
   reportar(){
-    this.closeReportar();
+    this.transaccionesService.registrarPercance(this.ejemplar, this.ultimaTransaccion(), this.incidente).subscribe(
+      (message)=>{
+
+        // Agregar la nueva transacción a los pedidos.
+        let nuevaTransaccion = new Transaccion;
+        nuevaTransaccion.fecha = new Date;
+        nuevaTransaccion.usuario = this.obtenerUsuario();
+        nuevaTransaccion.tipo = this.incidente;
+        nuevaTransaccion.detalles = {};
+        nuevaTransaccion.detalles["userId"] = this.ultimaTransaccion().detalles.userId;
+        this.ejemplar.transacciones.push(nuevaTransaccion);
+
+        // Recargar la tabla de transacciones
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api)=>{dtInstance.destroy(); this.dtTrigger.next();});
+
+        // Cambiar el estado del ejemplar
+        this.ejemplar.estado = "Inhabilitado";
+
+        Materialize.toast("Percance reportado", 3000, "toastSuccess");
+        // Cerrar el modal
+        this.closeReportar();
+      },
+      (error)=>{
+        Materialize.toast("Error al reportar el percance", 3000, "toastError");
+      }
+    );
+  }
+
+  // Método: exonerar
+  // Objetivo: registrar la exoneración de un ejemplar
+  exonerar(){
+    this.transaccionesService.exonerar(this.ejemplar, this.ultimaTransaccion()).subscribe(
+      (message)=>{
+
+        // Agregar la nueva transacción a los pedidos.
+        let nuevaTransaccion = new Transaccion;
+        nuevaTransaccion.fecha = new Date;
+        nuevaTransaccion.usuario = this.obtenerUsuario();
+        nuevaTransaccion.tipo = "Exoneración";
+        nuevaTransaccion.detalles = {};
+        nuevaTransaccion.detalles["userId"] = this.ultimaTransaccion().detalles.userId;
+        this.ejemplar.transacciones.push(nuevaTransaccion);
+
+        // Recargar la tabla de transacciones
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api)=>{dtInstance.destroy(); this.dtTrigger.next();});
+
+        // Cambiar el estado del ejemplar
+        this.ejemplar.estado = "Retirado";
+
+        Materialize.toast("Exoneración registrada", 3000, "toastSuccess");
+        // Cerrar el modal
+        this.closeReportar();
+      },
+      (error)=>{
+        Materialize.toast("Error al registrar la exoneración", 3000, "toastError");
+      }
+    );
+  }
+
+  // Método: restaurar
+  // Objetivo: registrar la restauración de un ejemplar
+  restaurar(){
+    this.transaccionesService.restaurar(this.ejemplar, this.ultimaTransaccion()).subscribe(
+      (message)=>{
+
+        // Agregar la nueva transacción a los pedidos.
+        let nuevaTransaccion = new Transaccion;
+        nuevaTransaccion.fecha = new Date;
+        nuevaTransaccion.usuario = this.obtenerUsuario();
+        nuevaTransaccion.tipo = "Restauración";
+        nuevaTransaccion.detalles = {};
+        nuevaTransaccion.detalles["userId"] = this.ultimaTransaccion().detalles.userId;
+        this.ejemplar.transacciones.push(nuevaTransaccion);
+
+        // Recargar la tabla de transacciones
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api)=>{dtInstance.destroy(); this.dtTrigger.next();});
+
+        // Cambiar el estado del ejemplar
+        this.ejemplar.estado = "Inactivo";
+
+        Materialize.toast("Restauración registrada", 3000, "toastSuccess");
+        // Cerrar el modal
+        this.closeReportar();
+      },
+      (error)=>{
+        Materialize.toast("Error al registrar la restauración", 3000, "toastError");
+      }
+    );
+  }
+
+  // Método: sustituir
+  // Objetivo: registrar la sustitución de un ejemplar
+  sustituir(){
+    this.transaccionesService.sustituir(this.ejemplar, this.ultimaTransaccion(), this.nuevoEjemplar).subscribe(
+      (message)=>{
+
+        // Agregar la nueva transacción a los pedidos.
+        let nuevaTransaccion = new Transaccion;
+        nuevaTransaccion.fecha = new Date;
+        nuevaTransaccion.usuario = this.obtenerUsuario();
+        nuevaTransaccion.tipo = "Sustitución";
+        nuevaTransaccion.detalles = {};
+        nuevaTransaccion.detalles["userId"] = this.ultimaTransaccion().detalles.userId;
+        nuevaTransaccion.nombre = "Sustituido por ejemplar " + this.nuevoEjemplar.codigo,
+        this.ejemplar.transacciones.push(nuevaTransaccion);
+
+        // Recargar la tabla de transacciones
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api)=>{dtInstance.destroy(); this.dtTrigger.next();});
+
+        // Cambiar el estado del ejemplar
+        this.ejemplar.estado = "Retirado";
+
+        Materialize.toast("Sustitución registrada", 3000, "toastSuccess");
+        // Cerrar el modal
+        this.closeReportar();
+      },
+      (error)=>{
+        Materialize.toast("Error al registrar la sustitución", 3000, "toastError");
+      }
+    );
   }
 
   //Método: manejarOpciones
@@ -149,6 +304,19 @@ export class EjemplarComponent implements OnInit {
       this.nuevoEjemplar.libro = new Libro;
     }
     this.opcion = opcion;
+  }
+
+  // Método: ultimaTransaccion
+  // Objetivo: Obtener la ultima transacción del ejemplar
+  ultimaTransaccion() : Transaccion{
+    return this.ejemplar.transacciones[this.ejemplar.transacciones.length - 1];
+  }
+
+  // Método: obtenerUsuario
+  // Objetivo: Obtiene el nombre del usuario actual
+  obtenerUsuario(): string{
+    let u = this.cookieService.getObject('usuario');
+    return u['nombre'];
   }
 
 }

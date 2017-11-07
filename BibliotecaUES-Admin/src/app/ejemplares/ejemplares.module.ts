@@ -15,7 +15,7 @@ import { DataTablesModule } from 'angular-datatables';
 
 import { EjemplaresRoutingModule } from './ejemplares-routing.module';
 import { EjemplaresRootComponent, EjemplarBuscarComponent, EjemplarComponent, EjemplarNuevoComponent } from './componentes';
-import { EjemplaresService } from './servicios';
+import { EjemplaresService, TransaccionesService } from './servicios';
 
 import { LibroSeleccionModule } from './../libro-seleccion';
 
@@ -37,7 +37,8 @@ import { LibroSeleccionModule } from './../libro-seleccion';
     EjemplarNuevoComponent
   ],
   providers: [
-    EjemplaresService
+    EjemplaresService,
+    TransaccionesService
   ]
 })
 export class EjemplaresModule { }
