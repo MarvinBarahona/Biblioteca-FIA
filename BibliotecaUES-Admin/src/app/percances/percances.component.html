@@ -39,8 +39,7 @@
           <h5>Listado de daños y extravios</h5>
 
           <!-- Table -->
-          <!-- <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"> -->
-          <table class="row-border hover">
+          <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
             <thead>
               <tr>
                 <th>Ejemplar</th>
@@ -57,13 +56,13 @@
                 <p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Cargando datos...</p>
               </div>
 
-              <!-- Adquisiciones -->
-              <tr>
-                <td><a>Código de barra</a></td>
-                <td>Libro</td>
-                <td>Nombre del prestamista</td>
-                <td>.fecha | date:"dd/MM/y"</td>
-                <td>S/N</td>
+              <!-- Percances -->
+              <tr *ngFor="let percance of percances">
+                <td><a [routerLink]="['/ejemplares/'+percance.ejemplar.id]">{{percance.ejemplar.codigo}}</a></td>
+                <td>{{percance.ejemplar.libro.titulo}}, {{percance.ejemplar.libro.edicion}}ed</td>
+                <td>{{percance.prestamista}}</td>
+                <td>{{percance.fecha}} | date:"dd/MM/y"</td>
+                <td>{{percance.resuelto? "Sí" : "No"}}</td>
               </tr>
 
             </tbody>

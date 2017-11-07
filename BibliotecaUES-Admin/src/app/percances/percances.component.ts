@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Rx';
 
-// import {  } from './../servicios';
+import { PercancesService, Percance } from './servicios';
 
 declare var $: any;
 
@@ -17,12 +17,14 @@ declare var $: any;
 })
 
 export class PercancesComponent implements OnInit {
+  percances: Percance[];
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
   constructor(
-    private router: Router
+    private router: Router,
+    private percancesService: PercancesService
   ) {
     // Para el sorting de las fechas.
     $.fn.dataTable.moment( 'DD/MM/YYYY' );
@@ -32,6 +34,7 @@ export class PercancesComponent implements OnInit {
       pageLength: 10,
       pagingType: 'simple_numbers',
       lengthMenu: [10, 15, 20],
+      order: [[4, "asc"], [3, "desc"]],
       language: {
         "emptyTable": "Sin registros disponibles en la tabla",
         "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
@@ -51,6 +54,13 @@ export class PercancesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    // Llamar al servicio
+    this.percancesService.obtenerTodos().subscribe(
+      percances => {
+        // Asignar los percances y refrescar la tabla;
+        this.percances = percances;
+        this.dtTrigger.next();
+      }
+    );
   }
 }

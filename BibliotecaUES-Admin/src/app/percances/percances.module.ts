@@ -15,7 +15,7 @@ import { DataTablesModule } from 'angular-datatables';
 
 import { PercancesRoutingModule } from './percances-routing.module';
 import { PercancesComponent } from './percances.component';
-// import { PercancesService } from './servicios';
+import { PercancesService } from './servicios';
 
 @NgModule({
   imports: [
@@ -31,7 +31,7 @@ import { PercancesComponent } from './percances.component';
     PercancesComponent
   ],
   providers: [
-    // PercancesService
+    PercancesService
   ]
 })
 export class PercancesModule { }
