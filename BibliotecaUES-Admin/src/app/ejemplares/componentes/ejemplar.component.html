@@ -28,8 +28,7 @@
         <div class="row">
           <button *ngIf="ejemplar.estado=='Prestado'" class="waves-effect waves-light btn col m2 offset-m1 s12" (click)="openReportar('daño')">Daño</button>
           <button *ngIf="ejemplar.estado=='Prestado'" class="waves-effect waves-light btn col m2 offset-m1 s12" (click)="openReportar('extravío')">Extravío</button>
-          <button class="waves-effect waves-light btn col m3 offset-m1 s12" (click)="habilitar(true)">Reponer ejemplar</button>
-          <button class="waves-effect waves-light btn col m2 offset-m1 s12" (click)="openRetirar()">Retirar</button>
+          <button *ngIf="ejemplar.estado=='Inactivo'" class="waves-effect waves-light btn col m2 offset-m1 s12" (click)="openRetirar()">Retirar</button>
         </div>
       </div>
       <!-- /card-panel -->
@@ -37,7 +36,7 @@
   </div>
 
   <!-- Apartado de resolución de daño/extravío -->
-  <div class="row" *ngIf="resolver">
+  <div class="row" *ngIf="ejemplar.estado == 'Inhabilitado'">
     <div class="col s12 m12 l12">
       <div class="card-panel">
 
@@ -61,41 +60,47 @@
 
         <!-- Exonerar -->
         <div class="row" *ngIf="opcion=='exonerar'">
-          <strong>¿Exonerar la reposición?</strong>
-          <button type="submit" class="btn waves-effect waves-green">Aceptar</button>
+          <strong>¿Exonerar la reposición?</strong><br>
+          <button type="submit" class="btn waves-effect waves-green">Exonerar</button>
         </div>
 
         <!-- Reponer con la misma versión -->
         <div class="row" *ngIf="opcion=='igual'">
+          <strong>¿Reponer con un ejemplar de la misma edición?</strong><br>
           <button type="submit" class="btn waves-effect waves-green">Reponer</button>
         </div>
 
         <!-- Reponer con una versión mayor -->
         <div class="row" *ngIf="opcion=='mayor'">
-          <!-- Seleccionar libro -->
-          <div class="row">
-            <div class="input-field col m6 s7 offset-m1">
-              <strong>Libro: </strong><br>
-              <input id="libro" type="text" name="libro" readonly required>
+          <form #nuevoEjemplarForm="ngForm">
+            
+            <!-- Seleccionar libro -->
+            <div class="row">
+              <div class="input-field col m6 s7 offset-m1">
+                <strong>Libro: </strong><br>
+                <input id="libro" type="text" name="libro" [(ngModel)]="nuevoEjemplar.libro.titulo" readonly required>
+              </div>
+              <a class="waves-effect waves-light btn col m3 s4 offset-m1 btnSelect" (click)="openSeleccion()">Seleccionar</a>
             </div>
-            <a class="waves-effect waves-light btn col m3 s4 offset-m1 btnSelect" (click)="openSeleccion()">Seleccionar</a>
-          </div>
 
-          <!-- Código de barras -->
-          <div class="row">
-            <div class="input-field col offset-m1 s6">
-              <input id="codigo" name="codigo" type="text" class="validate" pattern="^[\d]{8}$" required>
-              <label for="codigo" data-error="Ingrese 8 dígitos">Código de barras</label>
+            <!-- Código de barras -->
+            <div class="row">
+              <div class="input-field col offset-m1 s6">
+                <input id="codigo" name="codigo" type="text" class="validate" pattern="^[\d]{8}$" [(ngModel)]="nuevoEjemplar.codigo" required>
+                <label for="codigo" data-error="Ingrese 8 dígitos">Código de barras</label>
+              </div>
             </div>
-          </div>
 
-          <!-- Acciones -->
-          <div class="row">
-            <div class="center">
-              <button type="submit" class="btn waves-effect waves-green" >Guardar</button>
+            <!-- Acciones -->
+            <div class="row">
+              <div class="center">
+                <button type="submit" class="btn waves-effect waves-green" [disabled]="!nuevoEjemplarForm.form.valid">Guardar</button>
+              </div>
             </div>
-          </div>
+
+          </form>
         </div>
+        <!-- /Reponer edición mayor -->
 
       </div>
       <!-- /card-panel -->
@@ -156,6 +161,16 @@
     </div>
   </div>
 </ng-template>
+
+<!-- Ventana modal para agregar libro -->
+<div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalSeleccion">
+  <div class="modal-content">
+    <libro-seleccion (eventEmitter)='onNotify($event)'></libro-seleccion>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-light btn-flat" (click)="closeSeleccion()">Cerrar</a>
+  </div>
+</div>
 
 <!-- Ventana modal para asegurar la acción de retirar -->
 <div id="modal" class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalRetirar">

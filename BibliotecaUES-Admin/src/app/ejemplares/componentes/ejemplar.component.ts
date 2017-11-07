@@ -9,9 +9,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 import { Subject } from 'rxjs/Rx';
 
-import { EjemplaresService, Ejemplar, Transaccion } from './../servicios'
+import { EjemplaresService, Ejemplar, Transaccion, NuevoEjemplar, Libro } from './../servicios'
 
 declare var $: any;
+declare var Materialize: any;
 
 @Component({
   templateUrl: './ejemplar.component.html',
@@ -29,12 +30,15 @@ declare var $: any;
 export class EjemplarComponent implements OnInit {
   ejemplar: Ejemplar;
   incidente: string;
-  resolver: boolean;
   opcion: string;
+
+  nuevoEjemplar: NuevoEjemplar;
+
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
+  modalSeleccion = new EventEmitter<string | MaterializeAction>();
   modalRetirar = new EventEmitter<string|MaterializeAction>();
   modalReportar = new EventEmitter<string|MaterializeAction>();
 
@@ -43,7 +47,6 @@ export class EjemplarComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.resolver = false;
     // Para el sorting de las fechas.
     $.fn.dataTable.moment( 'DD/MM/YYYY' );
 
@@ -52,7 +55,9 @@ export class EjemplarComponent implements OnInit {
       pageLength: 10,
       pagingType: 'simple_numbers',
       lengthMenu: [10, 15, 20],
-      // order: [[1, "desc"]],
+      searching: false,
+      order:[1, "asc"],
+      ordering: false,
       language: {
         "emptyTable": "Sin registros disponibles en la tabla",
         "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
@@ -79,7 +84,8 @@ export class EjemplarComponent implements OnInit {
     this.ejemplarService.obtener(id).subscribe(
       ejemplar => {
         this.ejemplar = ejemplar;
-        this.dtTrigger.next();
+        this.ejemplar.estado = "Inhabilitado";
+        setTimeout(()=>{this.dtTrigger.next();}, 500);
       },
       error => {
         //Si el ejemplar no existe
@@ -88,6 +94,21 @@ export class EjemplarComponent implements OnInit {
         }
       }
     );
+  }
+
+  // Método: onNotify
+  // Objetivo: Escucha el evento emitido por el componente libro-seleccion
+  onNotify(libro: Libro): void {
+    this.nuevoEjemplar.libro = libro;
+    Materialize.toast("'" + libro.titulo + "' asignado al nuevo ejemplar", 3000, 'toastSuccess');
+  }
+
+  // Métodos para la ventana modal de selección de selección de libro
+  openSeleccion() {
+    this.modalSeleccion.emit({ action: "modal", params: ['open'] });
+  }
+  closeSeleccion() {
+    this.modalSeleccion.emit({ action: "modal", params: ['close'] });
   }
 
   // Métodos para la ventana modal de confirmación de retiro
@@ -119,15 +140,14 @@ export class EjemplarComponent implements OnInit {
     this.closeReportar();
   }
 
-  //Método: habilitar
-  //Objetivo: Mostrar las opciones existentes para reponer un ejemplar
-  habilitar(resolver: boolean){
-    this.resolver = resolver;
-  }
-
   //Método: manejarOpciones
   // Objetivo: Habilitar elementos según sea el caso
   manejarOpciones(opcion: string){
+    if(opcion == 'mayor'){
+      // Crear un nuevo ejemplar y asignarle un nuevo libro.
+      this.nuevoEjemplar = new NuevoEjemplar;
+      this.nuevoEjemplar.libro = new Libro;
+    }
     this.opcion = opcion;
   }
 
