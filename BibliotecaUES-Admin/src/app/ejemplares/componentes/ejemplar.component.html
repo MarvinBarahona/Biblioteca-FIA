@@ -72,7 +72,7 @@
 
         <!-- Reponer con una versión mayor -->
         <div class="row" *ngIf="opcion=='mayor'">
-          <form #nuevoEjemplarForm="ngForm" (submit)="sustituir()">
+          <form #nuevoEjemplarForm="ngForm" (submit)="sustituir()" autocomplete="off">
 
             <!-- Seleccionar libro -->
             <div class="row">

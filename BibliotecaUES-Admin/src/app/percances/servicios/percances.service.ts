@@ -33,32 +33,31 @@ export class PercancesService {
       // Mapeando la salida
       (response: Response) => {
         let a = response.json();
-        let r = a[0];
         let percances = new Array<Percance>();
+        a.forEach((r) => {
+          r.forEach((_percance) => {
+            let percance = new Percance;
+            percance.id = _percance['id'];
+            percance.fecha = _percance['createdAt'];
+            percance.prestamista = _percance['users'][1]['userName'];
+            percance.tipo = _percance['type'];
 
-        r.forEach((_percance) => {
-          let percance = new Percance;
-          percance.id = _percance['id'];
-          percance.fecha = _percance['createdAt'];
-          percance.prestamista = _percance['users'][1]['userName'];
-          percance.resuelto = _percance['RelatedId']? true: false;
+            let ejemplar = new Ejemplar;
+            ejemplar.id = _percance['details']['copyId'];
+            ejemplar.codigo = _percance['details']['copyCode'];
 
-          let ejemplar = new Ejemplar;
-          ejemplar.id = _percance['copies'][0]['id'];
-          ejemplar.codigo = _percance['copies'][0]['code'];
+            let libro = new Libro;
+            libro.titulo = _percance['details']['bookTitle'];
+            libro.edicion = _percance['details']['bookEdition'];
+            ejemplar.libro = libro;
 
-          let libro = new Libro;
-          libro.titulo = _percance['details']['bookTitle'];
-          libro.edicion = _percance['details']['bookEdition'];
-          ejemplar.libro = libro;
+            percance.ejemplar = ejemplar;
 
-          percance.ejemplar = ejemplar;
-
-          percances.push(percance);
+            percances.push(percance);
+          });
         });
 
         return percances;
-      }
-    );
+      });
   }
 }

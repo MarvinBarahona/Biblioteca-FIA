@@ -9,6 +9,6 @@ export class Percance{
   id: number;
   prestamista: string;
   fecha: Date;
-  resuelto: boolean;
+  tipo: string;
   ejemplar: Ejemplar;
 }

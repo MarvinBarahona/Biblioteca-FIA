@@ -44,9 +44,9 @@
               <tr>
                 <th>Ejemplar</th>
                 <th>Libro</th>
+                <th>Tipo</th>
                 <th>Prestamista</th>
                 <th>Fecha</th>
-                <th>Resuelto?</th>
               </tr>
             </thead>
             <tbody>
@@ -60,9 +60,9 @@
               <tr *ngFor="let percance of percances">
                 <td><a [routerLink]="['/ejemplares/'+percance.ejemplar.id]">{{percance.ejemplar.codigo}}</a></td>
                 <td>{{percance.ejemplar.libro.titulo}}, {{percance.ejemplar.libro.edicion}}ed</td>
+                <td>{{percance.tipo}}</td>
                 <td>{{percance.prestamista}}</td>
-                <td>{{percance.fecha}} | date:"dd/MM/y"</td>
-                <td>{{percance.resuelto? "Sí" : "No"}}</td>
+                <td>{{percance.fecha | date:"dd/MM/y"}} </td>
               </tr>
 
             </tbody>

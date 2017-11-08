@@ -54,7 +54,9 @@ export class TransaccionesService {
       details: {
         bookTitle: ejemplar.libro.titulo,
         bookEdition: ejemplar.libro.edicion,
-        userId: transaccionAnterior.detalles.userId
+        userId: transaccionAnterior.detalles.userId,
+        copyId: ejemplar.id,
+        copyCode: ejemplar.codigo
       }
     });
 
@@ -102,7 +104,7 @@ export class TransaccionesService {
   // Método: sustituir
   // Objetivo: confirmar la sustitución de un ejemplar
   sustituir(ejemplar: Ejemplar, transaccionAnterior: Transaccion, nuevoEjemplar: NuevoEjemplar): Observable<string> {
-    let url = this.baseUrl + '/transactions/restores';
+    let url = this.baseUrl + '/transactions/substitutions';
 
     let q = JSON.stringify({
       substitution:{

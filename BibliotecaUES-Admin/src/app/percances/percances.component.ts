@@ -34,7 +34,7 @@ export class PercancesComponent implements OnInit {
       pageLength: 10,
       pagingType: 'simple_numbers',
       lengthMenu: [10, 15, 20],
-      order: [[4, "asc"], [3, "desc"]],
+      order: [[4, "desc"]],
       language: {
         "emptyTable": "Sin registros disponibles en la tabla",
         "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
