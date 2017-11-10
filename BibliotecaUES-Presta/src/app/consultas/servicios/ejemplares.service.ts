@@ -125,4 +125,19 @@ export class EjemplaresService {
       }
     );
   }
+
+  // Método: retirar
+  // Objetivo: Confirmar el retiro de un ejemplar
+  retirar(ejemplar: Ejemplar, motivo: string): Observable<string> {
+    let url = this.baseUrl + '/transactions/retirement';
+
+    let q = JSON.stringify({
+      copies: [ejemplar.id],
+      notes: motivo
+    });
+
+    return this.http.post(url, q, { headers: this.headers }).map(
+      res => res.json()
+    );
+  }
 }

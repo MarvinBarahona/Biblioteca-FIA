@@ -24,7 +24,7 @@
           </div>
         </div>
 
-        <div class="row" *ngIf="ejemplar.estado=='Disponible'">
+        <div class="row" *ngIf="ejemplar.estado=='Disponible' || ejemplar.estado=='Reservado'">
           <button type="button" class="btn waves-effect waves-green" (click)="openRetirar()">Retirar</button>
         </div>
       </div>
@@ -83,7 +83,7 @@
     <!-- Causa -->
     <div class="row">
       <div class="input-field">
-        <input id="causa" name="causa" type="text" class="validate" required>
+        <input id="causa" name="motivo" type="text" class="validate" [(ngModel)]="motivo">
         <label for="causa">Causa</label>
       </div>
     </div>

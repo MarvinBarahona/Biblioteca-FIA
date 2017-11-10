@@ -3,31 +3,35 @@
 *Dirección física: src\app\consultas\componentes\ejemplar.component.ts
 *Objetivo: Mostrar información de un ejemplar específico
 **/
-
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
+import { CookieService } from 'ngx-cookie';
 
-import { EjemplaresService, Ejemplar }  from './../servicios'
+import { EjemplaresService, Ejemplar, Transaccion }  from './../servicios'
+
+declare var Materialize: any;
 
 @Component({
   templateUrl: './ejemplar.component.html',
   styles: [`
     .modal{
       height: 250px;
-      width: 350px;
+      width: 500px;
     }
   `]
 })
 export class EjemplarComponent implements OnInit {
   ejemplar: Ejemplar;
+  motivo: string;
 
   modalRetirar = new EventEmitter<string|MaterializeAction>();
 
   constructor(
     private ejemplarService: EjemplaresService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) {}
 
   ngOnInit() {
@@ -59,6 +63,33 @@ export class EjemplarComponent implements OnInit {
   // Método: retirar
   // Objetivo: Retirar el ejemplar.
   retirar(){
-    this.closeRetirar();
+    this.ejemplarService.retirar(this.ejemplar, this.motivo).subscribe(
+      (message)=>{
+        // Agregar la nueva transacción a los pedidos.
+        let nuevaTransaccion = new Transaccion;
+        nuevaTransaccion.fecha = new Date;
+        nuevaTransaccion.usuario = this.obtenerUsuario();
+        nuevaTransaccion.tipo = "Retiro";
+        nuevaTransaccion.nombre = this.motivo;
+        this.ejemplar.transacciones.push(nuevaTransaccion);
+
+        // Cambiar el estado del ejemplar
+        this.ejemplar.estado = "Retirado";
+
+        Materialize.toast("Ejemplar retirado", 3000, "toastSuccess");
+        // Cerrar el modal
+        this.closeRetirar();
+      },
+      (error)=>{
+        Materialize.toast("Error al retirar el ejemplar", 3000, "toastError");
+      }
+    );
+  }
+
+  // Método: obtenerUsuario
+  // Objetivo: Obtiene el nombre del usuario actual
+  obtenerUsuario(): string{
+    let u = this.cookieService.getObject('usuario');
+    return u['nombre'];
   }
 }
