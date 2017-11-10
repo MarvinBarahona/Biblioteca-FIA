@@ -237,7 +237,7 @@ export class SugerenciasService {
         sugerencia.materias = materias;
 
         if(sugerencia.estado == "Aceptada"){
-          sugerencia.cantidad = r['totalOrders'];
+          sugerencia.cantidad = r['quantity'];
           sugerencia.precio = r['price'];
         }
 

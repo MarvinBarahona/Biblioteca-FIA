@@ -26,13 +26,16 @@
               </thead>
 
               <tbody>
-              <!-- Sugerencias pendientes de aprobación -->
-                <tr>
-                  <td><a [routerLink]="['/sugerencias/1']">Título del libro</a></td>
-                  <td>123-123-12-1234-4</td>
-                  <td>2</td>
-                  <td>3</td>
-                  <td>$99.99</td>
+                <!-- Sugerencias pendientes de aprobación -->
+                <tr *ngIf="!filtradas('Pendiente')">
+                  No hay registros que mostrar
+                </tr>
+                <tr *ngFor="let sugerencia of filtradas('Pendiente')">
+                  <td><a [routerLink]="['/sugerencias/'+sugerencia.id]">{{sugerencia.titulo}}</a></td>
+                  <td>{{sugerencia.isbn}}</td>
+                  <td>{{sugerencia.pedidos}}</td>
+                  <td>{{sugerencia.votos}}</td>
+                  <td>{{sugerencia.precio | currency:'USD':'symbol-narrow'}}</td>
                 </tr>
               </tbody>
 
@@ -45,7 +48,6 @@
           <div>
 
             <table class="row-border hover">
-
               <thead>
                 <tr>
                   <th>Libro</th>
@@ -56,12 +58,15 @@
               </thead>
 
               <tbody>
-              <!-- Sugerencias pendientes de aprobación -->
-                <tr>
-                  <td><a>Título del libro</a></td>
-                  <td>123-123-12-1234-4</td>
-                  <td>5</td>
-                  <td>$99.99</td>
+                <!-- Sugerencias pendientes de aprobación -->
+                <tr *ngIf="!filtradas('Aprobada')">
+                  No hay registros que mostrar
+                </tr>
+                <tr *ngFor="let sugerencia of filtradas('Aprobada')">
+                  <td><a [routerLink]="['/sugerencias/'+sugerencia.id]">{{sugerencia.titulo}}</a></td>
+                  <td>{{sugerencia.isbn}}</td>
+                  <td>{{sugerencia.cantidad}}</td>
+                  <td>{{sugerencia.precio}}</td>
                 </tr>
               </tbody>
 
@@ -84,11 +89,14 @@
               </thead>
 
               <tbody>
-              <!-- Sugerencias pendientes de aprobación -->
-                <tr>
-                  <td><a>Título del libro</a></td>
-                  <td>123-123-12-1234-4</td>
-                  <td>¿Por qué se rechazo la sugerencia?</td>
+                <!-- Sugerencias pendientes de aprobación -->
+                <tr *ngIf="!filtradas('Rechazada')">
+                  No hay registros que mostrar
+                </tr>
+                <tr *ngFor="let sugerencia of filtradas('Rechazada')">
+                  <td><a [routerLink]="['/sugerencias/'+sugerencia.id]">{{sugerencia.titulo}}</a></td>
+                  <td>{{sugerencia.isbn}}</td>
+                  <td>{{sugerencia.razonRechazo}}</td>
                 </tr>
               </tbody>
 
@@ -98,7 +106,8 @@
 
       </div>
 
-      <br><hr>
+      <br>
+      <hr>
 
       <div class="row">
         <div class="right">

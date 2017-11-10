@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Rx';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
-// import {  } from './../servicios';
+import { SugerenciasService, Sugerencia } from './../servicios';
 
 declare var $: any;
 
@@ -24,6 +24,7 @@ declare var $: any;
   `]
 })
 export class SugerenciasComponent implements OnInit {
+  sugerencias: Sugerencia[];
 
   modalFinalizar = new EventEmitter<string | MaterializeAction>();
 
@@ -31,7 +32,8 @@ export class SugerenciasComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
 
   constructor(
-    private router: Router
+    private router: Router,
+    private sugerenciasService: SugerenciasService
   ) {
     // Opciones del datatable
     this.dtOptions = {
@@ -60,6 +62,23 @@ export class SugerenciasComponent implements OnInit {
   ngOnInit(): void {
     // Inicializando Tabs
     $('ul.tabs').tabs();
+
+    // Llamar al servicio
+    this.sugerenciasService.obtenerTodos().subscribe(
+      sugerencias => {
+        // Asignar los percances y refrescar la tabla;
+        this.sugerencias = sugerencias;
+        this.dtTrigger.next();
+      }
+    );
+  }
+
+  // Método: filtradas
+  // Objetivo: Obtiene sugerencias filtradas por su estado
+  filtradas(estado: string){
+    let r = this.sugerencias? this.sugerencias.filter((sugerencia) => {return sugerencia.estado == estado}) : null;
+    if( r && r.length == 0) r = null;
+    return r;
   }
 
   // Métodos para la ventana modal de confirmación de cierre de ciclo

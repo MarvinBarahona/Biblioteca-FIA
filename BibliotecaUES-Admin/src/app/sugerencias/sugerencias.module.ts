@@ -15,7 +15,7 @@ import { DataTablesModule } from 'angular-datatables';
 
 import { SugerenciasRoutingModule } from './sugerencias-routing.module';
 import { SugerenciasRootComponent, SugerenciasComponent, SugerenciaComponent } from './componentes';
-// import { SugerenciasService } from './servicios';
+import { SugerenciasService } from './servicios';
 
 @NgModule({
   imports: [
@@ -33,7 +33,7 @@ import { SugerenciasRootComponent, SugerenciasComponent, SugerenciaComponent } f
     SugerenciaComponent
   ],
   providers: [
-    // SugerenciasService
+    SugerenciasService
   ]
 })
 export class SugerenciasModule { }
