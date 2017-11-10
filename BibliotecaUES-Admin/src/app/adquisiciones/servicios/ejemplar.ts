@@ -1,4 +1,8 @@
-// Clase ejemplar de Libros
+/*
+*Nombre de la clase: Ejemplar
+*Dirección: /src/app/adquisiciones/servicios/ejemplar.ts
+*Objetivo:
+*/
 
 import { Libro } from './';
 
