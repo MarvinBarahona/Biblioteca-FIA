@@ -5,10 +5,12 @@
 **/
 
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
-// import {  } from './../servicios';
+import { SugerenciasService, Sugerencia, Voto, Pedido } from './../servicios';
+
+declare var Materialize: any;
 
 @Component({
   templateUrl: './sugerencia.component.html',
@@ -20,18 +22,39 @@ import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
   `]
 })
 export class SugerenciaComponent implements OnInit {
+  sugerencia: Sugerencia;
+
+  precio: number;
+  cantidad: number;
+  razon: string;
 
   modalAprobar = new EventEmitter<string | MaterializeAction>();
   modalDenegar = new EventEmitter<string | MaterializeAction>();
 
   constructor(
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    private sugerenciasService: SugerenciasService
   ) {
 
   }
 
   ngOnInit(): void {
+    // Obtiene el id del sugerencia
+    let id = this.route.snapshot.params['id'];
 
+    // Llama al servicio
+    this.sugerenciasService.obtener(id).subscribe(
+      sugerencia =>{
+        this.sugerencia = sugerencia;
+      },
+      error =>{
+        // Si el sugerencia no existe
+        if(error.status == 404){
+          this.router.navigate(['/error404']);
+        }
+      }
+    );
   }
 
   // Métodos para la ventana modal para aprobar sugerencia
@@ -45,7 +68,26 @@ export class SugerenciaComponent implements OnInit {
   // Método: aprobar
   // Objetivo: Aprobar el ejemplar.
   aprobar(){
-    this.closeAprobar();
+    if(this.precio == null || this.precio < 1){
+      Materialize.toast("Ingrese un precio mayor que 1", 3000, "toastError");
+    }
+    else if(this.cantidad == null || this.cantidad < 1){
+      Materialize.toast("Ingrese una cantidad mayor que 1", 3000, "toastError");
+    }
+    else{
+      this.sugerencia.cantidad = this.cantidad;
+      this.sugerencia.precio = this.precio;
+      this.sugerenciasService.aprobar(this.sugerencia).subscribe(
+        (msg)=>{
+          this.sugerencia.estado = "Aceptada";
+          Materialize.toast("Sugerencia aprobada", 3000, "toastSuccess");
+          this.closeAprobar();
+        },
+        (error)=>{
+          Materialize.toast("Error al aprobar la sugerencia", 3000, "toastError");
+        }
+      );
+    }
   }
 
   // Métodos para la ventana modal para denegar sugerencia
@@ -59,6 +101,21 @@ export class SugerenciaComponent implements OnInit {
   // Método: denegar
   // Objetivo: Denegar sugerencia.
   denegar(){
-    this.closeDenegar();
+    if(!this.razon){
+      Materialize.toast("Ingrese la razón de la negación", 3000, "toastError");
+    }
+    else{
+      this.sugerencia.razonRechazo = this.razon;
+      this.sugerenciasService.rechazar(this.sugerencia).subscribe(
+        (msg)=>{
+          this.sugerencia.estado = "Rechazada";
+          Materialize.toast("Sugerencia rechazada", 3000, "toastSuccess");
+          this.closeDenegar();
+        },
+        (error)=>{
+          Materialize.toast("Error al rechazar la sugerencia", 3000, "toastError");
+        }
+      );
+    }
   }
 }

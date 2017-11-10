@@ -59,10 +59,10 @@
 
               <tbody>
                 <!-- Sugerencias pendientes de aprobación -->
-                <tr *ngIf="!filtradas('Aprobada')">
+                <tr *ngIf="!filtradas('Aceptada')">
                   No hay registros que mostrar
                 </tr>
-                <tr *ngFor="let sugerencia of filtradas('Aprobada')">
+                <tr *ngFor="let sugerencia of filtradas('Aceptada')">
                   <td><a [routerLink]="['/sugerencias/'+sugerencia.id]">{{sugerencia.titulo}}</a></td>
                   <td>{{sugerencia.isbn}}</td>
                   <td>{{sugerencia.cantidad}}</td>

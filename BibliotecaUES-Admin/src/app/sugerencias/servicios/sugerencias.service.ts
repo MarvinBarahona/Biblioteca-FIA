@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
 import { environment } from './../../../environments/environment';
 
 import { CookieService } from 'ngx-cookie';
-import { Sugerencia, Materia } from './';
+import { Sugerencia, Voto, Pedido } from './';
 
 @Injectable()
 export class SugerenciasService {
@@ -37,7 +37,7 @@ export class SugerenciasService {
         // Mapeando la salida
         let sugerencias = new Array<Sugerencia>();
 
-        r.forEach((_sugerencia) =>{
+        r.forEach((_sugerencia) => {
           let sugerencia = new Sugerencia;
 
           sugerencia.id = _sugerencia['id'];
@@ -49,11 +49,11 @@ export class SugerenciasService {
           sugerencia.estado = _sugerencia['state'];
           sugerencia.precio = _sugerencia['price'];
 
-          if(sugerencia.estado == "Aprobada"){
+          if (sugerencia.estado == "Aceptada") {
             sugerencia.cantidad = _sugerencia['quantity'];
           }
 
-          if(sugerencia.estado == "Rechazada"){
+          if (sugerencia.estado == "Rechazada") {
             sugerencia.razonRechazo = r['reason'];
           }
 
@@ -85,32 +85,36 @@ export class SugerenciasService {
         sugerencia.isbn = r['isbn'];
         sugerencia.editorial = r['publisher'];
         sugerencia.estado = r['state'];
-        sugerencia.materias = [];
-
-        // Mapear materias con sus respectivos votos y pedidos
-        let materias = new Array<Materia>();
+        sugerencia.votos = r['upvotes'];
+        sugerencia.pedidos = r['orders'];
+        sugerencia.precio = r['price'];
+        sugerencia.detalleVotos = [];
+        sugerencia.detallePedidos = [];
 
         r['Courses'].forEach((_materia) => {
-          let materia = new Materia;
-          materia.id= _materia['id'];
-          materia.nombre = _materia['name'];
-          materia.votos = _materia['upvotes'];
-          materia.pedidos = _materia['orders'];
-          _materia['votes'].forEach((voto)=>{
+          let v = _materia['upvotes'];
+          if (v > 0) {
+            let voto = new Voto;
+            voto.nombre = _materia['name'];
+            voto.cantidad = v;
+            sugerencia.detalleVotos.push(voto);
+          }
 
+          _materia['votes'].forEach((_actividad) => {
+            if (_actividad['priority']) {
+              let pedido = new Pedido;
+              pedido.nombre = _materia['name'];
+              pedido.docente = _actividad['userName'];
+              sugerencia.detallePedidos.push(pedido);
+            }
           });
-
-          materias.push(materia);
         });
 
-        sugerencia.materias = materias;
-
-        if(sugerencia.estado == "Aceptada"){
+        if (sugerencia.estado == "Aceptada") {
           sugerencia.cantidad = r['quantity'];
-          sugerencia.precio = r['price'];
         }
 
-        if(sugerencia.estado == "Rechazada"){
+        if (sugerencia.estado == "Rechazada") {
           sugerencia.razonRechazo = r['reason'];
         }
 
@@ -121,7 +125,47 @@ export class SugerenciasService {
 
   // Método: aprobar
   // Objetivo: aprobar una sugerencia pendiente
-  // aprobar(sugerencia: Sugerencia) : Observable<string> {
-  //
-  // }
+  aprobar(sugerencia: Sugerencia) : Observable<string> {
+    let url = this.baseUrl + '/suggestions/' + sugerencia.id;
+
+    let q = JSON.stringify({state: "Aceptada", price: sugerencia.precio, quantity: sugerencia.cantidad});
+
+    // Realizando GET
+    return this.http.put(url, q,{ headers: this.headers }).map(
+      (response: Response) => {
+        let msg = response.json();
+        return msg;
+      }
+    );
+  }
+
+  // Método: rechazar
+  // Objetivo: rechazar una sugerencia pendiente
+  rechazar(sugerencia: Sugerencia) : Observable<string> {
+    let url = this.baseUrl + '/suggestions/' + sugerencia.id;
+
+    let q = JSON.stringify({state: "Rechazada", reason: sugerencia.razonRechazo});
+
+    // Realizando GET
+    return this.http.put(url, q,{ headers: this.headers }).map(
+      (response: Response) => {
+        let msg = response.json();
+        return msg;
+      }
+    );
+  }
+
+  // Método: terminarCiclo
+  // Objetivo: terminar el ciclo, eliminando las sugerencias aprobadas y rechazadas.
+  terminarCiclo() : Observable<string> {
+    let url = this.baseUrl + '/suggestions/periods';
+
+    // Realizando GET
+    return this.http.post(url, {}, { headers: this.headers }).map(
+      (response: Response) => {
+        let msg = response.json();
+        return msg;
+      }
+    );
+  }
 }

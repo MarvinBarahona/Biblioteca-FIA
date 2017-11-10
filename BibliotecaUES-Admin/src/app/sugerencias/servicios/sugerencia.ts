@@ -3,7 +3,7 @@
 *Dirección física: src/app/sugerencias/servicios/sugerencia.ts
 **/
 
-import { Materia } from './';
+import { Voto, Pedido } from './';
 
 export class Sugerencia{
   id: number;
@@ -22,5 +22,6 @@ export class Sugerencia{
 
   razonRechazo: string;
 
-  materias: Materia[];
+  detalleVotos: Voto[];
+  detallePedidos: Pedido[];
 }

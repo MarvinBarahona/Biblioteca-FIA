@@ -1,3 +1,4 @@
 export { SugerenciasService } from './sugerencias.service'
-export { Materia } from './materia';
+export { Voto } from './voto';
+export { Pedido } from './pedido';
 export { Sugerencia } from './sugerencia';

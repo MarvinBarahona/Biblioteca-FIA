@@ -1,74 +1,98 @@
-<div class="row">
-  <div class="col s12 m12 l12">
-    <div class="card-panel">
+<div *ngIf="sugerencia; else elseSugerencia">
+  <div class="row">
+    <div class="col s12 m12 l12">
+      <div class="card-panel">
 
-      <!-- Información del libro -->
-      <div class="row">
-        <div class="col l4 offset-l1 m6 offset-m1 s12">
-          <p><strong>Título: </strong> asdfasdf</p>
-          <p><strong>Autor: </strong> Autor</p>
-          <p><strong>Editorial: </strong> Editorial</p>
+        <!-- Información de la sugerencia -->
+        <div class="row">
+          <div class="col l5 offset-l1 m6 offset-m1 s12">
+            <p><strong>Título: </strong>{{sugerencia.titulo}}</p>
+            <p><strong>Autor: </strong>{{sugerencia.autor}}</p>
+            <p><strong>Editorial: </strong>{{sugerencia.editorial}}</p>
+          </div>
+          <div class="col l5 offset-l1 m5 s12">
+            <p><strong>Edición: </strong>{{sugerencia.edicion}}</p>
+            <p><strong>ISBN: </strong>{{sugerencia.edicion}}</p>
+          </div>
         </div>
-        <div class="col l4 offset-l1 m5 s12">
-          <p><strong>Edición: </strong> Edición</p>
-          <p><strong>ISBN: </strong> ISBN</p>
-          <p><strong>Precio sugerido: </strong> Precio sugerido</p>
+
+        <div class="row">
+          <div class="col l3 offset-l1">
+            <p><strong>Estado: </strong>{{sugerencia.estado}}</p>
+          </div>
+
+          <div class="col l5 offset-l1">
+            <p *ngIf="sugerencia.estado == 'Pendiente'"><strong>Precio sugerido: </strong>{{sugerencia.precio | currency:'USD':'symbol-narrow'}}</p>
+            <p *ngIf="sugerencia.estado == 'Aceptada'"><strong>Aprobado: </strong>{{sugerencia.cantidad}} ejemplares por {{sugerencia.precio | currency:'USD':'symbol-narrow'}}</p>
+            <p *ngIf="sugerencia.estado == 'Rechazada'"><strong>Motivo: </strong>{{sugerencia.razonRechazo}}</p>
+          </div>
+        </div>
+
+        <!-- Pedidos -->
+        <div class="row">
+          <div class="col l11 offset-l1 s12">
+            <strong>Pedidos: {{sugerencia.pedidos}} pedidos totales</strong><br>
+            <ol type="a">
+              <li *ngFor="let pedido of sugerencia.detallePedidos">{{pedido.docente}} solicita para la materia '{{pedido.nombre}}'</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Votos -->
+        <div class="row">
+          <div class="col l9 offset-l1 s12">
+            <strong>Votos: {{sugerencia.votos}} votos totales</strong><br>
+            <ol type="a">
+              <li *ngFor="let voto of sugerencia.detalleVotos">{{voto.cantidad}} votos para la materia '{{voto.nombre}}'</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Acciones -->
+        <div class="row" *ngIf="sugerencia.estado == 'Pendiente'">
+          <div class="center">
+            <button type="button" class="btn waves-effect waves-green" (click)="openAprobar()">Aprobar</button>
+            <button type="button" class="btn waves-effect waves-green" (click)="openDenegar()">Denegar</button>
+          </div>
         </div>
       </div>
+      <!-- /card-panel -->
+    </div>
+    <!-- /col -->
+  </div>
+  <!-- row -->
+</div>
 
-      <!-- Pedidos -->
-      <div class="row">
-        <div class="col l1 offset-l1 m1 offset-m1 s12">
-          <strong>Pedidos: </strong>
-        </div>
-        <div class="col l9 m10 s12">
-          <p>Juan Pérez solicita 2 ejemplares para la materia 'Programación III'</p>
-          <p>Juana de Arco solicita 2 ejemplares para la materia 'Introducción a la Informática'</p>
-        </div>
-      </div>
-
-      <!-- Votos -->
-      <div class="row">
-        <div class="col l1 offset-l1 m1 offset-m1 s12">
-          <strong>Votos: </strong>
-        </div>
-        <div class="col l9 m10 s12">
-          <p>3 votos en la materia 'Programación III'</p>
-          <p>5 votos en la materia 'Introducción a la Informática'</p>
-        </div>
-      </div>
-
-      <!-- Acciones -->
-      <div class="row">
-        <div class="center">
-          <button type="button" class="btn waves-effect waves-green" (click)="openAprobar()">Aprobar</button>
-          <button type="button" class="btn waves-effect waves-green" (click)="openDenegar()">Denegar</button>
-        </div>
+<!-- Mensaje de espera -->
+<ng-template #elseSugerencia>
+  <div class="row">
+    <div class="col s8 m8 offset-s2 offset-m2">
+      <p>Cargando...</p>
+      <div class="progress">
+        <div class="indeterminate"></div>
       </div>
     </div>
-    <!-- /card-panel -->
   </div>
-  <!-- /col -->
-</div>
-<!-- row -->
-
+</ng-template>
 
 <!-- Ventana modal para aprobar un pedido -->
 <div class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalAprobar">
   <div class="modal-content">
-    <h5>Aprobar sugerencia</h5>
+    <h5>Aprobar sugerencia</h5><br>
     <!-- Precio -->
-    <div class="input-field">
-      <input id="precio" name="precio" type="number" class="validate" min="1" max="100" step="0.01" required>
-      <label for="precio" data-error="Valor entre 1 y 100">Precio</label>
-    </div>
-
-    <!-- Cantidad -->
-    <div class="input-field">
-      <input id="cantidad" name="cantidad" type="number" class="validate" min="1" max="10" required>
-      <label for="cantidad" data-error="Valor entre 1 y 10">Cantidad</label>
+    <div class="row">
+      <div class="input-field col l4 offset-l2">
+        <input id="precio" name="precio" [(ngModel)]="precio" type="number" class="validate" min="1" step="0.01" required>
+        <label for="precio" data-error="Valor mayor que 0">Precio</label>
+      </div>
+      <!-- Cantidad -->
+      <div class="input-field col l4 offset-l1">
+        <input id="cantidad" name="cantidad" [(ngModel)]="cantidad" type="number" class="validate" min="1" required>
+        <label for="cantidad" data-error="Valor mayor que 0">Cantidad</label>
+      </div>
     </div>
   </div>
+
   <div class="modal-footer">
     <a class="btn waves-effect waves-light" (click)="aprobar()">Aceptar</a>
     <a class="btn waves-effect waves-light" (click)="closeAprobar()">Cerrar</a>
@@ -82,7 +106,7 @@
     <!-- Razón -->
     <div class="row">
       <div class="input-field col l8 offset-l2 s12">
-        <input id="razon" name="razon" type="text" class="validate" required>
+        <input id="razon" name="razon" [(ngModel)]="razon" type="text" class="validate" required>
         <label for="razon">Razón</label>
       </div>
     </div>

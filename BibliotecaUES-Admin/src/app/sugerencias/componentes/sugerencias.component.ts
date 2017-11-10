@@ -13,6 +13,7 @@ import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 import { SugerenciasService, Sugerencia } from './../servicios';
 
 declare var $: any;
+declare var Materialize: any;
 
 @Component({
   templateUrl: './sugerencias.component.html',
@@ -28,35 +29,10 @@ export class SugerenciasComponent implements OnInit {
 
   modalFinalizar = new EventEmitter<string | MaterializeAction>();
 
-  dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject();
-
   constructor(
     private router: Router,
     private sugerenciasService: SugerenciasService
   ) {
-    // Opciones del datatable
-    this.dtOptions = {
-      pageLength: 10,
-      pagingType: 'simple_numbers',
-      lengthMenu: [10, 15, 20],
-      order: [[3, 'asc']],
-      language: {
-        "emptyTable": "Sin registros disponibles en la tabla",
-        "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-        "infoEmpty": "",
-        "infoFiltered": "(filtrados de _MAX_ totales )",
-        "lengthMenu": "Mostrando _MENU_ registros",
-        "search": "Buscar:",
-        "zeroRecords": "Búsqueda sin resultados",
-        "paginate": {
-          "first": "Primero",
-          "last": "Último",
-          "next": "Siguiente",
-          "previous": "Anterior"
-        }
-      }
-    };
   }
 
   ngOnInit(): void {
@@ -68,7 +44,6 @@ export class SugerenciasComponent implements OnInit {
       sugerencias => {
         // Asignar los percances y refrescar la tabla;
         this.sugerencias = sugerencias;
-        this.dtTrigger.next();
       }
     );
   }
@@ -92,6 +67,21 @@ export class SugerenciasComponent implements OnInit {
   // Método: reportar
   // Objetivo: Reportar el ejemplar.
   finalizar() {
-    this.closeFinalizar();
+    this.sugerenciasService.terminarCiclo().subscribe(
+      (msg)=>{
+        Materialize.toast("Ciclo terminado", 3000, 'toastSuccess');
+        // Llamar al servicio
+        this.sugerenciasService.obtenerTodos().subscribe(
+          sugerencias => {
+            // Asignar los percances y refrescar la tabla;
+            this.sugerencias = sugerencias;
+          }
+        );
+        this.closeFinalizar();
+      },
+      (error)=>{
+        Materialize.toast("Error al terminar ciclo", 3000, 'toastError');
+      }
+    );
   }
 }
