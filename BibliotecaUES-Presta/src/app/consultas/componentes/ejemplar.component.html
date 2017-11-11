@@ -24,7 +24,7 @@
           </div>
         </div>
 
-        <div class="row" *ngIf="ejemplar.estado=='Disponible' || ejemplar.estado=='Reservado'">
+        <div class="row" *ngIf="ejemplar.estado=='Disponible'">
           <button type="button" class="btn waves-effect waves-green" (click)="openRetirar()">Retirar</button>
         </div>
       </div>

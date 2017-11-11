@@ -54,7 +54,7 @@ export class SugerenciasService {
           }
 
           if (sugerencia.estado == "Rechazada") {
-            sugerencia.razonRechazo = r['reason'];
+            sugerencia.razonRechazo = _sugerencia['reason'];
           }
 
           sugerencias.push(sugerencia);
@@ -163,8 +163,7 @@ export class SugerenciasService {
     // Realizando GET
     return this.http.post(url, {}, { headers: this.headers }).map(
       (response: Response) => {
-        let msg = response.json();
-        return msg;
+        return "success";
       }
     );
   }
