@@ -11,5 +11,6 @@ export class Ejemplar{
   codigo: string;
   estado: string;
   ultimaTransaccion: Date;
+  agregar: boolean;
   libro: Libro;
 }

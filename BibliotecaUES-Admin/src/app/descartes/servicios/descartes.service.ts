@@ -128,7 +128,7 @@ export class DescartesService {
 
   // Método: obtenerCandidatas
   // Objetivo: obtener todos los ejemplares candidatos a ser descartados
-  obtenerCandidata(): Observable<Ejemplar[]> {
+  obtenerCandidatos(): Observable<Ejemplar[]> {
     let url = this.baseUrl + '/copies/discards';
 
     // Realizando GET
@@ -144,6 +144,7 @@ export class DescartesService {
           ejemplar.codigo = _ejemplar['barcode'];
           ejemplar.estado = _ejemplar['state'];
           ejemplar.ultimaTransaccion = _ejemplar['lastTransaction'];
+          ejemplar.agregar = false;
 
           // Mapear el libro
           let rb = _ejemplar['book'];
