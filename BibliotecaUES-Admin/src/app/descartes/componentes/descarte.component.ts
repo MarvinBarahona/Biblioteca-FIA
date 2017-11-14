@@ -5,9 +5,9 @@
 **/
 
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
-// import {  } from './../servicios';
+import { DescartesService, Descarte } from './../servicios';
 
 
 @Component({
@@ -15,15 +15,30 @@ import { Router } from '@angular/router';
 })
 
 export class DescarteComponent implements OnInit {
+  descarte: Descarte;
 
   constructor(
-    private router: Router
-  ) {
-
-  }
+    private router: Router,
+    private route: ActivatedRoute,
+    private descartesService: DescartesService
+  ) { }
 
   ngOnInit(): void {
+    // Obtiene el id del intercambio
+    let id = this.route.snapshot.params['id'];
 
+    // Llama al servicio
+    this.descartesService.obtener(id).subscribe(
+      descarte =>{
+        this.descarte = descarte;
+      },
+      error =>{
+        //Si el descarte no existe
+        if(error.status == 404){
+          this.router.navigate(['/error404'], { skipLocationChange: true });
+        }
+      }
+    );
   }
 
 }

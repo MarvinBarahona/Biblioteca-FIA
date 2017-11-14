@@ -1,56 +1,71 @@
-<div class="row">
-  <div class="col s12 m12 l12">
-    <div class="card-panel">
-      <div class="row center">
-        <h5>Descarte de junio de 2017</h5>
-      </div>
-
-      <div class="row">
-        <div class="col m5 offset-m1">
-          <strong>Aprobado por: </strong> Juan Pérez
+<div *ngIf="descarte; else elseDescarte">
+  <div class="row">
+    <div class="col s12 m12 l12">
+      <div class="card-panel">
+        <div class="row center">
+          <h5>{{descarte.nombre}}</h5>
         </div>
 
-        <div class="col m3">
-          <strong>Fecha: </strong> dd/mm/aaaa
+        <div class="row">
+          <div class="col m5 offset-m1">
+            <strong>Aprobado por: </strong> {{descarte.usuario}}
+          </div>
+
+          <div class="col m3">
+            <strong>Fecha: </strong> {{descarte.fecha | date:'dd/MM/y'}}
+          </div>
+        </div>
+
+        <div class="row">
+          <strong>Ejemplares:</strong>
+        </div>
+
+        <br>
+        <div class="row">
+          <div class="col m8 offset-m1 s12">
+            <!-- Table -->
+            <table class="row-border hover">
+              <thead>
+                <tr>
+                  <th>Título</th>
+                  <th>Código</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <!-- Mensaje de carga -->
+                <div>
+                  <p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Cargando datos...</p>
+                </div>
+
+                <!-- Ejemplares -->
+                <tr *ngFor="let ejemplar of descarte.ejemplares">
+                  <td>{{ejemplar.libro.titulo}}, {{ejemplar.libro.edicion}}ed</td>
+                  <td>{{ejemplar.codigo}}</td>
+                </tr>
+
+              </tbody>
+            </table>
+            <!-- /Table -->
+          </div>
         </div>
       </div>
+      <!-- /card-panel -->
+    </div>
+    <!-- /col -->
+  </div>
+  <!-- row -->
+</div>
 
-      <div class="row">
-        <strong>Ejemplares:</strong>
-      </div>
 
-      <br>
-      <div class="row">
-        <div class="col m8 offset-m1 s12">
-          <!-- Table -->
-          <table class="row-border hover">
-            <thead>
-              <tr>
-                <th>Título</th>
-                <th>Código</th>
-              </tr>
-            </thead>
-            <tbody>
-
-              <!-- Mensaje de carga -->
-              <div>
-                <p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Cargando datos...</p>
-              </div>
-
-              <!-- Ejemplares -->
-              <tr>
-                <td>El principito</td>
-                <td>12345678</td>
-              </tr>
-
-            </tbody>
-          </table>
-          <!-- /Table -->
-        </div>
+<!-- Mensaje de espera -->
+<ng-template #elseDescarte>
+  <div class="row">
+    <div class="col s8 m8 offset-s2 offset-m2">
+      <p>Cargando...</p>
+      <div class="progress">
+        <div class="indeterminate"></div>
       </div>
     </div>
-    <!-- /card-panel -->
   </div>
-  <!-- /col -->
-</div>
-<!-- row -->
+</ng-template>
