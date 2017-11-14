@@ -9,5 +9,7 @@ import { Libro } from './';
 export class Ejemplar{
   id: number;
   codigo: string;
+  estado: string;
+  ultimaTransaccion: Date;
   libro: Libro;
 }

@@ -2,8 +2,7 @@
   <div class="col s12 m12 l12">
     <div class="card-panel">
       <!-- Table -->
-      <!-- <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"> -->
-      <table class="row-border hover">
+      <table class="row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
         <thead>
           <tr>
             <th>Proceso</th>
@@ -19,10 +18,10 @@
           </div>
 
           <!-- Adquisiciones -->
-          <tr>
-            <td><a [routerLink]="'/descartes/1'">Descarte de junio de 2017</a></td>
-            <td>Juan Pérez</td>
-            <td>.fecha | date:"dd/MM/y"</td>
+          <tr *ngFor="let descarte of descartes">
+            <td><a [routerLink]="['/descartes/'+descarte.id]">{{descarte.nombre}}</a></td>
+            <td>{{descarte.usuario}}</td>
+            <td>{{descarte.fecha | date:"dd/MM/y"}}</td>
           </tr>
 
         </tbody>

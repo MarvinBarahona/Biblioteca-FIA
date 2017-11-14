@@ -15,7 +15,7 @@ import { DataTablesModule } from 'angular-datatables';
 
 import { DescartesRoutingModule } from './descartes-routing.module';
 import { DescartesRootComponent, DescartesComponent, DescarteNuevoComponent, DescarteComponent } from './componentes/';
-// import { DescartesService } from './servicios';
+import { DescartesService } from './servicios';
 
 
 @NgModule({
@@ -35,7 +35,7 @@ import { DescartesRootComponent, DescartesComponent, DescarteNuevoComponent, Des
     DescarteComponent
   ],
   providers: [
-    // DescartesService
+    DescartesService
   ]
 })
 export class DescartesModule { }

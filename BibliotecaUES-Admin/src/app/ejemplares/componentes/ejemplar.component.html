@@ -137,7 +137,7 @@
                 <a *ngIf="transaccion.tipo=='Salida'" [routerLink]="['/intercambios/salida/'+transaccion.id]">{{transaccion.nombre}}</a>
                 <p *ngIf="transaccion.tipo=='Retiro'">{{transaccion.nombre}}</p>
                 <p *ngIf="transaccion.tipo=='Sustitución'">{{transaccion.nombre}}</p>
-                <a *ngIf="transaccion.tipo=='Reposición'" [routerLink]="['/ejemplares/'+transaccion.detalles.copyId]">{{transaccion.nombre}}</a>
+                <p *ngIf="transaccion.tipo=='Reposición'">{{transaccion.nombre}}</p>
                 <a *ngIf="transaccion.tipo=='Descarte'" [routerLink]="['/descartes/'+transaccion.id]">{{transaccion.nombre}}</a>
               </td>
             </tr>
