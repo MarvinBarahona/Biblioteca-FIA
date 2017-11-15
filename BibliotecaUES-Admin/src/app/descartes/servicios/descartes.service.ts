@@ -143,7 +143,7 @@ export class DescartesService {
           ejemplar.id = _ejemplar['id'];
           ejemplar.codigo = _ejemplar['barcode'];
           ejemplar.estado = _ejemplar['state'];
-          ejemplar.ultimaTransaccion = _ejemplar['lastTransaction'];
+          ejemplar.ultimaTransaccion = _ejemplar['updatedAt'];
           ejemplar.agregar = false;
 
           // Mapear el libro

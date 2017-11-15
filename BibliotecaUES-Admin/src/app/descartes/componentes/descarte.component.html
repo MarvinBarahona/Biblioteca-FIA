@@ -15,33 +15,28 @@
             <strong>Fecha: </strong> {{descarte.fecha | date:'dd/MM/y'}}
           </div>
         </div>
+        <br>
 
         <div class="row">
           <strong>Ejemplares:</strong>
         </div>
 
-        <br>
         <div class="row">
           <div class="col m8 offset-m1 s12">
             <!-- Table -->
             <table class="row-border hover">
               <thead>
                 <tr>
-                  <th>Título</th>
                   <th>Código</th>
+                  <th>Título</th>
                 </tr>
               </thead>
               <tbody>
 
-                <!-- Mensaje de carga -->
-                <div>
-                  <p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Cargando datos...</p>
-                </div>
-
                 <!-- Ejemplares -->
                 <tr *ngFor="let ejemplar of descarte.ejemplares">
-                  <td>{{ejemplar.libro.titulo}}, {{ejemplar.libro.edicion}}ed</td>
-                  <td>{{ejemplar.codigo}}</td>
+                  <td><a [routerLink]="['/ejemplares/'+ejemplar.id]">{{ejemplar.codigo}}</a></td>
+                  <td><a [routerLink]="['/libros/'+ejemplar.libro.id]">{{ejemplar.libro.titulo}}, {{ejemplar.libro.edicion}}ed</a></td>
                 </tr>
 
               </tbody>
