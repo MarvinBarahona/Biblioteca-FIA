@@ -12,7 +12,7 @@
       <div class="row">
         <!-- Pendientes -->
         <div id="pendientes" class="col s12">
-          <div>
+          <div class="row">
             <table class="row-border hover">
 
               <thead>
@@ -41,11 +41,15 @@
 
             </table>
           </div>
+
+          <div class="left">
+            <button type="submit" class="btn waves-effect waves-green" (click)="reporteSugerencias()">Generar reporte de sugerencias</button>
+          </div>
         </div>
 
         <!-- Aprobadas -->
         <div id="aprobadas" class="col s12">
-          <div>
+          <div class="row">
 
             <table class="row-border hover">
               <thead>
@@ -71,6 +75,9 @@
               </tbody>
 
             </table>
+          </div>
+          <div class="left">
+            <button type="submit" class="btn waves-effect waves-green" (click)="reporteSolicitudes()">Generar reporte de solicitudes</button>
           </div>
         </div>
 

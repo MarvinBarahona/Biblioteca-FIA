@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { CookieModule } from 'ngx-cookie';
 import { MaterializeModule } from 'angular2-materialize';
 import { DataTablesModule } from 'angular-datatables';
+import { PdfmakeModule } from 'ng-pdf-make';
 
 import { SugerenciasRoutingModule } from './sugerencias-routing.module';
 import { SugerenciasRootComponent, SugerenciasComponent, SugerenciaComponent } from './componentes';
@@ -25,6 +26,7 @@ import { SugerenciasService } from './servicios';
     DataTablesModule,
     MaterializeModule,
     CookieModule.forChild(),
+    PdfmakeModule,
     SugerenciasRoutingModule
   ],
   declarations: [

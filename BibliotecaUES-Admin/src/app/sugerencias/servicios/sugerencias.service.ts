@@ -24,8 +24,8 @@ export class SugerenciasService {
   }
 
 
-  // Método: top10
-  // Objetivo: recuperar un listado de las 10 sugerencias con más pedidos
+  // Método: obtenerTodos
+  // Objetivo: recuperar un listado de las las sugerencias
   obtenerTodos(): Observable<Sugerencia[]> {
     let url = this.baseUrl + '/suggestions';
 
@@ -48,6 +48,7 @@ export class SugerenciasService {
           sugerencia.pedidos = _sugerencia['orders'];
           sugerencia.estado = _sugerencia['state'];
           sugerencia.precio = _sugerencia['price'];
+          sugerencia.autor = _sugerencia['author'];
 
           if (sugerencia.estado == "Aceptada") {
             sugerencia.cantidad = _sugerencia['quantity'];
