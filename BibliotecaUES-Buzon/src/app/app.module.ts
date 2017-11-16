@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { SugerenciasModule } from './sugerencias/sugerencias.module';
+import { InfoModule } from './info/info.module';
 import { LoginModule } from './login/';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { LoginModule } from './login/';
     Angular2FontawesomeModule,
     LoginModule,
     SugerenciasModule,
+    InfoModule,
     AppRoutingModule
   ],
   declarations: [
