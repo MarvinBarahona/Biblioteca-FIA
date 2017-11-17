@@ -160,7 +160,6 @@ export class SugerenciasComponent implements OnInit {
     let rows = [];
 
     aceptadas.forEach((sugerencia)=>{
-      console.log(sugerencia);
       // Create a content row
       rows.push(new Row([
         new Cell(sugerencia.isbn),
@@ -212,7 +211,6 @@ export class SugerenciasComponent implements OnInit {
     let rows = [];
 
     aceptadas.forEach((sugerencia)=>{
-      console.log(sugerencia);
       // Create a content row
       rows.push(new Row([
         new Cell(sugerencia.isbn),

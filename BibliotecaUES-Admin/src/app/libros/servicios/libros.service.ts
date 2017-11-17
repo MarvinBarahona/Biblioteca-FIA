@@ -29,6 +29,10 @@ export class LibrosService {
     let url = this.baseUrl + '/books/' + id + '/setcatalog';
 
     // Obtener las materias registradas y las nuevas.
+    let materiasGuardar = nuevoCatalogo.materias;
+    nuevoCatalogo.materias = [];
+    materiasGuardar.forEach((materia)=>{nuevoCatalogo.materias.push(this.normalizar(materia))});
+
     let division = this.dividirNuevos(nuevoCatalogo.materias, materias);
     let materiasGuardadas = division['viejos'];
     let nuevasMaterias = division['nuevos'];
@@ -120,7 +124,7 @@ export class LibrosService {
         libro.anio = rb['year'];
         libro.catalogado = rb['catalogued'];
         libro.autores = [];
-        rb['Authors'].forEach((author) =>{
+        rb['Authors'].forEach((author) => {
           libro.autores.push(author['name']);
         });
 
@@ -163,7 +167,7 @@ export class LibrosService {
 
         // Mapeando la salida
         let materias = new Array<AutoData>();
-        r.forEach((_materia)  =>{
+        r.forEach((_materia) => {
           let materia = new AutoData;
 
           materia.id = _materia['id'];
@@ -194,5 +198,28 @@ export class LibrosService {
     });
 
     return { viejos: viejos, nuevos: nuevos };
+  }
+
+  // Método privado: normalizar
+  // Objeivo: eliminar tildes de palabras.
+  normalizar(palabra: string): string {
+    palabra = palabra.toLowerCase();
+    let from = "ãàáäâèéëêìíïîòóöôùúüûÑñÇç";
+    let to = "aaaaaeeeeiiiioooouuuunncc";
+    let mapping = {};
+
+    for (var i = 0, j = from.length; i < j; i++) mapping[from.charAt(i)] = to.charAt(i);
+
+    let ret = [];
+
+    for (var i = 0, j = palabra.length; i < j; i++) {
+      let c = palabra.charAt(i);
+
+      if (mapping.hasOwnProperty(palabra.charAt(i)))
+        ret.push(mapping[c]);
+      else
+        ret.push(c);
+    }
+    return ret.join('');
   }
 }
