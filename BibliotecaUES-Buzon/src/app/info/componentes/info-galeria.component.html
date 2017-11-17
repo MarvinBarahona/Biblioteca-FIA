@@ -1,0 +1,3 @@
+<div #carousel class="carousel" [ngClass]="{ 'initialized': showInitialized }" materialize="carousel" [materializeActions]="actions">
+  <a *ngFor="let url of imageURLs" class="carousel-item"><img [src]="url"></a>
+</div>

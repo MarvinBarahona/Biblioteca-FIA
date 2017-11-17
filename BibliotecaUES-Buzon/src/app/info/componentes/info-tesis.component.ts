@@ -6,7 +6,13 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'info-tesis',
-  templateUrl: './info-tesis.component.html'
+  templateUrl: './info-tesis.component.html',
+  styles: [`
+      img{
+        width: 400px;
+        height: 400px;
+      }
+  `]
 })
 export class InfoTesisComponent {
   constructor() { }
