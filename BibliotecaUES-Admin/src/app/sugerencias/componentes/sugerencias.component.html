@@ -12,36 +12,37 @@
       <div class="row">
         <!-- Pendientes -->
         <div id="pendientes" class="col s12">
-          <div class="row">
-            <table class="row-border hover">
+          <div *ngIf="sugerencias; else elseSugerencias;">
+            <div class="row">
+              <table class="row-border hover">
 
-              <thead>
-                <tr>
-                  <th>Libro</th>
-                  <th>ISBN</th>
-                  <th>Pedidos</th>
-                  <th>Votos</th>
-                  <th>Precio sugerido</th>
-                </tr>
-              </thead>
+                <thead>
+                  <tr>
+                    <th>Libro</th>
+                    <th>ISBN</th>
+                    <th>Pedidos</th>
+                    <th>Votos</th>
+                    <th>Precio sugerido</th>
+                  </tr>
+                </thead>
 
-              <tbody>
-                <!-- Sugerencias pendientes de aprobación -->
-                <tr *ngIf="!filtradas('Pendiente')">
-                  No hay registros que mostrar
-                </tr>
-                <tr *ngFor="let sugerencia of filtradas('Pendiente')">
-                  <td><a [routerLink]="['/sugerencias/'+sugerencia.id]">{{sugerencia.titulo}}</a></td>
-                  <td>{{sugerencia.isbn}}</td>
-                  <td>{{sugerencia.pedidos}}</td>
-                  <td>{{sugerencia.votos}}</td>
-                  <td>{{sugerencia.precio | currency:'USD':'symbol-narrow'}}</td>
-                </tr>
-              </tbody>
+                <tbody>
+                  <!-- Sugerencias pendientes de aprobación -->
+                  <tr *ngIf="!filtradas('Pendiente')">
+                    No hay registros que mostrar
+                  </tr>
+                  <tr *ngFor="let sugerencia of filtradas('Pendiente')">
+                    <td><a [routerLink]="['/sugerencias/'+sugerencia.id]">{{sugerencia.titulo}}</a></td>
+                    <td>{{sugerencia.isbn}}</td>
+                    <td>{{sugerencia.pedidos}}</td>
+                    <td>{{sugerencia.votos}}</td>
+                    <td>{{sugerencia.precio | currency:'USD':'symbol-narrow'}}</td>
+                  </tr>
+                </tbody>
 
-            </table>
+              </table>
+            </div>
           </div>
-
           <div class="left">
             <button type="submit" class="btn waves-effect waves-green" (click)="reporteSugerencias()">Generar reporte de sugerencias</button>
           </div>
@@ -49,32 +50,34 @@
 
         <!-- Aprobadas -->
         <div id="aprobadas" class="col s12">
-          <div class="row">
+          <div *ngIf="sugerencias; else elseSugerencias;">
+            <div class="row">
 
-            <table class="row-border hover">
-              <thead>
-                <tr>
-                  <th>Libro</th>
-                  <th>ISBN</th>
-                  <th>Cantidad aprobada</th>
-                  <th>Precio</th>
-                </tr>
-              </thead>
+              <table class="row-border hover">
+                <thead>
+                  <tr>
+                    <th>Libro</th>
+                    <th>ISBN</th>
+                    <th>Cantidad aprobada</th>
+                    <th>Precio</th>
+                  </tr>
+                </thead>
 
-              <tbody>
-                <!-- Sugerencias pendientes de aprobación -->
-                <tr *ngIf="!filtradas('Aceptada')">
-                  No hay registros que mostrar
-                </tr>
-                <tr *ngFor="let sugerencia of filtradas('Aceptada')">
-                  <td><a [routerLink]="['/sugerencias/'+sugerencia.id]">{{sugerencia.titulo}}</a></td>
-                  <td>{{sugerencia.isbn}}</td>
-                  <td>{{sugerencia.cantidad}}</td>
-                  <td>{{sugerencia.precio}}</td>
-                </tr>
-              </tbody>
+                <tbody>
+                  <!-- Sugerencias pendientes de aprobación -->
+                  <tr *ngIf="!filtradas('Aceptada')">
+                    No hay registros que mostrar
+                  </tr>
+                  <tr *ngFor="let sugerencia of filtradas('Aceptada')">
+                    <td><a [routerLink]="['/sugerencias/'+sugerencia.id]">{{sugerencia.titulo}}</a></td>
+                    <td>{{sugerencia.isbn}}</td>
+                    <td>{{sugerencia.cantidad}}</td>
+                    <td>{{sugerencia.precio}}</td>
+                  </tr>
+                </tbody>
 
-            </table>
+              </table>
+            </div>
           </div>
           <div class="left">
             <button type="submit" class="btn waves-effect waves-green" (click)="reporteSolicitudes()">Generar reporte de solicitudes</button>
@@ -83,38 +86,39 @@
 
         <!-- Denegadas -->
         <div id="denegadas" class="col s12">
-          <div>
+          <div *ngIf="sugerencias; else elseSugerencias;">
+            <div class="row">
+              <table class="row-border hover">
+                <thead>
+                  <tr>
+                    <th>Libro</th>
+                    <th>ISBN</th>
+                    <th>Razón</th>
+                  </tr>
+                </thead>
 
-            <table class="row-border hover">
-
-              <thead>
-                <tr>
-                  <th>Libro</th>
-                  <th>ISBN</th>
-                  <th>Razón</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <!-- Sugerencias pendientes de aprobación -->
-                <tr *ngIf="!filtradas('Rechazada')">
-                  No hay registros que mostrar
-                </tr>
-                <tr *ngFor="let sugerencia of filtradas('Rechazada')">
-                  <td><a [routerLink]="['/sugerencias/'+sugerencia.id]">{{sugerencia.titulo}}</a></td>
-                  <td>{{sugerencia.isbn}}</td>
-                  <td>{{sugerencia.razonRechazo}}</td>
-                </tr>
-              </tbody>
-
-            </table>
+                <tbody>
+                  <!-- Sugerencias pendientes de aprobación -->
+                  <tr *ngIf="!filtradas('Rechazada')">
+                    No hay registros que mostrar
+                  </tr>
+                  <tr *ngFor="let sugerencia of filtradas('Rechazada')">
+                    <td><a [routerLink]="['/sugerencias/'+sugerencia.id]">{{sugerencia.titulo}}</a></td>
+                    <td>{{sugerencia.isbn}}</td>
+                    <td>{{sugerencia.razonRechazo}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="left">
+            <button type="submit" class="btn waves-effect waves-green" (click)="reporteRechazos()">Generar reporte de rechazos</button>
           </div>
         </div>
-
       </div>
 
       <br>
-      <hr>
+      <br>
 
       <div class="row">
         <div class="right">
@@ -127,6 +131,19 @@
   <!-- /col -->
 </div>
 <!-- row -->
+
+<!-- Mensaje de espera -->
+<ng-template #elseSugerencias>
+  <div class="row">
+    <div class="col s8 m8 offset-s2 offset-m2">
+      <p>Cargando...</p>
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
 
 <!-- Ventana modal para asegurar la acción de finalizar ciclo -->
 <div id="modal" class="modal modal-fixed-footer" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalFinalizar">

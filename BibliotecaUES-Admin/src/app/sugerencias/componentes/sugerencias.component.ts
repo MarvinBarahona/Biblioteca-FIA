@@ -22,7 +22,7 @@ declare var Materialize: any;
   styles: [`
     .modal{
       height: 250px;
-      width: 350px;
+      width: 550px;
     }
   `]
 })
@@ -73,6 +73,8 @@ export class SugerenciasComponent implements OnInit {
     this.sugerenciasService.terminarCiclo().subscribe(
       (msg)=>{
         Materialize.toast("Ciclo terminado", 3000, 'toastSuccess');
+        this.reporteRechazos();
+        this.reporteSolicitudes();
         // Llamar al servicio
         this.sugerenciasService.obtenerTodos().subscribe(
           sugerencias => {
@@ -175,5 +177,56 @@ export class SugerenciasComponent implements OnInit {
 
     // Imprimir el comprobante
     this.pdfmake.download("Solicitudes de compra al " + (new Date).toLocaleDateString());
+  }
+
+  //Método: reporteSolicitudes
+  //Objetivo: Crear el pdf del reporte de solicitudes de compra
+  reporteRechazos(){
+    let aceptadas = this.filtradas('Rechazada');
+
+    // Configurando las fuentes
+    this.pdfmake.configureStyles({ header: { fontSize: 14, bold: true }, title: {bold: true}, header2: {alignment: 'center', bold: true } });
+
+    // Resetar el contenido de la página
+    this.pdfmake.docDefinition.content = [];
+
+    // COnfigurar el tamaño y orientación de la páginas
+    this.pdfmake.docDefinition.pageSize = "letter";
+
+    // Agregando encabezados
+    this.pdfmake.addText('Universidad de El Salvador', 'header');
+    this.pdfmake.addText('Biblioteca de Ingeniería y Arquitectura', 'header');
+    this.pdfmake.addText('\n\n');
+    this.pdfmake.addText('Reporte de sugerencias rechazadas', 'header2');
+    this.pdfmake.addText('Fecha de generación del reporte: ' + (new Date).toLocaleDateString());
+    this.pdfmake.addText('\n\n');
+
+    // Create Headers cells
+    const header1 = new Cell('ISBN');
+    const header2 = new Cell('Título');
+    const header3 = new Cell('Razón');
+
+    // Create headers row
+    const headerRows = new Row([header1, header2, header3]);
+
+    let rows = [];
+
+    aceptadas.forEach((sugerencia)=>{
+      console.log(sugerencia);
+      // Create a content row
+      rows.push(new Row([
+        new Cell(sugerencia.isbn),
+        new Cell(sugerencia.titulo + ", " + sugerencia.edicion + "° edición"),
+        new Cell(sugerencia.razonRechazo)
+      ]));
+    });
+
+    // Custom  column widths
+    const widths = [90, '*', 150];
+
+    this.pdfmake.addTable(new Table(headerRows, rows, widths));
+
+    // Imprimir el comprobante
+    this.pdfmake.download("Solicitudes rechazadas al " + (new Date).toLocaleDateString());
   }
 }
