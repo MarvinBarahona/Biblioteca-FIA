@@ -60,7 +60,7 @@ export class SugerenciasComponent implements OnInit {
   }
 
   // Métodos para la ventana modal de confirmación de cierre de ciclo
-  openFinalizar(incidente: string) {
+  openFinalizar() {
     this.modalFinalizar.emit({ action: "modal", params: ['open'] });
   }
   closeFinalizar() {
