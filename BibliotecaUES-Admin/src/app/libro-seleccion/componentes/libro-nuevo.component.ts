@@ -66,6 +66,7 @@ export class LibroNuevoComponent implements OnInit {
     this.showMessage = false;
     form.reset();
     this.inicializarAutocompletado();
+    this.libro.autores = [];
   }
 
   // Método: inicializarAutocompletado

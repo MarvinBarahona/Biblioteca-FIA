@@ -89,9 +89,9 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let ejemplar of libro.ejemplares">
-                  <td>{{ejemplar.estado}}</td>
+                <tr *ngFor="let ejemplar of libro.ejemplares">                  
                   <td>{{ejemplar.codigo || 'No asignado'}}</td>
+                  <td>{{ejemplar.estado}}</td>
                   <td><a *ngIf="ejemplar.estado == 'Disponible'" class="waves-effect waves-light" (click)="openReservar(ejemplar)">Reservar</a></td>
                 </tr>
               </tbody>

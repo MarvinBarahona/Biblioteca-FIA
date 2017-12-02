@@ -25,7 +25,7 @@
                   <input type="checkbox" class="filled-in" [id]="candidato.id" [(ngModel)]="candidato.agregar" />
                   <label for="{{candidato.id}}"></label>
                 </td>
-                <td>{{candidato.libro.titulo}}, {{candidato.edicion}}ed</td>
+                <td>{{candidato.libro.titulo}}, {{candidato.libro.edicion}}ed</td>
                 <td>{{candidato.codigo}}</td>
                 <td>{{candidato.estado}}</td>
                 <td>{{candidato.ultimaTransaccion | date:"dd/MM/y"}}</td>

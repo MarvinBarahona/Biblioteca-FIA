@@ -42,37 +42,7 @@ export class CatalogarComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
-
-    // Llama al servicio para obtener las materias registradas.
-    this.libroService.obtenerAutoCatalogo().subscribe(
-      materias => {
-        this.materias = materias;
-
-        // Estructura los datos para ser agregados al autocompletado
-        let materiasData = {};
-        this.materias.forEach((materia) =>{
-          materiasData[materia.nombre] = null;
-        });
-
-        // Materias ya agregadas
-        let initialData = [];
-        this.catalogo.materias.forEach((materia)=>{
-          initialData.push({tag: materia});
-        });
-
-        // Construye el autocompletado.
-        this.materiasAutocomplete = {
-          placeholder: "+ Materia",
-          secondaryPlaceholder: 'Ingrese materias',
-          data: initialData,
-          autocompleteOptions: {
-            data: materiasData,
-            limit: 5,
-            minLength: 1
-          }
-        };
-      }
-    );
+    this.obtenerMaterias();
   }
 
   // Método: guardarse
@@ -85,6 +55,7 @@ export class CatalogarComponent implements OnInit {
       message => {
         this.showMessage = false;
         Materialize.toast("Información guardada", 3000, 'toastSuccess');
+        this.obtenerMaterias();
       },
       error => {
         this.showMessage = false;
@@ -149,5 +120,38 @@ export class CatalogarComponent implements OnInit {
   eliminarMateria(chip: any){
     let i = this.catalogo.materias.indexOf(chip.tag);
     if (i > -1) this.catalogo.materias.splice(i, 1);
+  }
+
+  obtenerMaterias(){
+    // Llama al servicio para obtener las materias registradas.
+    this.libroService.obtenerAutoCatalogo().subscribe(
+      materias => {
+        this.materias = materias;
+
+        // Estructura los datos para ser agregados al autocompletado
+        let materiasData = {};
+        this.materias.forEach((materia) =>{
+          materiasData[materia.nombre] = null;
+        });
+
+        // Materias ya agregadas
+        let initialData = [];
+        this.catalogo.materias.forEach((materia)=>{
+          initialData.push({tag: materia});
+        });
+
+        // Construye el autocompletado.
+        this.materiasAutocomplete = {
+          placeholder: "+ Materia",
+          secondaryPlaceholder: 'Ingrese materias',
+          data: initialData,
+          autocompleteOptions: {
+            data: materiasData,
+            limit: 5,
+            minLength: 1
+          }
+        };
+      }
+    );
   }
 }
